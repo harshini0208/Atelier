@@ -16,7 +16,7 @@ the shopper already owns, and it is not a generic "you might like" feed.
 > brand or a real integration. Checkout creates a demo order and decrements mock stock; no payment is taken. The
 > retailer view includes synthetic shopper history, flagged `synthetic=true` in the event log.
 
-Live demo (Cloud Run): see `infra/created_resources.md` for the current URL.
+**Live demo (Cloud Run, live Gemini):** https://wiw-app-nhukbiswfq-uc.a.run.app  (pick a shopper in the top-right menu)
 
 ---
 
@@ -68,7 +68,8 @@ use the deterministic planner instead.
 10. **Retailer**: the funnel, and the unmet-demand gap: wide-leg trousers saved 143 times, 0 matches in stock, plus a
     merchandiser memo written from those numbers.
 
-Reset between rehearsals: **Demo panel → Reset demo data** (or `make seed`).
+Reset between rehearsals: **Demo panel → Reset demo data** (or `make seed`). For the Cloud Run deployment, reset with
+`make load-cloud`: re-seeding Cloud SQL takes several minutes, which is longer than a web request allows.
 
 ---
 
@@ -188,11 +189,17 @@ idle cost is about ₹150–900 a month, with a budget alert at ₹2,000.
   `gcloud run services remove-iam-policy-binding wiw-app --member=allUsers --role=roles/run.invoker --region us-central1`.
 - **Vertex AI Search retrieval:** results are topped up from local retrieval when fewer than 8 come back, because
   ranking is always done by the deterministic scorer.
+- **Cloud Run credentials:** they carry no quota-project header, so the runtime account needs no
+  `serviceusage.services.use`. Only local user credentials get one.
 - **Jewellery slot:** earrings get their own `ears` slot, so a festive look can wear both a dupatta and jhumkas.
 - **Commits:** phases 4 and 5 were committed together. They share the outfit engine, and a split commit would not have
   compiled.
 
 ## Limitations and next steps
+
+- Live vision is not perfectly deterministic. The detection prompt defines "wide-leg" versus chinos, and
+  `scripts/detect_stability.py` measured 5 of 5 identical classifications per demo image, but other screenshots can
+  still be read differently from run to run. Replay mode is exact; live mode caches the first answer per image.
 
 - Single store, single brand. `store_id` is in the schema so more can be added.
 - The inventory index in Vertex AI Search isn't updated on every sale; stock is always re-checked from the database.

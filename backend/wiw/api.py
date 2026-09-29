@@ -198,7 +198,10 @@ def update_folder(folder_id: int, body: FolderIn, db: Db, user: User) -> dict:
 
 @router.delete("/folders/{folder_id}")
 def delete_folder(folder_id: int, db: Db, user: User) -> dict:
-    db.delete(own_folder(db, user, folder_id))
+    f = own_folder(db, user, folder_id)
+    # a folder's stylist conversation goes with it (otherwise it would surface in the general chat)
+    db.query(m.ChatMessage).filter(m.ChatMessage.folder_id == folder_id).delete()
+    db.delete(f)
     db.commit()
     return {"ok": True}
 
