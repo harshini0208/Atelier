@@ -251,6 +251,9 @@ idle cost is about ₹150–900 a month, with a budget alert at ₹2,000.
 
 ## Limitations and next steps
 
+- **Delete my profile & data** removes everything from the app database. Copies of that shopper's events already
+  streamed to the BigQuery mirror stay there until the next `make load-cloud`, because BigQuery can't delete rows that
+  are still in its streaming buffer.
 - Live vision is not perfectly deterministic. The detection prompt defines "wide-leg" versus chinos, and
   `scripts/detect_stability.py` measured 5 of 5 identical classifications per demo image, but other screenshots can
   still be read differently from run to run. Replay mode is exact; live mode caches the first answer per image.
