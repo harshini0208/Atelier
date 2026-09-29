@@ -1,0 +1,119 @@
+{
+ "task": "detect",
+ "model": "gemini-3.8-flash",
+ "summary": "List every apparel, footwear and accessory piece visibly worn in this outfit image.\n\nRules:\n- One entry per piece. A pair of shoes, earrings or similar counts as ONE piece.\n- If several people are in ",
+ "created": "2026-09-29T21:39:43",
+ "response": {
+  "image_quality": "ok",
+  "people_count": 1,
+  "pieces": [
+   {
+    "subcategory": "hoodie",
+    "name": "Black hoodie",
+    "color": "black",
+    "box_2d": [
+     213,
+     247,
+     427,
+     753
+    ],
+    "confidence": 0.95,
+    "fabric": "cotton",
+    "gender_fit": "unisex",
+    "length": "regular",
+    "neckline": "hood",
+    "occasion_tags": [
+     "casual"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "relaxed",
+    "sleeve": "long",
+    "style_tags": [
+     "streetwear",
+     "minimal"
+    ]
+   },
+   {
+    "subcategory": "cargo_pants",
+    "name": "Olive cargo pants",
+    "color": "olive",
+    "box_2d": [
+     415,
+     404,
+     754,
+     594
+    ],
+    "confidence": 0.95,
+    "fabric": "cotton",
+    "gender_fit": "unisex",
+    "length": "long",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "straight",
+    "sleeve": "none",
+    "style_tags": [
+     "streetwear",
+     "minimal"
+    ]
+   },
+   {
+    "subcategory": "sling_bag",
+    "name": "Black mini shoulder bag",
+    "color": "black",
+    "box_2d": [
+     421,
+     617,
+     488,
+     712
+    ],
+    "confidence": 0.9,
+    "fabric": "leather",
+    "gender_fit": "unisex",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "minimal"
+    ]
+   },
+   {
+    "subcategory": "sneakers",
+    "name": "White sneakers",
+    "color": "white",
+    "box_2d": [
+     727,
+     419,
+     784,
+     580
+    ],
+    "confidence": 0.9,
+    "fabric": "synthetic",
+    "gender_fit": "unisex",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "streetwear",
+     "minimal"
+    ]
+   }
+  ]
+ }
+}

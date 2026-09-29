@@ -1,0 +1,161 @@
+{
+ "task": "detect",
+ "model": "gemini-3.8-flash",
+ "summary": "List every apparel, footwear and accessory piece visibly worn in this outfit image.\n\nRules:\n- One entry per piece. A pair of shoes, earrings or similar counts as ONE piece.\n- If several people are in ",
+ "created": "2026-09-29T21:40:13",
+ "response": {
+  "image_quality": "ok",
+  "people_count": 1,
+  "pieces": [
+   {
+    "subcategory": "linen_shirt",
+    "name": "White linen button-down shirt",
+    "color": "white",
+    "box_2d": [
+     229,
+     310,
+     421,
+     690
+    ],
+    "confidence": 0.95,
+    "fabric": "linen",
+    "gender_fit": "women",
+    "length": "regular",
+    "neckline": "collar",
+    "occasion_tags": [
+     "casual",
+     "work",
+     "brunch"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "regular",
+    "sleeve": "long",
+    "style_tags": [
+     "old_money",
+     "minimal",
+     "classic"
+    ]
+   },
+   {
+    "subcategory": "chinos",
+    "name": "Beige straight-leg trousers",
+    "color": "beige",
+    "box_2d": [
+     415,
+     402,
+     730,
+     597
+    ],
+    "confidence": 0.95,
+    "fabric": "linen",
+    "gender_fit": "women",
+    "length": "ankle",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual",
+     "work",
+     "brunch"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "straight",
+    "sleeve": "none",
+    "style_tags": [
+     "old_money",
+     "minimal",
+     "classic"
+    ]
+   },
+   {
+    "subcategory": "loafers",
+    "name": "Tan suede loafers",
+    "color": "tan",
+    "box_2d": [
+     727,
+     408,
+     785,
+     591
+    ],
+    "confidence": 0.9,
+    "fabric": "suede",
+    "gender_fit": "unisex",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual",
+     "work"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "old_money",
+     "preppy",
+     "classic"
+    ]
+   },
+   {
+    "subcategory": "tote",
+    "name": "Camel top handle bag",
+    "color": "camel",
+    "box_2d": [
+     421,
+     621,
+     492,
+     725
+    ],
+    "confidence": 0.88,
+    "fabric": "leather",
+    "gender_fit": "women",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual",
+     "work",
+     "brunch"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "old_money",
+     "classic",
+     "minimal"
+    ]
+   },
+   {
+    "subcategory": "watch",
+    "name": "Gold wrist watch",
+    "color": "gold",
+    "box_2d": [
+     407,
+     335,
+     438,
+     363
+    ],
+    "confidence": 0.85,
+    "fabric": "metal",
+    "gender_fit": "unisex",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual",
+     "work",
+     "formal"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "old_money",
+     "classic",
+     "minimal"
+    ]
+   }
+  ]
+ }
+}

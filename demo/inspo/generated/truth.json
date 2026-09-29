@@ -1,6 +1,6 @@
 {
  "old_money_summer": {
-  "sha256": "c7535dbaddf97d4fc54078ffbc1cb3dc447f31a670ca5efcf7dc7c19c14782d7",
+  "sha256": "3134cc288194b9e86edc515b8c1cced62693f85cde1a7950fda52d9d61434da2",
   "file": "old_money_summer.png",
   "pieces": [
    {
@@ -35,12 +35,12 @@
    {
     "subcategory": "chinos",
     "category": "bottoms",
-    "name": "Beige straight trousers",
+    "name": "Beige tapered chinos",
     "color": "beige",
     "secondary_color": null,
     "pattern": "solid",
     "fabric": "cotton",
-    "silhouette": "straight",
+    "silhouette": "tapered",
     "length": "ankle",
     "neckline": "none",
     "sleeve": "none",

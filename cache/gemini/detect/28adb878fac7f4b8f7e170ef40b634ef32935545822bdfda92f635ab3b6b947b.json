@@ -1,0 +1,134 @@
+{
+ "task": "detect",
+ "model": "gemini-3.8-flash",
+ "summary": "List every apparel, footwear and accessory piece visibly worn in this outfit image.\n\nRules:\n- One entry per piece. A pair of shoes, earrings or similar counts as ONE piece.\n- If several people are in ",
+ "created": "2026-09-29T21:39:17",
+ "response": {
+  "image_quality": "ok",
+  "people_count": 1,
+  "pieces": [
+   {
+    "subcategory": "linen_shirt",
+    "name": "Blue and white striped linen shirt",
+    "color": "sky_blue",
+    "box_2d": [
+     227,
+     321,
+     418,
+     679
+    ],
+    "confidence": 0.95,
+    "fabric": "linen",
+    "gender_fit": "unisex",
+    "length": "regular",
+    "neckline": "collar",
+    "occasion_tags": [
+     "casual",
+     "vacation",
+     "brunch",
+     "beach"
+    ],
+    "pattern": "stripes",
+    "secondary_color": "white",
+    "silhouette": "relaxed",
+    "sleeve": "long",
+    "style_tags": [
+     "resort",
+     "minimal",
+     "classic",
+     "old_money"
+    ]
+   },
+   {
+    "subcategory": "wide_leg_trousers",
+    "name": "Beige wide leg linen trousers",
+    "color": "beige",
+    "box_2d": [
+     415,
+     393,
+     762,
+     608
+    ],
+    "confidence": 0.95,
+    "fabric": "linen",
+    "gender_fit": "unisex",
+    "length": "long",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual",
+     "vacation",
+     "travel",
+     "brunch"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "wide",
+    "sleeve": "none",
+    "style_tags": [
+     "minimal",
+     "resort",
+     "old_money",
+     "classic"
+    ]
+   },
+   {
+    "subcategory": "sandals",
+    "name": "Brown slide sandals",
+    "color": "brown",
+    "box_2d": [
+     727,
+     418,
+     783,
+     582
+    ],
+    "confidence": 0.9,
+    "fabric": "leather",
+    "gender_fit": "unisex",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual",
+     "vacation",
+     "beach"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "minimal",
+     "resort"
+    ]
+   },
+   {
+    "subcategory": "sunglasses",
+    "name": "Brown round sunglasses",
+    "color": "brown",
+    "box_2d": [
+     170,
+     447,
+     189,
+     550
+    ],
+    "confidence": 0.85,
+    "fabric": "synthetic",
+    "gender_fit": "unisex",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual",
+     "vacation",
+     "beach"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "classic",
+     "resort"
+    ]
+   }
+  ]
+ }
+}
