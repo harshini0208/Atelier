@@ -211,3 +211,14 @@ def test_upload_from_landing_page_then_file_pieces_anywhere(client):
     assert client.get("/api/inspo", headers=hh).json() == []
     assert [h["piece"]["subcategory"] for h in client.get(f"/api/folders/{work['id']}", headers=hh).json()["hangers"]] == ["linen_shirt"]
     assert [h["piece"]["subcategory"] for h in client.get(f"/api/folders/{trip['id']}", headers=hh).json()["hangers"]] == ["loafers"]
+
+
+def test_unhang_a_piece(client):
+    folder = client.post("/api/folders", json={"name": "Unhang"}, headers=H).json()
+    inspo = upload(client, folder["id"], "street_men")
+    piece = inspo["pieces"][0]
+    client.post(f"/api/inspo/{inspo['id']}/pieces/{piece['id']}/hang", json={"folder_id": folder["id"]}, headers=H)
+    assert client.get(f"/api/folders/{folder['id']}", headers=H).json()["hanger_count"] == 1
+    assert client.delete(f"/api/inspo/{inspo['id']}/pieces/{piece['id']}/hang", headers=H).json() == {"ok": True}
+    assert client.get(f"/api/folders/{folder['id']}", headers=H).json()["hanger_count"] == 0
+    assert client.get(f"/api/inspo/{inspo['id']}", headers=H).json()["pieces"][0]["selected"] is None

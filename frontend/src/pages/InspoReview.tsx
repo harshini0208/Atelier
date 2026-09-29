@@ -68,8 +68,8 @@ function AddPieceDialog({ point, inspoId, onClose }: { point: [number, number] |
   );
 }
 
-function MatchCard({ item, chosen, onHang, onDetails, busy }: {
-  item: MatchItem; chosen: boolean; onHang: () => void; onDetails: () => void; busy: boolean;
+function MatchCard({ item, chosen, onHang, onDetails, busy, swap }: {
+  item: MatchItem; chosen: boolean; onHang: () => void; onDetails: () => void; busy: boolean; swap: boolean;
 }) {
   const p = item.product;
   return (
@@ -84,7 +84,7 @@ function MatchCard({ item, chosen, onHang, onDetails, busy }: {
           ? <div className="chips">{item.reasons.map((r) => <span key={r.label} className="chip chip-amber">{r.label}</span>)}</div>
           : <div className="chips">{item.why.slice(0, 2).map((w) => <span key={w} className="chip chip-sage">{w}</span>)}</div>}
         <button className={`btn btn-sm ${chosen ? "" : "btn-primary"}`} onClick={onHang} disabled={busy || chosen} style={{ marginTop: "auto" }}>
-          {chosen ? <><Icon name="check" size={14} /> On your hanger</> : <><Icon name="hanger" size={14} /> Hang this</>}
+          {chosen ? <><Icon name="check" size={14} /> On your hanger</> : <><Icon name="hanger" size={14} /> {swap ? "Swap to this" : "Hang this"}</>}
         </button>
       </div>
     </div>
@@ -105,6 +105,13 @@ function PieceMatchesPanel({ inspo, pieceId, folderId, onHung }: { inspo: Inspo;
       onHung(p ? p.name : "wish");
     },
   });
+  const unhang = useMutation({
+    mutationFn: () => api.del(`/inspo/${inspo.id}/pieces/${pieceId}/hang`),
+    onSuccess: () => {
+      ["piece-matches", "inspo", "folder", "folders"].forEach((k) => qc.invalidateQueries({ queryKey: [k] }));
+      onHung("removed");
+    },
+  });
   if (q.error) return <ErrorBox error={q.error} onRetry={() => q.refetch()} />;
   if (!q.data) return <SkeletonGrid n={3} />;
   const m = q.data;
@@ -113,20 +120,27 @@ function PieceMatchesPanel({ inspo, pieceId, folderId, onHung }: { inspo: Inspo;
     <section className="stack" style={{ gap: 8 }}>
       <div className="row-between"><h3>{title}</h3><span className="small muted">{hint}</span></div>
       <div className="product-grid">
-        {items.map((i) => <MatchCard key={i.product.id} item={i} chosen={chosen === i.product.id} busy={hang.isPending || !folderId}
+        {items.map((i) => <MatchCard key={i.product.id} item={i} chosen={chosen === i.product.id} swap={!!m.hanger}
+          busy={hang.isPending || (!folderId && !m.hanger)}
           onHang={() => hang.mutate(i.product)} onDetails={() => setDetails(i.product.id)} />)}
       </div>
     </section>
   );
   return (
     <div className="stack" style={{ gap: 18 }}>
-      {!folderId && <div className="alert">Choose a folder above, then hang the pieces you like.</div>}
+      {!folderId && !m.hanger && <div className="alert">You liked this piece. Choose a folder above and we'll hang its best store match there.</div>}
+      {m.hanger && (
+        <div className="row-between alert alert-sage">
+          <span>{chosen ? "The store piece marked “On your hanger” is saved in your folder. Tap another to swap." : "Saved as a wish."}</span>
+          <button className="btn btn-sm" onClick={() => unhang.mutate()} disabled={unhang.isPending}>Remove from hangers</button>
+        </div>
+      )}
       {m.gap_message && <div className="alert">{m.gap_message}</div>}
       {tier("For you", "Fits the look and your preferences", m.for_you)}
       {tier("Also view", "Great match, outside a preference", m.also_view)}
       {tier("Closest from this store", "Not a close match", m.closest)}
       {!m.covered && (
-        <button className="btn" onClick={() => hang.mutate(null)} disabled={!folderId || hang.isPending || (m.hanger !== null && !chosen)}>
+        <button className="btn" onClick={() => hang.mutate(null)} disabled={(!folderId && !m.hanger) || hang.isPending || (m.hanger !== null && !chosen)}>
           <Icon name="sparkle" size={16} /> {m.hanger && !chosen ? "Saved as a wish" : "Save as a wish (we'll tell you if it arrives)"}
         </button>
       )}
@@ -154,12 +168,49 @@ export default function InspoReview() {
   useEffect(() => { if (inspo?.folder_id && folderId === null) setFolderId(inspo.folder_id); }, [inspo, folderId]);
 
   const hung = new Set((inspo?.pieces ?? []).filter((p) => p.selected).map((p) => p.id));
+  const [liked, setLiked] = useState<Set<number>>(new Set());   // tapped before a folder was chosen
+  const [busy, setBusy] = useState<Set<number>>(new Set());
+  const [nudge, setNudge] = useState<string | null>(null);
+
+  /** A tapped piece is a liked piece: hang its best store match (or a wish if the store has nothing close). */
+  const autoHang = async (pid: number, fid: number) => {
+    setBusy((b) => new Set(b).add(pid));
+    try {
+      const m = await qc.fetchQuery({ queryKey: ["piece-matches", pid],
+        queryFn: () => api.get<PieceMatches>(`/inspo/${inspoId}/pieces/${pid}/matches`) });
+      const top = (m.for_you[0] ?? m.also_view[0])?.product;
+      await api.post(`/inspo/${inspoId}/pieces/${pid}/hang`, { product_id: top?.id ?? null, folder_id: fid });
+      toast(top ? `${top.name} is on your hanger` : "Saved as a wish: not in store yet");
+    } catch (e) {
+      toast(e instanceof Error ? e.message : "Couldn't hang that piece");
+    } finally {
+      setBusy((b) => { const n = new Set(b); n.delete(pid); return n; });
+      ["piece-matches", "inspo", "folder", "folders", "unfiled"].forEach((k) => qc.invalidateQueries({ queryKey: [k] }));
+    }
+  };
   const pick = (pid: number) => {
     setActive(pid);
+    setNudge(null);
+    if (!hung.has(pid) && !busy.has(pid)) {
+      if (folderId) void autoHang(pid, folderId);
+      else setLiked((l) => new Set(l).add(pid));
+    }
     window.setTimeout(() => matchesRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
   };
+  useEffect(() => {  // a folder was just chosen: hang everything liked so far
+    if (!folderId || liked.size === 0) return;
+    const pending = [...liked].filter((pid) => !hung.has(pid));
+    setLiked(new Set());
+    pending.forEach((pid) => void autoHang(pid, folderId));
+  }, [folderId]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const done = useMutation({
-    mutationFn: () => api.post(`/inspo/${inspoId}/select`, { piece_ids: [...hung], folder_id: folderId }),
+    mutationFn: async () => {
+      if (liked.size && folderId) await Promise.all([...liked].map((pid) => autoHang(pid, folderId)));
+      const fresh = await qc.fetchQuery({ queryKey: ["inspo", inspoId], queryFn: () => api.get<Inspo>(`/inspo/${inspoId}`) });
+      const ids = fresh.pieces.filter((p) => p.selected).map((p) => p.id);
+      return api.post(`/inspo/${inspoId}/select`, { piece_ids: ids, folder_id: folderId });
+    },
     onSuccess: () => {
       ["folder", "folders", "unfiled"].forEach((k) => qc.invalidateQueries({ queryKey: [k] }));
       const target = folderId ?? inspo!.folder_id;
@@ -177,6 +228,11 @@ export default function InspoReview() {
   if (q.error) return <ErrorBox error={q.error} onRetry={() => q.refetch()} />;
   if (!inspo) return <Loading label="Opening your inspo" />;
   const activePiece: Piece | undefined = inspo.pieces.find((p) => p.id === active);
+  const finish = () => {
+    if (liked.size && !folderId) { setNudge("Choose a folder above to save the pieces you liked."); return; }
+    if (!hung.size && !liked.size) { setNudge("Tap the pieces you like first. Each one goes onto a hanger in your folder."); return; }
+    done.mutate();
+  };
 
   return (
     <>
@@ -186,7 +242,7 @@ export default function InspoReview() {
         <div className="stack inspo-image-col">
           <div className={`inspo-frame ${tapMode ? "tap-mode" : ""}`} onClick={onImageClick}>
             <img src={inspo.image_url} alt="Your inspiration screenshot" />
-            {!tapMode && <Boxes inspo={inspo} active={active} hung={hung} pick={pick} />}
+            {!tapMode && <Boxes inspo={inspo} active={active} hung={new Set([...hung, ...liked])} pick={pick} />}
           </div>
           <div className="row" style={{ justifyContent: "center" }}>
             <button className={`btn btn-sm ${tapMode ? "btn-primary" : ""}`} onClick={() => setTapMode((t) => !t)} aria-pressed={tapMode}>
@@ -200,17 +256,18 @@ export default function InspoReview() {
             <span className="eyebrow">Tap a piece you love</span>
             <h1>{inspo.pieces.length ? `${inspo.pieces.length} piece${inspo.pieces.length === 1 ? "" : "s"} in this look` : "Let's find the pieces"}</h1>
             <p className="muted" style={{ margin: "6px 0 0" }}>
-              Tap a piece to see what Urban Thread has for it, then hang the one you want. Your hangers hold real store pieces.
+              Tap each piece you like. We hang its closest Urban Thread piece in your folder, and show the other options so you
+              can swap.
             </p>
           </div>
           {inspo.message && <div className={`alert ${inspo.status === "analyzed" ? "" : "alert-rose"}`}>{inspo.message}</div>}
           {inspo.pieces.length > 0 && (
             <div className="chips" role="tablist" aria-label="Pieces in this look">
               {inspo.pieces.map((p) => (
-                <button key={p.id} role="tab" aria-selected={active === p.id} className={`chip ${hung.has(p.id) ? "chip-sage" : ""}`}
+                <button key={p.id} role="tab" aria-selected={active === p.id} className={`chip ${hung.has(p.id) || liked.has(p.id) ? "chip-sage" : ""}`}
                   aria-pressed={active === p.id} onClick={() => pick(p.id)} style={{ padding: "4px 10px 4px 4px" }}>
                   {p.crop_url && <img src={p.crop_url} alt="" style={{ width: 28, height: 28, objectFit: "contain", borderRadius: 6, background: "#fff" }} />}
-                  {hung.has(p.id) ? "✓ " : ""}{p.name}
+                  {busy.has(p.id) ? <span className="spinner" style={{ width: 12, height: 12 }} /> : hung.has(p.id) ? "✓ " : liked.has(p.id) ? "♥ " : ""}{p.name}
                 </button>
               ))}
             </div>
@@ -233,15 +290,16 @@ export default function InspoReview() {
                   <div><div className="eyebrow">In store for</div><h2 style={{ fontSize: 20 }}>{activePiece.name}</h2></div>
                 </div>
                 <PieceMatchesPanel inspo={inspo} pieceId={activePiece.id} folderId={folderId}
-                  onHung={(n) => toast(n === "wish" ? "Saved as a wish" : `${n} is on your hanger`)} />
+                  onHung={(n) => toast(n === "wish" ? "Saved as a wish" : n === "removed" ? "Removed from your hangers" : `${n} is on your hanger`)} />
               </div>
             ) : inspo.pieces.length > 0 && (
               <div className="empty"><p className="muted" style={{ margin: 0 }}>Tap a box on the image or a piece above to see what's in store.</p></div>
             )}
           </div>
-          <button className="btn btn-primary btn-block" onClick={() => done.mutate()} disabled={done.isPending}>
-            {done.isPending ? <span className="spinner" /> : <Icon name="check" />}
-            {hung.size ? `Done: ${hung.size} piece${hung.size === 1 ? "" : "s"} on hangers` : "Done"}
+          {nudge && <div className="alert" role="alert">{nudge}</div>}
+          <button className="btn btn-primary btn-block" onClick={finish} disabled={done.isPending || busy.size > 0}>
+            {done.isPending || busy.size > 0 ? <span className="spinner" /> : <Icon name="check" />}
+            {hung.size ? `Done: ${hung.size} piece${hung.size === 1 ? "" : "s"} on hangers` : liked.size ? `Save ${liked.size} liked piece${liked.size === 1 ? "" : "s"}` : "Done"}
           </button>
           {done.error && <ErrorBox error={done.error} />}
           {hung.size > 0 && <span className="small muted" style={{ textAlign: "center" }}>

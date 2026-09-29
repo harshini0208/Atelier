@@ -408,6 +408,18 @@ def hang(inspo_id: int, piece_id: int, body: HangIn, db: Db, user: User) -> dict
     return hanger_dict(db, h, with_top=False)
 
 
+@router.delete("/inspo/{inspo_id}/pieces/{piece_id}/hang")
+def unhang(inspo_id: int, piece_id: int, db: Db, user: User) -> dict:
+    """Un-like a piece: take it off its hanger."""
+    inspo = own_inspo(db, user, inspo_id)
+    piece = own_piece(inspo, piece_id)
+    for h in db.scalars(select(m.Hanger).where(m.Hanger.user_id == user.id, m.Hanger.piece_id == piece.id)):
+        db.delete(h)
+    piece.selected = None
+    db.commit()
+    return {"ok": True}
+
+
 # ------------------------------------------------------------------ hangers + matches
 
 @router.get("/hangers/{hanger_id}/matches")

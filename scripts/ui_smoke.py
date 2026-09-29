@@ -66,32 +66,35 @@ def main() -> None:
         expect(page.get_by_text("Your wardrobes")).to_be_visible()
         shot(page, "03-home-fresh")
 
-        # 2. upload straight from the landing page (no folder yet)
+        # 2. upload straight from the landing page (no folder yet), tap pieces BEFORE choosing a folder
         page.set_input_files("input[type=file]", str(ROOT / "demo/inspo/generated/old_money_summer.png"))
         expect(page.get_by_text("Tap a piece you love")).to_be_visible(timeout=60_000)
         shot(page, "04-inspo")
+        page.get_by_role("button", name="Done").click()
+        expect(page.get_by_text("Tap the pieces you like first")).to_be_visible()   # never leaves empty-handed
         page.locator(".box").filter(has_text="Linen shirt").first.click()
-        expect(page.get_by_text("Choose a folder above")).to_be_visible(timeout=30_000)
-        expect(page.get_by_role("button", name="Hang this").first).to_be_disabled()
-        # create a folder right from the picker
+        expect(page.get_by_text("You liked this piece. Choose a folder")).to_be_visible(timeout=30_000)
+        page.locator(".box").filter(has_text="Chinos").first.click()
+        expect(page.get_by_role("button", name="Save 2 liked pieces")).to_be_visible()
+        # 3. create a folder from the picker -> both liked pieces are hung with their best store match
         name = f"Old-money summer {int(time.time()) % 1000}"
         page.get_by_label("Hang pieces in").select_option("new")
         page.get_by_label("Name").fill(name)
         page.get_by_role("button", name="Create folder").click()
-        expect(page.get_by_label("Hang pieces in")).to_have_value(re.compile(r"^\d+$"))
-
-        # 3. tap a piece -> store options appear immediately -> hang a real product
-        for label in ("Linen shirt", "Chinos", "Loafers"):
-            page.locator(".box").filter(has_text=label).first.click()
-            expect(page.get_by_role("heading", name="For you")).to_be_visible(timeout=30_000)
-            if label == "Linen shirt":
-                shot(page, "05-piece-matches")
-            page.get_by_role("button", name="Hang this").first.click()
-            expect(page.get_by_role("button", name="On your hanger")).to_be_visible()
+        expect(page.get_by_role("button", name=re.compile(r"Done: 2 pieces on hangers"))).to_be_visible(timeout=30_000)
+        # a third piece, tapped after the folder exists, is hung immediately; then swap its product
+        page.locator(".box").filter(has_text="Loafers").first.click()
+        expect(page.get_by_role("button", name=re.compile(r"Done: 3 pieces on hangers"))).to_be_visible(timeout=30_000)
+        expect(page.get_by_role("button", name="On your hanger")).to_be_visible(timeout=30_000)
+        shot(page, "05-piece-matches")
+        swap = page.get_by_role("button", name="Swap to this")
+        if swap.count():
+            swap.first.click()
+            expect(page.get_by_text("is on your hanger").last).to_be_visible()
         shot(page, "06-hung")
         page.get_by_role("button", name=re.compile(r"Done: 3 pieces")).click()
         expect(page.get_by_role("heading", name=name)).to_be_visible(timeout=30_000)
-        expect(page.get_by_role("button", name="Style board")).to_be_visible(timeout=30_000)
+        expect(page.get_by_role("tab", name="Hangers (3)")).to_be_visible()
         expect(page.locator(".hanger-card img").first).to_have_attribute("src", re.compile(r"/media/products/"))
         shot(page, "07-folder-hangers")
 
