@@ -155,54 +155,85 @@ def generate_json(task: str, *, version: str, parts: list[Part], schema: type[T]
 # ------------------------------------------------------------------ function calling (stylist chat)
 
 @dataclass
-class ModelTurn:
+class AgentResult:
     text: str
-    calls: list[dict]  # [{"name": ..., "args": {...}}]
-    source: str
+    trace: list[dict]   # serializable: model calls + tool responses of this turn
+    source: str         # live | cache | fallback
 
 
-def chat_turn(task: str, *, version: str, system: str, history: list[dict], tools: list[dict],
-              fallback: Callable[[], ModelTurn]) -> ModelTurn:
-    """One model step of a function-calling loop.
+def run_agent(task: str, *, version: str, system: str, history: list[dict], tools: list[dict],
+              execute: Callable[[str, dict], dict], fallback: Callable[[list[dict]], AgentResult],
+              max_steps: int = 5) -> AgentResult:
+    """Function-calling loop. history: [{"role": "user"|"model", "text": str}] (text only; last is the user turn).
 
-    history: [{"role": "user"|"model", "text": str} | {"role": "model", "calls": [...]} |
-              {"role": "tool", "name": str, "response": dict}]
-    tools: JSON-schema function declarations [{"name", "description", "parameters"}]
+    live   : always calls Gemini (raw response contents are kept inside the turn so Gemini 3 thought signatures
+             survive), and caches every step keyed by the serializable trace so far.
+    replay : replays cached steps, executing tools locally; on a miss the deterministic `fallback` finishes the turn
+             (it receives the trace so far, so tools that already ran are not re-run).
+    off    : fallback only.
     """
     s = get_settings()
-    key = cache_key(task, version, system, [json.dumps(history, sort_keys=True, default=str)], extra=tools)
-    if s.gemini_mode != "off":
-        cached = cache_get(task, key)
-        if cached is not None:
-            return ModelTurn(cached.get("text", ""), cached.get("calls", []), "cache")
-    if s.gemini_mode != "live":
-        return fallback()
-    try:
-        from google.genai import types
+    tool_names = sorted(t["name"] for t in tools)
+    trace: list[dict] = []
+    if s.gemini_mode == "off":
+        return fallback(trace)
+    if s.gemini_mode == "live":
+        try:
+            return _run_live(task, version, system, history, tools, execute, max_steps, tool_names)
+        except Exception as e:  # noqa: BLE001
+            log.warning("gemini agent failed, using fallback: %s", e)
+            return fallback(trace)
+    for _ in range(max_steps):
+        key = cache_key(task, version, system, [json.dumps(history + trace, sort_keys=True, default=str)], tool_names)
+        step = cache_get(task, key)
+        if step is None:
+            return fallback(trace)
+        if not step.get("calls"):
+            return AgentResult(step.get("text", ""), trace, "cache")
+        trace.append({"role": "model", "calls": step["calls"]})
+        for c in step["calls"]:
+            trace.append({"role": "tool", "name": c["name"], "response": execute(c["name"], c["args"])})
+    return fallback(trace)
 
-        contents = []
-        for h in history:
-            if h["role"] == "user":
-                contents.append(types.Content(role="user", parts=[types.Part(text=h["text"])]))
-            elif h["role"] == "model" and h.get("calls"):
-                contents.append(types.Content(role="model", parts=[
-                    types.Part(function_call=types.FunctionCall(name=c["name"], args=c["args"])) for c in h["calls"]]))
-            elif h["role"] == "model":
-                contents.append(types.Content(role="model", parts=[types.Part(text=h["text"])]))
-            elif h["role"] == "tool":
-                contents.append(types.Content(role="user", parts=[
-                    types.Part(function_response=types.FunctionResponse(name=h["name"], response=h["response"]))]))
-        decls = [types.FunctionDeclaration(name=t["name"], description=t["description"],
-                                           parameters_json_schema=t["parameters"]) for t in tools]
-        resp = client().models.generate_content(
-            model=s.gemini_model, contents=contents,
-            config=types.GenerateContentConfig(
-                system_instruction=system, temperature=0.3, tools=[types.Tool(function_declarations=decls)],
-                automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True)))
-        calls = [{"name": fc.name, "args": dict(fc.args or {})} for fc in (resp.function_calls or [])]
-        text = "" if calls else (resp.text or "")
-        cache_put(task, key, {"text": text, "calls": calls}, summary=history[-1].get("text", "") if history else "")
-        return ModelTurn(text, calls, "live")
-    except Exception as e:  # noqa: BLE001
-        log.warning("gemini chat failed, using fallback: %s", e)
-        return fallback()
+
+def _run_live(task, version, system, history, tools, execute, max_steps, tool_names) -> AgentResult:  # noqa: ANN001
+    from google.genai import types
+
+    s = get_settings()
+    contents = [types.Content(role="user" if h["role"] == "user" else "model", parts=[types.Part(text=h["text"])])
+                for h in history]
+    decls = [types.FunctionDeclaration(name=t["name"], description=t["description"],
+                                       parameters_json_schema=t["parameters"]) for t in tools]
+    config = types.GenerateContentConfig(
+        system_instruction=system, temperature=0.3, tools=[types.Tool(function_declarations=decls)],
+        automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True))
+    trace: list[dict] = []
+    for _ in range(max_steps):
+        key = cache_key(task, version, system, [json.dumps(history + trace, sort_keys=True, default=str)], tool_names)
+        resp = client().models.generate_content(model=s.gemini_model, contents=contents, config=config)
+        calls = [{"name": fc.name, "args": _plain(fc.args or {})} for fc in (resp.function_calls or [])]
+        if not calls:
+            text = resp.text or ""
+            cache_put(task, key, {"text": text, "calls": []}, summary=history[-1]["text"])
+            return AgentResult(text, trace, "live")
+        cache_put(task, key, {"text": "", "calls": calls}, summary=history[-1]["text"])
+        contents.append(resp.candidates[0].content)  # keeps thought signatures
+        trace.append({"role": "model", "calls": calls})
+        parts = []
+        for c in calls:
+            out = execute(c["name"], c["args"])
+            trace.append({"role": "tool", "name": c["name"], "response": out})
+            parts.append(types.Part(function_response=types.FunctionResponse(name=c["name"], response=out)))
+        contents.append(types.Content(role="user", parts=parts))
+    raise RuntimeError("agent exceeded max steps")
+
+
+def _plain(v: Any) -> Any:
+    """Convert proto/Map values from function call args into plain JSON types."""
+    if isinstance(v, dict) or hasattr(v, "items"):
+        return {str(k): _plain(x) for k, x in dict(v).items()}
+    if isinstance(v, (list, tuple)):
+        return [_plain(x) for x in v]
+    if isinstance(v, float) and v.is_integer():
+        return int(v)
+    return v

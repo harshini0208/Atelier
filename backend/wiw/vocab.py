@@ -29,7 +29,7 @@ def label(key: str) -> str:
 SLOT_BY_CATEGORY = {"tops": "torso", "bottoms": "legs", "one_piece": "full", "outerwear": "outer", "footwear": "feet"}
 ACCESSORY_SLOTS = {
     "tote": "hand", "sling_bag": "hand", "clutch": "hand", "belt": "waist", "sunglasses": "head",
-    "watch": "wrist", "jewellery": "neck", "scarf": "neck", "dupatta": "neck",
+    "watch": "wrist", "jewellery": "ears", "scarf": "neck", "dupatta": "neck",
 }
 
 

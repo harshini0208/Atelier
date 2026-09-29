@@ -263,3 +263,21 @@ button.chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-c
 .prefs-grid { display: grid; gap: 16px; }
 @media (min-width: 800px) { .prefs-grid { grid-template-columns: 1fr 1fr; } }
 .budget-row { display: grid; grid-template-columns: 110px 1fr 1fr; gap: 8px; align-items: center; }
+
+/* ---------------------------------------------------------------- stylist chat */
+.chat-panel { display: none; flex-direction: column; background: var(--surface-2); }
+.chat-panel.open { display: flex; position: fixed; inset: 0; z-index: 80; }
+.chat-fab { position: fixed; right: 16px; bottom: calc(76px + env(safe-area-inset-bottom)); z-index: 36; box-shadow: 0 8px 24px rgba(31,27,22,.25); }
+@media (min-width: 900px) {
+  .chat-panel, .chat-panel.open {
+    display: flex; position: fixed; top: var(--header-h); right: 0; bottom: 0; left: auto; width: var(--chat-w);
+    border-left: 1px solid var(--line); z-index: 30;
+  }
+  .chat-fab, .chat-close { display: none; }
+}
+
+/* ---------------------------------------------------------------- wardrobe */
+.wardrobe-layout { display: grid; gap: 20px; }
+@media (min-width: 1000px) { .wardrobe-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
+.tray-grid { display: grid; gap: 8px; grid-template-columns: 1fr; }
+@media (min-width: 560px) { .tray-grid { grid-template-columns: 1fr 1fr; } }

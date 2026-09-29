@@ -105,3 +105,25 @@ taste:
   core_min_count: 3            # an attribute seen this many times across saves is "core taste"
   exploring_days: 14           # attributes first seen within this window are "exploring"
   skip_weight: -0.3            # unselected pieces are mild negative signals
+
+stylist:
+  max_steps: 5                 # model <-> tool round trips per message
+  history_messages: 8          # previous chat messages sent as context
+  # Occasions the stylist treats as related when refining picks (deterministic, used by suggest_outfit).
+  related_occasions:
+    beach: [beach, vacation, brunch]
+    wedding: [wedding, festive, formal, party]
+    festive: [festive, wedding, party]
+    work: [work, formal]
+    formal: [formal, work, wedding]
+    party: [party, date, wedding]
+    date: [date, party, brunch]
+    brunch: [brunch, casual, vacation, date]
+    vacation: [vacation, beach, brunch, casual, travel]
+    casual: [casual, brunch, travel]
+    travel: [travel, casual, vacation]
+    gym: [gym, casual]
+  formality_shift:             # "make it more ..." nudges which style tags are preferred
+    more_casual: [minimal, streetwear, athleisure, boho, resort]
+    more_formal: [formal, classic, old_money]
+    more_festive: [ethnic, formal, romantic]

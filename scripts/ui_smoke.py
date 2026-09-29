@@ -66,6 +66,36 @@ def main() -> None:
         page.get_by_role("button", name="Add to look").click()
         expect(page.get_by_text("Added to your look")).to_be_visible()
         shot(page, "08-added")
+        page.keyboard.press("Escape")  # close the matches drawer
+
+        # stylist chat
+        if not desktop:
+            page.get_by_role("button", name="Open stylist chat").click()
+        page.get_by_label("Message the stylist").fill("Make it work for a beach wedding under ₹5,000")
+        page.get_by_role("button", name="Send").click()
+        expect(page.get_by_text("Look for beach wedding")).to_be_visible(timeout=60_000)
+        shot(page, "09-stylist")
+        page.get_by_role("button", name="Try on").click()
+        expect(page.get_by_text("Your hangers")).to_be_visible(timeout=30_000)
+        page.wait_for_timeout(800)
+        shot(page, "10-wardrobe-stylist-look")
+
+        # style it for me + drag and drop
+        page.get_by_role("button", name="Style it", exact=True).click()
+        expect(page.get_by_text("Look 1")).to_be_visible(timeout=60_000)
+        page.get_by_role("button", name="Clear").click()
+        card = page.locator("[aria-label^='Drag ']").first
+        stage = page.get_by_role("img", name="Empty mannequin")
+        box, sb = card.bounding_box(), stage.bounding_box()
+        page.mouse.move(box["x"] + 20, box["y"] + 20)
+        page.mouse.down()
+        page.mouse.move(box["x"] + 40, box["y"] + 40, steps=5)
+        page.mouse.move(sb["x"] + sb["width"] / 2, sb["y"] + sb["height"] * 0.35, steps=12)
+        page.wait_for_timeout(200)
+        shot(page, "11-dragging")
+        page.mouse.up()
+        expect(page.get_by_role("img", name=__import__("re").compile("Mannequin wearing"))).to_be_visible()
+        shot(page, "12-dropped")
         browser.close()
     if errors:
         print("browser errors:\n  " + "\n  ".join(errors))

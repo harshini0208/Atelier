@@ -24,7 +24,7 @@ BODY_TYPES = {
 HEIGHT_BANDS = {"petite": 0.94, "average": 1.0, "tall": 1.05}
 
 # z-order: lower draws first
-Z = {"legs": 10, "feet": 15, "torso": 20, "full": 20, "waist": 28, "outer": 30, "neck": 40, "wrist": 42,
+Z = {"legs": 10, "feet": 15, "torso": 20, "full": 20, "waist": 28, "outer": 30, "neck": 40, "ears": 41, "wrist": 42,
      "head": 44, "hand": 46}
 
 
@@ -78,6 +78,7 @@ def slot_transforms(b: Body) -> dict[str, dict]:
         "hand": t(100, 100, cx + b.hip + 52, b.hand_y + 24, 0.52, 0.52),
         "head": t(100, 100, cx, b.head_cy - 2, 0.44, 0.34),
         "neck": t(100, 44, cx, b.head_cy + 6, 0.62, 0.5),
+        "ears": t(100, 44, cx, b.head_cy + 6, 0.62, 0.5),
         "waist": t(100, 100, cx, b.waist_y + 6, (b.wa + 10) / 90, 0.42),
         "wrist": t(100, 100, cx - b.hip - 38, b.hand_y - 18, 0.2, 0.2),
     }
