@@ -1,0 +1,95 @@
+product_id,name,source_image_url,added_by
+ut-001,Ivory linen relaxed shirt,,store owner (manual)
+ut-002,Cream linen oversized shirt,,store owner (manual)
+ut-003,White linen-look shirt,,store owner (manual)
+ut-004,Ecru linen boyfriend shirt,https://www.talbots.com/on/demandware.static/-/Sites-master-catalog-talbots/default/dw81aa7a5c/images/241075275/241075275_2052.jpg,web image search
+ut-005,Sky linen shirt,http://lovebrand.com/cdn/shop/files/mens-sky-blue-abaco-linen-shirt-main.png?v=1787839387,web image search
+ut-006,Sage linen band-collar shirt,https://cdn2.propercloth.com/pic_cs/1fffebec09f1c638c9eb330ce43491f2_size6.jpg,web image search
+ut-007,Olive linen camp shirt,https://www.portugueseflannel.com/cdn/shop/files/Linen_Camp_Collar_Olive_01_e2f5e903-5244-4838-ae1b-307ac77bd55b.jpg?v=1773239015&width=2000,web image search
+ut-008,Blue candy-stripe shirt,https://turnbullandasser.com/cdn/shop/files/sh1059007_c1.jpg?v=1704023117&width=1000,web image search
+ut-009,White oxford shirt,https://cdn.shopify.com/s/files/1/0419/1525/files/1024x1024-Men-OxfordShirt-White-100725-Front.jpg?v=1760981052,web image search
+ut-010,Navy pinstripe shirt,https://universalworks.com/cdn/shop/files/p34050_chester-stripe-navy_1_fbe00d1d-6b0a-4494-8fd4-d8a84cfdc39c.jpg?v=1779367565&width=2000,web image search
+ut-011,Black satin shirt,https://nokayadesign.com/cdn/shop/files/002-002.jpg?v=1770739646&width=1180,web image search
+ut-012,Red check flannel shirt,https://barbellapparel.com/cdn/shop/files/frontier-flannel-front-flat-lay-forge_1080x.jpg?v=1790098964,web image search
+ut-013,White crew tee,http://perfecttshirtco.com/cdn/shop/products/men-s-white-short-sleeve-crew-neck-t-shirt-airlume-cotton-perfect-tshirt-co-4.jpg?v=1747336979&width=2048,web image search
+ut-014,Black oversized graphic tee,https://images.thekoreanfashion.com/rend/w1200/washed-boxy-fit-t-shirt-3-mqc41nuwb4n3.jpg,web image search
+ut-015,Navy striped breton tee,https://us.saint-james.com/cdn/shop/files/4131_FA-MARINE-NEIGE-E-shop-BD-01.jpg?crop=center&height=2000&v=1789118391&width=1400,web image search
+ut-016,Black ribbed crop top,https://littleboxindia.com/cdn/shop/products/Black_Ruched_Square_Neck_Crop_Top.jpg?v=1742818820,web image search
+ut-017,Lavender halter crop top,https://www.lulus.com/images/product/xlarge/9246581_1918016.jpg?w=375&hdpi=1,web image search
+ut-018,Blush puff-sleeve blouse,https://cdn.platform.next/common/items/default/default/itemimages/3_4Ratio/product/lge/W28653s7.jpg,web image search
+ut-019,Ivory silk-feel blouse,https://media.soliver.com/i/soliver/2177528.0403_flat?$ai$&fmt=auto&scale=clamp&w=1690&qlt=default,web image search
+ut-020,Mustard block-print kurta,https://fledglingwings.com/cdn/shop/products/mustard-yellow-hand-block-print-kurta-set-11403148YL-6_1445x.jpg?v=1658425848,web image search
+ut-021,White chikankari kurta,https://imagescdn.jaypore.com/img/app/product/3/39638749-13270520.jpg?w=500&auto=format,web image search
+ut-022,Black oversized hoodie,http://blankkingdom.com/cdn/shop/files/14-oz-black-hoodie-luxury-flat-lay.png?v=1769484605,web image search
+ut-023,Grey zip hoodie,https://www.lanesevenapparel.com/images/WAM_LARGE/ls14003DGR7flat_012026193727.png,web image search
+ut-024,Camel cable-knit sweater,https://media.maisoncashmere.com/a48304ef-7d4e-4a4c-9823-719ec3f82e09/maisoncashmere.com/cdn/shop/files/womens-essential-cashmere-cable-knit-sweater-MCW079-40-0009.webp?v=1754583964&width=3840,web image search
+ut-025,Navy crew sweater,https://theblacktux.com/cdn/shop/files/NavyCrewSweater_ECOM_1.png?v=1762802476&width=480,web image search
+ut-026,Mid-blue straight jeans,https://cdn.shopify.com/s/files/1/0557/0612/4373/files/7UD70C65_EPR_1_871ee51f-44c7-4f42-bf19-6e684c3a6c28.jpg?v=1786348725,web image search
+ut-027,Black skinny jeans,https://anatomie.com/cdn/shop/files/VSP_03321.jpg?v=1741186723&width=1946,web image search
+ut-028,Indigo slim jeans,https://mugsyjeans.com/cdn/shop/files/Indigos-flatlay-2024_a0af095e-3811-403a-8870-6c459d12230d.jpg?crop=center&height=1381&v=1736206551&width=1067,web image search
+ut-029,Light-wash baggy jeans,https://nahmias.com/cdn/shop/files/NAHMIAS_FLATLAYS1408copy.jpg?v=1784850988&width=1920,web image search
+ut-030,Beige straight chinos,https://cdn.shopify.com/s/files/1/0218/9988/files/w_rhy_straightleg_pant_bone_01.jpg?v=1773701329&width=1800&height=2340&crop=center,web image search
+ut-031,Sand tapered chinos,"https://res.cloudinary.com/wolfandbadger/image/upload/f_auto,q_auto:best,c_pad,b_white,h_800,w_800/products/ribbed-back-waist-linen-tapered-pants-beach-sand__2d81a88a2a0a0a74d9ba81a74659bd32",web image search
+ut-032,Khaki slim chinos,https://cdn.shopify.com/s/files/1/0218/9988/files/m_gabriel_articulated_chino_stretch_dt_01_1cd05394-0463-4f68-93a6-9630f38bbcea.jpg?v=1773877572&width=1800&height=2340&crop=center,web image search
+ut-033,Navy chinos,https://universalworks.com/cdn/shop/files/34230_peached-poplin-navy_1.jpg?v=1769100196&width=2000,web image search
+ut-034,Cream linen trousers,https://www.percivalclo.com/cdn/shop/files/Lorena_Wide_Leg_Trousers_Linen_Cream.jpg?v=1774627626&width=4000,web image search
+ut-035,Olive cargo pants,https://uniformla.com/cdn/shop/files/UNI_FORMCompactCargoPantsinOliveFrontFlatUNIFORMLA_1366x.jpg?v=1688175849,web image search
+ut-036,Black parachute cargos,https://s7d2.scene7.com/is/image/aeo/0461_5897_016_f?$pdp-m-opt$,web image search
+ut-037,Rust printed palazzo,https://bohobeachhut.com/cdn/shop/files/boho-beach-hut-wide-leg-pants-wide-leg-trousers-rust-paisley-boho-wide-leg-pants-1248527015.png?v=1783721353&width=600,web image search
+ut-038,Black flowy palazzo,https://i5.walmartimages.com/asr/8b01e05a-ac31-45cf-b7fd-f87db5bf395f.8a079636d1330c77b80b161478bbd516.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF,web image search
+ut-039,Ivory pleated midi skirt,https://images.quince.com/614sh8pl9wRba0yVGVfq7m/8549097c3804387e8c694e0a0cb13087/W-SKT-33-PORIVO_01_EDITED.jpg?w=1582&q=50&h=1978&reqOrigin=website-ssr,web image search
+ut-040,Floral tiered maxi skirt,https://i.etsystatic.com/24365174/r/il/538140/8091959389/il_570xN.8091959389_r52z.jpg,web image search
+ut-041,Denim mini skirt,https://scdn.speedsize.com/e5740c5a-e31c-4a4a-b4c6-f10b99aa94a9/lagence.com/cdn/shop/files/3472CYO_GRNT_FLAT.png?crop=region&crop_height=1988&crop_left=86&crop_top=86&crop_width=1988&v=1788409128&width=2000,web image search
+ut-042,Beige linen shorts,http://lovebrand.com/cdn/shop/files/mens-ecru-burrow-linen-shorts-main.jpg?v=1787841598,web image search
+ut-043,White denim shorts,https://www.oneteaspoon.com/cdn/shop/files/24999_WHTBEAUTY_FLAT_98_582bb621-1a0e-469e-ac4f-ae8143d14210.jpg?crop=center&height=1920&v=1745368575&width=2400,web image search
+ut-044,Sage linen midi dress,https://i.etsystatic.com/62336859/r/il/48e7e0/7989425507/il_fullxfull.7989425507_72sr.jpg,web image search
+ut-045,Black slip dress,https://media.stories.com/assets/005/30/14/3014c0838df8181f8ac1c5ad5467c31811e23182_xxl-1.jpg?imwidth=2560,web image search
+ut-046,Floral wrap dress,https://goddiva.us/cdn/shop/files/DR5131_BLUSH_1363_front_1778077955_77ae18e1-d98f-4c7b-9177-7774f5d92488_480x.jpg?v=1782117463,web image search
+ut-047,White broderie sundress,https://www.net-a-porter.com/variants/images/46376663162843089/in/w2000_q60.jpg,web image search
+ut-048,Emerald satin maxi dress,https://www.lulus.com/images/product/xlarge/12273301_1617976.jpg,web image search
+ut-049,Olive utility jumpsuit,https://www.lulus.com/images/product/xlarge/10808681_2211876.jpg,web image search
+ut-050,Sand linen co-ord set,https://siarawomen.com/cdn/shop/files/E9F8B048-BABF-4045-8162-006B70C01B8E.jpg?v=1777146740&width=1206,web image search
+ut-051,Lilac printed co-ord,https://karchobi.in/cdn/shop/files/Karchobi_LilacCream_CottonLinen_Shirt_Pant_WomensCoordSet_4.jpg?v=1772975864,web image search
+ut-052,Maroon embroidered kurta set,http://www.lakshita.com/cdn/shop/files/1_2202e361-79cd-4bc9-8492-a8778b43856e.jpg?v=1788412285,web image search
+ut-053,Pastel pink anarkali set,https://shopmulmul.com/cdn/shop/files/14_96e93863-d5b6-4b52-a835-2d293c5dcd8d.jpg?v=1755929153&width=1520,web image search
+ut-054,Ivory kurta pyjama set,https://glamourental.com/cdn/shop/files/2_cbfb2973-bc75-403d-8fc8-3e6d68ebf569.png?v=1778933275&width=940,web image search
+ut-055,Teal silk-blend saree,https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/3/4/3497ff5SUKAT2003_1.jpg?rnd=20200526195200&tr=w-512,web image search
+ut-056,Camel single-breasted blazer,https://cdn.platform.next/common/items/default/default/itemimages/3_4Ratio/product/lge/Y14407s2.jpg,web image search
+ut-057,Navy tailored blazer,https://cdn2.propercloth.com/pic_tccp/137242_a95b32cd29da6b65dab33b7966ec7d2a_size6.jpg,web image search
+ut-058,Ivory linen blazer,https://images.quince.com/2JYcgRV7p6UXHlDNh96z1k/e935277f5b83f9f52336a366bb576e49/W-JKT-53-FLAX-9985_EDITED.jpg?w=1582&q=50&h=1978&reqOrigin=website-ssr,web image search
+ut-059,Classic blue denim jacket,"https://lsco.scene7.com/is/image/lsco/A58830005-front-pdp-ld?fmt=jpeg&qlt=70&resMode=sharp2&fit=crop,1&op_usm=0.6,0.6,8&wid=2000&hei=2500",web image search
+ut-060,Olive bomber jacket,https://www.alphaindustries.com/cdn/shop/products/ma-1-bomber-jacket-slim-fit-outerwear-560738.jpg?v=1756747070&width=3840,web image search
+ut-061,Black satin bomber,https://www.mytheresa.com/image/1094/1238/100/43/P00846567.jpg,web image search
+ut-062,Charcoal Nehru jacket,http://studybyjanak.com/cdn/shop/files/WhatsAppImage2026-03-19at12.46.30PM_2.jpg?v=1774002104,web image search
+ut-063,Cream knit cardigan,https://lisa-yang.com/cdn/shop/files/76_LISAYANG_AW26_CASPULE_WW_DROP1_SEASONAL_FLATS_VANI_CARDIGAN_SAND_CREAM_2026556SR_589.jpg?v=1789377601&width=1920,web image search
+ut-064,Sage cropped cardigan,https://e62b7491ed19d1ac4eab-59f66b8cec21950fa673650bda99f50a.ssl.cf2.rackcdn.com/product-hugerect-3724281-534524-1757156403-76f0d4473e5e1485a216b3706e7dfbf7.757156404_type_hugerect_nid_3724281_uid_534524_0,web image search
+ut-065,White leather sneakers,https://uniformstandard.com/cdn/shop/files/Series1_Mens_TripleWhite_3.jpg?v=1754344208&width=2000,web image search
+ut-066,Chunky white trainers,http://www.milanocouture.com/cdn/shop/files/86804378-32D4-46F7-95A5-0F62A8374DBD_2ff9fe03-1eaa-40e2-887f-3dc1cdd1ca95.png?v=1784702917,web image search
+ut-067,Black runner sneakers,http://americantall.com/cdn/shop/files/American-Tall-Men-Knit-Runners-Black-Front.jpg?v=1762199422,web image search
+ut-068,Tan leather penny loafers,http://www.rancourtandcompany.com/cdn/shop/files/Women_sPinchPennyLoafer-Tan02.jpg?v=1738967935,web image search
+ut-069,Chocolate suede loafers,http://yaroche.com/cdn/shop/products/image_233d054b-58bf-44ba-9a3c-0a1b5dd61a57.jpg?v=1655500588,web image search
+ut-070,Black horsebit loafers,http://www.rancourtandcompany.com/cdn/shop/products/rs4-141832.jpg?v=1606004771,web image search
+ut-071,Tan suede loafers,https://cdn.shopify.com/s/files/1/0419/1525/files/1024x1024-Men-Lincoln-GoldenHour-061726-3.4_033484cb-4eb0-4830-9c98-dd192d12fd57.jpg?v=1785774808,web image search
+ut-072,Nude block heels,https://www.ally.nyc/cdn/shop/files/Side_v2_2400x.png?v=1749729776,web image search
+ut-073,Gold strappy block heels,https://www.lulus.com/images/product/xlarge/11442401_2358011.jpg?w=375&hdpi=1,web image search
+ut-074,Black ballet flats,http://margauxny.com/cdn/shop/files/fonteyn-black-nappa-3quarter.jpg?v=1760107242,web image search
+ut-075,Tan strappy flat sandals,https://www.toms.com/cdn/shop/files/10020825-s.jpg?v=1762277275&width=1920,web image search
+ut-076,Brown leather slides,https://cdn.shopify.com/s/files/1/0975/3129/8160/files/product_14335733_charleswood_mm_brown_201-001-043_main_sq_gy.jpg?v=1768971285,web image search
+ut-077,Black chelsea boots,https://cdn.shopify.com/s/files/1/0419/1525/files/1024x1024-Womens-Knockout-Black-081523-Side.jpg?v=1692639651,web image search
+ut-078,Gold embroidered juttis,http://pinkphulkari.com/cdn/shop/products/goldjutti1.jpg?v=1724124070,web image search
+ut-079,Tan canvas tote,https://paktbags.com/cdn/shop/files/Stash-PDP-images_Stash_Product_Photo_Tote_Mojave.jpg?v=1753642472&width=1600,web image search
+ut-080,Black leather-look tote,https://media3.newlookassets.com/i/newlook/944299501M3/womens/accessories/bags/black-textured-faux-leather-front-pocket-tote-bag.jpg?strip=true&qlt=50&w=720,web image search
+ut-081,Black nylon sling bag,https://cyber-techwear.com/cdn/shop/files/crossbody-mens-sling-bag_8.webp?v=1711864417,web image search
+ut-082,Tan crossbody bag,https://thursdayboots.com/cdn/shop/files/1024x1024-Women-CrossbodyBag-Saddle-122925-Front_224e9d15-790d-4054-ab12-68c93bebf6eb.jpg?v=1772488692&width=1024,web image search
+ut-083,Gold embellished clutch,https://cdn.shopaccino.com/shubhams/products/07-22501080243463_l.jpg?v=732,web image search
+ut-084,Black box clutch,https://onnaehrlich.com/cdn/shop/products/black2_c154437a-c284-481e-882f-3c08a6488b28.jpg?v=1700717101&width=1400,web image search
+ut-085,Brown leather belt,http://beckandwillow.com/cdn/shop/files/Leather-Baildon-Belt-White-BG-Brown-Brass.jpg?v=1756792988,web image search
+ut-086,Tortoise cat-eye sunglasses,http://www.otraeyewear.com/cdn/shop/files/Kenny-Tort-1.jpg?v=1749787455,web image search
+ut-087,Black aviator sunglasses,https://society43.com/cdn/shop/products/StandardAviators.jpg?v=1643330454,web image search
+ut-088,Gold-tone slim watch,https://eu-images.contentstack.com/v3/assets/blt7dcd2cfbc90d45de/bltcb4684c11df7c59b/6135cb4576238622f2ff25e9/3-2-_94f99e6196fdb5075411ad83b132d71d.jpg?format=pjpg&auto=webp&quality=75%2C90&width=3840,web image search
+ut-089,Black sports watch,https://m.media-amazon.com/images/I/71m+EnpgDsL._AC_UY1000_.jpg,web image search
+ut-090,Gold-tone jhumkas,https://i.ebayimg.com/images/g/PS8AAOSwAh5kAtKG/s-l1200.jpg,web image search
+ut-091,Pearl drop earrings,http://sophiyajewelry.com/cdn/shop/files/Ava_Pearl_Earrings_-_product_shot_609d17af-65c0-4588-97a9-a4b89c11474e.png?v=1788301161,web image search
+ut-092,Silk-feel printed scarf,http://us.drakes.com/cdn/shop/products/DR1AD022215-01251-5_1200x1200.jpg?v=1677143913,web image search
+ut-093,Gold zari dupatta,https://mohsintextiles.com/cdn/shop/files/2-Yellow-Golden-Zari-Katan-Silk-Banarasi-Dupatta.webp?v=1749947409&width=1000,web image search
+ut-094,Pink chiffon dupatta,https://tiimg.tistatic.com/fp/1/008/321/44-45-inch-width-100-150-gsm-ladies-pink-plain-chiffon-dupatta-933.jpg,web image search

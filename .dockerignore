@@ -7,3 +7,4 @@ local
 .pytest_cache
 *.pyc
 .env
+data/product_images

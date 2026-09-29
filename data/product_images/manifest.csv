@@ -1,0 +1,95 @@
+file_name,product_id,name,section,category,colour,has_photo
+ut-001.jpg,ut-001,Ivory linen relaxed shirt,women,linen_shirt,ivory,yes
+ut-002.jpg,ut-002,Cream linen oversized shirt,women,linen_shirt,cream,yes
+ut-003.jpg,ut-003,White linen-look shirt,women,linen_shirt,white,yes
+ut-004.jpg,ut-004,Ecru linen boyfriend shirt,women,linen_shirt,cream,yes
+ut-005.jpg,ut-005,Sky linen shirt,men,linen_shirt,sky_blue,yes
+ut-006.jpg,ut-006,Sage linen band-collar shirt,men,linen_shirt,sage,yes
+ut-007.jpg,ut-007,Olive linen camp shirt,unisex,linen_shirt,olive,yes
+ut-008.jpg,ut-008,Blue candy-stripe shirt,women,shirt,sky_blue,yes
+ut-009.jpg,ut-009,White oxford shirt,men,shirt,white,yes
+ut-010.jpg,ut-010,Navy pinstripe shirt,men,shirt,navy,yes
+ut-011.jpg,ut-011,Black satin shirt,women,shirt,black,yes
+ut-012.jpg,ut-012,Red check flannel shirt,men,shirt,red,yes
+ut-013.jpg,ut-013,White crew tee,unisex,tshirt,white,yes
+ut-014.jpg,ut-014,Black oversized graphic tee,unisex,tshirt,black,yes
+ut-015.jpg,ut-015,Navy striped breton tee,men,tshirt,navy,yes
+ut-016.jpg,ut-016,Black ribbed crop top,women,crop_top,black,yes
+ut-017.jpg,ut-017,Lavender halter crop top,women,crop_top,lavender,yes
+ut-018.jpg,ut-018,Blush puff-sleeve blouse,women,blouse,blush,yes
+ut-019.jpg,ut-019,Ivory silk-feel blouse,women,blouse,ivory,yes
+ut-020.jpg,ut-020,Mustard block-print kurta,women,kurta,mustard,yes
+ut-021.jpg,ut-021,White chikankari kurta,men,kurta,white,yes
+ut-022.jpg,ut-022,Black oversized hoodie,unisex,hoodie,black,yes
+ut-023.jpg,ut-023,Grey zip hoodie,unisex,hoodie,grey,yes
+ut-024.jpg,ut-024,Camel cable-knit sweater,women,sweater,camel,yes
+ut-025.jpg,ut-025,Navy crew sweater,men,sweater,navy,yes
+ut-026.jpg,ut-026,Mid-blue straight jeans,women,jeans,denim_blue,yes
+ut-027.jpg,ut-027,Black skinny jeans,women,jeans,black,yes
+ut-028.jpg,ut-028,Indigo slim jeans,men,jeans,navy,yes
+ut-029.jpg,ut-029,Light-wash baggy jeans,men,jeans,sky_blue,yes
+ut-030.jpg,ut-030,Beige straight chinos,women,chinos,beige,yes
+ut-031.jpg,ut-031,Sand tapered chinos,women,chinos,sand,yes
+ut-032.jpg,ut-032,Khaki slim chinos,men,chinos,khaki,yes
+ut-033.jpg,ut-033,Navy chinos,men,chinos,navy,yes
+ut-034.jpg,ut-034,Cream linen trousers,men,chinos,cream,yes
+ut-035.jpg,ut-035,Olive cargo pants,unisex,cargo_pants,olive,yes
+ut-036.jpg,ut-036,Black parachute cargos,unisex,cargo_pants,black,yes
+ut-037.jpg,ut-037,Rust printed palazzo,women,palazzo,rust,yes
+ut-038.jpg,ut-038,Black flowy palazzo,women,palazzo,black,yes
+ut-039.jpg,ut-039,Ivory pleated midi skirt,women,skirt,ivory,yes
+ut-040.jpg,ut-040,Floral tiered maxi skirt,women,skirt,mustard,yes
+ut-041.jpg,ut-041,Denim mini skirt,women,skirt,denim_blue,yes
+ut-042.jpg,ut-042,Beige linen shorts,men,shorts,beige,yes
+ut-043.jpg,ut-043,White denim shorts,women,shorts,white,yes
+ut-044.jpg,ut-044,Sage linen midi dress,women,dress,sage,yes
+ut-045.jpg,ut-045,Black slip dress,women,dress,black,yes
+ut-046.jpg,ut-046,Floral wrap dress,women,dress,blush,yes
+ut-047.jpg,ut-047,White broderie sundress,women,dress,white,yes
+ut-048.jpg,ut-048,Emerald satin maxi dress,women,dress,emerald,yes
+ut-049.jpg,ut-049,Olive utility jumpsuit,women,jumpsuit,olive,yes
+ut-050.jpg,ut-050,Sand linen co-ord set,women,coord_set,sand,yes
+ut-051.jpg,ut-051,Lilac printed co-ord,women,coord_set,lavender,yes
+ut-052.jpg,ut-052,Maroon embroidered kurta set,women,kurta_set,maroon,yes
+ut-053.jpg,ut-053,Pastel pink anarkali set,women,kurta_set,pink,yes
+ut-054.jpg,ut-054,Ivory kurta pyjama set,men,kurta_set,ivory,yes
+ut-055.jpg,ut-055,Teal silk-blend saree,women,saree,teal,yes
+ut-056.jpg,ut-056,Camel single-breasted blazer,women,blazer,camel,yes
+ut-057.jpg,ut-057,Navy tailored blazer,men,blazer,navy,yes
+ut-058.jpg,ut-058,Ivory linen blazer,women,blazer,ivory,yes
+ut-059.jpg,ut-059,Classic blue denim jacket,unisex,denim_jacket,denim_blue,yes
+ut-060.jpg,ut-060,Olive bomber jacket,men,bomber,olive,yes
+ut-061.jpg,ut-061,Black satin bomber,women,bomber,black,yes
+ut-062.jpg,ut-062,Charcoal Nehru jacket,men,nehru_jacket,charcoal,yes
+ut-063.jpg,ut-063,Cream knit cardigan,women,cardigan,cream,yes
+ut-064.jpg,ut-064,Sage cropped cardigan,women,cardigan,sage,yes
+ut-065.jpg,ut-065,White leather sneakers,unisex,sneakers,white,yes
+ut-066.jpg,ut-066,Chunky white trainers,unisex,sneakers,white,yes
+ut-067.jpg,ut-067,Black runner sneakers,men,sneakers,black,yes
+ut-068.jpg,ut-068,Tan leather penny loafers,women,loafers,tan,yes
+ut-069.jpg,ut-069,Chocolate suede loafers,women,loafers,brown,yes
+ut-070.jpg,ut-070,Black horsebit loafers,men,loafers,black,yes
+ut-071.jpg,ut-071,Tan suede loafers,men,loafers,tan,yes
+ut-072.jpg,ut-072,Nude block heels,women,block_heels,beige,yes
+ut-073.jpg,ut-073,Gold strappy block heels,women,block_heels,gold,yes
+ut-074.jpg,ut-074,Black ballet flats,women,flats,black,yes
+ut-075.jpg,ut-075,Tan strappy flat sandals,women,sandals,tan,yes
+ut-076.jpg,ut-076,Brown leather slides,men,sandals,brown,yes
+ut-077.jpg,ut-077,Black chelsea boots,women,boots,black,yes
+ut-078.jpg,ut-078,Gold embroidered juttis,women,juttis,gold,yes
+ut-079.jpg,ut-079,Tan canvas tote,women,tote,tan,yes
+ut-080.jpg,ut-080,Black leather-look tote,women,tote,black,yes
+ut-081.jpg,ut-081,Black nylon sling bag,unisex,sling_bag,black,yes
+ut-082.jpg,ut-082,Tan crossbody bag,women,sling_bag,tan,yes
+ut-083.jpg,ut-083,Gold embellished clutch,women,clutch,gold,yes
+ut-084.jpg,ut-084,Black box clutch,women,clutch,black,yes
+ut-085.jpg,ut-085,Brown leather belt,unisex,belt,brown,yes
+ut-086.jpg,ut-086,Tortoise cat-eye sunglasses,unisex,sunglasses,brown,yes
+ut-087.jpg,ut-087,Black aviator sunglasses,unisex,sunglasses,black,yes
+ut-088.jpg,ut-088,Gold-tone slim watch,unisex,watch,gold,yes
+ut-089.jpg,ut-089,Black sports watch,men,watch,black,yes
+ut-090.jpg,ut-090,Gold-tone jhumkas,women,jewellery,gold,yes
+ut-091.jpg,ut-091,Pearl drop earrings,women,jewellery,ivory,yes
+ut-092.jpg,ut-092,Silk-feel printed scarf,women,scarf,navy,yes
+ut-093.jpg,ut-093,Gold zari dupatta,women,dupatta,gold,yes
+ut-094.jpg,ut-094,Pink chiffon dupatta,women,dupatta,pink,yes

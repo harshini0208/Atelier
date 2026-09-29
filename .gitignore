@@ -8,3 +8,9 @@ local/
 .env
 infra/.ds_access.json
 .DS_Store
+
+# store product photos: third-party images, kept local (see data/product_images/sources.csv)
+data/product_images/*.jpg
+data/product_images/*.jpeg
+data/product_images/*.png
+data/product_images/*.webp
