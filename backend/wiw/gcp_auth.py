@@ -44,7 +44,11 @@ class GcloudUserCredentials(ga_credentials.Credentials):
 def credentials() -> ga_credentials.Credentials:
     project = get_settings().project
     try:
-        creds, _ = google.auth.default(scopes=SCOPES, quota_project_id=project)
+        creds, _ = google.auth.default(scopes=SCOPES)
+        # user credentials need a quota project; service accounts (Cloud Run) must NOT send one, or every call
+        # requires serviceusage.services.use on the project
+        if hasattr(creds, "with_quota_project") and getattr(creds, "refresh_token", None):
+            creds = creds.with_quota_project(project)
         creds.refresh(google.auth.transport.requests.Request())  # stale ADC files fail here, not later
         return creds
     except (DefaultCredentialsError, RefreshError):

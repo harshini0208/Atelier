@@ -87,6 +87,22 @@
       "cost": "\u20b90",
       "note": "alerts at 50/90/100% of \u20b92000",
       "created": "2026-09-29"
+    },
+    {
+      "kind": "cloud run service",
+      "name": "wiw-app",
+      "stop": "gcloud run services delete wiw-app --region us-central1 --project atelieros-cup26",
+      "cost": "~ \u20b90-100 (min instances 0)",
+      "note": "https://wiw-app-nhukbiswfq-uc.a.run.app",
+      "created": "2026-09-29"
+    },
+    {
+      "kind": "container images",
+      "name": "us-central1-docker.pkg.dev/atelieros-cup26/wiw/app",
+      "stop": "gcloud artifacts docker images delete us-central1-docker.pkg.dev/atelieros-cup26/wiw/app --delete-tags",
+      "cost": "< \u20b920",
+      "note": "one image per deploy",
+      "created": "2026-09-29"
     }
   ]
 }
