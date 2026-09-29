@@ -17,6 +17,9 @@ import Home from "./pages/Home";
 import InspoReview from "./pages/InspoReview";
 import Preferences from "./pages/Preferences";
 import Wardrobe from "./pages/Wardrobe";
+import Taste from "./pages/Taste";
+import Retailer from "./pages/Retailer";
+import Demo from "./pages/Demo";
 import Cart from "./pages/Cart";
 import Notifications from "./pages/Notifications";
 
@@ -42,6 +45,9 @@ function App() {
           <Route path="/folders/:id/wardrobe" element={<Wardrobe />} />
           <Route path="/inspo/:id" element={<InspoReview />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/taste" element={<Taste />} />
+          <Route path="/retailer" element={<Retailer />} />
+          <Route path="/demo" element={<Demo />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

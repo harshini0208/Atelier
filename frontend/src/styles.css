@@ -281,3 +281,18 @@ button.chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-c
 @media (min-width: 1000px) { .wardrobe-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
 .tray-grid { display: grid; gap: 8px; grid-template-columns: 1fr; }
 @media (min-width: 560px) { .tray-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ---------------------------------------------------------------- bars (single series, magnitude) */
+.bars { display: flex; flex-direction: column; gap: 8px; }
+.bar-row { display: grid; grid-template-columns: minmax(90px, 34%) 1fr auto; gap: 10px; align-items: center; font-size: 13px; }
+.bar-label { color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { height: 14px; background: #efe9e0; border-radius: 4px; overflow: hidden; }
+.bar-fill { display: block; height: 100%; background: var(--sage); border-radius: 0 4px 4px 0; min-width: 2px; }
+.bar-row:hover .bar-fill { background: #3b4a33; }
+.bar-value { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); min-width: 40px; text-align: right; }
+.stat-grid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 900px) { .stat-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.stat { padding: 14px; }
+.stat b { display: block; font-family: var(--serif); font-size: 28px; font-weight: 500; line-height: 1.1; }
+.two-col { display: grid; gap: 16px; }
+@media (min-width: 900px) { .two-col { grid-template-columns: 1fr 1fr; } }

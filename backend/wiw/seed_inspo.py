@@ -1,6 +1,8 @@
 """Attach pre-analysed demo inspo to persona folders by running the real pipeline (never live Gemini)."""
 from __future__ import annotations
 
+from datetime import datetime, timedelta
+
 from .db import session_scope
 from .inspo import ingest, select_pieces
 from .services import matches_for_piece, pick_size, user_prefs
@@ -28,5 +30,9 @@ def attach_persona_inspo(personas: dict, folders: dict[str, list[int]]) -> None:
                             if top:
                                 h.chosen_product_id = top.product["id"]
                                 h.chosen_size = pick_size(prefs, top.product)
+                        # persona history happened weeks ago, so today's saves read as "exploring"
+                        old = datetime.utcnow() - timedelta(days=30)
+                        for sig in db.query(m.TasteSignal).filter(m.TasteSignal.user_id == pr["id"]):
+                            sig.created_at = old
     finally:
         s.gemini_mode = mode

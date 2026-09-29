@@ -18,11 +18,10 @@ export type NavItem = { to: string; label: string; icon: string; mobile?: boolea
 export const NAV: NavItem[] = [
   { to: "/", label: "Wardrobes", icon: "hanger", mobile: true },
   { to: "/preferences", label: "Preferences", icon: "sliders", mobile: true },
+  { to: "/taste", label: "My taste", icon: "sparkle", mobile: true },
+  { to: "/retailer", label: "Retailer", icon: "chart", mobile: true },
+  { to: "/demo", label: "Demo panel", icon: "bolt" },
 ];
-
-export function registerNav(item: NavItem) {
-  if (!NAV.some((n) => n.to === item.to)) NAV.push(item);
-}
 
 function PersonaMenu() {
   const qc = useQueryClient();
