@@ -1,0 +1,542 @@
+{
+ "old_money_summer": {
+  "sha256": "c7535dbaddf97d4fc54078ffbc1cb3dc447f31a670ca5efcf7dc7c19c14782d7",
+  "file": "old_money_summer.png",
+  "pieces": [
+   {
+    "subcategory": "linen_shirt",
+    "category": "tops",
+    "name": "Ivory linen shirt",
+    "color": "ivory",
+    "secondary_color": null,
+    "pattern": "solid",
+    "fabric": "linen",
+    "silhouette": "relaxed",
+    "length": "regular",
+    "neckline": "collar",
+    "sleeve": "long",
+    "style_tags": [
+     "old_money",
+     "minimal"
+    ],
+    "occasion_tags": [
+     "brunch",
+     "vacation"
+    ],
+    "gender_fit": "women",
+    "box_2d": [
+     228,
+     309,
+     417,
+     691
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "chinos",
+    "category": "bottoms",
+    "name": "Beige straight trousers",
+    "color": "beige",
+    "secondary_color": null,
+    "pattern": "solid",
+    "fabric": "cotton",
+    "silhouette": "straight",
+    "length": "ankle",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "old_money",
+     "classic"
+    ],
+    "occasion_tags": [
+     "work",
+     "brunch"
+    ],
+    "gender_fit": "women",
+    "box_2d": [
+     359,
+     402,
+     729,
+     598
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "loafers",
+    "category": "footwear",
+    "name": "Tan leather loafers",
+    "color": "tan",
+    "secondary_color": null,
+    "pattern": "solid",
+    "fabric": "leather",
+    "silhouette": "regular",
+    "length": "regular",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "old_money",
+     "classic"
+    ],
+    "occasion_tags": [
+     "work",
+     "brunch"
+    ],
+    "gender_fit": "women",
+    "box_2d": [
+     729,
+     409,
+     783,
+     591
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "tote",
+    "category": "accessories",
+    "name": "Tan canvas tote",
+    "color": "tan",
+    "secondary_color": null,
+    "pattern": "solid",
+    "fabric": "canvas",
+    "silhouette": "regular",
+    "length": "regular",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "old_money",
+     "minimal"
+    ],
+    "occasion_tags": [
+     "vacation",
+     "brunch"
+    ],
+    "gender_fit": "women",
+    "box_2d": [
+     422,
+     619,
+     492,
+     724
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "watch",
+    "category": "accessories",
+    "name": "Gold watch",
+    "color": "gold",
+    "secondary_color": null,
+    "pattern": "solid",
+    "fabric": "metal",
+    "silhouette": "regular",
+    "length": "regular",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "old_money",
+     "classic"
+    ],
+    "occasion_tags": [
+     "work"
+    ],
+    "gender_fit": "unisex",
+    "box_2d": [
+     407,
+     337,
+     436,
+     361
+    ],
+    "confidence": 0.95
+   }
+  ]
+ },
+ "resort_linen": {
+  "sha256": "fb39c0fa991ce503fbed43f42b3c145a2935c1051060decf1a0e2d2afc6ab99c",
+  "file": "resort_linen.png",
+  "pieces": [
+   {
+    "subcategory": "shirt",
+    "category": "tops",
+    "name": "Blue striped shirt",
+    "color": "sky_blue",
+    "secondary_color": "white",
+    "pattern": "stripes",
+    "fabric": "cotton",
+    "silhouette": "relaxed",
+    "length": "regular",
+    "neckline": "collar",
+    "sleeve": "long",
+    "style_tags": [
+     "old_money",
+     "resort",
+     "preppy"
+    ],
+    "occasion_tags": [
+     "vacation",
+     "brunch"
+    ],
+    "gender_fit": "women",
+    "box_2d": [
+     228,
+     320,
+     417,
+     680
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "wide_leg_trousers",
+    "category": "bottoms",
+    "name": "Sand wide-leg linen trousers",
+    "color": "sand",
+    "secondary_color": null,
+    "pattern": "solid",
+    "fabric": "linen",
+    "silhouette": "wide",
+    "length": "long",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "resort",
+     "old_money",
+     "minimal"
+    ],
+    "occasion_tags": [
+     "vacation",
+     "beach"
+    ],
+    "gender_fit": "women",
+    "box_2d": [
+     359,
+     393,
+     754,
+     607
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "sandals",
+    "category": "footwear",
+    "name": "Tan flat sandals",
+    "color": "tan",
+    "secondary_color": null,
+    "pattern": "solid",
+    "fabric": "leather",
+    "silhouette": "regular",
+    "length": "regular",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "resort",
+     "boho"
+    ],
+    "occasion_tags": [
+     "beach",
+     "vacation"
+    ],
+    "gender_fit": "women",
+    "box_2d": [
+     729,
+     420,
+     783,
+     580
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "sunglasses",
+    "category": "accessories",
+    "name": "Tortoiseshell sunglasses",
+    "color": "brown",
+    "secondary_color": "tan",
+    "pattern": "print",
+    "fabric": "synthetic",
+    "silhouette": "regular",
+    "length": "regular",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "resort",
+     "old_money"
+    ],
+    "occasion_tags": [
+     "beach",
+     "vacation"
+    ],
+    "gender_fit": "unisex",
+    "box_2d": [
+     172,
+     450,
+     189,
+     550
+    ],
+    "confidence": 0.95
+   }
+  ]
+ },
+ "festive_ethnic": {
+  "sha256": "f8a15356173ad487ffd12e9b3b3581fb19e8136c5c0fd7a95c6f9de82a3bf379",
+  "file": "festive_ethnic.png",
+  "pieces": [
+   {
+    "subcategory": "lehenga",
+    "category": "one_piece",
+    "name": "Maroon embroidered lehenga",
+    "color": "maroon",
+    "secondary_color": "gold",
+    "pattern": "embroidered",
+    "fabric": "silk",
+    "silhouette": "flared",
+    "length": "maxi",
+    "neckline": "square",
+    "sleeve": "short",
+    "style_tags": [
+     "ethnic",
+     "formal"
+    ],
+    "occasion_tags": [
+     "wedding",
+     "festive"
+    ],
+    "gender_fit": "women",
+    "box_2d": [
+     224,
+     311,
+     741,
+     689
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "dupatta",
+    "category": "accessories",
+    "name": "Gold dupatta",
+    "color": "gold",
+    "secondary_color": "maroon",
+    "pattern": "embroidered",
+    "fabric": "silk",
+    "silhouette": "regular",
+    "length": "regular",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "ethnic"
+    ],
+    "occasion_tags": [
+     "wedding",
+     "festive"
+    ],
+    "gender_fit": "women",
+    "box_2d": [
+     243,
+     406,
+     554,
+     594
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "juttis",
+    "category": "footwear",
+    "name": "Gold embroidered juttis",
+    "color": "gold",
+    "secondary_color": "maroon",
+    "pattern": "embroidered",
+    "fabric": "synthetic",
+    "silhouette": "regular",
+    "length": "regular",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "ethnic"
+    ],
+    "occasion_tags": [
+     "wedding",
+     "festive"
+    ],
+    "gender_fit": "women",
+    "box_2d": [
+     729,
+     402,
+     784,
+     598
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "jewellery",
+    "category": "accessories",
+    "name": "Gold jhumkas",
+    "color": "gold",
+    "secondary_color": null,
+    "pattern": "embroidered",
+    "fabric": "metal",
+    "silhouette": "regular",
+    "length": "regular",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "ethnic"
+    ],
+    "occasion_tags": [
+     "wedding",
+     "festive"
+    ],
+    "gender_fit": "women",
+    "box_2d": [
+     181,
+     441,
+     223,
+     559
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "clutch",
+    "category": "accessories",
+    "name": "Gold embellished clutch",
+    "color": "gold",
+    "secondary_color": "ivory",
+    "pattern": "embroidered",
+    "fabric": "synthetic",
+    "silhouette": "regular",
+    "length": "regular",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "ethnic",
+     "formal"
+    ],
+    "occasion_tags": [
+     "wedding",
+     "festive"
+    ],
+    "gender_fit": "women",
+    "box_2d": [
+     443,
+     624,
+     478,
+     737
+    ],
+    "confidence": 0.95
+   }
+  ]
+ },
+ "street_men": {
+  "sha256": "20a0a2e742a7981115a0079d2981a02059f51d72016ae459a58e129620f305a2",
+  "file": "street_men.png",
+  "pieces": [
+   {
+    "subcategory": "hoodie",
+    "category": "tops",
+    "name": "Black oversized hoodie",
+    "color": "black",
+    "secondary_color": null,
+    "pattern": "solid",
+    "fabric": "cotton",
+    "silhouette": "oversized",
+    "length": "regular",
+    "neckline": "hood",
+    "sleeve": "long",
+    "style_tags": [
+     "streetwear",
+     "athleisure"
+    ],
+    "occasion_tags": [
+     "casual"
+    ],
+    "gender_fit": "unisex",
+    "box_2d": [
+     214,
+     248,
+     423,
+     752
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "cargo_pants",
+    "category": "bottoms",
+    "name": "Olive cargo pants",
+    "color": "olive",
+    "secondary_color": null,
+    "pattern": "solid",
+    "fabric": "cotton",
+    "silhouette": "relaxed",
+    "length": "long",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "streetwear"
+    ],
+    "occasion_tags": [
+     "casual",
+     "travel"
+    ],
+    "gender_fit": "unisex",
+    "box_2d": [
+     359,
+     406,
+     754,
+     594
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "sneakers",
+    "category": "footwear",
+    "name": "Chunky white sneakers",
+    "color": "white",
+    "secondary_color": "grey",
+    "pattern": "solid",
+    "fabric": "leather",
+    "silhouette": "regular",
+    "length": "regular",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "streetwear",
+     "athleisure"
+    ],
+    "occasion_tags": [
+     "casual"
+    ],
+    "gender_fit": "unisex",
+    "box_2d": [
+     729,
+     420,
+     783,
+     580
+    ],
+    "confidence": 0.95
+   },
+   {
+    "subcategory": "sling_bag",
+    "category": "accessories",
+    "name": "Black sling bag",
+    "color": "black",
+    "secondary_color": null,
+    "pattern": "solid",
+    "fabric": "polyester",
+    "silhouette": "regular",
+    "length": "regular",
+    "neckline": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "streetwear"
+    ],
+    "occasion_tags": [
+     "casual",
+     "travel"
+    ],
+    "gender_fit": "unisex",
+    "box_2d": [
+     421,
+     619,
+     489,
+     711
+    ],
+    "confidence": 0.95
+   }
+  ]
+ }
+}

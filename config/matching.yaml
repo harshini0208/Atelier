@@ -1,0 +1,107 @@
+# Deterministic matching configuration. Gemini never sees or changes these numbers.
+
+retrieval:
+  max_candidates: 60      # items pulled from CatalogSearch before scoring
+  min_candidates: 8       # if Vertex AI Search returns fewer, top up from local retrieval
+
+style_score:
+  # Weights are points out of 100. Attributes that are "none" on either side (e.g. sleeve on shoes)
+  # are skipped and the remaining weights are rescaled to 100.
+  weights:
+    subcategory: 34
+    color: 20
+    pattern: 8
+    silhouette: 8
+    fabric: 10
+    style_tags: 13
+    occasion_tags: 7
+  max_delta_e: 45          # CIEDE2000 distance at which colour similarity reaches 0
+  secondary_color_bonus: 3 # small bonus when both sides share a secondary colour (e.g. stripes on white)
+
+good_match:
+  threshold: 60                    # style score needed to count as a good match
+  min_subcategory_similarity: 0.75 # a skirt never "covers" trousers, however well the colour matches
+  require_in_stock: true           # at least one size in stock
+
+# Related subcategories get partial credit (symmetric). Unlisted pairs score 0; same subcategory 1.0.
+subcategory_similarity:
+  - [shirt, linen_shirt, 0.85]
+  - [shirt, blouse, 0.6]
+  - [linen_shirt, blouse, 0.5]
+  - [tshirt, crop_top, 0.45]
+  - [kurta, shirt, 0.3]
+  - [hoodie, sweater, 0.5]
+  - [wide_leg_trousers, palazzo, 0.6]
+  - [wide_leg_trousers, chinos, 0.45]
+  - [wide_leg_trousers, cargo_pants, 0.3]
+  - [chinos, jeans, 0.4]
+  - [chinos, cargo_pants, 0.4]
+  - [palazzo, skirt, 0.3]
+  - [leggings, jeans, 0.3]
+  - [lehenga, kurta_set, 0.4]
+  - [lehenga, saree, 0.35]
+  - [lehenga, skirt, 0.3]
+  - [coord_set, jumpsuit, 0.4]
+  - [dress, jumpsuit, 0.3]
+  - [kurta_set, saree, 0.3]
+  - [shrug, cardigan, 0.7]
+  - [blazer, nehru_jacket, 0.4]
+  - [bomber, denim_jacket, 0.4]
+  - [stilettos, block_heels, 0.7]
+  - [kolhapuris, sandals, 0.6]
+  - [juttis, flats, 0.5]
+  - [juttis, kolhapuris, 0.5]
+  - [loafers, flats, 0.45]
+  - [sneakers, loafers, 0.2]
+  - [tote, sling_bag, 0.5]
+  - [clutch, sling_bag, 0.4]
+  - [scarf, dupatta, 0.5]
+
+# Fabric similarity: same fabric 1.0, same group this value, otherwise 0.
+fabric_groups:
+  score: 0.55
+  groups:
+    - [linen, cotton]
+    - [viscose, silk, chiffon]
+    - [polyester, synthetic]
+    - [wool, knit]
+    - [leather, suede]
+    - [canvas, cotton]
+
+silhouette_groups:
+  score: 0.6
+  groups:
+    - [slim, tapered, bodycon]
+    - [regular, straight]
+    - [relaxed, oversized, wide]
+    - [wide, flared, a_line]
+
+pattern_similarity:
+  score: 0.4              # partial credit for "busy vs busy" (e.g. floral vs print)
+  busy: [floral, print, polka, embroidered, checks, stripes]
+
+preferences:
+  preferred_material_bonus: 4   # added to the style score for display/sort only, never to the good-match test
+  size_group_free: Free
+
+tiers:
+  for_you: "For you"
+  also_view: "Also view"
+  max_for_you: 6
+  max_also_view: 6
+  max_closest: 3               # shown when a piece has no good match ("closest from this store")
+
+alerts:
+  new_arrival_threshold: 68    # taste score a new item must reach before we notify
+  price_drop_min_pct: 5        # ignore trivial price moves
+  watch_top_n: 5               # hanger alerts watch each hanger's top-N good matches
+
+complete_the_look:
+  weights: {color_harmony: 40, style_overlap: 35, occasion_overlap: 25}
+  min_score: 55
+  max_suggestions: 4
+
+taste:
+  core_min_count: 3            # an attribute seen this many times across saves is "core taste"
+  exploring_days: 14           # attributes first seen within this window are "exploring"
+  skip_weight: -0.3            # unselected pieces are mild negative signals
