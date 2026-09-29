@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../api";
 import { useVocab } from "../components/Layout";
 import ProductModal from "../components/ProductModal";
+import { AddFolderDialog } from "./Home";
 import { ErrorBox, Icon, Loading, Modal, Price, SkeletonGrid, useToast } from "../components/ui";
 import type { FolderSummary, Inspo, MatchItem, Piece, Product } from "../types";
 
@@ -90,7 +91,7 @@ function MatchCard({ item, chosen, onHang, onDetails, busy }: {
   );
 }
 
-function PieceMatchesPanel({ inspo, pieceId, folderId, onHung }: { inspo: Inspo; pieceId: number; folderId: number; onHung: (name: string) => void }) {
+function PieceMatchesPanel({ inspo, pieceId, folderId, onHung }: { inspo: Inspo; pieceId: number; folderId: number | null; onHung: (name: string) => void }) {
   const qc = useQueryClient();
   const [details, setDetails] = useState<string | null>(null);
   const q = useQuery({ queryKey: ["piece-matches", pieceId], queryFn: () => api.get<PieceMatches>(`/inspo/${inspo.id}/pieces/${pieceId}/matches`) });
@@ -112,19 +113,20 @@ function PieceMatchesPanel({ inspo, pieceId, folderId, onHung }: { inspo: Inspo;
     <section className="stack" style={{ gap: 8 }}>
       <div className="row-between"><h3>{title}</h3><span className="small muted">{hint}</span></div>
       <div className="product-grid">
-        {items.map((i) => <MatchCard key={i.product.id} item={i} chosen={chosen === i.product.id} busy={hang.isPending}
+        {items.map((i) => <MatchCard key={i.product.id} item={i} chosen={chosen === i.product.id} busy={hang.isPending || !folderId}
           onHang={() => hang.mutate(i.product)} onDetails={() => setDetails(i.product.id)} />)}
       </div>
     </section>
   );
   return (
     <div className="stack" style={{ gap: 18 }}>
+      {!folderId && <div className="alert">Choose a folder above, then hang the pieces you like.</div>}
       {m.gap_message && <div className="alert">{m.gap_message}</div>}
       {tier("For you", "Fits the look and your preferences", m.for_you)}
       {tier("Also view", "Great match, outside a preference", m.also_view)}
       {tier("Closest from this store", "Not a close match", m.closest)}
       {!m.covered && (
-        <button className="btn" onClick={() => hang.mutate(null)} disabled={hang.isPending || (m.hanger !== null && !chosen)}>
+        <button className="btn" onClick={() => hang.mutate(null)} disabled={!folderId || hang.isPending || (m.hanger !== null && !chosen)}>
           <Icon name="sparkle" size={16} /> {m.hanger && !chosen ? "Saved as a wish" : "Save as a wish (we'll tell you if it arrives)"}
         </button>
       )}
@@ -144,11 +146,12 @@ export default function InspoReview() {
   const folders = useQuery({ queryKey: ["folders"], queryFn: () => api.get<FolderSummary[]>("/folders") });
   const [active, setActive] = useState<number | null>(null);
   const [folderId, setFolderId] = useState<number | null>(null);
+  const [newFolder, setNewFolder] = useState(false);
   const [tapMode, setTapMode] = useState(false);
   const [tapPoint, setTapPoint] = useState<[number, number] | null | undefined>(undefined);
   const matchesRef = useRef<HTMLDivElement>(null);
   const inspo = q.data;
-  useEffect(() => { if (inspo && folderId === null) setFolderId(inspo.folder_id); }, [inspo, folderId]);
+  useEffect(() => { if (inspo?.folder_id && folderId === null) setFolderId(inspo.folder_id); }, [inspo, folderId]);
 
   const hung = new Set((inspo?.pieces ?? []).filter((p) => p.selected).map((p) => p.id));
   const pick = (pid: number) => {
@@ -157,7 +160,11 @@ export default function InspoReview() {
   };
   const done = useMutation({
     mutationFn: () => api.post(`/inspo/${inspoId}/select`, { piece_ids: [...hung], folder_id: folderId }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["folder"] }); nav(`/folders/${folderId ?? inspo!.folder_id}`); },
+    onSuccess: () => {
+      ["folder", "folders", "unfiled"].forEach((k) => qc.invalidateQueries({ queryKey: [k] }));
+      const target = folderId ?? inspo!.folder_id;
+      nav(target ? `/folders/${target}` : "/");
+    },
   });
 
   const onImageClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -173,7 +180,8 @@ export default function InspoReview() {
 
   return (
     <>
-      <Link to={`/folders/${inspo.folder_id}`} className="btn btn-ghost btn-sm" style={{ marginLeft: -8 }}><Icon name="back" size={16} /> Back to folder</Link>
+      <Link to={inspo.folder_id ? `/folders/${inspo.folder_id}` : "/"} className="btn btn-ghost btn-sm" style={{ marginLeft: -8 }}>
+        <Icon name="back" size={16} /> {inspo.folder_id ? "Back to folder" : "Home"}</Link>
       <div className="inspo-layout" style={{ marginTop: 8 }}>
         <div className="stack inspo-image-col">
           <div className={`inspo-frame ${tapMode ? "tap-mode" : ""}`} onClick={onImageClick}>
@@ -207,15 +215,16 @@ export default function InspoReview() {
               ))}
             </div>
           )}
-          {folders.data && folders.data.length > 1 && (
-            <div className="row small">
-              <label htmlFor="to-folder" className="muted">Hang in</label>
-              <select id="to-folder" className="select" style={{ width: "auto", minHeight: 36 }} value={folderId ?? ""}
-                onChange={(e) => setFolderId(Number(e.target.value))}>
-                {folders.data.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}
-              </select>
-            </div>
-          )}
+          <div className="row small">
+            <label htmlFor="to-folder" className="muted">Hang pieces in</label>
+            <select id="to-folder" className="select" style={{ width: "auto", minHeight: 36, borderColor: folderId ? undefined : "var(--amber)" }}
+              value={folderId ?? ""} onChange={(e) => (e.target.value === "new" ? setNewFolder(true) : setFolderId(Number(e.target.value)))}>
+              <option value="" disabled>Choose a folder…</option>
+              {folders.data?.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}
+              <option value="new">+ New folder…</option>
+            </select>
+            <span className="muted">You can switch folders between pieces.</span>
+          </div>
           <div ref={matchesRef} style={{ scrollMarginTop: 80 }}>
             {activePiece ? (
               <div className="card pad stack">
@@ -223,7 +232,7 @@ export default function InspoReview() {
                   {activePiece.crop_url && <img src={activePiece.crop_url} alt="" style={{ width: 52, height: 52, objectFit: "contain", background: "#efe8de", borderRadius: 8 }} />}
                   <div><div className="eyebrow">In store for</div><h2 style={{ fontSize: 20 }}>{activePiece.name}</h2></div>
                 </div>
-                <PieceMatchesPanel inspo={inspo} pieceId={activePiece.id} folderId={folderId ?? inspo.folder_id!}
+                <PieceMatchesPanel inspo={inspo} pieceId={activePiece.id} folderId={folderId}
                   onHung={(n) => toast(n === "wish" ? "Saved as a wish" : `${n} is on your hanger`)} />
               </div>
             ) : inspo.pieces.length > 0 && (
@@ -240,6 +249,7 @@ export default function InspoReview() {
           </span>}
         </div>
       </div>
+      {newFolder && <AddFolderDialog onClose={() => setNewFolder(false)} onCreated={(f) => setFolderId(f.id)} />}
       {tapPoint !== undefined && <AddPieceDialog point={tapPoint} inspoId={inspoId} onClose={() => setTapPoint(undefined)} />}
     </>
   );

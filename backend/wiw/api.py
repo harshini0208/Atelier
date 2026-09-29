@@ -175,6 +175,10 @@ def delete_me(db: Db, user: User) -> dict:
     db.query(m.Event).filter(m.Event.user_id == uid).delete(synchronize_session=False)
     db.delete(user)
     db.commit()
+    from .storage import storage
+
+    for prefix in (f"inspo/{uid}/", f"crops/{uid}/"):  # their uploaded screenshots and crops
+        storage().delete_prefix(prefix)
     return {"ok": True}
 
 
@@ -263,9 +267,27 @@ def get_folder(folder_id: int, db: Db, user: User) -> dict:
 
 # ------------------------------------------------------------------ inspo
 
+@router.post("/inspo")
+async def upload_unfiled_inspo(db: Db, user: User, file: UploadFile = File(...)) -> dict:
+    """Upload from the landing page: the screenshot isn't in a folder yet. Each hung piece picks its own folder."""
+    return await _upload(db, user, None, file)
+
+
+@router.get("/inspo")
+def list_unfiled_inspo(db: Db, user: User) -> list[dict]:
+    """Uploads not filed into any folder yet (nothing hung from them)."""
+    rows = db.scalars(select(m.InspoImage).where(m.InspoImage.user_id == user.id, m.InspoImage.folder_id.is_(None))
+                      .order_by(m.InspoImage.id.desc()))
+    return [inspo_dict(i) for i in rows]
+
+
 @router.post("/folders/{folder_id}/inspo")
 async def upload_inspo(folder_id: int, db: Db, user: User, file: UploadFile = File(...)) -> dict:
     own_folder(db, user, folder_id)
+    return await _upload(db, user, folder_id, file)
+
+
+async def _upload(db: Session, user: m.User, folder_id: int | None, file: UploadFile) -> dict:
     data = await file.read()
     if len(data) > MAX_UPLOAD:
         raise HTTPException(413, "That image is over 12 MB. Try a smaller screenshot.")
@@ -330,6 +352,8 @@ def select_inspo_pieces(inspo_id: int, body: SelectIn, db: Db, user: User) -> di
     inspo = own_inspo(db, user, inspo_id)
     for fid in {body.folder_id, *body.folder_by_piece.values()} - {None}:
         own_folder(db, user, fid)
+    if inspo.folder_id is None and body.folder_id is None and body.piece_ids:
+        raise HTTPException(422, "Choose a folder first.")
     out = select_pieces(db, user.id, inspo, body.piece_ids, body.folder_by_piece, body.folder_id)
     db.commit()
     return out
@@ -374,6 +398,8 @@ def hang(inspo_id: int, piece_id: int, body: HangIn, db: Db, user: User) -> dict
     piece = own_piece(inspo, piece_id)
     if body.folder_id:
         own_folder(db, user, body.folder_id)
+    elif inspo.folder_id is None and not db.scalar(select(m.Hanger).where(m.Hanger.piece_id == piece.id)):
+        raise HTTPException(422, "Choose a folder for this piece first.")
     try:
         h = hang_piece(db, user.id, inspo, piece, product_id=body.product_id, size=body.size, folder_id=body.folder_id)
     except ValueError as e:

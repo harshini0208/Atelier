@@ -177,7 +177,10 @@ def test_delete_my_profile_removes_everything(client):
     inspo = upload(client, f["id"], "street_men", headers=hh)
     piece = inspo["pieces"][0]
     client.post(f"/api/inspo/{inspo['id']}/pieces/{piece['id']}/hang", json={}, headers=hh)
+    from wiw.storage import storage
+    assert storage().get(inspo["image_url"].removeprefix("/media/"))
     assert client.delete("/api/me", headers=hh).json() == {"ok": True}
+    assert storage().get(inspo["image_url"].removeprefix("/media/")) is None       # uploads removed too
     assert client.get("/api/me", headers=hh).status_code == 401
     from sqlalchemy import func, select
 
@@ -186,3 +189,25 @@ def test_delete_my_profile_removes_everything(client):
     with session_scope() as db:
         for model in (m.Folder, m.Hanger, m.InspoImage, m.Event, m.TasteSignal):
             assert db.scalar(select(func.count()).select_from(model).where(model.user_id == uid)) == 0
+
+
+def test_upload_from_landing_page_then_file_pieces_anywhere(client):
+    uid = client.post("/api/profile", json={"name": "Lander", "city": "Mumbai", "sizes": {"tops": "M", "bottoms": "28", "footwear": "5"}}).json()["id"]
+    hh = {"X-User-Id": uid}
+    data = (ROOT / "demo/inspo/generated/old_money_summer.png").read_bytes()
+    inspo = client.post("/api/inspo", files={"file": ("a.png", data, "image/png")}, headers=hh).json()
+    assert inspo["folder_id"] is None and inspo["pieces"]
+    assert [i["id"] for i in client.get("/api/inspo", headers=hh).json()] == [inspo["id"]]   # shown as unsorted
+    shirt, loafers = (next(p for p in inspo["pieces"] if p["subcategory"] == s) for s in ("linen_shirt", "loafers"))
+    m = client.get(f"/api/inspo/{inspo['id']}/pieces/{shirt['id']}/matches", headers=hh).json()
+    pid = m["for_you"][0]["product"]["id"]
+    no_folder = client.post(f"/api/inspo/{inspo['id']}/pieces/{shirt['id']}/hang", json={"product_id": pid}, headers=hh)
+    assert no_folder.status_code == 422                                                        # must pick a folder
+    work = client.post("/api/folders", json={"name": "Work"}, headers=hh).json()
+    trip = client.post("/api/folders", json={"name": "Trip"}, headers=hh).json()
+    client.post(f"/api/inspo/{inspo['id']}/pieces/{shirt['id']}/hang", json={"product_id": pid, "folder_id": work["id"]}, headers=hh)
+    client.post(f"/api/inspo/{inspo['id']}/pieces/{loafers['id']}/hang", json={"folder_id": trip["id"]}, headers=hh)
+    assert client.get(f"/api/inspo/{inspo['id']}", headers=hh).json()["folder_id"] == work["id"]  # filed with first piece
+    assert client.get("/api/inspo", headers=hh).json() == []
+    assert [h["piece"]["subcategory"] for h in client.get(f"/api/folders/{work['id']}", headers=hh).json()["hangers"]] == ["linen_shirt"]
+    assert [h["piece"]["subcategory"] for h in client.get(f"/api/folders/{trip['id']}", headers=hh).json()["hangers"]] == ["loafers"]

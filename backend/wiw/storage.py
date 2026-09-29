@@ -14,6 +14,7 @@ class Storage(Protocol):
     def put(self, path: str, data: bytes, content_type: str | None = None) -> str: ...
     def get(self, path: str) -> bytes | None: ...
     def exists(self, path: str) -> bool: ...
+    def delete_prefix(self, prefix: str) -> int: ...
 
 
 def url_for(path: str) -> str:
@@ -51,6 +52,14 @@ class LocalStorage:
     def exists(self, path: str) -> bool:
         return self._p(path).is_file()
 
+    def delete_prefix(self, prefix: str) -> int:
+        import shutil
+
+        d = self._p(prefix.rstrip("/"))
+        n = sum(1 for f in d.rglob("*") if f.is_file()) if d.is_dir() else 0
+        shutil.rmtree(d, ignore_errors=True)
+        return n
+
 
 class GcsStorage:
     def __init__(self) -> None:
@@ -83,6 +92,13 @@ class GcsStorage:
 
     def exists(self, path: str) -> bool:
         return path in self._cache or self.bucket.blob(path).exists()
+
+    def delete_prefix(self, prefix: str) -> int:
+        blobs = list(self.bucket.list_blobs(prefix=prefix))
+        for b in blobs:
+            b.delete()
+            self._cache.pop(b.name, None)
+        return len(blobs)
 
 
 @lru_cache(maxsize=1)

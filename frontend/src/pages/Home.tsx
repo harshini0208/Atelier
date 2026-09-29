@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { api } from "../api";
 import { useMe } from "../components/Layout";
 import { ErrorBox, Icon, Modal, useToast } from "../components/ui";
-import type { FolderSummary } from "../types";
+import UploadZone from "../components/UploadZone";
+import type { FolderSummary, Inspo } from "../types";
 
 export function AddFolderDialog({ onClose, onCreated }: { onClose: () => void; onCreated?: (f: FolderSummary) => void }) {
   const qc = useQueryClient();
@@ -73,6 +74,7 @@ export default function Home() {
   const nav = useNavigate();
   const [adding, setAdding] = useState(false);
   const folders = useQuery({ queryKey: ["folders"], queryFn: () => api.get<FolderSummary[]>("/folders") });
+  const unfiled = useQuery({ queryKey: ["unfiled"], queryFn: () => api.get<Inspo[]>("/inspo") });
 
   return (
     <>
@@ -83,16 +85,35 @@ export default function Home() {
           <p className="muted" style={{ margin: 0 }}>
             Upload a screenshot of a reel, post or pin. We find the pieces in this store, in your size and budget, ready to buy.
           </p>
-          <div className="row">
-            <button className="btn btn-primary" onClick={() => setAdding(true)}><Icon name="plus" /> Add folder</button>
+          <div className="hero-steps" aria-label="How it works">
+            <div><b>1</b>Upload a screenshot</div>
+            <div><b>2</b>Tap the pieces you love</div>
+            <div><b>3</b>Hang them in any folder</div>
           </div>
         </div>
-        <div className="hero-steps" aria-label="How it works">
-          <div><b>1</b>Upload a screenshot</div>
-          <div><b>2</b>Pick the pieces you love</div>
-          <div><b>3</b>Shop them in your size</div>
+        <div className="stack" style={{ gap: 8 }}>
+          <UploadZone />
+          <button className="btn btn-ghost btn-sm" style={{ alignSelf: "center" }} onClick={() => setAdding(true)}>
+            <Icon name="plus" size={16} /> or add an empty folder</button>
         </div>
       </section>
+
+      {!!unfiled.data?.length && (
+        <section className="section">
+          <div className="section-head">
+            <h2>Not in a folder yet</h2>
+            <span className="small muted">Open one and hang its pieces in any folder</span>
+          </div>
+          <div className="row" style={{ gap: 10, overflowX: "auto", flexWrap: "nowrap", paddingBottom: 4 }}>
+            {unfiled.data.map((i) => (
+              <Link key={i.id} to={`/inspo/${i.id}`} className="card" style={{ flex: "0 0 120px", overflow: "hidden", textDecoration: "none" }}>
+                <img src={i.image_url} alt="Unsorted inspo" style={{ width: "100%", aspectRatio: "9/16", objectFit: "cover" }} />
+                <div className="small muted" style={{ padding: "6px 8px" }}>{i.pieces.length} pieces</div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="section">
         <div className="section-head">

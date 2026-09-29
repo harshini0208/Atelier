@@ -52,8 +52,10 @@ takes screenshots).
    (women's, men's or everything), sizes and fit, budget per piece, fabrics they love or avoid, and colours and
    occasions. Everything can be edited later in **Preferences**. There are no demo personas and no passwords; the
    browser remembers the profile. The profile menu offers **Start over as someone new** and **Delete my profile & data**.
-2. **Folders.** "Add folder" with any name and description ("Goa trip", "Sangeet night"…), then upload a screenshot by
-   drag-drop, file picker or paste.
+2. **Upload from the landing page** (drag-drop, file picker or paste), or inside a folder. Pieces from one screenshot
+   can go into different folders: pick a folder in the "Hang pieces in" menu, or create one right there with "+ New
+   folder…". An upload is filed with its first hung piece; until then it waits under "Not in a folder yet" on the home
+   page. Folders have any name and description ("Goa trip", "Sangeet night"…).
 3. **Tap a piece you love.** Gemini finds every piece and draws a box around each. Tapping a box (or its chip) shows at
    once what Urban Thread has for it:
    - **For you:** matches that fit your preferences.

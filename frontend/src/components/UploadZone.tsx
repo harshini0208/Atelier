@@ -26,7 +26,8 @@ export function Analyzing({ src }: { src: string | null }) {
   );
 }
 
-export default function UploadZone({ folderId, compact = false }: { folderId: number; compact?: boolean }) {
+/** Upload a screenshot. With a folderId it lands in that folder; without one (landing page) pieces are filed later. */
+export default function UploadZone({ folderId, compact = false }: { folderId?: number; compact?: boolean }) {
   const qc = useQueryClient();
   const nav = useNavigate();
   const input = useRef<HTMLInputElement>(null);
@@ -37,10 +38,10 @@ export default function UploadZone({ folderId, compact = false }: { folderId: nu
     mutationFn: (file: File) => {
       const fd = new FormData();
       fd.append("file", file);
-      return api.post<Inspo>(`/folders/${folderId}/inspo`, fd);
+      return api.post<Inspo>(folderId ? `/folders/${folderId}/inspo` : "/inspo", fd);
     },
     onSuccess: (inspo) => {
-      qc.invalidateQueries({ queryKey: ["folder", folderId] });
+      qc.invalidateQueries({ queryKey: folderId ? ["folder", folderId] : ["unfiled"] });
       qc.invalidateQueries({ queryKey: ["folders"] });
       nav(`/inspo/${inspo.id}`);
     },

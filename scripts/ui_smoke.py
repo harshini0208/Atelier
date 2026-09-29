@@ -66,15 +66,19 @@ def main() -> None:
         expect(page.get_by_text("Your wardrobes")).to_be_visible()
         shot(page, "03-home-fresh")
 
-        # 2. folder + inspo
-        page.get_by_role("button", name="Add folder").first.click()
-        name = f"Old-money summer {int(time.time()) % 1000}"
-        page.get_by_label("Name").fill(name)
-        page.get_by_role("button", name="Create folder").click()
-        expect(page.get_by_role("heading", name=name)).to_be_visible()
+        # 2. upload straight from the landing page (no folder yet)
         page.set_input_files("input[type=file]", str(ROOT / "demo/inspo/generated/old_money_summer.png"))
         expect(page.get_by_text("Tap a piece you love")).to_be_visible(timeout=60_000)
         shot(page, "04-inspo")
+        page.locator(".box").filter(has_text="Linen shirt").first.click()
+        expect(page.get_by_text("Choose a folder above")).to_be_visible(timeout=30_000)
+        expect(page.get_by_role("button", name="Hang this").first).to_be_disabled()
+        # create a folder right from the picker
+        name = f"Old-money summer {int(time.time()) % 1000}"
+        page.get_by_label("Hang pieces in").select_option("new")
+        page.get_by_label("Name").fill(name)
+        page.get_by_role("button", name="Create folder").click()
+        expect(page.get_by_label("Hang pieces in")).to_have_value(re.compile(r"^\d+$"))
 
         # 3. tap a piece -> store options appear immediately -> hang a real product
         for label in ("Linen shirt", "Chinos", "Loafers"):
@@ -86,6 +90,7 @@ def main() -> None:
             expect(page.get_by_role("button", name="On your hanger")).to_be_visible()
         shot(page, "06-hung")
         page.get_by_role("button", name=re.compile(r"Done: 3 pieces")).click()
+        expect(page.get_by_role("heading", name=name)).to_be_visible(timeout=30_000)
         expect(page.get_by_role("button", name="Style board")).to_be_visible(timeout=30_000)
         expect(page.locator(".hanger-card img").first).to_have_attribute("src", re.compile(r"/media/products/"))
         shot(page, "07-folder-hangers")

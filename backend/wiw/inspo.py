@@ -147,6 +147,8 @@ def hang_piece(db: Session, user_id: str, inspo: m.InspoImage, piece: m.Detected
             emit(db, "hanger_no_match", user_id, **piece_fields(piece))
     if hanger is None:
         hanger = m.Hanger(user_id=user_id, folder_id=folder_id or inspo.folder_id, piece_id=piece.id)
+        if inspo.folder_id is None:
+            inspo.folder_id = hanger.folder_id  # an upload from the landing page is filed with its first hung piece
         db.add(hanger)
     elif folder_id:
         hanger.folder_id = folder_id
