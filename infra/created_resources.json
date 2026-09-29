@@ -1,0 +1,92 @@
+{
+  "created": [
+    {
+      "kind": "storage bucket",
+      "name": "wiw-atelieros-cup26-media",
+      "stop": "gcloud storage rm -r gs://wiw-atelieros-cup26-media",
+      "cost": "< \u20b910",
+      "note": "",
+      "created": "2026-09-29"
+    },
+    {
+      "kind": "bigquery dataset",
+      "name": "wiw",
+      "stop": "bq rm -r -f atelieros-cup26:wiw",
+      "cost": "< \u20b910",
+      "note": "",
+      "created": "2026-09-29"
+    },
+    {
+      "kind": "cloudsql database",
+      "name": "atelieros-pg/wiw",
+      "stop": "gcloud sql databases delete wiw -i atelieros-pg --project atelieros-cup26",
+      "cost": "\u20b90 (reused instance)",
+      "note": "",
+      "created": "2026-09-29"
+    },
+    {
+      "kind": "secret",
+      "name": "wiw-db-password",
+      "stop": "gcloud secrets delete wiw-db-password --project atelieros-cup26",
+      "cost": "< \u20b910",
+      "note": "",
+      "created": "2026-09-29"
+    },
+    {
+      "kind": "cloudsql user",
+      "name": "atelieros-pg/wiw_app",
+      "stop": "gcloud sql users delete wiw_app -i atelieros-pg --project atelieros-cup26",
+      "cost": "\u20b90",
+      "note": "",
+      "created": "2026-09-29"
+    },
+    {
+      "kind": "artifact registry repo",
+      "name": "wiw",
+      "stop": "gcloud artifacts repositories delete wiw --location us-central1 --project atelieros-cup26",
+      "cost": "< \u20b920",
+      "note": "",
+      "created": "2026-09-29"
+    },
+    {
+      "kind": "service account",
+      "name": "wiw-run@atelieros-cup26.iam.gserviceaccount.com",
+      "stop": "gcloud iam service-accounts delete wiw-run@atelieros-cup26.iam.gserviceaccount.com --project atelieros-cup26",
+      "cost": "\u20b90",
+      "note": "",
+      "created": "2026-09-29"
+    },
+    {
+      "kind": "iam bindings",
+      "name": "wiw-run@atelieros-cup26.iam.gserviceaccount.com",
+      "stop": "gcloud projects remove-iam-policy-binding atelieros-cup26 --member=serviceAccount:wiw-run@atelieros-cup26.iam.gserviceaccount.com --role=<role> (for each role)",
+      "cost": "\u20b90",
+      "note": "project: aiplatform.user, discoveryengine.viewer, bigquery.jobUser, cloudsql.client, logging.logWriter; bucket objectAdmin; secret accessor; dataset WRITER",
+      "created": "2026-09-29"
+    },
+    {
+      "kind": "vertex ai search datastore",
+      "name": "wiw-catalog",
+      "stop": "curl -X DELETE -H \"Authorization: Bearer $(gcloud auth print-access-token)\" https://discoveryengine.googleapis.com/v1/projects/atelieros-cup26/locations/global/collections/default_collection/dataStores/wiw-catalog",
+      "cost": "~ \u20b950 (index storage)",
+      "note": "",
+      "created": "2026-09-29"
+    },
+    {
+      "kind": "vertex ai search app",
+      "name": "wiw-search",
+      "stop": "curl -X DELETE -H \"Authorization: Bearer $(gcloud auth print-access-token)\" https://discoveryengine.googleapis.com/v1/projects/atelieros-cup26/locations/global/collections/default_collection/engines/wiw-search",
+      "cost": "~ \u20b950-300 (per 1k queries)",
+      "note": "",
+      "created": "2026-09-29"
+    },
+    {
+      "kind": "billing budget",
+      "name": "wiw-budget",
+      "stop": "gcloud billing budgets list --billing-account=0148FD-6A1B13-16DC6A (then: gcloud billing budgets delete <ID> --billing-account=0148FD-6A1B13-16DC6A)",
+      "cost": "\u20b90",
+      "note": "alerts at 50/90/100% of \u20b92000",
+      "created": "2026-09-29"
+    }
+  ]
+}

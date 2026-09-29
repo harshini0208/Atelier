@@ -1,0 +1,34 @@
+# Google Cloud resources used by Walk-In Wardrobe.
+# Everything this project creates is prefixed `wiw-` (or named `wiw`).
+# Resources marked "reused" existed before and are never modified or deleted by our scripts.
+project: atelieros-cup26            # reused: existing billed project that holds the earlier atelieros* resources
+region: us-central1                 # colocated with the reused Cloud SQL instance (asia-south1 would add cross-region latency)
+
+gemini:
+  # Verified with a live probe on 2026-09-29: the newest Flash model this project can reach.
+  # gemini-3.8-flash is served only from the `global` location.
+  model: gemini-3.8-flash
+  location: global
+
+bucket: wiw-atelieros-cup26-media   # product images, inspo uploads, crops
+bq_dataset: wiw                     # behaviour events + retailer views
+bq_location: us-central1
+
+cloudsql:
+  instance: atelieros-pg            # reused instance (POSTGRES_16, db-f1-micro); we only add a database + user
+  database: wiw
+  user: wiw_app
+  password_secret: wiw-db-password  # Secret Manager secret holding the wiw_app password
+
+search:
+  location: global
+  datastore: wiw-catalog
+  engine: wiw-search
+
+artifact_repo: wiw
+service_account: wiw-run            # least-privilege runtime identity for Cloud Run
+run_service: wiw-app
+
+budget:
+  name: wiw-budget
+  amount_inr: 2000
