@@ -1,7 +1,7 @@
 PY      := .venv/bin/python
 export PYTHONPATH := backend:.
 
-.PHONY: setup dev api web test seed seed-cloud load-cloud demo-record gcp-setup gcp-status build deploy smoke
+.PHONY: setup dev api web test seed reset load-cloud demo-record product-manifest product-images product-images-cloud gcp-setup gcp-status build deploy smoke
 
 setup:            ## create venv, install backend + frontend deps
 	python3.12 -m venv .venv
@@ -24,6 +24,18 @@ api:
 test:             ## backend unit tests + frontend type check
 	$(PY) -m pytest -q backend/tests
 	cd frontend && npx tsc --noEmit -p .
+
+reset:            ## wipe ALL shopper data locally and start fresh (catalog + your product photos only)
+	$(PY) scripts/seed.py
+
+product-manifest: ## list every product ID -> name, to name your photo files
+	$(PY) scripts/product_images.py manifest
+
+product-images:   ## publish data/product_images/* locally
+	$(PY) scripts/product_images.py apply
+
+product-images-cloud: ## publish data/product_images/* to Cloud Storage + Cloud SQL
+	DB_BACKEND=cloudsql STORAGE_BACKEND=gcs SEARCH_BACKEND=vertex $(PY) scripts/product_images.py apply
 
 load-cloud:       ## push seeded data to Cloud SQL, GCS, BigQuery and Vertex AI Search
 	$(PY) scripts/load_cloud.py

@@ -20,9 +20,9 @@ from .commerce import CartError, add_item
 from .services import matches_for_piece, pick_size, prefs_dict, product_dict
 from .settings import get_settings
 from .styling import folder_hangers, suggest_outfit
-from .vocab import CATEGORIES, COLORS, FABRICS, OCCASIONS, SUB_TO_CAT, label, slot_for
+from .vocab import CATEGORIES, COLORS, FABRICS, OCCASIONS, SUB_TO_CAT, label
 
-VERSION = "stylist-v2"
+VERSION = "stylist-v3"
 FORMALITY = ["more_casual", "more_formal", "more_festive"]
 
 TOOLS = [
@@ -52,7 +52,7 @@ TOOLS = [
          "occasion": {"type": "string", "description": "e.g. 'beach wedding', 'work', 'sangeet'"},
          "max_total_inr": {"type": "integer", "description": "Budget for the whole outfit"},
          "formality": {"type": "string", "enum": FORMALITY}}}},
-    {"name": "place_on_mannequin", "description": "Dress the folder's mannequin. Omit product_ids to use the most recently suggested outfit.",
+    {"name": "place_on_board", "description": "Lay the outfit out on the folder's style board. Omit product_ids to use the most recently suggested outfit.",
      "parameters": {"type": "object", "properties": {"product_ids": {"type": "array", "items": {"type": "string"}}}}},
     {"name": "add_to_cart", "description": "Add products to the cart in the shopper's size when it is in stock. Omit product_ids to add the most recently suggested outfit.",
      "parameters": {"type": "object", "properties": {"product_ids": {"type": "array", "items": {"type": "string"}}}}},
@@ -232,29 +232,25 @@ def _default_ids(ctx: Ctx, product_ids: list[str] | None) -> list[str]:
     return list(product_ids or []) or [i["product"]["id"] for i in (ctx.outfit or {}).get("items", [])]
 
 
-def t_place_on_mannequin(ctx: Ctx, product_ids: list[str] | None = None) -> dict:
+def t_place_on_board(ctx: Ctx, product_ids: list[str] | None = None) -> dict:
+    from .styling import auto_layout
+
     if not ctx.folder:
         return {"error": "Open a folder first."}
-    product_ids = _default_ids(ctx, product_ids)
-    placements, seen_slots = [], set()
-    for pid in product_ids:
+    products = []
+    for pid in dict.fromkeys(_default_ids(ctx, product_ids)):
         p = ctx.db.get(m.Product, pid)
-        if not p:
-            continue
-        slot = slot_for(p.subcategory)
-        if slot in seen_slots:
-            continue
-        seen_slots.add(slot)
-        placements.append({"product_id": p.id, "slot": slot})
-    if not placements:
+        if p:
+            products.append(product_dict(p))
+    if not products:
         return {"error": "None of those products exist in the catalog."}
     occasion = (ctx.outfit or {}).get("occasion")
     look = m.Look(user_id=ctx.user.id, folder_id=ctx.folder.id, name=f"Stylist pick for {occasion}" if occasion else "Stylist pick",
-                  placements=placements, reason=occasion or "")
+                  placements=auto_layout(products), reason=occasion or "")
     ctx.db.add(look)
     ctx.db.flush()
-    ctx.actions.append(f"Dressed the mannequin in {len(placements)} piece{'s' if len(placements) != 1 else ''}")
-    return {"status": "ok", "placed": [p["product_id"] for p in placements]}
+    ctx.actions.append(f"Laid out {len(products)} piece{'s' if len(products) != 1 else ''} on your style board")
+    return {"status": "ok", "placed": [p["id"] for p in products]}
 
 
 def t_add_to_cart(ctx: Ctx, product_ids: list[str] | None = None) -> dict:
@@ -280,7 +276,7 @@ def t_add_to_cart(ctx: Ctx, product_ids: list[str] | None = None) -> dict:
 
 IMPL = {"search_catalog": t_search_catalog, "get_hanger_matches": t_get_hanger_matches,
         "get_preferences": t_get_preferences, "update_preferences": t_update_preferences,
-        "suggest_outfit": t_suggest_outfit, "place_on_mannequin": t_place_on_mannequin, "add_to_cart": t_add_to_cart}
+        "suggest_outfit": t_suggest_outfit, "place_on_board": t_place_on_board, "add_to_cart": t_add_to_cart}
 
 
 def execute(ctx: Ctx, name: str, args: dict) -> dict:
@@ -404,15 +400,15 @@ def plan(ctx: Ctx, message: str, trace: list[dict]) -> gemini.AgentResult:
             n = len(out.get("for_you", []))
             return gemini.AgentResult(f"Here are the closest pieces to your {out['piece'].lower()}: {n} fit your preferences"
                                       + (", plus a few that are worth a look." if out.get("also_view") else "."), trace, "fallback")
-    if re.search(r"mannequin|try (it|this|them) on|put (it|them|this) on|dress (me|it|her|him)", t):
+    if re.search(r"board|canvas|mannequin|try (it|this|them) on|put (it|them|this) on|lay (it|them) out", t):
         if not (ctx.outfit or {}).get("items") and "suggest_outfit" not in ran:
             call("suggest_outfit", occasion=occasion, max_total_inr=budget, formality=formality)
         items = (ctx.outfit or {}).get("items", [])
         if not items:
-            return gemini.AgentResult("Add a few hangers to this folder first, then I can dress the mannequin.", trace, "fallback")
-        call("place_on_mannequin", product_ids=[i["product"]["id"] for i in items])
-        return gemini.AgentResult(f"Done. Your mannequin is wearing the {', '.join(i['product']['name'] for i in items)}. "
-                                  "Open the walk-in wardrobe to see it.", trace, "fallback")
+            return gemini.AgentResult("Add a few hangers to this folder first, then I can lay out a look.", trace, "fallback")
+        call("place_on_board", product_ids=[i["product"]["id"] for i in items])
+        return gemini.AgentResult(f"Done. I've laid out the {', '.join(i['product']['name'] for i in items)} on your style "
+                                  "board. Open it to move pieces around or layer them.", trace, "fallback")
     wants_search = re.search(r"\b(find|show|search|looking for|need|want)\b", t)
     sub_hit = subcategories_in(t)
     if wants_search and sub_hit and not occasion:
@@ -447,9 +443,9 @@ def plan(ctx: Ctx, message: str, trace: list[dict]) -> gemini.AgentResult:
     notes = [f"{i['product']['name']}: {i['reasons'][0]['label'].lower()}" for i in o["items"] if i["reasons"]]
     if notes:
         msg += " Heads-up: " + "; ".join(notes) + "."
-    if re.search(r"mannequin|try (it )?on|put (it|them) on", t):
-        call("place_on_mannequin", product_ids=[i["product"]["id"] for i in o["items"]])
-        msg += " I've dressed your mannequin in it."
+    if re.search(r"board|canvas|try (it )?on|put (it|them) on", t):
+        call("place_on_board", product_ids=[i["product"]["id"] for i in o["items"]])
+        msg += " I've laid it out on your style board."
     return gemini.AgentResult(msg, trace, "fallback")
 
 

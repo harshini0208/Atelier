@@ -46,6 +46,8 @@ if dist.exists():
 
     @app.get("/{full_path:path}", include_in_schema=False)
     def spa(full_path: str) -> FileResponse:
+        if full_path.startswith(("api/", "media/")):
+            raise HTTPException(404, "Not found")
         f = dist / full_path
         if full_path and f.is_file() and dist.resolve() in f.resolve().parents:
             return FileResponse(f)

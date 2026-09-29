@@ -8,20 +8,22 @@ import "./styles.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { currentUserId } from "./api";
 import ChatPanel from "./components/ChatPanel";
 import { Layout } from "./components/Layout";
 import { Loading, ToastProvider } from "./components/ui";
+import Admin from "./pages/Admin";
+import Cart from "./pages/Cart";
 import FolderPage from "./pages/FolderPage";
 import Home from "./pages/Home";
 import InspoReview from "./pages/InspoReview";
-import Preferences from "./pages/Preferences";
-import Wardrobe from "./pages/Wardrobe";
-import Taste from "./pages/Taste";
-import Retailer from "./pages/Retailer";
-import Demo from "./pages/Demo";
-import Cart from "./pages/Cart";
 import Notifications from "./pages/Notifications";
+import Onboarding from "./pages/Onboarding";
+import Preferences from "./pages/Preferences";
+import Shop from "./pages/Shop";
+import StyleBoard from "./pages/StyleBoard";
+import Taste from "./pages/Taste";
 
 const qc = new QueryClient({ defaultOptions: { queries: { retry: 1, refetchOnWindowFocus: false, staleTime: 15_000 } } });
 
@@ -35,19 +37,23 @@ function NotFound() {
 }
 
 function App() {
+  const { pathname } = useLocation();
+  const signedIn = !!currentUserId();
+  if (pathname === "/admin") return <Layout bare><Admin /></Layout>;
+  if (!signedIn && pathname !== "/welcome") return <Navigate to="/welcome" replace />;
+  if (pathname === "/welcome") return signedIn ? <Navigate to="/" replace /> : <Layout bare><Onboarding /></Layout>;
   return (
     <Layout chat={<ChatPanel />}>
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
           <Route path="/preferences" element={<Preferences />} />
           <Route path="/folders/:id" element={<FolderPage />} />
-          <Route path="/folders/:id/wardrobe" element={<Wardrobe />} />
+          <Route path="/folders/:id/board" element={<StyleBoard />} />
           <Route path="/inspo/:id" element={<InspoReview />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/taste" element={<Taste />} />
-          <Route path="/retailer" element={<Retailer />} />
-          <Route path="/demo" element={<Demo />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

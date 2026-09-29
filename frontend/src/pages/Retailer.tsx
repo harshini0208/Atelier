@@ -20,8 +20,7 @@ export default function Retailer() {
   const f = Object.fromEntries(r.funnel.map((s) => [s.step, s.shoppers]));
   return (
     <>
-      <span className="eyebrow">Retailer view · Urban Thread</span>
-      <h1>What shoppers want, and what we're missing</h1>
+      <h2>What shoppers want, and what we're missing</h2>
       <p className="small muted">{r.source}. {r.synthetic_note}</p>
 
       <section className="card pad section stack" style={{ borderColor: "var(--sage)" }}>

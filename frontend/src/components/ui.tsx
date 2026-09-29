@@ -21,7 +21,6 @@ const paths: Record<string, string> = {
   arrow: "M5 12h14M13 6l6 6-6 6",
   back: "M19 12H5M11 6l-6 6 6 6",
   tag: "M3 12V4h8l10 10-8 8zM7.5 7.5h0",
-  mannequin: "M12 2a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM8 9h8l-1 6h-6zM9 15l-1 7M15 15l1 7M12 15v7",
   trash: "M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13",
   undo: "M9 14 4 9l5-5M4 9h11a5 5 0 0 1 0 10h-3",
 };

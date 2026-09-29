@@ -18,7 +18,7 @@ def client():
     from fastapi.testclient import TestClient
 
     from wiw.seed import seed_all
-    seed_all()
+    seed_all(personas=True, with_history=True)
     from wiw.main import app
     c = TestClient(app)
     f = c.post("/api/folders", json={"name": "Old-money summer"}, headers=H).json()

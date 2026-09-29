@@ -21,6 +21,7 @@ are listed at the bottom and must not be deleted from here.
 | billing budget | `wiw-budget` (alerts at 50/90/100% of ₹2000) | 2026-09-29 | ₹0 | `gcloud billing budgets list --billing-account=0148FD-6A1B13-16DC6A (then: gcloud billing budgets delete <ID> --billing-account=0148FD-6A1B13-16DC6A)` |
 | cloud run service | `wiw-app` (https://wiw-app-nhukbiswfq-uc.a.run.app) | 2026-09-29 | ~ ₹0-100 (min instances 0) | `gcloud run services delete wiw-app --region us-central1 --project atelieros-cup26` |
 | container images | `us-central1-docker.pkg.dev/atelieros-cup26/wiw/app` (one image per deploy) | 2026-09-29 | < ₹20 | `gcloud artifacts docker images delete us-central1-docker.pkg.dev/atelieros-cup26/wiw/app --delete-tags` |
+| secret | `wiw-admin-token` (admin token for /admin; read it with: gcloud secrets versions access latest --secret wiw-admin-token --project atelieros-cup26) | 2026-09-29 | < ₹10 | `gcloud secrets delete wiw-admin-token --project atelieros-cup26` |
 
 ## Reused (not ours, do not delete)
 

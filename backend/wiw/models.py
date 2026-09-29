@@ -39,17 +39,6 @@ class Preferences(Base):
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=now, onupdate=now)
 
 
-class Avatar(Base):
-    __tablename__ = "avatars"
-    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
-    presentation: Mapped[str] = mapped_column(String(10), default="women")
-    body_type: Mapped[str] = mapped_column(String(20), default="slim")
-    height_band: Mapped[str] = mapped_column(String(10), default="average")
-    skin_tone: Mapped[int] = mapped_column(Integer, default=4)          # index into a 10-swatch row
-    hair_style: Mapped[str] = mapped_column(String(20), default="long")
-    hair_color: Mapped[str] = mapped_column(String(20), default="black")
-
-
 class Folder(Base):
     __tablename__ = "folders"
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)

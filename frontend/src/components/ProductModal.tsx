@@ -19,7 +19,7 @@ export default function ProductModal({ productId, hangerId, onClose, onAddedToLo
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["folder"] });
       qc.invalidateQueries({ queryKey: ["matches", hangerId] });
-      toast("Added to your look");
+      toast("On your hanger");
       onAddedToLook?.();
       onClose();
     },
@@ -72,7 +72,7 @@ export default function ProductModal({ productId, hangerId, onClose, onAddedToLo
           <div className="row">
             {hangerId && (
               <button className="btn btn-primary" style={{ flex: 1 }} disabled={toLook.isPending} onClick={() => toLook.mutate()}>
-                <Icon name="hanger" /> Add to look
+                <Icon name="hanger" /> Put on this hanger
               </button>
             )}
             <button className={`btn ${hangerId ? "" : "btn-primary"}`} style={{ flex: 1 }} disabled={!size || toCart.isPending || !p.in_stock}

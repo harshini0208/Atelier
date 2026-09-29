@@ -32,7 +32,7 @@ def demo_folder():
     from fastapi.testclient import TestClient
 
     from wiw.seed import seed_all
-    seed_all(with_history=False)
+    seed_all(personas=True)
     from wiw.main import app
     c = TestClient(app)
     f = c.post("/api/folders", json={"name": "Old-money summer", "description": "Linen, loafers and long lunches"}, headers=H).json()
@@ -70,10 +70,10 @@ def test_preference_change_needs_confirmation(demo_folder):
     assert "chiffon" in c.get("/api/preferences", headers=H).json()["avoid_materials"]
 
 
-def test_mannequin_and_cart_via_chat(demo_folder):
+def test_board_and_cart_via_chat(demo_folder):
     c, fid = demo_folder
     c.post("/api/chat", json={"message": "Make it work for a beach wedding under ₹5,000", "folder_id": fid}, headers=H)
-    r = c.post("/api/chat", json={"message": "put it on the mannequin", "folder_id": fid}, headers=H).json()
+    r = c.post("/api/chat", json={"message": "put it on my board", "folder_id": fid}, headers=H).json()
     assert r["payload"]["actions"]
     looks = c.get(f"/api/folders/{fid}/looks", headers=H).json()
     assert looks[0]["name"].startswith("Stylist pick") and len(looks[0]["items"]) >= 3
@@ -93,25 +93,51 @@ def test_style_it_for_me(demo_folder):
     assert casual["options"]
 
 
-def test_look_validation(demo_folder):
+def test_board_looks_keep_positions_and_layers(demo_folder):
     c, fid = demo_folder
-    bad = c.post(f"/api/folders/{fid}/looks", json={"placements": [{"product_id": "ut-001"}, {"product_id": "ut-008"}]}, headers=H)
-    assert bad.status_code == 422  # two tops in one slot
+    dup = c.post(f"/api/folders/{fid}/looks", json={"placements": [{"product_id": "ut-001"}, {"product_id": "ut-001"}]}, headers=H)
+    assert dup.status_code == 422
     assert c.post(f"/api/folders/{fid}/looks", json={"placements": [{"product_id": "nope"}]}, headers=H).status_code == 404
-    ok = c.post(f"/api/folders/{fid}/looks", json={"name": "Mine", "placements": [{"product_id": "ut-001"}, {"product_id": "ut-030"}]}, headers=H)
-    assert ok.status_code == 200 and ok.json()["total_inr"] > 0
+    assert c.post(f"/api/folders/{fid}/looks", json={"placements": []}, headers=H).status_code == 422
+    # free canvas: a shirt with a blazer layered OVER it (outside), and a tee layered UNDER the shirt (inside)
+    body = {"name": "Layers", "placements": [
+        {"product_id": "ut-001", "x": 30, "y": 5, "w": 40, "z": 20},
+        {"product_id": "ut-058", "x": 25, "y": 3, "w": 46, "z": 30},
+        {"product_id": "ut-013", "x": 33, "y": 8, "w": 36, "z": 10},
+        {"product_id": "ut-030"}]}  # no position: gets a sensible default
+    look = c.post(f"/api/folders/{fid}/looks", json=body, headers=H).json()
+    items = {i["product"]["id"]: i for i in look["items"]}
+    assert items["ut-058"]["z"] > items["ut-001"]["z"] > items["ut-013"]["z"]
+    assert all(items["ut-030"][k] is not None for k in ("x", "y", "w", "z"))
+    assert c.get(f"/api/folders/{fid}/looks", headers=H).json()[0]["id"] == look["id"]
 
 
-def test_mannequin_geometry_and_avatar(demo_folder):
-    c, _ = demo_folder
-    g = c.get("/api/mannequin?presentation=men&body_type=broad&height_band=tall&skin_tone=7").json()
-    assert g["body"].startswith("<") and "linen_shirt" in g["transforms"] and "feet" in g["drop_zones"]
-    assert c.get("/api/mannequin?presentation=women&body_type=broad").json()["transforms"]  # invalid combo repaired
-    d = c.post("/api/avatar/describe", json={"text": "tall, athletic guy with a buzz cut and deep brown skin"}, headers=H).json()
-    assert (d["presentation"], d["body_type"], d["height_band"], d["hair_style"]) == ("men", "athletic", "tall", "buzz")
-    assert d["skin_tone"] >= 6
-    saved = c.put("/api/avatar", json={**{k: v for k, v in d.items() if k != "source"}}, headers=H).json()
-    assert saved["body_type"] == "athletic"
+def test_style_it_returns_a_board_layout(demo_folder):
+    c, fid = demo_folder
+    st = c.post(f"/api/folders/{fid}/style", json={}, headers=H).json()
+    o = st["options"][0]
+    assert {d["product_id"] for d in o["layout"]} == {i["product"]["id"] for i in o["items"]}
+    assert c.get("/api/avatar", headers=H).status_code == 404  # the mannequin is gone
+
+
+def test_product_photos(tmp_path, monkeypatch):
+    from PIL import Image
+
+    from wiw import product_images as pi
+    monkeypatch.setattr(pi, "PHOTO_DIR", tmp_path)
+    Image.new("RGB", (1800, 2400), "white").save(tmp_path / "ut-001.jpg")
+    Image.new("RGBA", (400, 400), (0, 0, 0, 0)).save(tmp_path / "ut-002.png")
+    with session_scope() as db:
+        assert pi.apply_photos(db) == 2
+        a, b = db.get(m.Product, "ut-001"), db.get(m.Product, "ut-002")
+        assert a.image_url.endswith("/products/photos/ut-001.jpg") and b.image_url.endswith(".png")
+        assert db.get(m.Product, "ut-003").image_url.endswith(".svg")          # no photo: keeps the flat-lay
+        manifest = pi.write_manifest(db, tmp_path / "manifest.csv").read_text()
+        assert "ut-001.jpg,ut-001,Ivory linen relaxed shirt" in manifest
+        db.rollback()
+    from wiw.storage import storage
+    img = Image.open(__import__("io").BytesIO(storage().get("products/photos/ut-001.jpg")))
+    assert max(img.size) <= pi.MAX_SIDE
 
 
 def test_tool_rejects_unknown_products():

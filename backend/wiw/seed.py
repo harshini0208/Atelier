@@ -1,4 +1,6 @@
-"""Load the generated catalog + personas into the configured database and media storage."""
+"""Load the store catalog (and, for tests/demos only, synthetic personas + history) into the configured backends.
+
+The default is a clean start: the Urban Thread catalog and nothing else. Shoppers create their own profiles."""
 from __future__ import annotations
 
 import json
@@ -15,9 +17,40 @@ def load_json(name: str) -> dict:
     return json.loads((ROOT / "data" / name).read_text())
 
 
+LEGACY_TABLES = ["avatars"]  # removed from the schema (the mannequin is gone); dropped on reset
+
+
 def reset_schema() -> None:
+    from sqlalchemy import text
+
+    with engine().begin() as conn:
+        for t in LEGACY_TABLES:
+            conn.execute(text(f"DROP TABLE IF EXISTS {t}" + (" CASCADE" if conn.dialect.name == "postgresql" else "")))
     m.Base.metadata.drop_all(engine())
     m.Base.metadata.create_all(engine())
+    wipe_uploads()
+
+
+def wipe_uploads() -> None:
+    """Delete shopper uploads (inspo screenshots and crops) from media storage."""
+    import shutil
+
+    from .settings import get_settings
+
+    s = get_settings()
+    if s.storage_backend == "gcs":
+        from .storage import storage
+
+        bucket = storage().bucket
+        for prefix in ("inspo/", "crops/"):
+            blobs = list(bucket.list_blobs(prefix=prefix))
+            for i in range(0, len(blobs), 100):
+                with bucket.client.batch():
+                    for b in blobs[i:i + 100]:
+                        b.delete()
+    else:
+        for d in ("inspo", "crops"):
+            shutil.rmtree(s.media_dir / d, ignore_errors=True)
 
 
 def ensure_schema() -> None:
@@ -69,7 +102,6 @@ def load_personas(db: Session, personas: dict, catalog: dict) -> dict[str, list[
         db.add(m.Preferences(user_id=pr["id"], budgets=prefs["budgets"], sizes=prefs["sizes"], fit=prefs["fit"],
                              preferred_materials=prefs["preferred_materials"], avoid_materials=prefs["avoid_materials"],
                              avoid_colors=prefs["avoid_colors"], occasions=prefs["occasions"], gender_fit=prefs["gender_fit"]))
-        db.add(m.Avatar(user_id=pr["id"], **pr["avatar"]))
         folders[pr["id"]] = []
         for f in pr["folders"]:
             fo = m.Folder(user_id=pr["id"], name=f["name"], description=f["description"])
@@ -99,13 +131,26 @@ def write_product_images(catalog: dict) -> None:
         st.put(f"products/{p['id']}.svg", product_svg(p).encode(), "image/svg+xml")
 
 
-def seed_all(images: bool = True, with_inspo: bool = True, with_history: bool = True) -> dict:
-    catalog, personas = load_json("catalog.json"), load_json("personas.json")
+def seed_all(images: bool = True, personas: bool = False, with_inspo: bool = True, with_history: bool = False) -> dict:
+    """Reset the schema and load the catalog. personas/with_history add synthetic shoppers (tests and rehearsals)."""
+    catalog = load_json("catalog.json")
     reset_schema()
     if images:
         write_product_images(catalog)
     with session_scope() as db:
         load_catalog(db, catalog)
+    from .product_images import apply_photos
+
+    with session_scope() as db:
+        photos = apply_photos(db)
+    if not personas:
+        if with_history:
+            from .seed_history import seed_synthetic_history
+
+            seed_synthetic_history()
+        return {"products": len(catalog["products"]), "photos": photos, "personas": 0}
+    personas = load_json("personas.json")
+    with session_scope() as db:
         folders = load_personas(db, personas, catalog)
     if with_inspo:
         from .seed_inspo import attach_persona_inspo

@@ -123,6 +123,8 @@ def discover() -> dict[str, bool | str]:
     found[f"cloudsql user {sql['user']}"] = sql["user"] in users.split()
     rc, _ = sh(f"gcloud secrets describe {sql['password_secret']} --project {P}")
     found[f"secret {sql['password_secret']}"] = rc == 0
+    rc, _ = sh(f"gcloud secrets describe {CFG['admin_token_secret']} --project {P}")
+    found[f"secret {CFG['admin_token_secret']}"] = rc == 0
     rc, _ = sh(f"gcloud artifacts repositories describe {CFG['artifact_repo']} --location {REGION} --project {P}")
     found[f"artifact repo {CFG['artifact_repo']}"] = rc == 0
     rc, _ = sh(f"gcloud iam service-accounts describe {SA_EMAIL} --project {P}")
@@ -220,6 +222,13 @@ def setup() -> None:
         sh(f"printf %s '{pw}' | gcloud secrets create {sql['password_secret']} --project {P} "
            f"--replication-policy=automatic --data-file=-", check=True)
         record("secret", sql["password_secret"], f"gcloud secrets delete {sql['password_secret']} --project {P}", "< ₹10")
+    if not found[f"secret {CFG['admin_token_secret']}"]:
+        tok = secrets.token_urlsafe(18)
+        sh(f"printf %s '{tok}' | gcloud secrets create {CFG['admin_token_secret']} --project {P} "
+           f"--replication-policy=automatic --data-file=-", check=True)
+        record("secret", CFG["admin_token_secret"], f"gcloud secrets delete {CFG['admin_token_secret']} --project {P}", "< ₹10",
+               note="admin token for /admin; read it with: gcloud secrets versions access latest --secret "
+                    f"{CFG['admin_token_secret']} --project {P}")
     if not found[f"cloudsql user {sql['user']}"]:
         _, pw = sh(f"gcloud secrets versions access latest --secret {sql['password_secret']} --project {P}", check=True)
         sh(f"gcloud sql users create {sql['user']} -i {sql['instance']} --project {P} --password='{pw.strip()}'", check=True)
@@ -286,8 +295,11 @@ def grant_roles() -> None:
            f"--condition=None --quiet --format=none", check=True)
     sh(f"gcloud storage buckets add-iam-policy-binding gs://{CFG['bucket']} --member={member} "
        f"--role=roles/storage.objectAdmin --format=none", check=True)
-    sh(f"gcloud secrets add-iam-policy-binding {CFG['cloudsql']['password_secret']} --project {P} "
-       f"--member={member} --role=roles/secretmanager.secretAccessor --format=none", check=True)
+    for secret in (CFG["cloudsql"]["password_secret"], CFG["admin_token_secret"]):
+        rc, _ = sh(f"gcloud secrets describe {secret} --project {P}")
+        if rc == 0:
+            sh(f"gcloud secrets add-iam-policy-binding {secret} --project {P} "
+               f"--member={member} --role=roles/secretmanager.secretAccessor --format=none", check=True)
     # Dataset-level BigQuery write access (not project-wide).
     ds = f"{P}:{CFG['bq_dataset']}"
     _, raw = sh(f"bq --project_id={P} show --format=prettyjson {ds}", check=True)

@@ -174,13 +174,17 @@ def _index_vertex(p: m.Product) -> None:
         logging.getLogger("wiw.agents").warning("vertex upsert failed: %s", e)
 
 
-def watched_products(db: Session, user_id: str) -> list[dict]:
-    """Products this shopper's alerts are watching (for the demo panel)."""
+def watched_products(db: Session) -> list[dict]:
+    """Store products that at least one shopper's hangers are watching (for the admin store-events panel)."""
     n = get_settings().matching["alerts"]["watch_top_n"]
     out: dict[str, dict] = {}
-    for h in db.scalars(select(m.Hanger).where(m.Hanger.user_id == user_id)):
-        res = matches_for_piece(db, user_id, h.piece)
-        for i in res.for_you[:n] + res.also_view[:n]:
-            out.setdefault(i.product["id"], {"product": i.product, "hanger": h.piece.name,
-                                             "reasons": [r.label for r in i.reasons]})
-    return list(out.values())
+    for h in db.scalars(select(m.Hanger).order_by(m.Hanger.id)):
+        res = matches_for_piece(db, h.user_id, h.piece)
+        picks = ([product_dict(db.get(m.Product, h.chosen_product_id))] if h.chosen_product_id else []) + \
+                [i.product for i in res.for_you[:n] + res.also_view[:n]]
+        for p in picks:
+            e = out.setdefault(p["id"], {"product": p, "watchers": set(), "hangers": set()})
+            e["watchers"].add(h.user_id)
+            e["hangers"].add(h.piece.name)
+    return [{"product": e["product"], "watchers": len(e["watchers"]), "hanger": sorted(e["hangers"])[0],
+             "reasons": []} for e in out.values()]

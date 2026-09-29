@@ -124,3 +124,45 @@ def mark_read(db: Db, user: User) -> dict:
     db.execute(update(m.Notification).where(m.Notification.user_id == user.id).values(read=True))
     db.commit()
     return {"ok": True}
+
+
+# ------------------------------------------------------------------ shop (the customer storefront)
+
+SORTS = {"recommended", "new", "price_asc", "price_desc", "discount"}
+
+
+@router.get("/shop")
+def shop(db: Db, gender: str = "women", category: str | None = None, subcategory: str | None = None,
+         sort: str = "recommended", q: str | None = None) -> dict:
+    """Browse the whole catalog like a store website: a women's/men's section, categories, sort and search.
+    Unisex pieces appear in both sections."""
+    from .vocab import CATEGORIES, SUBCATEGORIES, label
+
+    genders = {"women": ("women", "unisex"), "men": ("men", "unisex")}.get(gender, ("women", "men", "unisex"))
+    rows = [product_dict(p) for p in db.scalars(select(m.Product).where(m.Product.active.is_(True),
+                                                                        m.Product.gender_fit.in_(genders)))]
+    if q:
+        terms = q.lower().split()
+        rows = [p for p in rows if all(t in f"{p['name']} {p['subcategory_label']} {p['fabric']} {p['primary_color']}".lower()
+                                       for t in terms)]
+    cat_counts = {c: sum(p["category"] == c for p in rows) for c in CATEGORIES}
+    if category in CATEGORIES:
+        rows = [p for p in rows if p["category"] == category]
+    sub_counts = {s: sum(p["subcategory"] == s for p in rows) for s in SUBCATEGORIES.get(category or "", [])}
+    if subcategory:
+        rows = [p for p in rows if p["subcategory"] == subcategory]
+    key = {"new": lambda p: (p["added_at"],), "price_asc": lambda p: (p["price_inr"],),
+           "price_desc": lambda p: (-p["price_inr"],),
+           "discount": lambda p: (-(p["mrp_inr"] - p["price_inr"]) / p["mrp_inr"],)}.get(sort if sort in SORTS else "")
+    if sort == "new":
+        rows.sort(key=lambda p: p["added_at"], reverse=True)
+    elif key:
+        rows.sort(key=key)
+    else:  # recommended: in stock first, then category order, then name
+        rows.sort(key=lambda p: (not p["in_stock"], CATEGORIES.index(p["category"]), p["name"]))
+    newest = sorted((p["added_at"] for p in rows), reverse=True)[:8]
+    for p in rows:
+        p["is_new"] = p["added_at"] in newest
+    return {"gender": gender, "category": category, "subcategory": subcategory, "count": len(rows), "products": rows,
+            "categories": [{"key": c, "label": label(c), "count": n} for c, n in cat_counts.items() if n],
+            "subcategories": [{"key": s, "label": label(s), "count": n} for s, n in sub_counts.items() if n]}

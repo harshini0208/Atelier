@@ -241,3 +241,24 @@ def complete_the_look(db: Session, user_id: str, look_products: list[dict], limi
         seen_slots.add(r["product"]["slot"])
         uniq.append(r)
     return uniq[: limit or cfg["max_suggestions"]]
+
+
+# Flat-lay starting positions on the style board, in % of board width/height. z: higher = worn outside / on top.
+LAYOUT = {
+    "torso": (30, 4, 40, 20), "full": (29, 3, 42, 20), "outer": (12, 2, 44, 30), "legs": (31, 40, 38, 10),
+    "feet": (36, 80, 28, 15), "hand": (70, 46, 26, 40), "head": (70, 4, 24, 45), "neck": (4, 6, 24, 42),
+    "ears": (4, 30, 18, 43), "waist": (32, 36, 34, 25), "wrist": (4, 50, 18, 44),
+}
+
+
+def auto_layout(products: list[dict]) -> list[dict]:
+    """Deterministic board layout for a set of products. Pieces sharing a slot are fanned out so both stay visible;
+    outerwear overlaps the top and sits above it (layered outside)."""
+    out, used = [], {}
+    for p in products:
+        slot = slot_for(p["subcategory"])
+        x, y, w, z = LAYOUT.get(slot, (40, 40, 24, 50))
+        n = used.get(slot, 0)
+        used[slot] = n + 1
+        out.append({"product_id": p["id"], "x": x + 8 * n, "y": y + 5 * n, "w": w, "z": z + n})
+    return out

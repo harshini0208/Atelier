@@ -15,7 +15,7 @@ type Msg = {
     pending_preferences?: { summary: string } | null };
 };
 
-const SUGGESTIONS = ["Make it work for a beach wedding under ₹5,000", "Make it more casual", "Put it on the mannequin",
+const SUGGESTIONS = ["Make it work for a beach wedding under ₹5,000", "Make it more casual", "Put it on my board",
   "Add the look to my cart"];
 
 function useFolderId(): number | null {
@@ -31,8 +31,8 @@ function OutfitCard({ o, folderId, onOpen }: { o: Outfit; folderId: number | nul
   const place = useMutation({
     mutationFn: () => api.post(`/folders/${folderId}/looks`, {
       name: o.occasion ? `For ${o.occasion}` : "Stylist pick",
-      placements: o.items.map((i) => ({ product_id: i.product.id, slot: i.product.slot })), reason: o.occasion ?? "" }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["looks", folderId] }); nav(`/folders/${folderId}/wardrobe`); },
+      placements: o.items.map((i) => ({ product_id: i.product.id })), reason: o.occasion ?? "" }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["looks", folderId] }); nav(`/folders/${folderId}/board`); },
   });
   const cart = useMutation({
     mutationFn: () => api.post<{ added: unknown[]; needs_size: unknown[] }>(`/cart/look/${folderId}`, {
@@ -70,7 +70,7 @@ function OutfitCard({ o, folderId, onOpen }: { o: Outfit; folderId: number | nul
       )}
       {folderId && (
         <div className="row" style={{ marginTop: 8, gap: 6 }}>
-          <button className="btn btn-sm" onClick={() => place.mutate()} disabled={place.isPending}><Icon name="mannequin" size={16} /> Try on</button>
+          <button className="btn btn-sm" onClick={() => place.mutate()} disabled={place.isPending}><Icon name="sparkle" size={16} /> Open on board</button>
           <button className="btn btn-sm btn-primary" onClick={() => cart.mutate()} disabled={cart.isPending}><Icon name="bag" size={16} /> Add look to cart</button>
         </div>
       )}

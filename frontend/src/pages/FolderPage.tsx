@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { api } from "../api";
+import { api, inr } from "../api";
 import HangerDrawer from "../components/HangerDrawer";
 import UploadZone from "../components/UploadZone";
 import { CoverageLine, ErrorBox, Icon, Loading, useToast } from "../components/ui";
@@ -16,27 +16,24 @@ function HangerHook() {
   );
 }
 
-function statusChip(h: Hanger) {
-  if (h.covered_in_prefs) return <span className="chip chip-sage">In store</span>;
-  if (h.covered) return <span className="chip chip-amber">Outside prefs</span>;
-  return <span className="chip chip-rose">Not in store</span>;
-}
-
 function HangerCard({ h, onOpen }: { h: Hanger; onOpen: () => void }) {
-  const inset = h.chosen_product?.image_url ?? h.top_match?.product.image_url;
+  // the hanger holds the real store piece; the inspo crop is only a small reminder of where it came from
+  const product = h.chosen_product;
   return (
-    <button className="hanger" onClick={onOpen} aria-label={`${h.piece.name}: see matches`}>
+    <button className="hanger" onClick={onOpen} aria-label={`${product?.name ?? h.piece.name}: see other options`}>
       <HangerHook />
       <div className="hanger-card">
         <div className="hanger-img">
-          {h.piece.crop_url ? <img src={h.piece.crop_url} alt="" /> : null}
-          {inset && <img className="pick" src={inset} alt="" title={h.chosen_product ? "In your look" : "Top match"} />}
+          {product ? <img src={product.image_url} alt={product.name} style={{ padding: 8 }} />
+            : h.piece.crop_url ? <img src={h.piece.crop_url} alt="" style={{ opacity: .55 }} /> : null}
+          {product && h.piece.crop_url && <img className="pick" src={h.piece.crop_url} alt="" title={`From your inspo: ${h.piece.name}`} />}
         </div>
         <div className="hanger-body">
-          <div className="name">{h.piece.name}</div>
+          <div className="name">{product?.name ?? h.piece.name}</div>
           <div className="row" style={{ marginTop: 6, gap: 4 }}>
-            {statusChip(h)}
-            {h.chosen_product && <span className="chip chip-dark">In look</span>}
+            {product ? <span className="price" style={{ fontSize: 13 }}>{inr(product.price_inr)}</span>
+              : <span className="chip chip-rose">{h.covered ? "Pick a store piece" : "Wish · not in store"}</span>}
+            {product && h.chosen_size && <span className="chip">Size {h.chosen_size}</span>}
           </div>
         </div>
       </div>
@@ -95,7 +92,7 @@ export default function FolderPage() {
           {f.description && <p className="muted" style={{ margin: "4px 0 0" }}>{f.description}</p>}
         </div>
         {f.hangers.length > 0 && (
-          <button className="btn" onClick={() => nav(`/folders/${folderId}/wardrobe`)}><Icon name="mannequin" /> Walk-in wardrobe</button>
+          <button className="btn btn-primary" onClick={() => nav(`/folders/${folderId}/board`)}><Icon name="sparkle" /> Style board</button>
         )}
       </div>
 

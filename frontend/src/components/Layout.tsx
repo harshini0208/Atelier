@@ -2,34 +2,32 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { api, currentUserId, setCurrentUserId } from "../api";
-import type { Me, Persona, Vocab } from "../types";
+import type { Me, Vocab } from "../types";
 import { Icon } from "./ui";
 
 export function useMe() {
-  return useQuery({ queryKey: ["me"], queryFn: () => api.get<Me>("/me") });
+  return useQuery({ queryKey: ["me"], queryFn: () => api.get<Me>("/me"), enabled: !!currentUserId() });
 }
 
 export function useVocab() {
   return useQuery({ queryKey: ["vocab"], queryFn: () => api.get<Vocab>("/vocab"), staleTime: Infinity });
 }
 
-export type NavItem = { to: string; label: string; icon: string; mobile?: boolean };
+export type NavItem = { to: string; label: string; icon: string };
 
 export const NAV: NavItem[] = [
-  { to: "/", label: "Wardrobes", icon: "hanger", mobile: true },
-  { to: "/preferences", label: "Preferences", icon: "sliders", mobile: true },
-  { to: "/taste", label: "My taste", icon: "sparkle", mobile: true },
-  { to: "/retailer", label: "Retailer", icon: "chart", mobile: true },
-  { to: "/demo", label: "Demo panel", icon: "bolt" },
+  { to: "/", label: "Wardrobes", icon: "hanger" },
+  { to: "/shop", label: "Shop", icon: "tag" },
+  { to: "/taste", label: "My taste", icon: "sparkle" },
+  { to: "/preferences", label: "Preferences", icon: "sliders" },
 ];
 
-function PersonaMenu() {
+function ProfileMenu() {
   const qc = useQueryClient();
   const nav = useNavigate();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const { data: me } = useMe();
-  const { data: personas } = useQuery({ queryKey: ["personas"], queryFn: () => api.get<Persona[]>("/personas") });
 
   useEffect(() => {
     const h = (e: MouseEvent) => ref.current && !ref.current.contains(e.target as Node) && setOpen(false);
@@ -37,36 +35,42 @@ function PersonaMenu() {
     return () => document.removeEventListener("mousedown", h);
   }, []);
 
-  const switchTo = async (id: string | null) => {
-    if (id === null) id = (await api.post<{ id: string }>("/guest")).id;
-    setCurrentUserId(id);
+  const startOver = () => {
+    if (!confirm("Start over with a new profile on this device? Your current wardrobe stays saved but you'll be signed out of it.")) return;
+    setCurrentUserId(null);
     setOpen(false);
     qc.clear();
-    nav("/");
+    nav("/welcome");
+  };
+
+  const deleteMe = async () => {
+    if (!confirm("Delete your profile, folders, hangers, cart and orders? This can't be undone.")) return;
+    await api.del("/me");
+    setCurrentUserId(null);
+    qc.clear();
+    nav("/welcome");
   };
 
   return (
     <div ref={ref} style={{ position: "relative" }}>
       <button className="btn btn-sm btn-ghost" onClick={() => setOpen((o) => !o)} aria-haspopup="menu" aria-expanded={open}>
         <span aria-hidden style={{ width: 26, height: 26, borderRadius: 99, background: "#e3d9cb", display: "grid", placeItems: "center", fontFamily: "var(--serif)" }}>
-          {me?.name?.[0] ?? "·"}
+          {me?.name?.[0]?.toUpperCase() ?? "·"}
         </span>
         <span className="persona-name">{me?.name ?? "…"}</span>
       </button>
       {open && (
-        <div role="menu" className="card" style={{ position: "absolute", right: 0, top: 46, width: 260, padding: 6, zIndex: 50 }}>
-          <div className="eyebrow" style={{ padding: "6px 10px" }}>Demo shoppers</div>
-          {personas?.map((p) => (
-            <button key={p.id} role="menuitem" className="btn btn-ghost btn-block" style={{ justifyContent: "flex-start", height: "auto", padding: "8px 10px", fontWeight: 500 }}
-              onClick={() => switchTo(p.id)}>
-              <span style={{ textAlign: "left" }}>
-                <b>{p.name}</b>{p.id === currentUserId() ? " ✓" : ""}<br />
-                <span className="small muted">{p.tagline} · {p.city}</span>
-              </span>
-            </button>
-          ))}
-          <button role="menuitem" className="btn btn-ghost btn-block" style={{ justifyContent: "flex-start" }} onClick={() => switchTo(null)}>
-            Continue as a guest
+        <div role="menu" className="card" style={{ position: "absolute", right: 0, top: 46, width: 240, padding: 6, zIndex: 50 }}>
+          <div style={{ padding: "8px 10px" }}><b>{me?.name}</b><div className="small muted">{me?.city}</div></div>
+          <button role="menuitem" className="btn btn-ghost btn-block" style={{ justifyContent: "flex-start" }}
+            onClick={() => { setOpen(false); nav("/preferences"); }}>Edit profile & preferences</button>
+          <button role="menuitem" className="btn btn-ghost btn-block" style={{ justifyContent: "flex-start" }}
+            onClick={() => { setOpen(false); nav("/cart"); }}>Cart & orders</button>
+          <button role="menuitem" className="btn btn-ghost btn-block" style={{ justifyContent: "flex-start" }} onClick={startOver}>
+            Start over as someone new
+          </button>
+          <button role="menuitem" className="btn btn-ghost btn-block" style={{ justifyContent: "flex-start", color: "var(--rose)" }} onClick={deleteMe}>
+            Delete my profile & data
           </button>
         </div>
       )}
@@ -74,7 +78,7 @@ function PersonaMenu() {
   );
 }
 
-export function Layout({ children, chat }: { children: ReactNode; chat?: ReactNode }) {
+export function Layout({ children, chat, bare = false }: { children: ReactNode; chat?: ReactNode; bare?: boolean }) {
   const { data: me } = useMe();
   return (
     <div className="app">
@@ -83,31 +87,35 @@ export function Layout({ children, chat }: { children: ReactNode; chat?: ReactNo
           <img src="/favicon.svg" alt="" className="brand-mark" />
           <span>Walk-In Wardrobe</span>
         </NavLink>
-        <nav className="nav" aria-label="Main">
-          {NAV.map((n) => <NavLink key={n.to} to={n.to} end={n.to === "/"}>{n.label}</NavLink>)}
-        </nav>
+        {!bare && (
+          <nav className="nav" aria-label="Main">
+            {NAV.map((n) => <NavLink key={n.to} to={n.to} end={n.to === "/"}>{n.label}</NavLink>)}
+          </nav>
+        )}
         <div className="header-spacer" />
-        <div className="header-actions">
-          <NavLink to="/notifications" className="icon-btn" aria-label={`Notifications${me?.unread_notifications ? `, ${me.unread_notifications} unread` : ""}`}>
-            <Icon name="bell" />
-            {!!me?.unread_notifications && <span className="badge">{me.unread_notifications}</span>}
-          </NavLink>
-          <NavLink to="/cart" className="icon-btn" aria-label={`Cart${me?.cart_count ? `, ${me.cart_count} items` : ""}`}>
-            <Icon name="bag" />
-            {!!me?.cart_count && <span className="badge">{me.cart_count}</span>}
-          </NavLink>
-          <PersonaMenu />
-        </div>
+        {!bare && (
+          <div className="header-actions">
+            <NavLink to="/notifications" className="icon-btn" aria-label={`Notifications${me?.unread_notifications ? `, ${me.unread_notifications} unread` : ""}`}>
+              <Icon name="bell" />
+              {!!me?.unread_notifications && <span className="badge">{me.unread_notifications}</span>}
+            </NavLink>
+            <NavLink to="/cart" className="icon-btn" aria-label={`Cart${me?.cart_count ? `, ${me.cart_count} items` : ""}`}>
+              <Icon name="bag" />
+              {!!me?.cart_count && <span className="badge">{me.cart_count}</span>}
+            </NavLink>
+            <ProfileMenu />
+          </div>
+        )}
       </header>
       <div className={`shell ${chat ? "with-chat" : ""}`}>
         <main className="main" id="main">{children}</main>
         {chat}
       </div>
-      <nav className="bottom-nav" aria-label="Main">
-        {NAV.filter((n) => n.mobile).map((n) => (
-          <NavLink key={n.to} to={n.to} end={n.to === "/"}><Icon name={n.icon} />{n.label}</NavLink>
-        ))}
-      </nav>
+      {!bare && (
+        <nav className="bottom-nav" aria-label="Main">
+          {NAV.map((n) => <NavLink key={n.to} to={n.to} end={n.to === "/"}><Icon name={n.icon} />{n.label}</NavLink>)}
+        </nav>
+      )}
     </div>
   );
 }

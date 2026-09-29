@@ -137,7 +137,14 @@ def ensure_bigquery() -> None:
 
 
 def load_events_to_bigquery(rows: list[dict]) -> int:
+    """Replace wiw.events with these rows. With no rows the table is recreated empty (a table with recently
+    streamed rows can't be truncated, and an empty load job is rejected)."""
     from google.cloud import bigquery as bq
+
+    if not rows:
+        _bq().delete_table(bq_table(), not_found_ok=True)
+        ensure_bigquery()
+        return 0
 
     job = _bq().load_table_from_json(rows, bq_table(), job_config=bq.LoadJobConfig(
         schema=bq_schema(), write_disposition="WRITE_TRUNCATE"))

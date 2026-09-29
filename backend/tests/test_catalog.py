@@ -102,3 +102,17 @@ def test_every_product_renders_valid_svg(catalog):
     for p in catalog["products"]:
         root = ET.fromstring(product_svg(p))
         assert root.get("viewBox") == "0 0 200 200"
+
+
+def test_clean_start_has_no_shoppers():
+    from sqlalchemy import func, select
+
+    from wiw import models as m
+    from wiw.db import session_scope
+    from wiw.seed import seed_all
+    out = seed_all(images=False)
+    assert out["personas"] == 0
+    with session_scope() as db:
+        assert db.scalar(select(func.count()).select_from(m.User)) == 0
+        assert db.scalar(select(func.count()).select_from(m.Event)) == 0
+        assert db.scalar(select(func.count()).select_from(m.Product)) == 94

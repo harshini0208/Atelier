@@ -10,7 +10,7 @@ from wiw.db import session_scope
 @pytest.fixture(scope="module", autouse=True)
 def seeded():
     from wiw.seed import seed_all
-    seed_all(images=False, with_history=False)
+    seed_all(images=False, personas=True)
 
 
 def pid(db, name):

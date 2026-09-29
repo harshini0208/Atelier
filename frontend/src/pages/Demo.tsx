@@ -4,7 +4,7 @@ import { api, inr } from "../api";
 import { ErrorBox, Icon, Loading, useToast } from "../components/ui";
 import type { Product } from "../types";
 
-type State = { watched: { product: Product; hanger: string; reasons: string[] }[]; new_arrivals: { index: number; name: string; price_inr: number }[] };
+type State = { watched: { product: Product; hanger: string; watchers: number }[]; new_arrivals: { index: number; name: string; price_inr: number }[] };
 
 export default function Demo() {
   const qc = useQueryClient();
@@ -31,17 +31,15 @@ export default function Demo() {
 
   return (
     <div style={{ maxWidth: 900, margin: "0 auto" }}>
-      <span className="eyebrow">Demo panel · synthetic catalog events</span>
-      <h1>Trigger the agents</h1>
-      <p className="muted">These simulate store events. Each one runs the matching watchers and writes notifications to shoppers whose hangers it matches.</p>
+      <p className="muted">Simulate store events. Each one runs the matching watchers and notifies shoppers whose hangers it matches.</p>
       {err && <ErrorBox error={err} />}
       {log.length > 0 && <div className="alert alert-sage stack" style={{ gap: 4 }}>{log.slice(0, 4).map((l, i) => <span key={i}>{l}</span>)}</div>}
       {!q.data && <Loading />}
       {q.data && (
         <>
           <section className="section">
-            <div className="section-head"><h2>Pieces this shopper's alerts are watching</h2></div>
-            {q.data.watched.length === 0 && <div className="empty"><p className="muted" style={{ margin: 0 }}>Hang a few pieces first.</p></div>}
+            <div className="section-head"><h2>Pieces shoppers are watching</h2></div>
+            {q.data.watched.length === 0 && <div className="empty"><p className="muted" style={{ margin: 0 }}>No shopper has hung a piece yet.</p></div>}
             <div className="stack">
               {q.data.watched.map((w) => {
                 const sold = w.product.sizes.filter((s) => s.stock <= 0).map((s) => s.size);
@@ -50,7 +48,7 @@ export default function Demo() {
                     <img src={w.product.image_url} alt="" style={{ width: 56, height: 56, objectFit: "contain", background: "#f4efe8", borderRadius: 8 }} />
                     <div style={{ flex: 1, minWidth: 180 }}>
                       <b>{w.product.name}</b> <span className="small">{inr(w.product.price_inr)}</span>
-                      <div className="small muted">Matches the saved {w.hanger.toLowerCase()}{w.reasons.length ? ` · ${w.reasons.join(", ")}` : ""}</div>
+                      <div className="small muted">{w.watchers} shopper{w.watchers === 1 ? "" : "s"} watching · e.g. for “{w.hanger}”</div>
                     </div>
                     <button className="btn btn-sm" onClick={() => price.mutate(w.product)} disabled={price.isPending}><Icon name="tag" size={16} /> Drop price ~22%</button>
                     {sold.map((s) => (
@@ -73,8 +71,8 @@ export default function Demo() {
             </div>
           </section>
           <section className="section">
-            <button className="btn btn-ghost" onClick={() => confirm("Reset all demo data to the seeded state?") && reset.mutate()} disabled={reset.isPending}>
-              {reset.isPending ? <span className="spinner" /> : <Icon name="undo" size={16} />} Reset demo data</button>
+            <button className="btn btn-ghost" onClick={() => confirm("Delete ALL shopper data (profiles, folders, carts, orders, events) and start fresh? The catalog stays.") && reset.mutate()} disabled={reset.isPending}>
+              {reset.isPending ? <span className="spinner" /> : <Icon name="undo" size={16} />} Delete all shopper data</button>
           </section>
         </>
       )}

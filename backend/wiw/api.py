@@ -1,6 +1,9 @@
-"""HTTP API. The acting persona is chosen with the X-User-Id header (demo personas; no real login)."""
+"""HTTP API. A shopper creates a profile once; the app keeps its id and sends it as X-User-Id (no passwords).
+Brand-side endpoints (insights, store events, resets) require X-Admin-Token when ADMIN_TOKEN is set."""
 from __future__ import annotations
 
+import os
+import secrets
 import uuid
 from typing import Annotated
 
@@ -13,8 +16,7 @@ from . import models as m
 from .colors import color_hex
 from .db import get_db
 from .events import emit
-from .inspo import add_manual_piece, ingest, select_pieces
-from .mannequin import BODY_TYPES, HAIR_COLORS, HAIR_STYLES, HEIGHT_BANDS, SKIN_TONES
+from .inspo import add_manual_piece, hang_piece, ingest, select_pieces
 from .services import (delivery_label, hanger_dict, inspo_dict, look_coverage, look_hangers, matches_for_piece,
                        pick_size, prefs_dict, product_dict)
 from .settings import get_settings
@@ -27,13 +29,23 @@ MAX_UPLOAD = 12 * 1024 * 1024
 
 
 def current_user(db: Db, x_user_id: Annotated[str | None, Header()] = None) -> m.User:
-    user = db.get(m.User, x_user_id or "aanya")
+    user = db.get(m.User, x_user_id) if x_user_id else None
     if not user:
-        raise HTTPException(401, "Unknown persona. Pick a demo shopper or continue as guest.")
+        raise HTTPException(401, "Let's set up your profile first.")
     return user
 
 
 User = Annotated[m.User, Depends(current_user)]
+
+
+def require_admin(x_admin_token: Annotated[str | None, Header()] = None) -> None:
+    """Brand-side endpoints. Open locally when ADMIN_TOKEN is unset; required on Cloud Run."""
+    token = os.getenv("ADMIN_TOKEN")
+    if token and not (x_admin_token and secrets.compare_digest(x_admin_token, token)):
+        raise HTTPException(403, "Admin token required")
+
+
+Admin = Depends(require_admin)
 
 
 def own_folder(db: Session, user: m.User, folder_id: int) -> m.Folder:
@@ -76,28 +88,7 @@ def vocab() -> dict:
         "sizes": {"tops": {g: size_system("tops", g) for g in ("women", "men")},
                   "bottoms": {g: size_system("bottoms", g) for g in ("women", "men")},
                   "footwear": {g: size_system("footwear", g) for g in ("women", "men")}},
-        "avatar": {"body_types": {k: list(v) for k, v in BODY_TYPES.items()}, "height_bands": list(HEIGHT_BANDS),
-                   "skin_tones": SKIN_TONES, "hair_styles": HAIR_STYLES, "hair_colors": HAIR_COLORS},
     }
-
-
-@router.get("/personas")
-def personas(db: Db) -> list[dict]:
-    users = db.scalars(select(m.User).where(m.User.is_guest.is_(False)).order_by(m.User.created_at, m.User.id))
-    return [{"id": u.id, "name": u.name, "city": u.city, "tagline": u.tagline} for u in users]
-
-
-@router.post("/guest")
-def create_guest(db: Db) -> dict:
-    uid = f"guest-{uuid.uuid4().hex[:8]}"
-    db.add(m.User(id=uid, name="Guest", city="Mumbai", tagline="Just browsing", is_guest=True))
-    db.flush()
-    db.add(m.Preferences(user_id=uid, budgets={c: [0, 5000] for c in CATEGORIES}, sizes={}, fit="regular",
-                         preferred_materials=[], avoid_materials=[], avoid_colors=[], occasions=[], gender_fit="women"))
-    db.add(m.Avatar(user_id=uid))
-    db.add(m.Folder(user_id=uid, name="My first wardrobe", description="Start here"))
-    db.commit()
-    return {"id": uid, "name": "Guest"}
 
 
 @router.get("/me")
@@ -138,6 +129,53 @@ def validate_prefs(p: PrefsIn) -> None:
             raise HTTPException(422, f"Unknown colour {c}")
     if p.gender_fit not in ("women", "men", "any"):
         raise HTTPException(422, "gender_fit must be women, men or any")
+
+
+class ProfileIn(PrefsIn):
+    name: str = Field(min_length=1, max_length=60)
+    city: str = Field(default="Mumbai", max_length=40)
+
+
+@router.post("/profile")
+def create_profile(body: ProfileIn, db: Db) -> dict:
+    """Onboarding: a new shopper tells us their name and preferences; we return their id."""
+    validate_prefs(body)
+    uid = f"u-{uuid.uuid4().hex[:12]}"
+    db.add(m.User(id=uid, name=body.name.strip(), city=body.city, tagline=""))
+    db.flush()
+    db.add(m.Preferences(user_id=uid, **body.model_dump(exclude={"name", "city"})))
+    db.commit()
+    return {"id": uid, "name": body.name.strip()}
+
+
+class MeIn(BaseModel):
+    name: str = Field(min_length=1, max_length=60)
+    city: str = Field(max_length=40)
+
+
+@router.patch("/me")
+def update_me(body: MeIn, db: Db, user: User) -> dict:
+    user.name, user.city = body.name.strip(), body.city
+    db.commit()
+    return {"id": user.id, "name": user.name, "city": user.city}
+
+
+@router.delete("/me")
+def delete_me(db: Db, user: User) -> dict:
+    """Delete this shopper's profile and everything they created (folders, uploads' records, cart, orders, events)."""
+    uid = user.id
+    for model in (m.ChatMessage, m.Notification, m.CartItem, m.TasteSignal, m.Look, m.Hanger):
+        db.query(model).filter(model.user_id == uid).delete(synchronize_session=False)
+    for o in db.scalars(select(m.Order).where(m.Order.user_id == uid)):
+        db.delete(o)
+    for i in db.scalars(select(m.InspoImage).where(m.InspoImage.user_id == uid)):
+        db.delete(i)
+    db.query(m.Folder).filter(m.Folder.user_id == uid).delete(synchronize_session=False)
+    db.query(m.Preferences).filter(m.Preferences.user_id == uid).delete(synchronize_session=False)
+    db.query(m.Event).filter(m.Event.user_id == uid).delete(synchronize_session=False)
+    db.delete(user)
+    db.commit()
+    return {"ok": True}
 
 
 @router.get("/preferences")
@@ -295,6 +333,53 @@ def select_inspo_pieces(inspo_id: int, body: SelectIn, db: Db, user: User) -> di
     out = select_pieces(db, user.id, inspo, body.piece_ids, body.folder_by_piece, body.folder_id)
     db.commit()
     return out
+
+
+def own_piece(inspo: m.InspoImage, piece_id: int) -> m.DetectedPiece:
+    piece = next((p for p in inspo.pieces if p.id == piece_id), None)
+    if not piece:
+        raise HTTPException(404, "Piece not found")
+    return piece
+
+
+@router.get("/inspo/{inspo_id}/pieces/{piece_id}/matches")
+def piece_matches(inspo_id: int, piece_id: int, db: Db, user: User) -> dict:
+    """Shown the moment a shopper taps a piece they like: what this store actually has for it."""
+    inspo = own_inspo(db, user, inspo_id)
+    piece = own_piece(inspo, piece_id)
+    res = matches_for_piece(db, user.id, piece)
+    for item in (res.for_you or res.also_view)[:1]:
+        emit(db, "match_viewed", user.id, product_id=item.product["id"], subcategory=piece.subcategory)
+    db.commit()
+    hanger = db.scalar(select(m.Hanger).where(m.Hanger.user_id == user.id, m.Hanger.piece_id == piece.id))
+    out = res.as_dict()
+    out["piece"] = {"id": piece.id, "name": piece.name, "crop_url": piece.crop_url, "subcategory": piece.subcategory,
+                    "subcategory_label": label(piece.subcategory), "color": piece.color, "fabric": piece.fabric}
+    out["hanger"] = {"id": hanger.id, "chosen_product_id": hanger.chosen_product_id} if hanger else None
+    if not res.covered:
+        out["gap_message"] = (f"Urban Thread doesn't stock a close match for the {piece.name.lower()} right now. "
+                              "Here's the closest from this store, or save it as a wish.")
+    return out
+
+
+class HangIn(BaseModel):
+    product_id: str | None = None   # None = save as a wish (nothing close in store)
+    size: str | None = None
+    folder_id: int | None = None
+
+
+@router.post("/inspo/{inspo_id}/pieces/{piece_id}/hang")
+def hang(inspo_id: int, piece_id: int, body: HangIn, db: Db, user: User) -> dict:
+    inspo = own_inspo(db, user, inspo_id)
+    piece = own_piece(inspo, piece_id)
+    if body.folder_id:
+        own_folder(db, user, body.folder_id)
+    try:
+        h = hang_piece(db, user.id, inspo, piece, product_id=body.product_id, size=body.size, folder_id=body.folder_id)
+    except ValueError as e:
+        raise HTTPException(404, "Product not found") from e
+    db.commit()
+    return hanger_dict(db, h, with_top=False)
 
 
 # ------------------------------------------------------------------ hangers + matches

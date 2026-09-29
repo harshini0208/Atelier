@@ -26,6 +26,7 @@ search:
   engine: wiw-search
 
 artifact_repo: wiw
+admin_token_secret: wiw-admin-token  # gates /admin (brand insights + store events) on Cloud Run
 service_account: wiw-run            # least-privilege runtime identity for Cloud Run
 run_service: wiw-app
 

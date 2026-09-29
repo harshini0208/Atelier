@@ -2,7 +2,8 @@
 
     make load-cloud
 
-1. Cloud SQL `wiw` database (schema reset + seed) and product/inspo media into the GCS bucket.
+1. Cloud SQL `wiw` database: schema reset (ALL shopper data is deleted) + the store catalog; product images and
+   photos into the GCS bucket; shopper uploads (inspo/, crops/) are deleted from the bucket.
 2. BigQuery `wiw.events` table + views, loaded with the seeded events.
 3. Vertex AI Search `wiw-catalog`: schema + full document import.
 """
@@ -19,8 +20,7 @@ os.environ.setdefault("GEMINI_MODE", "replay")
 
 
 def main() -> None:
-    import importlib.util
-    import subprocess
+        import subprocess
 
     from sqlalchemy import select
 
@@ -31,9 +31,8 @@ def main() -> None:
     from wiw.seed import seed_all
 
     subprocess.run([sys.executable, str(ROOT / "data/generate.py")], check=True)
-    has = lambda mod: importlib.util.find_spec(f"wiw.{mod}") is not None  # noqa: E731
     print("1/3 Cloud SQL + GCS ...", flush=True)
-    print("   ", seed_all(with_inspo=has("seed_inspo"), with_history=has("seed_history")))
+    print("   ", seed_all())
 
     print("2/3 BigQuery ...", flush=True)
     ensure_bigquery()

@@ -150,7 +150,6 @@ export type Me = {
   cart_count: number;
 };
 
-export type Persona = { id: string; name: string; city: string; tagline: string };
 
 export type Vocab = {
   categories: { key: string; label: string; subcategories: { key: string; label: string }[] }[];
@@ -160,11 +159,4 @@ export type Vocab = {
   style_tags: string[];
   cities: string[];
   sizes: Record<string, Record<string, string[]>>;
-  avatar: {
-    body_types: Record<string, string[]>;
-    height_bands: string[];
-    skin_tones: string[];
-    hair_styles: string[];
-    hair_colors: Record<string, string>;
-  };
 };

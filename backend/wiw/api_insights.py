@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field
 from . import gemini
 from . import models as m
 from .agents import change_price, launch_new_arrival, new_arrivals_available, restock, watched_products
-from .api import Db, User
+from .api import Admin, Db, User
 from .events import query_view
 from .settings import get_settings
 from .taste import profile, taste_sentence
@@ -58,7 +58,8 @@ def retailer_numbers(db) -> dict:  # noqa: ANN001
     return {"funnel": [{"step": f["step"], "shoppers": int(f["shoppers"]), "events": int(f["events"])} for f in funnel],
             "gaps": gaps[:8], "top_attributes": dict(attrs), "coverage": coverage,
             "source": "BigQuery (wiw dataset)" if get_settings().events_backend == "bigquery" else "Local event log",
-            "synthetic_note": "Includes synthetic shopper history generated for this demo (flagged synthetic=true)."}
+            "synthetic_note": ("Includes synthetic shopper history (flagged synthetic=true)."
+                               if db.query(m.Event).filter(m.Event.synthetic.is_(True)).first() else "Real shopper activity only.")}
 
 
 def memo_fallback(n: dict) -> Memo:
@@ -75,9 +76,14 @@ def memo_fallback(n: dict) -> Memo:
                         f"{top['label'].lower()} drop next season." if top else "Keep monitoring saves weekly."))
 
 
-@router.get("/retailer")
+@router.get("/retailer", dependencies=[Admin])
 def retailer(db: Db) -> dict:
     n = retailer_numbers(db)
+    if not n["coverage"].get("pieces"):
+        return {**n, "memo": {"headline": "No shopper activity yet",
+                              "bullets": ["Nobody has saved inspo pieces yet, so there is nothing to report.",
+                                          "Numbers appear here as shoppers upload inspo and hang pieces."],
+                              "action": "Share the Walk-In Wardrobe link with shoppers."}, "memo_source": "fallback"}
     facts = {"funnel": n["funnel"], "top_gaps": n["gaps"][:4], "coverage": n["coverage"],
              "top_saved": {k: v[:4] for k, v in n["top_attributes"].items()}}
     prompt = ("You are writing a short memo for a fashion merchandiser at Urban Thread (a fictional store). Use ONLY the "
@@ -89,9 +95,9 @@ def retailer(db: Db) -> dict:
 
 # ------------------------------------------------------------------ demo / admin panel
 
-@router.get("/demo/state")
-def demo_state(db: Db, user: User) -> dict:
-    return {"watched": watched_products(db, user.id), "new_arrivals": new_arrivals_available(db)}
+@router.get("/demo/state", dependencies=[Admin])
+def demo_state(db: Db) -> dict:
+    return {"watched": watched_products(db), "new_arrivals": new_arrivals_available(db)}
 
 
 class PriceIn(BaseModel):
@@ -99,7 +105,7 @@ class PriceIn(BaseModel):
     new_price_inr: int = Field(ge=99, le=100000)
 
 
-@router.post("/demo/price")
+@router.post("/demo/price", dependencies=[Admin])
 def demo_price(body: PriceIn, db: Db) -> dict:
     try:
         out = change_price(db, body.product_id, body.new_price_inr)
@@ -115,7 +121,7 @@ class RestockIn(BaseModel):
     qty: int = Field(default=5, ge=1, le=100)
 
 
-@router.post("/demo/restock")
+@router.post("/demo/restock", dependencies=[Admin])
 def demo_restock(body: RestockIn, db: Db) -> dict:
     try:
         out = restock(db, body.product_id, body.size, body.qty)
@@ -125,7 +131,7 @@ def demo_restock(body: RestockIn, db: Db) -> dict:
     return out
 
 
-@router.post("/demo/new-arrival/{index}")
+@router.post("/demo/new-arrival/{index}", dependencies=[Admin])
 def demo_new_arrival(index: int, db: Db) -> dict:
     try:
         out = launch_new_arrival(db, index)
@@ -135,9 +141,9 @@ def demo_new_arrival(index: int, db: Db) -> dict:
     return out
 
 
-@router.post("/demo/reset")
+@router.post("/demo/reset", dependencies=[Admin])
 def demo_reset() -> dict:
     """Re-seed the synthetic data (demo rehearsals). Never touches anything outside the wiw database."""
     from .seed import seed_all
 
-    return seed_all(images=get_settings().storage_backend == "local")
+    return seed_all(images=get_settings().storage_backend == "local", personas=False, with_history=False)

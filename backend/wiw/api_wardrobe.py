@@ -1,7 +1,6 @@
-"""Walk-in wardrobe: avatar, mannequin geometry, saved looks, "Style it for me"."""
+"""Style board: a plain canvas per folder where shoppers arrange real store pieces, saved looks, "Style it for me"."""
 from __future__ import annotations
 
-import re
 from typing import Literal
 
 from fastapi import APIRouter, HTTPException
@@ -11,141 +10,38 @@ from sqlalchemy import select
 from . import gemini
 from . import models as m
 from .api import Db, User, own_folder
-from .mannequin import (BODY_TYPES, DROP_ZONES, H, HAIR_COLORS, HAIR_STYLES, HEIGHT_BANDS, W, Body, body_svg_parts,
-                        drop_zones, slot_transforms_for)
-from .services import product_dict
-from .styling import complete_the_look, folder_hangers, style_options
-from .vocab import ALL_SUBCATEGORIES, label, slot_for
+from .services import matches_for_piece, product_dict
+from .styling import auto_layout, complete_the_look, folder_hangers, style_options
+from .vocab import label
 
 router = APIRouter(prefix="/api")
 
 
-# ------------------------------------------------------------------ avatar
-
-class AvatarIn(BaseModel):
-    presentation: Literal["women", "men"] = "women"
-    body_type: str = "slim"
-    height_band: Literal["petite", "average", "tall"] = "average"
-    skin_tone: int = Field(default=4, ge=0, le=9)
-    hair_style: Literal["long", "bob", "bun", "curly", "short", "buzz"] = "long"
-    hair_color: Literal["black", "dark_brown", "brown", "auburn", "blonde", "grey"] = "black"
-
-
-def fix_avatar(a: AvatarIn) -> AvatarIn:
-    if a.body_type not in BODY_TYPES[a.presentation]:
-        a.body_type = next(iter(BODY_TYPES[a.presentation]))
-    return a
-
-
-def avatar_dict(a: m.Avatar) -> dict:
-    return {"presentation": a.presentation, "body_type": a.body_type, "height_band": a.height_band,
-            "skin_tone": a.skin_tone, "hair_style": a.hair_style, "hair_color": a.hair_color}
-
-
-@router.get("/avatar")
-def get_avatar(db: Db, user: User) -> dict:
-    a = db.get(m.Avatar, user.id) or m.Avatar(user_id=user.id)
-    return avatar_dict(a)
-
-
-@router.put("/avatar")
-def put_avatar(body: AvatarIn, db: Db, user: User) -> dict:
-    body = fix_avatar(body)
-    a = db.get(m.Avatar, user.id) or m.Avatar(user_id=user.id)
-    for k, v in body.model_dump().items():
-        setattr(a, k, v)
-    db.add(a)
-    db.commit()
-    return avatar_dict(a)
-
-
-class DescribeIn(BaseModel):
-    text: str = Field(min_length=2, max_length=400)
-    presentation: Literal["women", "men"] | None = None
-
-
-AVATAR_PROMPT = """Convert the shopper's own description of themselves into parameters for drawing a simple, faceless
-2D fashion mannequin. Use only what they say; keep defaults (average height, the first body type) when not stated.
-body_type must be one of: women -> {women}; men -> {men}. skin_tone is an index 0 (lightest) to 9 (deepest).
-hair_style: long, bob, bun, curly, short, buzz. hair_color: black, dark_brown, brown, auburn, blonde, grey.
-Description: "{text}"
-"""
-
-
-def describe_fallback(text: str, presentation: str | None) -> AvatarIn:
-    t = text.lower()
-    pres = presentation or ("men" if re.search(r"\b(man|male|guy|he|him|men)\b", t) else "women")
-    body = {"women": [("hourglass", r"hourglass|curvy"), ("pear", r"pear|wide hips|bottom.?heavy|hips"),
-                      ("apple", r"apple|tummy|midsection"), ("plus", r"plus|full.?figured|xl|curvy plus")],
-            "men": [("athletic", r"athletic|fit|muscular|gym"), ("broad", r"broad|stocky|big shoulders"),
-                    ("plus", r"plus|heavy|big|xl")]}[pres]
-    bt = next((b for b, pat in body if re.search(pat, t)), "slim")
-    height = "tall" if re.search(r"\btall\b|5'?\s?(9|10|11)|6'", t) else "petite" if re.search(r"petite|short|5'?\s?[0-2]\b|4'", t) else "average"
-    tones = [(r"very fair|porcelain", 0), (r"fair|light", 1), (r"wheatish|medium|olive", 4), (r"tan|dusky|brown", 6),
-             (r"dark|deep", 8)]
-    skin = next((v for pat, v in tones if re.search(pat, t)), 4)
-    hair = next((h for h in ("curly", "bob", "bun", "buzz", "short", "long") if h in t), "short" if pres == "men" else "long")
-    if re.search(r"bald|shaved", t):
-        hair = "buzz"
-    colors = [("blonde", r"blond"), ("auburn", r"auburn|red(dish)? hair|ginger"), ("grey", r"grey|gray|silver hair"),
-              ("brown", r"\bbrown hair|light brown"), ("dark_brown", r"dark brown")]
-    hc = next((c for c, pat in colors if re.search(pat, t)), "black")
-    return AvatarIn(presentation=pres, body_type=bt, height_band=height, skin_tone=skin, hair_style=hair, hair_color=hc)
-
-
-@router.post("/avatar/describe")
-def describe(body: DescribeIn, user: User) -> dict:
-    prompt = AVATAR_PROMPT.format(women=", ".join(BODY_TYPES["women"]), men=", ".join(BODY_TYPES["men"]), text=body.text)
-    res = gemini.generate_json("avatar", version="avatar-v1", parts=[prompt], schema=AvatarIn,
-                               fallback=lambda: describe_fallback(body.text, body.presentation), validate=fix_avatar,
-                               system="You only output drawing parameters. You never judge or comment on appearance.")
-    out = res.value
-    if body.presentation and out.presentation != body.presentation:
-        out.presentation = body.presentation
-        out = fix_avatar(out)
-    return {**out.model_dump(), "source": res.source}
-
-
-@router.get("/mannequin")
-def mannequin(presentation: str = "women", body_type: str = "slim", height_band: str = "average", skin_tone: int = 4,
-              hair_style: str = "long", hair_color: str = "black") -> dict:
-    presentation = presentation if presentation in BODY_TYPES else "women"
-    b = Body(presentation, body_type, height_band if height_band in HEIGHT_BANDS else "average")
-    body, hair_front = body_svg_parts(b, max(0, min(9, skin_tone)), hair_style if hair_style in HAIR_STYLES else "long",
-                                      hair_color if hair_color in HAIR_COLORS else "black")
-    return {"width": W, "height": H, "body": body, "hair_front": hair_front,
-            "transforms": {s: slot_transforms_for(b, s) for s in ALL_SUBCATEGORIES},
-            "drop_zones": drop_zones(b), "zone_order": DROP_ZONES}
-
-
-# ------------------------------------------------------------------ tray + looks
-
 @router.get("/folders/{folder_id}/tray")
 def tray(folder_id: int, db: Db, user: User) -> dict:
-    """What can go on the mannequin: each hanger's chosen product, else its best in-store match."""
-    from .services import matches_for_piece
-
+    """Pieces available for the board: each hanger's store product (chosen, else its best in-store match)."""
     own_folder(db, user, folder_id)
     items = []
     for i, h in enumerate(folder_hangers(db, user.id, folder_id), 1):
         entry = {"hanger_id": h.id, "hanger_index": i, "piece": {"name": h.piece.name, "crop_url": h.piece.crop_url,
                                                                 "subcategory": h.piece.subcategory}}
         if h.chosen_product_id:
-            entry["product"] = product_dict(db.get(m.Product, h.chosen_product_id))
-            entry["source"] = "chosen"
+            entry["product"], entry["source"] = product_dict(db.get(m.Product, h.chosen_product_id)), "chosen"
         else:
             res = matches_for_piece(db, user.id, h.piece)
             top = (res.for_you or res.also_view or [None])[0]
             entry["product"] = top.product if top else None
             entry["source"] = "top_match" if top else "not_in_store"
-        entry["slot"] = slot_for(entry["product"]["subcategory"] if entry["product"] else h.piece.subcategory)
         items.append(entry)
     return {"items": items}
 
 
 class Placement(BaseModel):
     product_id: str
-    slot: str | None = None
+    x: float | None = Field(default=None, ge=-50, le=150)   # % of board width (left edge)
+    y: float | None = Field(default=None, ge=-50, le=150)   # % of board height (top edge)
+    w: float | None = Field(default=None, ge=5, le=100)     # % of board width
+    z: int | None = Field(default=None, ge=0, le=999)       # layer order: higher is on top (worn outside)
 
 
 class LookIn(BaseModel):
@@ -154,14 +50,33 @@ class LookIn(BaseModel):
     reason: str = Field(default="", max_length=300)
 
 
-def look_dict(db, l: m.Look) -> dict:  # noqa: ANN001, E741
+def look_dict(db, lk: m.Look) -> dict:  # noqa: ANN001
     items = []
-    for pl in l.placements:
+    for pl in lk.placements:
         p = db.get(m.Product, pl["product_id"])
         if p:
-            items.append({"product": product_dict(p), "slot": pl.get("slot") or slot_for(p.subcategory)})
-    return {"id": l.id, "name": l.name, "reason": l.reason, "items": items, "created_at": l.created_at.isoformat(),
+            items.append({"product": product_dict(p), **{k: pl.get(k) for k in ("x", "y", "w", "z")}})
+    return {"id": lk.id, "name": lk.name, "reason": lk.reason, "items": items, "created_at": lk.created_at.isoformat(),
             "total_inr": sum(i["product"]["price_inr"] for i in items)}
+
+
+def normalise_placements(db, placements: list[Placement]) -> list[dict]:  # noqa: ANN001
+    products, seen = [], set()
+    for pl in placements:
+        p = db.get(m.Product, pl.product_id)
+        if not p:
+            raise HTTPException(404, f"Unknown product {pl.product_id}")
+        if p.id in seen:
+            raise HTTPException(422, f"{p.name} is on the board twice")
+        seen.add(p.id)
+        products.append(product_dict(p))
+    layout = {d["product_id"]: d for d in auto_layout(products)}  # defaults for anything not positioned yet
+    out = []
+    for pl in placements:
+        d = dict(layout[pl.product_id])
+        d.update({k: v for k, v in pl.model_dump().items() if v is not None})
+        out.append(d)
+    return out
 
 
 @router.get("/folders/{folder_id}/looks")
@@ -174,18 +89,10 @@ def list_looks(folder_id: int, db: Db, user: User) -> list[dict]:
 @router.post("/folders/{folder_id}/looks")
 def save_look(folder_id: int, body: LookIn, db: Db, user: User) -> dict:
     own_folder(db, user, folder_id)
-    placements, slots = [], set()
-    for pl in body.placements:
-        p = db.get(m.Product, pl.product_id)
-        if not p:
-            raise HTTPException(404, f"Unknown product {pl.product_id}")
-        slot = slot_for(p.subcategory)
-        if slot in slots:
-            raise HTTPException(422, f"Two pieces can't share the {slot} slot")
-        slots.add(slot)
-        placements.append({"product_id": p.id, "slot": slot})
-    look = m.Look(user_id=user.id, folder_id=folder_id, name=body.name.strip() or "My look", placements=placements,
-                  reason=body.reason)
+    if not body.placements:
+        raise HTTPException(422, "Put at least one piece on the board first")
+    look = m.Look(user_id=user.id, folder_id=folder_id, name=body.name.strip() or "My look",
+                  placements=normalise_placements(db, body.placements), reason=body.reason)
     db.add(look)
     db.commit()
     return look_dict(db, look)
@@ -246,5 +153,7 @@ def style_it(folder_id: int, body: StyleIn, db: Db, user: User) -> dict:
                                    _fallback_line(o, body.occasion, body.formality) for o in options]))
     for o, line in zip(options, res.value.lines):
         o["reason"] = line
+        o["layout"] = auto_layout([i["product"] for i in o["items"]])
     extras = complete_the_look(db, user.id, [i["product"] for i in options[0]["items"]], limit=3)
     return {"options": options, "source": res.source, "complete_the_look": extras}
+

@@ -122,3 +122,37 @@ def select_pieces(db: Session, user_id: str, inspo: m.InspoImage, selected_ids: 
         emit(db, "coverage_computed", user_id, covered=cov["covered"], covered_in_prefs=cov["covered_in_prefs"],
              total=cov["total"])
     return {"created": [h.id for h in created], "coverage": cov}
+
+
+def hang_piece(db: Session, user_id: str, inspo: m.InspoImage, piece: m.DetectedPiece, *, product_id: str | None,
+               size: str | None, folder_id: int | None) -> m.Hanger:
+    """The shopper liked a piece and picked a real store product for it: that product goes on the hanger.
+    With no product (the store has nothing close) the piece is kept as a wish, which still counts as demand."""
+    from .services import pick_size
+
+    prefs = user_prefs(db, user_id)
+    product = db.get(m.Product, product_id) if product_id else None
+    if product_id and not product:
+        raise ValueError("unknown product")
+    hanger = db.query(m.Hanger).filter(m.Hanger.user_id == user_id, m.Hanger.piece_id == piece.id).one_or_none()
+    first_time = piece.selected is not True
+    piece.selected = True
+    if first_time:
+        db.add(m.TasteSignal(user_id=user_id, piece_id=piece.id, weight=1.0, attributes={
+            "subcategory": piece.subcategory, "color": piece.color, "fabric": piece.fabric, "pattern": piece.pattern,
+            "silhouette": piece.silhouette, "style_tags": piece.style_tags, "occasion_tags": piece.occasion_tags}))
+        res = matches_for_piece(db, user_id, piece, prefs)
+        emit(db, "piece_selected", user_id, matched=int(res.covered), **piece_fields(piece))
+        if not res.covered:
+            emit(db, "hanger_no_match", user_id, **piece_fields(piece))
+    if hanger is None:
+        hanger = m.Hanger(user_id=user_id, folder_id=folder_id or inspo.folder_id, piece_id=piece.id)
+        db.add(hanger)
+    elif folder_id:
+        hanger.folder_id = folder_id
+    hanger.chosen_product_id = product.id if product else None
+    hanger.chosen_size = (size or pick_size(prefs, product)) if product else None
+    if product:
+        emit(db, "add_to_look", user_id, product_id=product.id, subcategory=product.subcategory, value_inr=product.price_inr)
+    db.flush()
+    return hanger

@@ -79,7 +79,7 @@ export default function Home() {
       <section className="hero">
         <div className="stack">
           <span className="eyebrow">Urban Thread · Walk-In Wardrobe</span>
-          <h1>{me ? `Hi ${me.name}. ` : ""}Save inspiration from anywhere.</h1>
+          <h1>{me ? `Hi ${me.name.split(" ")[0]}. ` : ""}Save inspiration from anywhere.</h1>
           <p className="muted" style={{ margin: 0 }}>
             Upload a screenshot of a reel, post or pin. We find the pieces in this store, in your size and budget, ready to buy.
           </p>

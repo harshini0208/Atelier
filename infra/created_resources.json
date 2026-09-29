@@ -103,6 +103,14 @@
       "cost": "< \u20b920",
       "note": "one image per deploy",
       "created": "2026-09-29"
+    },
+    {
+      "kind": "secret",
+      "name": "wiw-admin-token",
+      "stop": "gcloud secrets delete wiw-admin-token --project atelieros-cup26",
+      "cost": "< \u20b910",
+      "note": "admin token for /admin; read it with: gcloud secrets versions access latest --secret wiw-admin-token --project atelieros-cup26",
+      "created": "2026-09-29"
     }
   ]
 }
