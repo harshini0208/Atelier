@@ -2,19 +2,19 @@
  "task": "detect",
  "model": "gemini-3.8-flash",
  "summary": "List every apparel, footwear and accessory piece visibly worn in this outfit image.\n\nRules:\n- One entry per piece. A pair of shoes, earrings or similar counts as ONE piece.\n- If several people are in ",
- "created": "2026-09-29T21:39:30",
+ "created": "2026-09-29T22:41:28",
  "response": {
   "image_quality": "ok",
   "people_count": 1,
   "pieces": [
    {
     "subcategory": "blouse",
-    "name": "Maroon and gold patterned choli blouse",
+    "name": "Maroon and gold printed blouse",
     "color": "maroon",
     "box_2d": [
      228,
-     354,
-     371,
+     356,
+     369,
      642
     ],
     "confidence": 0.95,
@@ -29,23 +29,23 @@
     ],
     "pattern": "print",
     "secondary_color": "gold",
-    "silhouette": "slim",
-    "sleeve": "three_quarter",
+    "silhouette": "regular",
+    "sleeve": "short",
     "style_tags": [
      "ethnic"
     ]
    },
    {
     "subcategory": "lehenga",
-    "name": "Maroon and gold patterned lehenga skirt",
+    "name": "Maroon and gold printed lehenga skirt",
     "color": "maroon",
     "box_2d": [
-     390,
-     311,
-     745,
-     693
+     392,
+     313,
+     744,
+     690
     ],
-    "confidence": 0.95,
+    "confidence": 0.98,
     "fabric": "silk",
     "gender_fit": "women",
     "length": "maxi",
@@ -68,19 +68,20 @@
     "name": "Gold woven dupatta",
     "color": "gold",
     "box_2d": [
-     240,
-     406,
-     533,
+     233,
+     407,
+     535,
      595
     ],
-    "confidence": 0.9,
+    "confidence": 0.96,
     "fabric": "silk",
     "gender_fit": "women",
-    "length": "long",
+    "length": "none",
     "neckline": "none",
     "occasion_tags": [
      "wedding",
-     "festive"
+     "festive",
+     "party"
     ],
     "pattern": "print",
     "secondary_color": "maroon",
@@ -96,11 +97,11 @@
     "color": "gold",
     "box_2d": [
      442,
-     624,
-     479,
+     626,
+     480,
      737
     ],
-    "confidence": 0.9,
+    "confidence": 0.92,
     "fabric": "synthetic",
     "gender_fit": "women",
     "length": "none",
@@ -120,7 +121,7 @@
    },
    {
     "subcategory": "jewellery",
-    "name": "Gold statement earrings",
+    "name": "Gold statement jhumka earrings",
     "color": "gold",
     "box_2d": [
      178,
@@ -128,14 +129,15 @@
      224,
      558
     ],
-    "confidence": 0.85,
+    "confidence": 0.9,
     "fabric": "metal",
     "gender_fit": "women",
     "length": "none",
     "neckline": "none",
     "occasion_tags": [
      "wedding",
-     "festive"
+     "festive",
+     "party"
     ],
     "pattern": "solid",
     "secondary_color": null,
@@ -150,13 +152,13 @@
     "name": "Embellished gold juttis",
     "color": "gold",
     "box_2d": [
-     735,
-     400,
+     738,
+     402,
      786,
-     603
+     599
     ],
-    "confidence": 0.8,
-    "fabric": "silk",
+    "confidence": 0.88,
+    "fabric": "synthetic",
     "gender_fit": "women",
     "length": "none",
     "neckline": "none",

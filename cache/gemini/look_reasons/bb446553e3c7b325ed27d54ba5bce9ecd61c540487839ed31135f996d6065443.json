@@ -1,0 +1,13 @@
+{
+ "task": "look_reasons",
+ "model": "gemini-3.8-flash",
+ "summary": "Write one short line (max 16 words) for each look explaining why it works. Mention colour or fabric. Do not mention prices or invent items.\nLook 1: Ivory linen relaxed shirt (linen, ivory), Beige stra",
+ "created": "2026-09-29T22:42:45",
+ "response": {
+  "lines": [
+   "Breathable ivory linen pairs seamlessly with neutral beige cotton for an effortless warm-weather aesthetic.",
+   "The crisp sky-blue striped cotton adds fresh contrast against classic beige chinos and tan leather.",
+   "Airy ivory linen and casual tan leather sandals create a relaxed, beautifully coordinated summer look."
+  ]
+ }
+}

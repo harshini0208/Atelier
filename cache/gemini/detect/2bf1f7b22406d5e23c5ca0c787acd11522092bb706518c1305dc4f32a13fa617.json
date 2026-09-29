@@ -2,74 +2,82 @@
  "task": "detect",
  "model": "gemini-3.8-flash",
  "summary": "List every apparel, footwear and accessory piece visibly worn in this outfit image.\n\nRules:\n- One entry per piece. A pair of shoes, earrings or similar counts as ONE piece.\n- If several people are in ",
- "created": "2026-09-29T21:39:43",
+ "created": "2026-09-29T22:41:16",
  "response": {
   "image_quality": "ok",
   "people_count": 1,
   "pieces": [
    {
-    "subcategory": "hoodie",
-    "name": "Black hoodie",
-    "color": "black",
+    "subcategory": "linen_shirt",
+    "name": "Blue striped linen shirt",
+    "color": "sky_blue",
     "box_2d": [
-     213,
-     247,
-     427,
-     753
+     226,
+     321,
+     421,
+     679
     ],
     "confidence": 0.95,
-    "fabric": "cotton",
-    "gender_fit": "unisex",
+    "fabric": "linen",
+    "gender_fit": "women",
     "length": "regular",
-    "neckline": "hood",
+    "neckline": "collar",
     "occasion_tags": [
-     "casual"
+     "casual",
+     "vacation",
+     "brunch",
+     "beach"
     ],
-    "pattern": "solid",
-    "secondary_color": null,
+    "pattern": "stripes",
+    "secondary_color": "white",
     "silhouette": "relaxed",
     "sleeve": "long",
     "style_tags": [
-     "streetwear",
-     "minimal"
+     "resort",
+     "minimal",
+     "classic"
     ]
    },
    {
-    "subcategory": "cargo_pants",
-    "name": "Olive cargo pants",
-    "color": "olive",
+    "subcategory": "wide_leg_trousers",
+    "name": "Beige wide leg linen trousers",
+    "color": "beige",
     "box_2d": [
-     415,
-     404,
-     754,
-     594
+     414,
+     394,
+     762,
+     608
     ],
     "confidence": 0.95,
-    "fabric": "cotton",
-    "gender_fit": "unisex",
+    "fabric": "linen",
+    "gender_fit": "women",
     "length": "long",
     "neckline": "none",
     "occasion_tags": [
-     "casual"
+     "casual",
+     "vacation",
+     "brunch",
+     "beach"
     ],
     "pattern": "solid",
     "secondary_color": null,
-    "silhouette": "straight",
+    "silhouette": "wide",
     "sleeve": "none",
     "style_tags": [
-     "streetwear",
-     "minimal"
+     "resort",
+     "minimal",
+     "classic"
     ]
    },
    {
-    "subcategory": "sling_bag",
-    "name": "Black mini shoulder bag",
-    "color": "black",
+    "subcategory": "sandals",
+    "name": "Brown strap slide sandals",
+    "color": "brown",
     "box_2d": [
-     421,
-     617,
-     488,
-     712
+     727,
+     417,
+     784,
+     582
     ],
     "confidence": 0.9,
     "fabric": "leather",
@@ -77,25 +85,28 @@
     "length": "none",
     "neckline": "none",
     "occasion_tags": [
-     "casual"
+     "casual",
+     "vacation",
+     "beach"
     ],
     "pattern": "solid",
-    "secondary_color": null,
+    "secondary_color": "tan",
     "silhouette": "none",
     "sleeve": "none",
     "style_tags": [
+     "resort",
      "minimal"
     ]
    },
    {
-    "subcategory": "sneakers",
-    "name": "White sneakers",
-    "color": "white",
+    "subcategory": "sunglasses",
+    "name": "Brown tinted sunglasses",
+    "color": "brown",
     "box_2d": [
-     727,
-     419,
-     784,
-     580
+     170,
+     449,
+     191,
+     550
     ],
     "confidence": 0.9,
     "fabric": "synthetic",
@@ -103,14 +114,15 @@
     "length": "none",
     "neckline": "none",
     "occasion_tags": [
-     "casual"
+     "casual",
+     "vacation"
     ],
     "pattern": "solid",
     "secondary_color": null,
     "silhouette": "none",
     "sleeve": "none",
     "style_tags": [
-     "streetwear",
+     "resort",
      "minimal"
     ]
    }

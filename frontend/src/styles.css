@@ -277,10 +277,21 @@ button.chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-c
 }
 
 /* ---------------------------------------------------------------- wardrobe */
-.wardrobe-layout { display: grid; gap: 20px; }
-@media (min-width: 1000px) { .wardrobe-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
+.wardrobe-layout { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); grid-template-areas: "tray" "stage" "side"; }
+.wardrobe-layout > * { min-width: 0; }
+.wardrobe-tray { grid-area: tray; }
+.wardrobe-stage { grid-area: stage; }
+.wardrobe-side { grid-area: side; }
+/* phones: hangers are a swipeable strip ABOVE the mannequin, so you drag down onto the body */
+.wardrobe-tray .tray-grid { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scroll-snap-type: x mandatory; }
+.wardrobe-tray .tray-card { flex: 0 0 230px; scroll-snap-align: start; }
 .tray-grid { display: grid; gap: 8px; grid-template-columns: 1fr; }
 @media (min-width: 560px) { .tray-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) {
+  .wardrobe-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "stage tray" "stage side"; align-items: start; }
+  .wardrobe-tray .tray-grid { display: grid; grid-template-columns: 1fr 1fr; overflow: visible; }
+  .wardrobe-tray .tray-card { flex: none; }
+}
 
 /* ---------------------------------------------------------------- bars (single series, magnitude) */
 .bars { display: flex; flex-direction: column; gap: 8px; }

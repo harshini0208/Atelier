@@ -16,7 +16,7 @@ from .settings import ROOT
 from .vocab import (ALL_SUBCATEGORIES, COLORS, FABRICS, LENGTHS, NECKLINES, OCCASIONS, PATTERNS, SILHOUETTES,
                     SLEEVES, STYLE_TAGS, SUB_TO_CAT)
 
-PROMPT_VERSION = "detect-v3"
+PROMPT_VERSION = "detect-v4"
 LOW_CONFIDENCE = 0.45
 
 SYSTEM = (
@@ -30,8 +30,9 @@ Rules:
 - One entry per piece. A pair of shoes, earrings or similar counts as ONE piece.
 - If several people are in the image, describe only the most prominent outfit (largest, most central).
 - Include partly visible pieces, with lower confidence.
-- Use only the allowed enum values. Pick the closest subcategory (e.g. flowy wide trousers -> wide_leg_trousers,
-  a flared skirt with a blouse worn for a wedding -> lehenga). 'none' is allowed for length/neckline/sleeve/silhouette
+- Use only the allowed enum values. Pick the closest subcategory. Trousers: wide_leg_trousers only when the legs are
+  clearly wider at the hem than at the thigh and hang loose; straight, slim or tapered smart trousers -> chinos;
+  denim -> jeans. A flared skirt with a blouse worn for a wedding -> lehenga. 'none' is allowed for length/neckline/sleeve/silhouette
   when they do not apply (shoes, bags, jewellery).
 - fabric is your best guess from texture and drape.
 - name: a short plain shopping name, e.g. "Ivory linen shirt". No brand names.

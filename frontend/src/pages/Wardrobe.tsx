@@ -1,4 +1,4 @@
-import { DndContext, DragEndEvent, KeyboardSensor, PointerSensor, TouchSensor, useDraggable, useSensor, useSensors } from "@dnd-kit/core";
+import { DndContext, DragEndEvent, DragOverlay, DragStartEvent, KeyboardSensor, PointerSensor, TouchSensor, useDraggable, useSensor, useSensors } from "@dnd-kit/core";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -17,11 +17,10 @@ type StyleResp = { options: StyleOption[]; complete_the_look: { product: Product
 
 function TrayCard({ item, onPut }: { item: TrayItem; onPut: (p: Product) => void }) {
   const p = item.product;
-  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id: `tray-${item.hanger_id}`, disabled: !p, data: { product: p } });
-  const style = transform ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`, zIndex: 50 } : undefined;
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({ id: `tray-${item.hanger_id}`, disabled: !p, data: { product: p } });
   return (
-    <div ref={setNodeRef} className="card" style={{ ...style, padding: 8, display: "flex", gap: 8, alignItems: "center", opacity: isDragging ? 0.85 : 1,
-      touchAction: "none", boxShadow: isDragging ? "0 12px 30px rgba(0,0,0,.2)" : undefined }}>
+    <div ref={setNodeRef} className="card tray-card" style={{ padding: 8, display: "flex", gap: 8, alignItems: "center", opacity: isDragging ? 0.4 : 1,
+      touchAction: "none" }}>
       <div {...listeners} {...attributes} aria-label={p ? `Drag ${p.name} onto the mannequin` : `${item.piece.name}: not in store`}
         style={{ cursor: p ? "grab" : "not-allowed", display: "flex", gap: 8, alignItems: "center", flex: 1, minWidth: 0 }}>
         <div style={{ width: 58, height: 58, borderRadius: 10, background: "#f4efe8", flex: "none", display: "grid", placeItems: "center" }}>
@@ -72,6 +71,7 @@ export default function Wardrobe() {
   const [placed, setPlaced] = useState<Record<string, Product>>({});
   const [history, setHistory] = useState<Record<string, Product>[]>([]);
   const [dragging, setDragging] = useState(false);
+  const [active, setActive] = useState<Product | null>(null);
   const [editAvatar, setEditAvatar] = useState(false);
   const [product, setProduct] = useState<string | null>(null);
   const [needSizes, setNeedSizes] = useState<{ product: Product; reason: string }[] | null>(null);
@@ -97,8 +97,10 @@ export default function Wardrobe() {
     commit(next);
   };
   const takeOff = (p: Product) => { const next = { ...placed }; delete next[p.slot]; commit(next); };
+  const onDragStart = (e: DragStartEvent) => { setDragging(true); setActive((e.active.data.current?.product as Product) ?? null); };
   const onDragEnd = (e: DragEndEvent) => {
     setDragging(false);
+    setActive(null);
     const p = e.active.data.current?.product as Product | undefined;
     if (!p || !e.over) return;
     putOn(p);
@@ -136,9 +138,15 @@ export default function Wardrobe() {
         <div><span className="eyebrow">Walk-in wardrobe</span><h1>{folder.data.name}</h1></div>
         <button className="btn btn-sm" onClick={() => setEditAvatar(true)}><Icon name="user" size={16} /> Edit mannequin</button>
       </div>
-      <DndContext sensors={sensors} onDragStart={() => setDragging(true)} onDragCancel={() => setDragging(false)} onDragEnd={onDragEnd}>
+      <DndContext sensors={sensors} onDragStart={onDragStart} onDragCancel={() => { setDragging(false); setActive(null); }} onDragEnd={onDragEnd}>
         <div className="wardrobe-layout section" style={{ marginTop: 16 }}>
-          <div className="stack">
+          <section className="stack wardrobe-tray" style={{ gap: 8 }}>
+            <div className="row-between"><h3>Your hangers</h3><span className="small muted">Drag onto the mannequin, or tap “Put on”</span></div>
+            {tray.isLoading && <Loading />}
+            {tray.data?.items.length === 0 && <div className="empty"><p className="muted" style={{ margin: 0 }}>No hangers yet. Save pieces from an inspo first.</p></div>}
+            <div className="tray-grid">{tray.data?.items.map((it) => <TrayCard key={it.hanger_id} item={it} onPut={putOn} />)}</div>
+          </section>
+          <div className="stack wardrobe-stage">
             <MannequinStage geo={geo.data} placed={pieces} dragging={dragging} onRemove={takeOff} />
             <div className="row" style={{ justifyContent: "center", gap: 6 }}>
               <button className="btn btn-sm" disabled={!history.length} onClick={() => { setPlaced(history[history.length - 1]); setHistory((h) => h.slice(0, -1)); }}>
@@ -158,13 +166,7 @@ export default function Wardrobe() {
             )}
           </div>
 
-          <div className="stack">
-            <section className="stack" style={{ gap: 8 }}>
-              <div className="row-between"><h3>Your hangers</h3><span className="small muted">Drag onto the mannequin, or tap “Put on”</span></div>
-              {tray.isLoading && <Loading />}
-              {tray.data?.items.length === 0 && <div className="empty"><p className="muted" style={{ margin: 0 }}>No hangers yet. Save pieces from an inspo first.</p></div>}
-              <div className="tray-grid">{tray.data?.items.map((it) => <TrayCard key={it.hanger_id} item={it} onPut={putOn} />)}</div>
-            </section>
+          <div className="stack wardrobe-side">
 
             <section className="card pad stack">
               <div className="row-between">
@@ -228,6 +230,13 @@ export default function Wardrobe() {
             )}
           </div>
         </div>
+        <DragOverlay dropAnimation={null}>
+          {active && (
+            <div className="card" style={{ padding: 6, width: 96, boxShadow: "0 14px 34px rgba(0,0,0,.25)", cursor: "grabbing" }}>
+              <img src={active.image_url} alt="" style={{ width: 84, height: 84, objectFit: "contain" }} />
+            </div>
+          )}
+        </DragOverlay>
       </DndContext>
       {editAvatar && <AvatarSetup initial={avatar.data} onClose={() => setEditAvatar(false)} />}
       {product && <ProductModal productId={product} onClose={() => setProduct(null)} />}

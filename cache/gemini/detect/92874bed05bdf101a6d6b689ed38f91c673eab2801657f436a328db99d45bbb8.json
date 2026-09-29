@@ -2,123 +2,152 @@
  "task": "detect",
  "model": "gemini-3.8-flash",
  "summary": "List every apparel, footwear and accessory piece visibly worn in this outfit image.\n\nRules:\n- One entry per piece. A pair of shoes, earrings or similar counts as ONE piece.\n- If several people are in ",
- "created": "2026-09-29T21:39:17",
+ "created": "2026-09-29T22:40:53",
  "response": {
   "image_quality": "ok",
   "people_count": 1,
   "pieces": [
    {
     "subcategory": "linen_shirt",
-    "name": "Blue and white striped linen shirt",
-    "color": "sky_blue",
+    "name": "White linen button-down shirt",
+    "color": "white",
     "box_2d": [
-     227,
-     321,
-     418,
-     679
+     226,
+     308,
+     420,
+     685
     ],
     "confidence": 0.95,
     "fabric": "linen",
-    "gender_fit": "unisex",
+    "gender_fit": "women",
     "length": "regular",
     "neckline": "collar",
     "occasion_tags": [
      "casual",
-     "vacation",
+     "work",
      "brunch",
-     "beach"
-    ],
-    "pattern": "stripes",
-    "secondary_color": "white",
-    "silhouette": "relaxed",
-    "sleeve": "long",
-    "style_tags": [
-     "resort",
-     "minimal",
-     "classic",
-     "old_money"
-    ]
-   },
-   {
-    "subcategory": "wide_leg_trousers",
-    "name": "Beige wide leg linen trousers",
-    "color": "beige",
-    "box_2d": [
-     415,
-     393,
-     762,
-     608
-    ],
-    "confidence": 0.95,
-    "fabric": "linen",
-    "gender_fit": "unisex",
-    "length": "long",
-    "neckline": "none",
-    "occasion_tags": [
-     "casual",
-     "vacation",
-     "travel",
-     "brunch"
+     "vacation"
     ],
     "pattern": "solid",
     "secondary_color": null,
-    "silhouette": "wide",
-    "sleeve": "none",
+    "silhouette": "regular",
+    "sleeve": "long",
     "style_tags": [
-     "minimal",
-     "resort",
      "old_money",
+     "minimal",
      "classic"
     ]
    },
    {
-    "subcategory": "sandals",
-    "name": "Brown slide sandals",
-    "color": "brown",
+    "subcategory": "chinos",
+    "name": "Beige tailored straight trousers",
+    "color": "beige",
     "box_2d": [
-     727,
-     418,
-     783,
-     582
+     413,
+     401,
+     730,
+     598
     ],
-    "confidence": 0.9,
-    "fabric": "leather",
-    "gender_fit": "unisex",
+    "confidence": 0.95,
+    "fabric": "linen",
+    "gender_fit": "women",
+    "length": "ankle",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual",
+     "work",
+     "brunch",
+     "vacation"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "straight",
+    "sleeve": "none",
+    "style_tags": [
+     "old_money",
+     "minimal",
+     "classic"
+    ]
+   },
+   {
+    "subcategory": "loafers",
+    "name": "Tan suede loafers",
+    "color": "tan",
+    "box_2d": [
+     725,
+     407,
+     784,
+     592
+    ],
+    "confidence": 0.95,
+    "fabric": "suede",
+    "gender_fit": "women",
     "length": "none",
     "neckline": "none",
     "occasion_tags": [
      "casual",
-     "vacation",
-     "beach"
+     "work",
+     "brunch"
     ],
     "pattern": "solid",
     "secondary_color": null,
     "silhouette": "none",
     "sleeve": "none",
     "style_tags": [
-     "minimal",
-     "resort"
+     "old_money",
+     "classic",
+     "preppy"
     ]
    },
    {
-    "subcategory": "sunglasses",
-    "name": "Brown round sunglasses",
-    "color": "brown",
+    "subcategory": "tote",
+    "name": "Tan top-handle bag",
+    "color": "tan",
     "box_2d": [
-     170,
-     447,
-     189,
-     550
+     421,
+     617,
+     492,
+     723
     ],
-    "confidence": 0.85,
-    "fabric": "synthetic",
-    "gender_fit": "unisex",
+    "confidence": 0.9,
+    "fabric": "leather",
+    "gender_fit": "women",
     "length": "none",
     "neckline": "none",
     "occasion_tags": [
      "casual",
-     "vacation",
-     "beach"
+     "work",
+     "brunch"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "old_money",
+     "minimal",
+     "classic"
+    ]
+   },
+   {
+    "subcategory": "watch",
+    "name": "Gold strap watch",
+    "color": "gold",
+    "box_2d": [
+     407,
+     335,
+     439,
+     362
+    ],
+    "confidence": 0.85,
+    "fabric": "metal",
+    "gender_fit": "women",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual",
+     "work",
+     "brunch"
     ],
     "pattern": "solid",
     "secondary_color": null,
@@ -126,7 +155,7 @@
     "sleeve": "none",
     "style_tags": [
      "classic",
-     "resort"
+     "old_money"
     ]
    }
   ]

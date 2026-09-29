@@ -1,0 +1,15 @@
+{
+ "task": "retailer_memo",
+ "model": "gemini-3.8-flash",
+ "summary": "You are writing a short memo for a fashion merchandiser at Urban Thread (a fictional store). Use ONLY the numbers below; quote counts exactly, do not invent percentages or data. Headline (max 14 words",
+ "created": "2026-09-29T22:43:48",
+ "response": {
+  "headline": "Urban Thread Memo: 67 Shoppers Purchased While 144 Wide-Leg Trouser Saves Remained Unmatched",
+  "bullets": [
+   "Across the funnel, 244 shoppers saved 1361 pieces, 127 added items to cart, and 67 shoppers purchased across 84 events.",
+   "Wide-leg trousers represent the largest inventory gap with 144 saves and 0 matches, including 86 saves for sand linen and 35 saves for white linen.",
+   "Catalog coverage reached 1055 out of 1361 pieces, resulting in 183 fully covered looks out of 423 total looks."
+  ],
+  "action": "Procure sand linen wide-leg trousers to fulfill 86 unmatched saves and white linen wide-leg trousers to fulfill 35 saves."
+ }
+}

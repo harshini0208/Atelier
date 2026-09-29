@@ -305,6 +305,18 @@ def grant_roles() -> None:
            + "; bucket objectAdmin; secret accessor; dataset WRITER")
 
 
+def record_run(url: str = "") -> None:
+    record("cloud run service", CFG["run_service"],
+           f"gcloud run services delete {CFG['run_service']} --region {REGION} --project {P}",
+           "~ ₹0-100 (min instances 0)", note=url)
+    record("container images", f"{REGION}-docker.pkg.dev/{P}/{CFG['artifact_repo']}/app",
+           f"gcloud artifacts docker images delete {REGION}-docker.pkg.dev/{P}/{CFG['artifact_repo']}/app --delete-tags",
+           "< ₹20", note="one image per deploy")
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "status"
-    {"status": status, "setup": setup}[cmd]()
+    if cmd == "record-run":
+        record_run(sys.argv[2] if len(sys.argv) > 2 else "")
+    else:
+        {"status": status, "setup": setup}[cmd]()

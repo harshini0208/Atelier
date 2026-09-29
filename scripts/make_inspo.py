@@ -42,7 +42,7 @@ LOOKS = {
         "pieces": [
             piece("linen_shirt", "ivory", "Ivory linen shirt", fabric="linen", fit="relaxed", neckline="collar", sleeve="long",
                   styles=("old_money", "minimal"), occasions=("brunch", "vacation")),
-            piece("chinos", "beige", "Beige tapered chinos", fit="tapered", length="ankle",
+            piece("chinos", "beige", "Beige slim chinos", fit="slim", length="ankle",
                   styles=("old_money", "classic"), occasions=("work", "brunch")),
             piece("loafers", "tan", "Tan leather loafers", fabric="leather", styles=("old_money", "classic"), occasions=("work", "brunch")),
             piece("tote", "tan", "Tan canvas tote", fabric="canvas", styles=("old_money", "minimal"), occasions=("vacation", "brunch")),

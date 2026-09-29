@@ -1,0 +1,120 @@
+{
+ "task": "detect",
+ "model": "gemini-3.8-flash",
+ "summary": "List every apparel, footwear and accessory piece visibly worn in this outfit image.\n\nRules:\n- One entry per piece. A pair of shoes, earrings or similar counts as ONE piece.\n- If several people are in ",
+ "created": "2026-09-29T22:41:35",
+ "response": {
+  "image_quality": "ok",
+  "people_count": 1,
+  "pieces": [
+   {
+    "subcategory": "hoodie",
+    "name": "Black oversized hoodie",
+    "color": "black",
+    "box_2d": [
+     215,
+     248,
+     425,
+     750
+    ],
+    "confidence": 0.98,
+    "fabric": "cotton",
+    "gender_fit": "unisex",
+    "length": "regular",
+    "neckline": "hood",
+    "occasion_tags": [
+     "casual"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "oversized",
+    "sleeve": "long",
+    "style_tags": [
+     "streetwear",
+     "minimal"
+    ]
+   },
+   {
+    "subcategory": "cargo_pants",
+    "name": "Olive green cargo pants",
+    "color": "olive",
+    "box_2d": [
+     415,
+     404,
+     762,
+     597
+    ],
+    "confidence": 0.98,
+    "fabric": "cotton",
+    "gender_fit": "unisex",
+    "length": "regular",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "straight",
+    "sleeve": "none",
+    "style_tags": [
+     "streetwear",
+     "minimal"
+    ]
+   },
+   {
+    "subcategory": "sling_bag",
+    "name": "Black mini shoulder bag",
+    "color": "black",
+    "box_2d": [
+     419,
+     616,
+     488,
+     712
+    ],
+    "confidence": 0.92,
+    "fabric": "leather",
+    "gender_fit": "unisex",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "minimal",
+     "streetwear"
+    ]
+   },
+   {
+    "subcategory": "sneakers",
+    "name": "White low-top sneakers",
+    "color": "white",
+    "box_2d": [
+     727,
+     417,
+     786,
+     584
+    ],
+    "confidence": 0.95,
+    "fabric": "leather",
+    "gender_fit": "unisex",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "minimal",
+     "streetwear"
+    ]
+   }
+  ]
+ }
+}

@@ -141,6 +141,9 @@ export default function ChatPanel() {
     },
   });
   useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }); }, [q.data, send.isPending, open]);
+  // on phones the chat is a full-screen sheet: close it when an action navigates (e.g. "Try on")
+  const { pathname } = useLocation();
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   const submit = (e?: FormEvent, value?: string) => {
     e?.preventDefault();

@@ -1,6 +1,6 @@
 {
  "old_money_summer": {
-  "sha256": "3134cc288194b9e86edc515b8c1cced62693f85cde1a7950fda52d9d61434da2",
+  "sha256": "be24f6ffbadf40791f0ecb957530b62eb424a26f6f47dbf282605ec6c9cfc862",
   "file": "old_money_summer.png",
   "pieces": [
    {
@@ -35,12 +35,12 @@
    {
     "subcategory": "chinos",
     "category": "bottoms",
-    "name": "Beige tapered chinos",
+    "name": "Beige slim chinos",
     "color": "beige",
     "secondary_color": null,
     "pattern": "solid",
     "fabric": "cotton",
-    "silhouette": "tapered",
+    "silhouette": "slim",
     "length": "ankle",
     "neckline": "none",
     "sleeve": "none",
