@@ -122,6 +122,10 @@ def main() -> None:
         page.get_by_role("button", name="Add to cart").click()
         expect(page.get_by_text("Added to cart")).to_be_visible()
         shot(page, "11-added-to-cart")
+        # leave no trace: the smoke shopper deletes their own profile and data
+        status = page.evaluate("""async () => (await fetch('/api/me', {method: 'DELETE',
+            headers: {'X-User-Id': localStorage.getItem('wiw.user')}})).status""")
+        assert status == 200, f"cleanup failed: {status}"
         browser.close()
     if errors:
         print("browser errors:\n  " + "\n  ".join(errors))
