@@ -116,7 +116,7 @@ flat-lay. `make reset` and `make load-cloud` re-apply whatever photos are in the
 - `make reset`: locally, deletes every profile, folder, inspo upload, hanger, cart, order, chat and event, then
   reloads the catalog and your photos.
 - `make load-cloud`: does the same for Cloud SQL, Cloud Storage (deletes shopper uploads), BigQuery (recreates an empty
-  events table) and Vertex AI Search. It takes a minute or two.
+  events table) and Vertex AI Search. It takes about 10 minutes from a laptop (rows are inserted over the network).
 
 The demo personas and synthetic shopper history still exist, but only as test fixtures
 (`seed_all(personas=True, with_history=True)`); the app never loads them.

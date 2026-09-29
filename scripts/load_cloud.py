@@ -20,7 +20,7 @@ os.environ.setdefault("GEMINI_MODE", "replay")
 
 
 def main() -> None:
-        import subprocess
+    import subprocess
 
     from sqlalchemy import select
 
