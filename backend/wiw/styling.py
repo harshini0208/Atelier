@@ -91,8 +91,10 @@ class Brief:
                 sc -= 25
             if p["season"] == "winter" or p["fabric"] == "wool" or p["category"] == "outerwear":
                 sc += 10
-            if p["subcategory"] in ("coat", "bomber", "boots") or p["fabric"] == "wool":
-                sc += 8      # a real coat beats a cardigan in the cold
+            if p["subcategory"] in ("coat", "bomber", "boots"):
+                sc += 12     # a real coat beats a cardigan in the cold
+            elif p["subcategory"] in ("cardigan", "shrug"):
+                sc -= 6
         elif self.season == "summer":
             if p["season"] == "winter" or p["fabric"] == "wool" or p["subcategory"] in ("coat", "boots"):
                 sc -= 20
