@@ -1,0 +1,34 @@
+{
+ "task": "catalog_tag",
+ "model": "gemini-3.8-flash",
+ "summary": "You are cataloguing product photos for a women's high-street fashion store.\nDescribe the single main product in this image using only the allowed values.\n- usable=false if it is a collage, a lifestyle",
+ "created": "2026-10-01T14:09:44",
+ "response": {
+  "usable": true,
+  "visible_logo_or_text": false,
+  "subcategory": "blouse",
+  "name": "Cream satin pointed collar blouse",
+  "primary_color": "cream",
+  "style_tags": [
+   "formal",
+   "classic",
+   "old_money"
+  ],
+  "occasion_tags": [
+   "work",
+   "formal",
+   "party",
+   "date"
+  ],
+  "fabric": "polyester",
+  "length": "regular",
+  "neckline": "collar",
+  "pattern": "solid",
+  "season": "all",
+  "secondary_color": null,
+  "shows_person_face": true,
+  "silhouette": "regular",
+  "sleeve": "long",
+  "womens_item": true
+ }
+}

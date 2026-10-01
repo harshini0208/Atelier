@@ -1,0 +1,10 @@
+.venv
+**/node_modules
+frontend/dist
+local
+.git
+**/__pycache__
+.pytest_cache
+*.pyc
+.env
+data/product_images

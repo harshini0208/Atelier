@@ -1,0 +1,131 @@
+{
+ "task": "detect",
+ "model": "gemini-3.8-flash",
+ "summary": "List every apparel, footwear and accessory piece visibly worn in this outfit image.\n\nRules:\n- One entry per piece. A pair of shoes, earrings or similar counts as ONE piece.\n- If several people are in ",
+ "created": "2026-09-29T22:41:16",
+ "response": {
+  "image_quality": "ok",
+  "people_count": 1,
+  "pieces": [
+   {
+    "subcategory": "linen_shirt",
+    "name": "Blue striped linen shirt",
+    "color": "sky_blue",
+    "box_2d": [
+     226,
+     321,
+     421,
+     679
+    ],
+    "confidence": 0.95,
+    "fabric": "linen",
+    "gender_fit": "women",
+    "length": "regular",
+    "neckline": "collar",
+    "occasion_tags": [
+     "casual",
+     "vacation",
+     "brunch",
+     "beach"
+    ],
+    "pattern": "stripes",
+    "secondary_color": "white",
+    "silhouette": "relaxed",
+    "sleeve": "long",
+    "style_tags": [
+     "resort",
+     "minimal",
+     "classic"
+    ]
+   },
+   {
+    "subcategory": "wide_leg_trousers",
+    "name": "Beige wide leg linen trousers",
+    "color": "beige",
+    "box_2d": [
+     414,
+     394,
+     762,
+     608
+    ],
+    "confidence": 0.95,
+    "fabric": "linen",
+    "gender_fit": "women",
+    "length": "long",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual",
+     "vacation",
+     "brunch",
+     "beach"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "wide",
+    "sleeve": "none",
+    "style_tags": [
+     "resort",
+     "minimal",
+     "classic"
+    ]
+   },
+   {
+    "subcategory": "sandals",
+    "name": "Brown strap slide sandals",
+    "color": "brown",
+    "box_2d": [
+     727,
+     417,
+     784,
+     582
+    ],
+    "confidence": 0.9,
+    "fabric": "leather",
+    "gender_fit": "unisex",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual",
+     "vacation",
+     "beach"
+    ],
+    "pattern": "solid",
+    "secondary_color": "tan",
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "resort",
+     "minimal"
+    ]
+   },
+   {
+    "subcategory": "sunglasses",
+    "name": "Brown tinted sunglasses",
+    "color": "brown",
+    "box_2d": [
+     170,
+     449,
+     191,
+     550
+    ],
+    "confidence": 0.9,
+    "fabric": "synthetic",
+    "gender_fit": "unisex",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "casual",
+     "vacation"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "resort",
+     "minimal"
+    ]
+   }
+  ]
+ }
+}

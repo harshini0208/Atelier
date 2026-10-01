@@ -1,0 +1,32 @@
+{
+ "task": "catalog_tag",
+ "model": "gemini-3.8-flash",
+ "summary": "You are cataloguing product photos for a women's high-street fashion store.\nDescribe the single main product in this image using only the allowed values.\n- usable=false if it is a collage, a lifestyle",
+ "created": "2026-10-01T14:13:37",
+ "response": {
+  "usable": true,
+  "visible_logo_or_text": false,
+  "subcategory": "denim_jacket",
+  "name": "Distressed cropped denim jacket",
+  "primary_color": "denim_blue",
+  "style_tags": [
+   "streetwear",
+   "edgy",
+   "y2k"
+  ],
+  "occasion_tags": [
+   "casual",
+   "party"
+  ],
+  "fabric": "denim",
+  "length": "cropped",
+  "neckline": "collar",
+  "pattern": "solid",
+  "season": "all",
+  "secondary_color": null,
+  "shows_person_face": true,
+  "silhouette": "regular",
+  "sleeve": "long",
+  "womens_item": true
+ }
+}

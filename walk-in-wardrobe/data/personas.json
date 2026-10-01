@@ -1,0 +1,510 @@
+{
+ "personas": [
+  {
+   "id": "aanya",
+   "name": "Aanya",
+   "city": "Mumbai",
+   "tagline": "Quiet luxury on a high-street budget",
+   "preferences": {
+    "budgets": {
+     "tops": [
+      500,
+      2500
+     ],
+     "bottoms": [
+      800,
+      2500
+     ],
+     "one_piece": [
+      1500,
+      4000
+     ],
+     "outerwear": [
+      2000,
+      4500
+     ],
+     "footwear": [
+      1000,
+      4000
+     ],
+     "accessories": [
+      300,
+      2500
+     ]
+    },
+    "sizes": {
+     "tops": "M",
+     "bottoms": "28",
+     "footwear": "5"
+    },
+    "fit": "relaxed",
+    "preferred_materials": [
+     "linen",
+     "cotton",
+     "silk"
+    ],
+    "avoid_materials": [
+     "polyester"
+    ],
+    "avoid_colors": [
+     "orange"
+    ],
+    "occasions": [
+     "work",
+     "brunch",
+     "vacation"
+    ],
+    "gender_fit": "women"
+   },
+   "avatar": {
+    "presentation": "women",
+    "body_type": "hourglass",
+    "height_band": "average",
+    "skin_tone": 4,
+    "hair_style": "long",
+    "hair_color": "black"
+   },
+   "folders": [
+    {
+     "name": "Festive edit",
+     "description": "Diwali parties and a cousin's sangeet",
+     "inspo": [
+      "festive_ethnic"
+     ]
+    }
+   ],
+   "orders": [
+    [
+     "White crew tee",
+     "M"
+    ],
+    [
+     "Mid-blue straight jeans",
+     "28"
+    ],
+    [
+     "Tan crossbody bag",
+     "Free"
+    ],
+    [
+     "Black ballet flats",
+     "5"
+    ]
+   ]
+  },
+  {
+   "id": "kabir",
+   "name": "Kabir",
+   "city": "Delhi",
+   "tagline": "Oversized everything",
+   "preferences": {
+    "budgets": {
+     "tops": [
+      600,
+      2500
+     ],
+     "bottoms": [
+      1000,
+      3000
+     ],
+     "one_piece": [
+      2000,
+      4000
+     ],
+     "outerwear": [
+      2500,
+      5000
+     ],
+     "footwear": [
+      1500,
+      4500
+     ],
+     "accessories": [
+      500,
+      3000
+     ]
+    },
+    "sizes": {
+     "tops": "L",
+     "bottoms": "32",
+     "footwear": "9"
+    },
+    "fit": "oversized",
+    "preferred_materials": [
+     "cotton",
+     "denim"
+    ],
+    "avoid_materials": [],
+    "avoid_colors": [
+     "pink",
+     "lavender"
+    ],
+    "occasions": [
+     "casual",
+     "travel"
+    ],
+    "gender_fit": "men"
+   },
+   "avatar": {
+    "presentation": "men",
+    "body_type": "athletic",
+    "height_band": "tall",
+    "skin_tone": 5,
+    "hair_style": "short",
+    "hair_color": "black"
+   },
+   "folders": [
+    {
+     "name": "Streetwear",
+     "description": "Weekend fits",
+     "inspo": [
+      "street_men"
+     ]
+    }
+   ],
+   "orders": [
+    [
+     "Black oversized graphic tee",
+     "L"
+    ],
+    [
+     "White leather sneakers",
+     "9"
+    ]
+   ]
+  },
+  {
+   "id": "meera",
+   "name": "Meera",
+   "city": "Bengaluru",
+   "tagline": "Wedding-season regular",
+   "preferences": {
+    "budgets": {
+     "tops": [
+      500,
+      2500
+     ],
+     "bottoms": [
+      800,
+      2500
+     ],
+     "one_piece": [
+      2500,
+      6000
+     ],
+     "outerwear": [
+      2000,
+      4500
+     ],
+     "footwear": [
+      1000,
+      4000
+     ],
+     "accessories": [
+      300,
+      2500
+     ]
+    },
+    "sizes": {
+     "tops": "M",
+     "bottoms": "30",
+     "footwear": "6"
+    },
+    "fit": "regular",
+    "preferred_materials": [
+     "silk",
+     "cotton"
+    ],
+    "avoid_materials": [
+     "polyester"
+    ],
+    "avoid_colors": [],
+    "occasions": [
+     "festive",
+     "wedding"
+    ],
+    "gender_fit": "women"
+   },
+   "avatar": {
+    "presentation": "women",
+    "body_type": "pear",
+    "height_band": "petite",
+    "skin_tone": 6,
+    "hair_style": "bun",
+    "hair_color": "black"
+   },
+   "folders": [
+    {
+     "name": "Sister's wedding",
+     "description": "Mehendi, sangeet and the reception",
+     "inspo": [
+      "festive_ethnic"
+     ]
+    }
+   ],
+   "orders": [
+    [
+     "Gold-tone jhumkas",
+     "Free"
+    ]
+   ]
+  },
+  {
+   "id": "rohan",
+   "name": "Rohan",
+   "city": "Pune",
+   "tagline": "Boardroom to brunch",
+   "preferences": {
+    "budgets": {
+     "tops": [
+      600,
+      2500
+     ],
+     "bottoms": [
+      1000,
+      3000
+     ],
+     "one_piece": [
+      2000,
+      4000
+     ],
+     "outerwear": [
+      2500,
+      5000
+     ],
+     "footwear": [
+      1500,
+      4500
+     ],
+     "accessories": [
+      500,
+      3000
+     ]
+    },
+    "sizes": {
+     "tops": "M",
+     "bottoms": "32",
+     "footwear": "8"
+    },
+    "fit": "slim",
+    "preferred_materials": [
+     "cotton",
+     "wool",
+     "linen"
+    ],
+    "avoid_materials": [
+     "polyester"
+    ],
+    "avoid_colors": [],
+    "occasions": [
+     "work",
+     "formal"
+    ],
+    "gender_fit": "men"
+   },
+   "avatar": {
+    "presentation": "men",
+    "body_type": "slim",
+    "height_band": "average",
+    "skin_tone": 3,
+    "hair_style": "short",
+    "hair_color": "dark_brown"
+   },
+   "folders": [
+    {
+     "name": "Office",
+     "description": "Monday to Friday",
+     "inspo": []
+    }
+   ],
+   "orders": [
+    [
+     "White oxford shirt",
+     "M"
+    ],
+    [
+     "Navy chinos",
+     "32"
+    ],
+    [
+     "Black horsebit loafers",
+     "8"
+    ]
+   ]
+  },
+  {
+   "id": "zoya",
+   "name": "Zoya",
+   "city": "Hyderabad",
+   "tagline": "Boho, always packing for Goa",
+   "preferences": {
+    "budgets": {
+     "tops": [
+      500,
+      2500
+     ],
+     "bottoms": [
+      800,
+      2500
+     ],
+     "one_piece": [
+      1500,
+      4000
+     ],
+     "outerwear": [
+      2000,
+      4500
+     ],
+     "footwear": [
+      1000,
+      4000
+     ],
+     "accessories": [
+      300,
+      2500
+     ]
+    },
+    "sizes": {
+     "tops": "S",
+     "bottoms": "26",
+     "footwear": "4"
+    },
+    "fit": "relaxed",
+    "preferred_materials": [
+     "linen",
+     "cotton",
+     "viscose"
+    ],
+    "avoid_materials": [],
+    "avoid_colors": [
+     "black"
+    ],
+    "occasions": [
+     "vacation",
+     "beach",
+     "brunch"
+    ],
+    "gender_fit": "women"
+   },
+   "avatar": {
+    "presentation": "women",
+    "body_type": "slim",
+    "height_band": "average",
+    "skin_tone": 7,
+    "hair_style": "curly",
+    "hair_color": "brown"
+   },
+   "folders": [
+    {
+     "name": "Goa trip",
+     "description": "Beach days and sundowners",
+     "inspo": [
+      "resort_linen"
+     ]
+    }
+   ],
+   "orders": [
+    [
+     "Floral tiered maxi skirt",
+     "26"
+    ]
+   ]
+  }
+ ],
+ "product_ids": {
+  "Ivory linen relaxed shirt": "ut-001",
+  "Cream linen oversized shirt": "ut-002",
+  "White linen-look shirt": "ut-003",
+  "Ecru linen boyfriend shirt": "ut-004",
+  "Sky linen shirt": "ut-005",
+  "Sage linen band-collar shirt": "ut-006",
+  "Olive linen camp shirt": "ut-007",
+  "Blue candy-stripe shirt": "ut-008",
+  "White oxford shirt": "ut-009",
+  "Navy pinstripe shirt": "ut-010",
+  "Black satin shirt": "ut-011",
+  "Red check flannel shirt": "ut-012",
+  "White crew tee": "ut-013",
+  "Black oversized graphic tee": "ut-014",
+  "Navy striped breton tee": "ut-015",
+  "Black ribbed crop top": "ut-016",
+  "Lavender halter crop top": "ut-017",
+  "Blush puff-sleeve blouse": "ut-018",
+  "Ivory silk-feel blouse": "ut-019",
+  "Mustard block-print kurta": "ut-020",
+  "White chikankari kurta": "ut-021",
+  "Black oversized hoodie": "ut-022",
+  "Grey zip hoodie": "ut-023",
+  "Camel cable-knit sweater": "ut-024",
+  "Navy crew sweater": "ut-025",
+  "Mid-blue straight jeans": "ut-026",
+  "Black skinny jeans": "ut-027",
+  "Indigo slim jeans": "ut-028",
+  "Light-wash baggy jeans": "ut-029",
+  "Beige straight chinos": "ut-030",
+  "Sand tapered chinos": "ut-031",
+  "Khaki slim chinos": "ut-032",
+  "Navy chinos": "ut-033",
+  "Cream linen trousers": "ut-034",
+  "Olive cargo pants": "ut-035",
+  "Black parachute cargos": "ut-036",
+  "Rust printed palazzo": "ut-037",
+  "Black flowy palazzo": "ut-038",
+  "Ivory pleated midi skirt": "ut-039",
+  "Floral tiered maxi skirt": "ut-040",
+  "Denim mini skirt": "ut-041",
+  "Beige linen shorts": "ut-042",
+  "White denim shorts": "ut-043",
+  "Sage linen midi dress": "ut-044",
+  "Black slip dress": "ut-045",
+  "Floral wrap dress": "ut-046",
+  "White broderie sundress": "ut-047",
+  "Emerald satin maxi dress": "ut-048",
+  "Olive utility jumpsuit": "ut-049",
+  "Sand linen co-ord set": "ut-050",
+  "Lilac printed co-ord": "ut-051",
+  "Maroon embroidered kurta set": "ut-052",
+  "Pastel pink anarkali set": "ut-053",
+  "Ivory kurta pyjama set": "ut-054",
+  "Teal silk-blend saree": "ut-055",
+  "Camel single-breasted blazer": "ut-056",
+  "Navy tailored blazer": "ut-057",
+  "Ivory linen blazer": "ut-058",
+  "Classic blue denim jacket": "ut-059",
+  "Olive bomber jacket": "ut-060",
+  "Black satin bomber": "ut-061",
+  "Charcoal Nehru jacket": "ut-062",
+  "Cream knit cardigan": "ut-063",
+  "Sage cropped cardigan": "ut-064",
+  "White leather sneakers": "ut-065",
+  "Chunky white trainers": "ut-066",
+  "Black runner sneakers": "ut-067",
+  "Tan leather penny loafers": "ut-068",
+  "Chocolate suede loafers": "ut-069",
+  "Black horsebit loafers": "ut-070",
+  "Tan suede loafers": "ut-071",
+  "Nude block heels": "ut-072",
+  "Gold strappy block heels": "ut-073",
+  "Black ballet flats": "ut-074",
+  "Tan strappy flat sandals": "ut-075",
+  "Brown leather slides": "ut-076",
+  "Black chelsea boots": "ut-077",
+  "Gold embroidered juttis": "ut-078",
+  "Tan canvas tote": "ut-079",
+  "Black leather-look tote": "ut-080",
+  "Black nylon sling bag": "ut-081",
+  "Tan crossbody bag": "ut-082",
+  "Gold embellished clutch": "ut-083",
+  "Black box clutch": "ut-084",
+  "Brown leather belt": "ut-085",
+  "Tortoise cat-eye sunglasses": "ut-086",
+  "Black aviator sunglasses": "ut-087",
+  "Gold-tone slim watch": "ut-088",
+  "Black sports watch": "ut-089",
+  "Gold-tone jhumkas": "ut-090",
+  "Pearl drop earrings": "ut-091",
+  "Silk-feel printed scarf": "ut-092",
+  "Gold zari dupatta": "ut-093",
+  "Pink chiffon dupatta": "ut-094"
+ }
+}

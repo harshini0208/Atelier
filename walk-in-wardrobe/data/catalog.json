@@ -1,0 +1,9266 @@
+{
+ "store": {
+  "id": "urban-thread",
+  "name": "Urban Thread",
+  "brand": "Urban Thread",
+  "warehouse_city": "Mumbai",
+  "description": "A fictional mid-size high-street label: easy basics, smart workwear, a small festive edit."
+ },
+ "products": [
+  {
+   "id": "ut-001",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Ivory linen relaxed shirt",
+   "category": "tops",
+   "subcategory": "linen_shirt",
+   "gender_fit": "women",
+   "primary_color": "ivory",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "linen",
+   "silhouette": "relaxed",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "work",
+    "brunch",
+    "vacation"
+   ],
+   "style_tags": [
+    "old_money",
+    "minimal",
+    "classic"
+   ],
+   "season": "summer",
+   "price_inr": 1799,
+   "mrp_inr": 1999,
+   "image_url": "/media/products/ut-001.svg",
+   "added_at": "2026-05-14T11:00:00",
+   "description": "Ivory linen relaxed shirt in linen. Relaxed fit, regular length. Made for work, brunch, vacation."
+  },
+  {
+   "id": "ut-002",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Cream linen oversized shirt",
+   "category": "tops",
+   "subcategory": "linen_shirt",
+   "gender_fit": "women",
+   "primary_color": "cream",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "linen",
+   "silhouette": "oversized",
+   "length": "long",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "vacation",
+    "brunch"
+   ],
+   "style_tags": [
+    "old_money",
+    "resort"
+   ],
+   "season": "summer",
+   "price_inr": 3299,
+   "mrp_inr": 4099,
+   "image_url": "/media/products/ut-002.svg",
+   "added_at": "2026-06-07T20:00:00",
+   "description": "Cream linen oversized shirt in linen. Oversized fit, long length. Made for vacation, brunch."
+  },
+  {
+   "id": "ut-003",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "White linen-look shirt",
+   "category": "tops",
+   "subcategory": "linen_shirt",
+   "gender_fit": "women",
+   "primary_color": "white",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "polyester",
+   "silhouette": "relaxed",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "work",
+    "casual"
+   ],
+   "style_tags": [
+    "minimal",
+    "classic"
+   ],
+   "season": "summer",
+   "price_inr": 1199,
+   "mrp_inr": 1199,
+   "image_url": "/media/products/ut-003.svg",
+   "added_at": "2026-07-05T19:00:00",
+   "description": "White linen-look shirt in polyester. Relaxed fit, regular length. Made for work, casual."
+  },
+  {
+   "id": "ut-004",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Ecru linen boyfriend shirt",
+   "category": "tops",
+   "subcategory": "linen_shirt",
+   "gender_fit": "women",
+   "primary_color": "cream",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "linen",
+   "silhouette": "relaxed",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "three_quarter",
+   "occasion_tags": [
+    "brunch",
+    "vacation",
+    "work"
+   ],
+   "style_tags": [
+    "old_money",
+    "minimal"
+   ],
+   "season": "summer",
+   "price_inr": 1999,
+   "mrp_inr": 2199,
+   "image_url": "/media/products/ut-004.svg",
+   "added_at": "2026-06-04T04:00:00",
+   "description": "Ecru linen boyfriend shirt in linen. Relaxed fit, regular length. Made for brunch, vacation, work."
+  },
+  {
+   "id": "ut-005",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Sky linen shirt",
+   "category": "tops",
+   "subcategory": "linen_shirt",
+   "gender_fit": "men",
+   "primary_color": "sky_blue",
+   "secondary_color": null,
+   "color_family": "blue",
+   "pattern": "solid",
+   "fabric": "linen",
+   "silhouette": "regular",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "vacation",
+    "beach",
+    "wedding"
+   ],
+   "style_tags": [
+    "resort",
+    "classic",
+    "old_money"
+   ],
+   "season": "summer",
+   "price_inr": 1999,
+   "mrp_inr": 2899,
+   "image_url": "/media/products/ut-005.svg",
+   "added_at": "2026-05-21T12:00:00",
+   "description": "Sky linen shirt in linen. Regular fit, regular length. Made for vacation, beach, wedding."
+  },
+  {
+   "id": "ut-006",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Sage linen band-collar shirt",
+   "category": "tops",
+   "subcategory": "linen_shirt",
+   "gender_fit": "men",
+   "primary_color": "sage",
+   "secondary_color": null,
+   "color_family": "green",
+   "pattern": "solid",
+   "fabric": "linen",
+   "silhouette": "relaxed",
+   "length": "regular",
+   "neckline": "mandarin",
+   "sleeve": "long",
+   "occasion_tags": [
+    "vacation",
+    "beach",
+    "casual"
+   ],
+   "style_tags": [
+    "resort",
+    "minimal"
+   ],
+   "season": "summer",
+   "price_inr": 2199,
+   "mrp_inr": 2199,
+   "image_url": "/media/products/ut-006.svg",
+   "added_at": "2026-06-03T08:00:00",
+   "description": "Sage linen band-collar shirt in linen. Relaxed fit, regular length. Made for vacation, beach, casual."
+  },
+  {
+   "id": "ut-007",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Olive linen camp shirt",
+   "category": "tops",
+   "subcategory": "linen_shirt",
+   "gender_fit": "unisex",
+   "primary_color": "olive",
+   "secondary_color": null,
+   "color_family": "green",
+   "pattern": "solid",
+   "fabric": "linen",
+   "silhouette": "relaxed",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "short",
+   "occasion_tags": [
+    "vacation",
+    "beach",
+    "casual"
+   ],
+   "style_tags": [
+    "resort"
+   ],
+   "season": "summer",
+   "price_inr": 1699,
+   "mrp_inr": 2099,
+   "image_url": "/media/products/ut-007.svg",
+   "added_at": "2026-05-11T01:00:00",
+   "description": "Olive linen camp shirt in linen. Relaxed fit, regular length. Made for vacation, beach, casual.",
+   "scheduled_price_drop_inr": 1299
+  },
+  {
+   "id": "ut-008",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Blue candy-stripe shirt",
+   "category": "tops",
+   "subcategory": "shirt",
+   "gender_fit": "women",
+   "primary_color": "sky_blue",
+   "secondary_color": "white",
+   "color_family": "blue",
+   "pattern": "stripes",
+   "fabric": "cotton",
+   "silhouette": "relaxed",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "work",
+    "brunch",
+    "vacation"
+   ],
+   "style_tags": [
+    "old_money",
+    "preppy",
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 1899,
+   "mrp_inr": 1899,
+   "image_url": "/media/products/ut-008.svg",
+   "added_at": "2026-09-09T06:00:00",
+   "description": "Blue candy-stripe shirt in cotton. Relaxed fit, regular length. Made for work, brunch, vacation."
+  },
+  {
+   "id": "ut-009",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "White oxford shirt",
+   "category": "tops",
+   "subcategory": "shirt",
+   "gender_fit": "men",
+   "primary_color": "white",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "cotton",
+   "silhouette": "slim",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "work",
+    "formal",
+    "wedding"
+   ],
+   "style_tags": [
+    "classic",
+    "formal",
+    "old_money"
+   ],
+   "season": "all",
+   "price_inr": 1999,
+   "mrp_inr": 1999,
+   "image_url": "/media/products/ut-009.svg",
+   "added_at": "2026-07-03T06:00:00",
+   "description": "White oxford shirt in cotton. Slim fit, regular length. Made for work, formal, wedding."
+  },
+  {
+   "id": "ut-010",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Navy pinstripe shirt",
+   "category": "tops",
+   "subcategory": "shirt",
+   "gender_fit": "men",
+   "primary_color": "navy",
+   "secondary_color": "white",
+   "color_family": "blue",
+   "pattern": "stripes",
+   "fabric": "cotton",
+   "silhouette": "slim",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "work",
+    "formal"
+   ],
+   "style_tags": [
+    "formal",
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 2299,
+   "mrp_inr": 2599,
+   "image_url": "/media/products/ut-010.svg",
+   "added_at": "2026-09-07T14:00:00",
+   "description": "Navy pinstripe shirt in cotton. Slim fit, regular length. Made for work, formal."
+  },
+  {
+   "id": "ut-011",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black satin shirt",
+   "category": "tops",
+   "subcategory": "shirt",
+   "gender_fit": "women",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "polyester",
+   "silhouette": "regular",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "party",
+    "date"
+   ],
+   "style_tags": [
+    "edgy",
+    "minimal"
+   ],
+   "season": "all",
+   "price_inr": 1599,
+   "mrp_inr": 1999,
+   "image_url": "/media/products/ut-011.svg",
+   "added_at": "2026-09-20T10:00:00",
+   "description": "Black satin shirt in polyester. Regular fit, regular length. Made for party, date."
+  },
+  {
+   "id": "ut-012",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Red check flannel shirt",
+   "category": "tops",
+   "subcategory": "shirt",
+   "gender_fit": "men",
+   "primary_color": "red",
+   "secondary_color": "black",
+   "color_family": "warm",
+   "pattern": "checks",
+   "fabric": "cotton",
+   "silhouette": "relaxed",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "casual",
+    "travel"
+   ],
+   "style_tags": [
+    "streetwear"
+   ],
+   "season": "winter",
+   "price_inr": 1799,
+   "mrp_inr": 1799,
+   "image_url": "/media/products/ut-012.svg",
+   "added_at": "2026-05-05T16:00:00",
+   "description": "Red check flannel shirt in cotton. Relaxed fit, regular length. Made for casual, travel."
+  },
+  {
+   "id": "ut-013",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "White crew tee",
+   "category": "tops",
+   "subcategory": "tshirt",
+   "gender_fit": "unisex",
+   "primary_color": "white",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "cotton",
+   "silhouette": "regular",
+   "length": "regular",
+   "neckline": "crew",
+   "sleeve": "short",
+   "occasion_tags": [
+    "casual"
+   ],
+   "style_tags": [
+    "minimal",
+    "athleisure"
+   ],
+   "season": "all",
+   "price_inr": 599,
+   "mrp_inr": 699,
+   "image_url": "/media/products/ut-013.svg",
+   "added_at": "2026-09-06T06:00:00",
+   "description": "White crew tee in cotton. Regular fit, regular length. Made for casual."
+  },
+  {
+   "id": "ut-014",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black oversized graphic tee",
+   "category": "tops",
+   "subcategory": "tshirt",
+   "gender_fit": "unisex",
+   "primary_color": "black",
+   "secondary_color": "white",
+   "color_family": "neutral",
+   "pattern": "print",
+   "fabric": "cotton",
+   "silhouette": "oversized",
+   "length": "regular",
+   "neckline": "crew",
+   "sleeve": "short",
+   "occasion_tags": [
+    "casual"
+   ],
+   "style_tags": [
+    "streetwear",
+    "y2k"
+   ],
+   "season": "all",
+   "price_inr": 899,
+   "mrp_inr": 899,
+   "image_url": "/media/products/ut-014.svg",
+   "added_at": "2026-05-01T23:00:00",
+   "description": "Black oversized graphic tee in cotton. Oversized fit, regular length. Made for casual."
+  },
+  {
+   "id": "ut-015",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Navy striped breton tee",
+   "category": "tops",
+   "subcategory": "tshirt",
+   "gender_fit": "men",
+   "primary_color": "navy",
+   "secondary_color": "white",
+   "color_family": "blue",
+   "pattern": "stripes",
+   "fabric": "cotton",
+   "silhouette": "regular",
+   "length": "regular",
+   "neckline": "crew",
+   "sleeve": "long",
+   "occasion_tags": [
+    "casual",
+    "brunch"
+   ],
+   "style_tags": [
+    "classic",
+    "preppy"
+   ],
+   "season": "all",
+   "price_inr": 999,
+   "mrp_inr": 1399,
+   "image_url": "/media/products/ut-015.svg",
+   "added_at": "2026-05-03T21:00:00",
+   "description": "Navy striped breton tee in cotton. Regular fit, regular length. Made for casual, brunch."
+  },
+  {
+   "id": "ut-016",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black ribbed crop top",
+   "category": "tops",
+   "subcategory": "crop_top",
+   "gender_fit": "women",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "knit",
+   "silhouette": "slim",
+   "length": "cropped",
+   "neckline": "square",
+   "sleeve": "sleeveless",
+   "occasion_tags": [
+    "party",
+    "casual"
+   ],
+   "style_tags": [
+    "streetwear",
+    "y2k"
+   ],
+   "season": "summer",
+   "price_inr": 699,
+   "mrp_inr": 899,
+   "image_url": "/media/products/ut-016.svg",
+   "added_at": "2026-05-29T03:00:00",
+   "description": "Black ribbed crop top in knit. Slim fit, cropped length. Made for party, casual."
+  },
+  {
+   "id": "ut-017",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Lavender halter crop top",
+   "category": "tops",
+   "subcategory": "crop_top",
+   "gender_fit": "women",
+   "primary_color": "lavender",
+   "secondary_color": null,
+   "color_family": "purple",
+   "pattern": "solid",
+   "fabric": "viscose",
+   "silhouette": "slim",
+   "length": "cropped",
+   "neckline": "halter",
+   "sleeve": "sleeveless",
+   "occasion_tags": [
+    "date",
+    "vacation"
+   ],
+   "style_tags": [
+    "romantic"
+   ],
+   "season": "summer",
+   "price_inr": 799,
+   "mrp_inr": 799,
+   "image_url": "/media/products/ut-017.svg",
+   "added_at": "2026-09-03T09:00:00",
+   "description": "Lavender halter crop top in viscose. Slim fit, cropped length. Made for date, vacation."
+  },
+  {
+   "id": "ut-018",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Blush puff-sleeve blouse",
+   "category": "tops",
+   "subcategory": "blouse",
+   "gender_fit": "women",
+   "primary_color": "blush",
+   "secondary_color": null,
+   "color_family": "pink",
+   "pattern": "solid",
+   "fabric": "viscose",
+   "silhouette": "regular",
+   "length": "regular",
+   "neckline": "square",
+   "sleeve": "short",
+   "occasion_tags": [
+    "brunch",
+    "date"
+   ],
+   "style_tags": [
+    "romantic"
+   ],
+   "season": "summer",
+   "price_inr": 1499,
+   "mrp_inr": 1499,
+   "image_url": "/media/products/ut-018.svg",
+   "added_at": "2026-06-06T10:00:00",
+   "description": "Blush puff-sleeve blouse in viscose. Regular fit, regular length. Made for brunch, date."
+  },
+  {
+   "id": "ut-019",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Ivory silk-feel blouse",
+   "category": "tops",
+   "subcategory": "blouse",
+   "gender_fit": "women",
+   "primary_color": "ivory",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "polyester",
+   "silhouette": "regular",
+   "length": "regular",
+   "neckline": "v_neck",
+   "sleeve": "long",
+   "occasion_tags": [
+    "work"
+   ],
+   "style_tags": [
+    "old_money",
+    "classic",
+    "formal"
+   ],
+   "season": "all",
+   "price_inr": 1699,
+   "mrp_inr": 2399,
+   "image_url": "/media/products/ut-019.svg",
+   "added_at": "2026-07-15T10:00:00",
+   "description": "Ivory silk-feel blouse in polyester. Regular fit, regular length. Made for work."
+  },
+  {
+   "id": "ut-020",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Mustard block-print kurta",
+   "category": "tops",
+   "subcategory": "kurta",
+   "gender_fit": "women",
+   "primary_color": "mustard",
+   "secondary_color": "rust",
+   "color_family": "warm",
+   "pattern": "print",
+   "fabric": "cotton",
+   "silhouette": "straight",
+   "length": "long",
+   "neckline": "mandarin",
+   "sleeve": "three_quarter",
+   "occasion_tags": [
+    "festive",
+    "casual",
+    "work"
+   ],
+   "style_tags": [
+    "ethnic",
+    "boho"
+   ],
+   "season": "all",
+   "price_inr": 1499,
+   "mrp_inr": 1499,
+   "image_url": "/media/products/ut-020.svg",
+   "added_at": "2026-07-11T20:00:00",
+   "description": "Mustard block-print kurta in cotton. Straight fit, long length. Made for festive, casual, work."
+  },
+  {
+   "id": "ut-021",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "White chikankari kurta",
+   "category": "tops",
+   "subcategory": "kurta",
+   "gender_fit": "men",
+   "primary_color": "white",
+   "secondary_color": "ivory",
+   "color_family": "neutral",
+   "pattern": "embroidered",
+   "fabric": "cotton",
+   "silhouette": "regular",
+   "length": "long",
+   "neckline": "mandarin",
+   "sleeve": "long",
+   "occasion_tags": [
+    "festive",
+    "wedding"
+   ],
+   "style_tags": [
+    "ethnic",
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 2199,
+   "mrp_inr": 2399,
+   "image_url": "/media/products/ut-021.svg",
+   "added_at": "2026-05-18T23:00:00",
+   "description": "White chikankari kurta in cotton. Regular fit, long length. Made for festive, wedding."
+  },
+  {
+   "id": "ut-022",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black oversized hoodie",
+   "category": "tops",
+   "subcategory": "hoodie",
+   "gender_fit": "unisex",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "cotton",
+   "silhouette": "oversized",
+   "length": "regular",
+   "neckline": "hood",
+   "sleeve": "long",
+   "occasion_tags": [
+    "casual",
+    "travel"
+   ],
+   "style_tags": [
+    "streetwear",
+    "athleisure"
+   ],
+   "season": "winter",
+   "price_inr": 1999,
+   "mrp_inr": 2499,
+   "image_url": "/media/products/ut-022.svg",
+   "added_at": "2026-06-18T23:00:00",
+   "description": "Black oversized hoodie in cotton. Oversized fit, regular length. Made for casual, travel."
+  },
+  {
+   "id": "ut-023",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Grey zip hoodie",
+   "category": "tops",
+   "subcategory": "hoodie",
+   "gender_fit": "unisex",
+   "primary_color": "grey",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "cotton",
+   "silhouette": "regular",
+   "length": "regular",
+   "neckline": "hood",
+   "sleeve": "long",
+   "occasion_tags": [
+    "gym",
+    "casual"
+   ],
+   "style_tags": [
+    "athleisure"
+   ],
+   "season": "winter",
+   "price_inr": 1799,
+   "mrp_inr": 1799,
+   "image_url": "/media/products/ut-023.svg",
+   "added_at": "2026-08-22T08:00:00",
+   "description": "Grey zip hoodie in cotton. Regular fit, regular length. Made for gym, casual."
+  },
+  {
+   "id": "ut-024",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Camel cable-knit sweater",
+   "category": "tops",
+   "subcategory": "sweater",
+   "gender_fit": "women",
+   "primary_color": "camel",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "wool",
+   "silhouette": "relaxed",
+   "length": "regular",
+   "neckline": "crew",
+   "sleeve": "long",
+   "occasion_tags": [
+    "work",
+    "casual"
+   ],
+   "style_tags": [
+    "old_money",
+    "classic"
+   ],
+   "season": "winter",
+   "price_inr": 2799,
+   "mrp_inr": 2799,
+   "image_url": "/media/products/ut-024.svg",
+   "added_at": "2026-09-11T14:00:00",
+   "description": "Camel cable-knit sweater in wool. Relaxed fit, regular length. Made for work, casual."
+  },
+  {
+   "id": "ut-025",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Navy crew sweater",
+   "category": "tops",
+   "subcategory": "sweater",
+   "gender_fit": "men",
+   "primary_color": "navy",
+   "secondary_color": null,
+   "color_family": "blue",
+   "pattern": "solid",
+   "fabric": "wool",
+   "silhouette": "regular",
+   "length": "regular",
+   "neckline": "crew",
+   "sleeve": "long",
+   "occasion_tags": [
+    "work"
+   ],
+   "style_tags": [
+    "classic",
+    "preppy",
+    "old_money"
+   ],
+   "season": "winter",
+   "price_inr": 2499,
+   "mrp_inr": 2499,
+   "image_url": "/media/products/ut-025.svg",
+   "added_at": "2026-06-07T06:00:00",
+   "description": "Navy crew sweater in wool. Regular fit, regular length. Made for work."
+  },
+  {
+   "id": "ut-026",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Mid-blue straight jeans",
+   "category": "bottoms",
+   "subcategory": "jeans",
+   "gender_fit": "women",
+   "primary_color": "denim_blue",
+   "secondary_color": null,
+   "color_family": "blue",
+   "pattern": "solid",
+   "fabric": "denim",
+   "silhouette": "straight",
+   "length": "ankle",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual",
+    "brunch"
+   ],
+   "style_tags": [
+    "classic",
+    "minimal"
+   ],
+   "season": "all",
+   "price_inr": 2299,
+   "mrp_inr": 2599,
+   "image_url": "/media/products/ut-026.svg",
+   "added_at": "2026-09-20T12:00:00",
+   "description": "Mid-blue straight jeans in denim. Straight fit, ankle length. Made for casual, brunch."
+  },
+  {
+   "id": "ut-027",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black skinny jeans",
+   "category": "bottoms",
+   "subcategory": "jeans",
+   "gender_fit": "women",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "denim",
+   "silhouette": "slim",
+   "length": "ankle",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual",
+    "party"
+   ],
+   "style_tags": [
+    "edgy"
+   ],
+   "season": "all",
+   "price_inr": 1999,
+   "mrp_inr": 2899,
+   "image_url": "/media/products/ut-027.svg",
+   "added_at": "2026-06-18T08:00:00",
+   "description": "Black skinny jeans in denim. Slim fit, ankle length. Made for casual, party."
+  },
+  {
+   "id": "ut-028",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Indigo slim jeans",
+   "category": "bottoms",
+   "subcategory": "jeans",
+   "gender_fit": "men",
+   "primary_color": "navy",
+   "secondary_color": null,
+   "color_family": "blue",
+   "pattern": "solid",
+   "fabric": "denim",
+   "silhouette": "slim",
+   "length": "long",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual",
+    "work"
+   ],
+   "style_tags": [
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 2499,
+   "mrp_inr": 2499,
+   "image_url": "/media/products/ut-028.svg",
+   "added_at": "2026-05-16T16:00:00",
+   "description": "Indigo slim jeans in denim. Slim fit, long length. Made for casual, work."
+  },
+  {
+   "id": "ut-029",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Light-wash baggy jeans",
+   "category": "bottoms",
+   "subcategory": "jeans",
+   "gender_fit": "men",
+   "primary_color": "sky_blue",
+   "secondary_color": null,
+   "color_family": "blue",
+   "pattern": "solid",
+   "fabric": "denim",
+   "silhouette": "relaxed",
+   "length": "long",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual"
+   ],
+   "style_tags": [
+    "streetwear",
+    "y2k"
+   ],
+   "season": "all",
+   "price_inr": 2799,
+   "mrp_inr": 2799,
+   "image_url": "/media/products/ut-029.svg",
+   "added_at": "2026-07-28T03:00:00",
+   "description": "Light-wash baggy jeans in denim. Relaxed fit, long length. Made for casual."
+  },
+  {
+   "id": "ut-030",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Beige straight chinos",
+   "category": "bottoms",
+   "subcategory": "chinos",
+   "gender_fit": "women",
+   "primary_color": "beige",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "cotton",
+   "silhouette": "straight",
+   "length": "ankle",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "brunch"
+   ],
+   "style_tags": [
+    "old_money",
+    "minimal",
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 1999,
+   "mrp_inr": 1999,
+   "image_url": "/media/products/ut-030.svg",
+   "added_at": "2026-06-19T19:00:00",
+   "description": "Beige straight chinos in cotton. Straight fit, ankle length. Made for work, brunch."
+  },
+  {
+   "id": "ut-031",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Sand tapered chinos",
+   "category": "bottoms",
+   "subcategory": "chinos",
+   "gender_fit": "women",
+   "primary_color": "sand",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "cotton",
+   "silhouette": "tapered",
+   "length": "ankle",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "casual"
+   ],
+   "style_tags": [
+    "minimal",
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 1799,
+   "mrp_inr": 1999,
+   "image_url": "/media/products/ut-031.svg",
+   "added_at": "2026-06-15T06:00:00",
+   "description": "Sand tapered chinos in cotton. Tapered fit, ankle length. Made for work, casual."
+  },
+  {
+   "id": "ut-032",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Khaki slim chinos",
+   "category": "bottoms",
+   "subcategory": "chinos",
+   "gender_fit": "men",
+   "primary_color": "khaki",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "cotton",
+   "silhouette": "slim",
+   "length": "long",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "casual"
+   ],
+   "style_tags": [
+    "classic",
+    "preppy"
+   ],
+   "season": "all",
+   "price_inr": 1799,
+   "mrp_inr": 1999,
+   "image_url": "/media/products/ut-032.svg",
+   "added_at": "2026-06-25T18:00:00",
+   "description": "Khaki slim chinos in cotton. Slim fit, long length. Made for work, casual."
+  },
+  {
+   "id": "ut-033",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Navy chinos",
+   "category": "bottoms",
+   "subcategory": "chinos",
+   "gender_fit": "men",
+   "primary_color": "navy",
+   "secondary_color": null,
+   "color_family": "blue",
+   "pattern": "solid",
+   "fabric": "cotton",
+   "silhouette": "regular",
+   "length": "long",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work"
+   ],
+   "style_tags": [
+    "classic",
+    "preppy",
+    "old_money"
+   ],
+   "season": "all",
+   "price_inr": 1999,
+   "mrp_inr": 2899,
+   "image_url": "/media/products/ut-033.svg",
+   "added_at": "2026-05-07T23:00:00",
+   "description": "Navy chinos in cotton. Regular fit, long length. Made for work."
+  },
+  {
+   "id": "ut-034",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Cream linen trousers",
+   "category": "bottoms",
+   "subcategory": "chinos",
+   "gender_fit": "men",
+   "primary_color": "cream",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "linen",
+   "silhouette": "relaxed",
+   "length": "long",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "beach",
+    "wedding",
+    "vacation"
+   ],
+   "style_tags": [
+    "resort",
+    "old_money"
+   ],
+   "season": "summer",
+   "price_inr": 2499,
+   "mrp_inr": 2799,
+   "image_url": "/media/products/ut-034.svg",
+   "added_at": "2026-07-30T13:00:00",
+   "description": "Cream linen trousers in linen. Relaxed fit, long length. Made for beach, wedding, vacation."
+  },
+  {
+   "id": "ut-035",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Olive cargo pants",
+   "category": "bottoms",
+   "subcategory": "cargo_pants",
+   "gender_fit": "unisex",
+   "primary_color": "olive",
+   "secondary_color": null,
+   "color_family": "green",
+   "pattern": "solid",
+   "fabric": "cotton",
+   "silhouette": "relaxed",
+   "length": "long",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual",
+    "travel"
+   ],
+   "style_tags": [
+    "streetwear"
+   ],
+   "season": "all",
+   "price_inr": 2299,
+   "mrp_inr": 3299,
+   "image_url": "/media/products/ut-035.svg",
+   "added_at": "2026-08-08T11:00:00",
+   "description": "Olive cargo pants in cotton. Relaxed fit, long length. Made for casual, travel."
+  },
+  {
+   "id": "ut-036",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black parachute cargos",
+   "category": "bottoms",
+   "subcategory": "cargo_pants",
+   "gender_fit": "unisex",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "polyester",
+   "silhouette": "wide",
+   "length": "long",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual"
+   ],
+   "style_tags": [
+    "streetwear",
+    "y2k"
+   ],
+   "season": "all",
+   "price_inr": 2499,
+   "mrp_inr": 3599,
+   "image_url": "/media/products/ut-036.svg",
+   "added_at": "2026-07-28T13:00:00",
+   "description": "Black parachute cargos in polyester. Wide fit, long length. Made for casual."
+  },
+  {
+   "id": "ut-037",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Rust printed palazzo",
+   "category": "bottoms",
+   "subcategory": "palazzo",
+   "gender_fit": "women",
+   "primary_color": "rust",
+   "secondary_color": "mustard",
+   "color_family": "warm",
+   "pattern": "print",
+   "fabric": "viscose",
+   "silhouette": "wide",
+   "length": "long",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "festive",
+    "casual",
+    "vacation"
+   ],
+   "style_tags": [
+    "ethnic",
+    "boho"
+   ],
+   "season": "all",
+   "price_inr": 1299,
+   "mrp_inr": 1399,
+   "image_url": "/media/products/ut-037.svg",
+   "added_at": "2026-06-18T08:00:00",
+   "description": "Rust printed palazzo in viscose. Wide fit, long length. Made for festive, casual, vacation."
+  },
+  {
+   "id": "ut-038",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black flowy palazzo",
+   "category": "bottoms",
+   "subcategory": "palazzo",
+   "gender_fit": "women",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "polyester",
+   "silhouette": "wide",
+   "length": "long",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "casual"
+   ],
+   "style_tags": [
+    "minimal"
+   ],
+   "season": "all",
+   "price_inr": 999,
+   "mrp_inr": 1099,
+   "image_url": "/media/products/ut-038.svg",
+   "added_at": "2026-05-18T12:00:00",
+   "description": "Black flowy palazzo in polyester. Wide fit, long length. Made for work, casual."
+  },
+  {
+   "id": "ut-039",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Ivory pleated midi skirt",
+   "category": "bottoms",
+   "subcategory": "skirt",
+   "gender_fit": "women",
+   "primary_color": "ivory",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "polyester",
+   "silhouette": "a_line",
+   "length": "midi",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "brunch",
+    "work"
+   ],
+   "style_tags": [
+    "old_money",
+    "romantic"
+   ],
+   "season": "all",
+   "price_inr": 1799,
+   "mrp_inr": 1999,
+   "image_url": "/media/products/ut-039.svg",
+   "added_at": "2026-08-17T14:00:00",
+   "description": "Ivory pleated midi skirt in polyester. A line fit, midi length. Made for brunch, work."
+  },
+  {
+   "id": "ut-040",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Floral tiered maxi skirt",
+   "category": "bottoms",
+   "subcategory": "skirt",
+   "gender_fit": "women",
+   "primary_color": "mustard",
+   "secondary_color": "rust",
+   "color_family": "warm",
+   "pattern": "floral",
+   "fabric": "viscose",
+   "silhouette": "flared",
+   "length": "maxi",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "vacation",
+    "beach"
+   ],
+   "style_tags": [
+    "boho",
+    "resort"
+   ],
+   "season": "summer",
+   "price_inr": 1999,
+   "mrp_inr": 2899,
+   "image_url": "/media/products/ut-040.svg",
+   "added_at": "2026-09-01T16:00:00",
+   "description": "Floral tiered maxi skirt in viscose. Flared fit, maxi length. Made for vacation, beach."
+  },
+  {
+   "id": "ut-041",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Denim mini skirt",
+   "category": "bottoms",
+   "subcategory": "skirt",
+   "gender_fit": "women",
+   "primary_color": "denim_blue",
+   "secondary_color": null,
+   "color_family": "blue",
+   "pattern": "solid",
+   "fabric": "denim",
+   "silhouette": "a_line",
+   "length": "mini",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual"
+   ],
+   "style_tags": [
+    "y2k",
+    "streetwear"
+   ],
+   "season": "all",
+   "price_inr": 1499,
+   "mrp_inr": 1499,
+   "image_url": "/media/products/ut-041.svg",
+   "added_at": "2026-07-29T08:00:00",
+   "description": "Denim mini skirt in denim. A line fit, mini length. Made for casual."
+  },
+  {
+   "id": "ut-042",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Beige linen shorts",
+   "category": "bottoms",
+   "subcategory": "shorts",
+   "gender_fit": "men",
+   "primary_color": "beige",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "linen",
+   "silhouette": "regular",
+   "length": "regular",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "beach",
+    "vacation"
+   ],
+   "style_tags": [
+    "resort"
+   ],
+   "season": "summer",
+   "price_inr": 1299,
+   "mrp_inr": 1899,
+   "image_url": "/media/products/ut-042.svg",
+   "added_at": "2026-07-12T11:00:00",
+   "description": "Beige linen shorts in linen. Regular fit, regular length. Made for beach, vacation."
+  },
+  {
+   "id": "ut-043",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "White denim shorts",
+   "category": "bottoms",
+   "subcategory": "shorts",
+   "gender_fit": "women",
+   "primary_color": "white",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "denim",
+   "silhouette": "regular",
+   "length": "mini",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "beach",
+    "vacation"
+   ],
+   "style_tags": [
+    "boho"
+   ],
+   "season": "summer",
+   "price_inr": 999,
+   "mrp_inr": 1099,
+   "image_url": "/media/products/ut-043.svg",
+   "added_at": "2026-05-17T07:00:00",
+   "description": "White denim shorts in denim. Regular fit, mini length. Made for beach, vacation."
+  },
+  {
+   "id": "ut-044",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Sage linen midi dress",
+   "category": "one_piece",
+   "subcategory": "dress",
+   "gender_fit": "women",
+   "primary_color": "sage",
+   "secondary_color": null,
+   "color_family": "green",
+   "pattern": "solid",
+   "fabric": "linen",
+   "silhouette": "a_line",
+   "length": "midi",
+   "neckline": "square",
+   "sleeve": "short",
+   "occasion_tags": [
+    "brunch",
+    "vacation",
+    "wedding",
+    "beach"
+   ],
+   "style_tags": [
+    "resort",
+    "old_money",
+    "romantic"
+   ],
+   "season": "summer",
+   "price_inr": 3499,
+   "mrp_inr": 3499,
+   "image_url": "/media/products/ut-044.svg",
+   "added_at": "2026-06-22T03:00:00",
+   "description": "Sage linen midi dress in linen. A line fit, midi length. Made for brunch, vacation, wedding."
+  },
+  {
+   "id": "ut-045",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black slip dress",
+   "category": "one_piece",
+   "subcategory": "dress",
+   "gender_fit": "women",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "polyester",
+   "silhouette": "bodycon",
+   "length": "midi",
+   "neckline": "v_neck",
+   "sleeve": "sleeveless",
+   "occasion_tags": [
+    "party",
+    "date"
+   ],
+   "style_tags": [
+    "minimal",
+    "edgy"
+   ],
+   "season": "all",
+   "price_inr": 2499,
+   "mrp_inr": 2499,
+   "image_url": "/media/products/ut-045.svg",
+   "added_at": "2026-06-03T13:00:00",
+   "description": "Black slip dress in polyester. Bodycon fit, midi length. Made for party, date."
+  },
+  {
+   "id": "ut-046",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Floral wrap dress",
+   "category": "one_piece",
+   "subcategory": "dress",
+   "gender_fit": "women",
+   "primary_color": "blush",
+   "secondary_color": "rust",
+   "color_family": "pink",
+   "pattern": "floral",
+   "fabric": "viscose",
+   "silhouette": "a_line",
+   "length": "midi",
+   "neckline": "v_neck",
+   "sleeve": "short",
+   "occasion_tags": [
+    "brunch",
+    "date",
+    "beach",
+    "wedding"
+   ],
+   "style_tags": [
+    "romantic",
+    "boho"
+   ],
+   "season": "summer",
+   "price_inr": 2799,
+   "mrp_inr": 3099,
+   "image_url": "/media/products/ut-046.svg",
+   "added_at": "2026-09-13T10:00:00",
+   "description": "Floral wrap dress in viscose. A line fit, midi length. Made for brunch, date, beach."
+  },
+  {
+   "id": "ut-047",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "White broderie sundress",
+   "category": "one_piece",
+   "subcategory": "dress",
+   "gender_fit": "women",
+   "primary_color": "white",
+   "secondary_color": "ivory",
+   "color_family": "neutral",
+   "pattern": "embroidered",
+   "fabric": "cotton",
+   "silhouette": "a_line",
+   "length": "mini",
+   "neckline": "square",
+   "sleeve": "sleeveless",
+   "occasion_tags": [
+    "vacation",
+    "beach"
+   ],
+   "style_tags": [
+    "boho",
+    "resort"
+   ],
+   "season": "summer",
+   "price_inr": 2999,
+   "mrp_inr": 2999,
+   "image_url": "/media/products/ut-047.svg",
+   "added_at": "2026-05-06T19:00:00",
+   "description": "White broderie sundress in cotton. A line fit, mini length. Made for vacation, beach."
+  },
+  {
+   "id": "ut-048",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Emerald satin maxi dress",
+   "category": "one_piece",
+   "subcategory": "dress",
+   "gender_fit": "women",
+   "primary_color": "emerald",
+   "secondary_color": null,
+   "color_family": "green",
+   "pattern": "solid",
+   "fabric": "polyester",
+   "silhouette": "flared",
+   "length": "maxi",
+   "neckline": "halter",
+   "sleeve": "sleeveless",
+   "occasion_tags": [
+    "wedding",
+    "party"
+   ],
+   "style_tags": [
+    "formal",
+    "romantic"
+   ],
+   "season": "all",
+   "price_inr": 4499,
+   "mrp_inr": 4499,
+   "image_url": "/media/products/ut-048.svg",
+   "added_at": "2026-05-29T20:00:00",
+   "description": "Emerald satin maxi dress in polyester. Flared fit, maxi length. Made for wedding, party."
+  },
+  {
+   "id": "ut-049",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Olive utility jumpsuit",
+   "category": "one_piece",
+   "subcategory": "jumpsuit",
+   "gender_fit": "women",
+   "primary_color": "olive",
+   "secondary_color": null,
+   "color_family": "green",
+   "pattern": "solid",
+   "fabric": "cotton",
+   "silhouette": "relaxed",
+   "length": "long",
+   "neckline": "collar",
+   "sleeve": "short",
+   "occasion_tags": [
+    "casual",
+    "travel"
+   ],
+   "style_tags": [
+    "streetwear",
+    "minimal"
+   ],
+   "season": "all",
+   "price_inr": 2999,
+   "mrp_inr": 3699,
+   "image_url": "/media/products/ut-049.svg",
+   "added_at": "2026-06-19T23:00:00",
+   "description": "Olive utility jumpsuit in cotton. Relaxed fit, long length. Made for casual, travel."
+  },
+  {
+   "id": "ut-050",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Sand linen co-ord set",
+   "category": "one_piece",
+   "subcategory": "coord_set",
+   "gender_fit": "women",
+   "primary_color": "sand",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "linen",
+   "silhouette": "relaxed",
+   "length": "long",
+   "neckline": "collar",
+   "sleeve": "short",
+   "occasion_tags": [
+    "vacation",
+    "brunch",
+    "beach"
+   ],
+   "style_tags": [
+    "resort",
+    "old_money",
+    "minimal"
+   ],
+   "season": "summer",
+   "price_inr": 3999,
+   "mrp_inr": 3999,
+   "image_url": "/media/products/ut-050.svg",
+   "added_at": "2026-08-19T08:00:00",
+   "description": "Sand linen co-ord set in linen. Relaxed fit, long length. Made for vacation, brunch, beach."
+  },
+  {
+   "id": "ut-051",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Lilac printed co-ord",
+   "category": "one_piece",
+   "subcategory": "coord_set",
+   "gender_fit": "women",
+   "primary_color": "lavender",
+   "secondary_color": "purple",
+   "color_family": "purple",
+   "pattern": "print",
+   "fabric": "viscose",
+   "silhouette": "relaxed",
+   "length": "long",
+   "neckline": "collar",
+   "sleeve": "short",
+   "occasion_tags": [
+    "brunch",
+    "vacation"
+   ],
+   "style_tags": [
+    "boho"
+   ],
+   "season": "summer",
+   "price_inr": 3299,
+   "mrp_inr": 3299,
+   "image_url": "/media/products/ut-051.svg",
+   "added_at": "2026-05-04T06:00:00",
+   "description": "Lilac printed co-ord in viscose. Relaxed fit, long length. Made for brunch, vacation."
+  },
+  {
+   "id": "ut-052",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Maroon embroidered kurta set",
+   "category": "one_piece",
+   "subcategory": "kurta_set",
+   "gender_fit": "women",
+   "primary_color": "maroon",
+   "secondary_color": "gold",
+   "color_family": "warm",
+   "pattern": "embroidered",
+   "fabric": "viscose",
+   "silhouette": "straight",
+   "length": "long",
+   "neckline": "mandarin",
+   "sleeve": "three_quarter",
+   "occasion_tags": [
+    "festive",
+    "wedding"
+   ],
+   "style_tags": [
+    "ethnic"
+   ],
+   "season": "all",
+   "price_inr": 3999,
+   "mrp_inr": 4399,
+   "image_url": "/media/products/ut-052.svg",
+   "added_at": "2026-06-19T02:00:00",
+   "description": "Maroon embroidered kurta set in viscose. Straight fit, long length. Made for festive, wedding."
+  },
+  {
+   "id": "ut-053",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Pastel pink anarkali set",
+   "category": "one_piece",
+   "subcategory": "kurta_set",
+   "gender_fit": "women",
+   "primary_color": "pink",
+   "secondary_color": "gold",
+   "color_family": "pink",
+   "pattern": "embroidered",
+   "fabric": "viscose",
+   "silhouette": "flared",
+   "length": "long",
+   "neckline": "mandarin",
+   "sleeve": "three_quarter",
+   "occasion_tags": [
+    "festive",
+    "wedding"
+   ],
+   "style_tags": [
+    "ethnic",
+    "romantic"
+   ],
+   "season": "all",
+   "price_inr": 4499,
+   "mrp_inr": 6399,
+   "image_url": "/media/products/ut-053.svg",
+   "added_at": "2026-08-20T12:00:00",
+   "description": "Pastel pink anarkali set in viscose. Flared fit, long length. Made for festive, wedding."
+  },
+  {
+   "id": "ut-054",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Ivory kurta pyjama set",
+   "category": "one_piece",
+   "subcategory": "kurta_set",
+   "gender_fit": "men",
+   "primary_color": "ivory",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "cotton",
+   "silhouette": "regular",
+   "length": "long",
+   "neckline": "mandarin",
+   "sleeve": "long",
+   "occasion_tags": [
+    "festive",
+    "wedding"
+   ],
+   "style_tags": [
+    "ethnic",
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 3299,
+   "mrp_inr": 4699,
+   "image_url": "/media/products/ut-054.svg",
+   "added_at": "2026-05-30T17:00:00",
+   "description": "Ivory kurta pyjama set in cotton. Regular fit, long length. Made for festive, wedding."
+  },
+  {
+   "id": "ut-055",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Teal silk-blend saree",
+   "category": "one_piece",
+   "subcategory": "saree",
+   "gender_fit": "women",
+   "primary_color": "teal",
+   "secondary_color": "gold",
+   "color_family": "blue",
+   "pattern": "embroidered",
+   "fabric": "silk",
+   "silhouette": "regular",
+   "length": "long",
+   "neckline": "square",
+   "sleeve": "short",
+   "occasion_tags": [
+    "wedding",
+    "festive"
+   ],
+   "style_tags": [
+    "ethnic",
+    "formal"
+   ],
+   "season": "all",
+   "price_inr": 5999,
+   "mrp_inr": 8599,
+   "image_url": "/media/products/ut-055.svg",
+   "added_at": "2026-09-07T09:00:00",
+   "description": "Teal silk-blend saree in silk. Regular fit, long length. Made for wedding, festive."
+  },
+  {
+   "id": "ut-056",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Camel single-breasted blazer",
+   "category": "outerwear",
+   "subcategory": "blazer",
+   "gender_fit": "women",
+   "primary_color": "camel",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "wool",
+   "silhouette": "regular",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "work",
+    "formal"
+   ],
+   "style_tags": [
+    "old_money",
+    "classic",
+    "formal"
+   ],
+   "season": "winter",
+   "price_inr": 4999,
+   "mrp_inr": 4999,
+   "image_url": "/media/products/ut-056.svg",
+   "added_at": "2026-07-24T02:00:00",
+   "description": "Camel single-breasted blazer in wool. Regular fit, regular length. Made for work, formal."
+  },
+  {
+   "id": "ut-057",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Navy tailored blazer",
+   "category": "outerwear",
+   "subcategory": "blazer",
+   "gender_fit": "men",
+   "primary_color": "navy",
+   "secondary_color": null,
+   "color_family": "blue",
+   "pattern": "solid",
+   "fabric": "wool",
+   "silhouette": "slim",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "work",
+    "formal",
+    "wedding"
+   ],
+   "style_tags": [
+    "formal",
+    "classic",
+    "old_money"
+   ],
+   "season": "all",
+   "price_inr": 5999,
+   "mrp_inr": 7499,
+   "image_url": "/media/products/ut-057.svg",
+   "added_at": "2026-08-14T03:00:00",
+   "description": "Navy tailored blazer in wool. Slim fit, regular length. Made for work, formal, wedding."
+  },
+  {
+   "id": "ut-058",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Ivory linen blazer",
+   "category": "outerwear",
+   "subcategory": "blazer",
+   "gender_fit": "women",
+   "primary_color": "ivory",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "linen",
+   "silhouette": "relaxed",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "work",
+    "brunch",
+    "wedding"
+   ],
+   "style_tags": [
+    "old_money",
+    "minimal",
+    "resort"
+   ],
+   "season": "summer",
+   "price_inr": 4299,
+   "mrp_inr": 4799,
+   "image_url": "/media/products/ut-058.svg",
+   "added_at": "2026-05-08T18:00:00",
+   "description": "Ivory linen blazer in linen. Relaxed fit, regular length. Made for work, brunch, wedding."
+  },
+  {
+   "id": "ut-059",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Classic blue denim jacket",
+   "category": "outerwear",
+   "subcategory": "denim_jacket",
+   "gender_fit": "unisex",
+   "primary_color": "denim_blue",
+   "secondary_color": null,
+   "color_family": "blue",
+   "pattern": "solid",
+   "fabric": "denim",
+   "silhouette": "regular",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "casual",
+    "travel"
+   ],
+   "style_tags": [
+    "classic",
+    "streetwear"
+   ],
+   "season": "all",
+   "price_inr": 2999,
+   "mrp_inr": 2999,
+   "image_url": "/media/products/ut-059.svg",
+   "added_at": "2026-08-29T03:00:00",
+   "description": "Classic blue denim jacket in denim. Regular fit, regular length. Made for casual, travel."
+  },
+  {
+   "id": "ut-060",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Olive bomber jacket",
+   "category": "outerwear",
+   "subcategory": "bomber",
+   "gender_fit": "men",
+   "primary_color": "olive",
+   "secondary_color": "black",
+   "color_family": "green",
+   "pattern": "solid",
+   "fabric": "polyester",
+   "silhouette": "regular",
+   "length": "regular",
+   "neckline": "crew",
+   "sleeve": "long",
+   "occasion_tags": [
+    "casual"
+   ],
+   "style_tags": [
+    "streetwear"
+   ],
+   "season": "winter",
+   "price_inr": 3499,
+   "mrp_inr": 4999,
+   "image_url": "/media/products/ut-060.svg",
+   "added_at": "2026-08-21T20:00:00",
+   "description": "Olive bomber jacket in polyester. Regular fit, regular length. Made for casual."
+  },
+  {
+   "id": "ut-061",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black satin bomber",
+   "category": "outerwear",
+   "subcategory": "bomber",
+   "gender_fit": "women",
+   "primary_color": "black",
+   "secondary_color": "maroon",
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "polyester",
+   "silhouette": "oversized",
+   "length": "regular",
+   "neckline": "crew",
+   "sleeve": "long",
+   "occasion_tags": [
+    "party",
+    "casual"
+   ],
+   "style_tags": [
+    "streetwear",
+    "edgy",
+    "y2k"
+   ],
+   "season": "all",
+   "price_inr": 3299,
+   "mrp_inr": 3299,
+   "image_url": "/media/products/ut-061.svg",
+   "added_at": "2026-05-23T03:00:00",
+   "description": "Black satin bomber in polyester. Oversized fit, regular length. Made for party, casual."
+  },
+  {
+   "id": "ut-062",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Charcoal Nehru jacket",
+   "category": "outerwear",
+   "subcategory": "nehru_jacket",
+   "gender_fit": "men",
+   "primary_color": "charcoal",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "wool",
+   "silhouette": "slim",
+   "length": "regular",
+   "neckline": "mandarin",
+   "sleeve": "sleeveless",
+   "occasion_tags": [
+    "festive",
+    "wedding"
+   ],
+   "style_tags": [
+    "ethnic",
+    "formal"
+   ],
+   "season": "all",
+   "price_inr": 2999,
+   "mrp_inr": 3299,
+   "image_url": "/media/products/ut-062.svg",
+   "added_at": "2026-08-20T23:00:00",
+   "description": "Charcoal Nehru jacket in wool. Slim fit, regular length. Made for festive, wedding."
+  },
+  {
+   "id": "ut-063",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Cream knit cardigan",
+   "category": "outerwear",
+   "subcategory": "cardigan",
+   "gender_fit": "women",
+   "primary_color": "cream",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "knit",
+   "silhouette": "relaxed",
+   "length": "regular",
+   "neckline": "v_neck",
+   "sleeve": "long",
+   "occasion_tags": [
+    "work",
+    "casual"
+   ],
+   "style_tags": [
+    "old_money",
+    "minimal"
+   ],
+   "season": "winter",
+   "price_inr": 2299,
+   "mrp_inr": 3299,
+   "image_url": "/media/products/ut-063.svg",
+   "added_at": "2026-05-17T11:00:00",
+   "description": "Cream knit cardigan in knit. Relaxed fit, regular length. Made for work, casual."
+  },
+  {
+   "id": "ut-064",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Sage cropped cardigan",
+   "category": "outerwear",
+   "subcategory": "cardigan",
+   "gender_fit": "women",
+   "primary_color": "sage",
+   "secondary_color": null,
+   "color_family": "green",
+   "pattern": "solid",
+   "fabric": "knit",
+   "silhouette": "slim",
+   "length": "cropped",
+   "neckline": "v_neck",
+   "sleeve": "long",
+   "occasion_tags": [
+    "brunch",
+    "casual"
+   ],
+   "style_tags": [
+    "romantic"
+   ],
+   "season": "all",
+   "price_inr": 1999,
+   "mrp_inr": 2499,
+   "image_url": "/media/products/ut-064.svg",
+   "added_at": "2026-07-30T16:00:00",
+   "description": "Sage cropped cardigan in knit. Slim fit, cropped length. Made for brunch, casual."
+  },
+  {
+   "id": "ut-065",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "White leather sneakers",
+   "category": "footwear",
+   "subcategory": "sneakers",
+   "gender_fit": "unisex",
+   "primary_color": "white",
+   "secondary_color": "grey",
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "leather",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual",
+    "travel"
+   ],
+   "style_tags": [
+    "minimal",
+    "classic",
+    "athleisure"
+   ],
+   "season": "all",
+   "price_inr": 3499,
+   "mrp_inr": 3899,
+   "image_url": "/media/products/ut-065.svg",
+   "added_at": "2026-08-08T13:00:00",
+   "description": "White leather sneakers in leather. Made for casual, travel."
+  },
+  {
+   "id": "ut-066",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Chunky white trainers",
+   "category": "footwear",
+   "subcategory": "sneakers",
+   "gender_fit": "unisex",
+   "primary_color": "white",
+   "secondary_color": "grey",
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "leather",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual"
+   ],
+   "style_tags": [
+    "streetwear",
+    "athleisure",
+    "y2k"
+   ],
+   "season": "all",
+   "price_inr": 4499,
+   "mrp_inr": 5599,
+   "image_url": "/media/products/ut-066.svg",
+   "added_at": "2026-06-21T00:00:00",
+   "description": "Chunky white trainers in leather. Made for casual."
+  },
+  {
+   "id": "ut-067",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black runner sneakers",
+   "category": "footwear",
+   "subcategory": "sneakers",
+   "gender_fit": "men",
+   "primary_color": "black",
+   "secondary_color": "white",
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "knit",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "gym",
+    "casual"
+   ],
+   "style_tags": [
+    "athleisure"
+   ],
+   "season": "all",
+   "price_inr": 2999,
+   "mrp_inr": 2999,
+   "image_url": "/media/products/ut-067.svg",
+   "added_at": "2026-08-06T20:00:00",
+   "description": "Black runner sneakers in knit. Made for gym, casual."
+  },
+  {
+   "id": "ut-068",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Tan leather penny loafers",
+   "category": "footwear",
+   "subcategory": "loafers",
+   "gender_fit": "women",
+   "primary_color": "tan",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "leather",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "brunch"
+   ],
+   "style_tags": [
+    "old_money",
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 3999,
+   "mrp_inr": 3999,
+   "image_url": "/media/products/ut-068.svg",
+   "added_at": "2026-05-10T02:00:00",
+   "description": "Tan leather penny loafers in leather. Made for work, brunch."
+  },
+  {
+   "id": "ut-069",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Chocolate suede loafers",
+   "category": "footwear",
+   "subcategory": "loafers",
+   "gender_fit": "women",
+   "primary_color": "brown",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "suede",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "brunch"
+   ],
+   "style_tags": [
+    "old_money",
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 4999,
+   "mrp_inr": 4999,
+   "image_url": "/media/products/ut-069.svg",
+   "added_at": "2026-05-11T05:00:00",
+   "description": "Chocolate suede loafers in suede. Made for work, brunch."
+  },
+  {
+   "id": "ut-070",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black horsebit loafers",
+   "category": "footwear",
+   "subcategory": "loafers",
+   "gender_fit": "men",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "leather",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "formal",
+    "wedding"
+   ],
+   "style_tags": [
+    "old_money",
+    "formal",
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 4499,
+   "mrp_inr": 4499,
+   "image_url": "/media/products/ut-070.svg",
+   "added_at": "2026-08-14T04:00:00",
+   "description": "Black horsebit loafers in leather. Made for work, formal, wedding."
+  },
+  {
+   "id": "ut-071",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Tan suede loafers",
+   "category": "footwear",
+   "subcategory": "loafers",
+   "gender_fit": "men",
+   "primary_color": "tan",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "suede",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "brunch",
+    "vacation",
+    "wedding"
+   ],
+   "style_tags": [
+    "old_money",
+    "resort"
+   ],
+   "season": "all",
+   "price_inr": 3999,
+   "mrp_inr": 4399,
+   "image_url": "/media/products/ut-071.svg",
+   "added_at": "2026-05-14T17:00:00",
+   "description": "Tan suede loafers in suede. Made for brunch, vacation, wedding."
+  },
+  {
+   "id": "ut-072",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Nude block heels",
+   "category": "footwear",
+   "subcategory": "block_heels",
+   "gender_fit": "women",
+   "primary_color": "beige",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "leather",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "party",
+    "wedding"
+   ],
+   "style_tags": [
+    "classic",
+    "minimal"
+   ],
+   "season": "all",
+   "price_inr": 2799,
+   "mrp_inr": 2799,
+   "image_url": "/media/products/ut-072.svg",
+   "added_at": "2026-09-06T04:00:00",
+   "description": "Nude block heels in leather. Made for work, party, wedding."
+  },
+  {
+   "id": "ut-073",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Gold strappy block heels",
+   "category": "footwear",
+   "subcategory": "block_heels",
+   "gender_fit": "women",
+   "primary_color": "gold",
+   "secondary_color": null,
+   "color_family": "metallic",
+   "pattern": "solid",
+   "fabric": "synthetic",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "party",
+    "wedding",
+    "festive"
+   ],
+   "style_tags": [
+    "formal"
+   ],
+   "season": "all",
+   "price_inr": 2999,
+   "mrp_inr": 2999,
+   "image_url": "/media/products/ut-073.svg",
+   "added_at": "2026-08-29T07:00:00",
+   "description": "Gold strappy block heels in synthetic. Made for party, wedding, festive."
+  },
+  {
+   "id": "ut-074",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black ballet flats",
+   "category": "footwear",
+   "subcategory": "flats",
+   "gender_fit": "women",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "leather",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "casual"
+   ],
+   "style_tags": [
+    "classic",
+    "minimal",
+    "old_money"
+   ],
+   "season": "all",
+   "price_inr": 1799,
+   "mrp_inr": 1799,
+   "image_url": "/media/products/ut-074.svg",
+   "added_at": "2026-09-07T02:00:00",
+   "description": "Black ballet flats in leather. Made for work, casual."
+  },
+  {
+   "id": "ut-075",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Tan strappy flat sandals",
+   "category": "footwear",
+   "subcategory": "sandals",
+   "gender_fit": "women",
+   "primary_color": "tan",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "leather",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "vacation",
+    "beach",
+    "brunch"
+   ],
+   "style_tags": [
+    "boho",
+    "resort",
+    "minimal"
+   ],
+   "season": "summer",
+   "price_inr": 1499,
+   "mrp_inr": 2099,
+   "image_url": "/media/products/ut-075.svg",
+   "added_at": "2026-06-01T13:00:00",
+   "description": "Tan strappy flat sandals in leather. Made for vacation, beach, brunch."
+  },
+  {
+   "id": "ut-076",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Brown leather slides",
+   "category": "footwear",
+   "subcategory": "sandals",
+   "gender_fit": "men",
+   "primary_color": "brown",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "leather",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "beach",
+    "vacation",
+    "casual"
+   ],
+   "style_tags": [
+    "resort"
+   ],
+   "season": "summer",
+   "price_inr": 1799,
+   "mrp_inr": 1799,
+   "image_url": "/media/products/ut-076.svg",
+   "added_at": "2026-05-18T10:00:00",
+   "description": "Brown leather slides in leather. Made for beach, vacation, casual."
+  },
+  {
+   "id": "ut-077",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black chelsea boots",
+   "category": "footwear",
+   "subcategory": "boots",
+   "gender_fit": "women",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "leather",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual",
+    "work"
+   ],
+   "style_tags": [
+    "edgy",
+    "classic"
+   ],
+   "season": "winter",
+   "price_inr": 4999,
+   "mrp_inr": 7099,
+   "image_url": "/media/products/ut-077.svg",
+   "added_at": "2026-06-28T20:00:00",
+   "description": "Black chelsea boots in leather. Made for casual, work."
+  },
+  {
+   "id": "ut-078",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Gold embroidered juttis",
+   "category": "footwear",
+   "subcategory": "juttis",
+   "gender_fit": "women",
+   "primary_color": "gold",
+   "secondary_color": "maroon",
+   "color_family": "metallic",
+   "pattern": "embroidered",
+   "fabric": "synthetic",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "festive",
+    "wedding"
+   ],
+   "style_tags": [
+    "ethnic"
+   ],
+   "season": "all",
+   "price_inr": 1899,
+   "mrp_inr": 1899,
+   "image_url": "/media/products/ut-078.svg",
+   "added_at": "2026-05-03T00:00:00",
+   "description": "Gold embroidered juttis in synthetic. Made for festive, wedding."
+  },
+  {
+   "id": "ut-079",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Tan canvas tote",
+   "category": "accessories",
+   "subcategory": "tote",
+   "gender_fit": "women",
+   "primary_color": "tan",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "canvas",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "vacation",
+    "brunch"
+   ],
+   "style_tags": [
+    "old_money",
+    "minimal",
+    "resort"
+   ],
+   "season": "all",
+   "price_inr": 1999,
+   "mrp_inr": 1999,
+   "image_url": "/media/products/ut-079.svg",
+   "added_at": "2026-06-19T00:00:00",
+   "description": "Tan canvas tote in canvas. Made for work, vacation, brunch."
+  },
+  {
+   "id": "ut-080",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black leather-look tote",
+   "category": "accessories",
+   "subcategory": "tote",
+   "gender_fit": "women",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "synthetic",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work"
+   ],
+   "style_tags": [
+    "minimal",
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 2499,
+   "mrp_inr": 2499,
+   "image_url": "/media/products/ut-080.svg",
+   "added_at": "2026-08-01T00:00:00",
+   "description": "Black leather-look tote in synthetic. Made for work."
+  },
+  {
+   "id": "ut-081",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black nylon sling bag",
+   "category": "accessories",
+   "subcategory": "sling_bag",
+   "gender_fit": "unisex",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "polyester",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual",
+    "travel"
+   ],
+   "style_tags": [
+    "streetwear",
+    "athleisure"
+   ],
+   "season": "all",
+   "price_inr": 1299,
+   "mrp_inr": 1599,
+   "image_url": "/media/products/ut-081.svg",
+   "added_at": "2026-09-12T12:00:00",
+   "description": "Black nylon sling bag in polyester. Made for casual, travel."
+  },
+  {
+   "id": "ut-082",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Tan crossbody bag",
+   "category": "accessories",
+   "subcategory": "sling_bag",
+   "gender_fit": "women",
+   "primary_color": "tan",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "leather",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "brunch",
+    "casual"
+   ],
+   "style_tags": [
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 2299,
+   "mrp_inr": 2299,
+   "image_url": "/media/products/ut-082.svg",
+   "added_at": "2026-06-30T20:00:00",
+   "description": "Tan crossbody bag in leather. Made for brunch, casual."
+  },
+  {
+   "id": "ut-083",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Gold embellished clutch",
+   "category": "accessories",
+   "subcategory": "clutch",
+   "gender_fit": "women",
+   "primary_color": "gold",
+   "secondary_color": "ivory",
+   "color_family": "metallic",
+   "pattern": "embroidered",
+   "fabric": "synthetic",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "wedding",
+    "party",
+    "festive"
+   ],
+   "style_tags": [
+    "ethnic",
+    "formal"
+   ],
+   "season": "all",
+   "price_inr": 1799,
+   "mrp_inr": 1799,
+   "image_url": "/media/products/ut-083.svg",
+   "added_at": "2026-05-31T22:00:00",
+   "description": "Gold embellished clutch in synthetic. Made for wedding, party, festive."
+  },
+  {
+   "id": "ut-084",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black box clutch",
+   "category": "accessories",
+   "subcategory": "clutch",
+   "gender_fit": "women",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "synthetic",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "party"
+   ],
+   "style_tags": [
+    "minimal",
+    "formal"
+   ],
+   "season": "all",
+   "price_inr": 1499,
+   "mrp_inr": 1699,
+   "image_url": "/media/products/ut-084.svg",
+   "added_at": "2026-06-02T10:00:00",
+   "description": "Black box clutch in synthetic. Made for party."
+  },
+  {
+   "id": "ut-085",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Brown leather belt",
+   "category": "accessories",
+   "subcategory": "belt",
+   "gender_fit": "unisex",
+   "primary_color": "brown",
+   "secondary_color": null,
+   "color_family": "earth",
+   "pattern": "solid",
+   "fabric": "leather",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "casual"
+   ],
+   "style_tags": [
+    "classic",
+    "old_money"
+   ],
+   "season": "all",
+   "price_inr": 999,
+   "mrp_inr": 999,
+   "image_url": "/media/products/ut-085.svg",
+   "added_at": "2026-05-30T06:00:00",
+   "description": "Brown leather belt in leather. Made for work, casual."
+  },
+  {
+   "id": "ut-086",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Tortoise cat-eye sunglasses",
+   "category": "accessories",
+   "subcategory": "sunglasses",
+   "gender_fit": "unisex",
+   "primary_color": "brown",
+   "secondary_color": "tan",
+   "color_family": "earth",
+   "pattern": "print",
+   "fabric": "synthetic",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "vacation",
+    "beach"
+   ],
+   "style_tags": [
+    "old_money",
+    "resort"
+   ],
+   "season": "summer",
+   "price_inr": 1499,
+   "mrp_inr": 1499,
+   "image_url": "/media/products/ut-086.svg",
+   "added_at": "2026-08-11T13:00:00",
+   "description": "Tortoise cat-eye sunglasses in synthetic. Made for vacation, beach."
+  },
+  {
+   "id": "ut-087",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black aviator sunglasses",
+   "category": "accessories",
+   "subcategory": "sunglasses",
+   "gender_fit": "unisex",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "metal",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual",
+    "travel"
+   ],
+   "style_tags": [
+    "classic",
+    "streetwear"
+   ],
+   "season": "all",
+   "price_inr": 1799,
+   "mrp_inr": 1799,
+   "image_url": "/media/products/ut-087.svg",
+   "added_at": "2026-06-01T08:00:00",
+   "description": "Black aviator sunglasses in metal. Made for casual, travel."
+  },
+  {
+   "id": "ut-088",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Gold-tone slim watch",
+   "category": "accessories",
+   "subcategory": "watch",
+   "gender_fit": "unisex",
+   "primary_color": "gold",
+   "secondary_color": null,
+   "color_family": "metallic",
+   "pattern": "solid",
+   "fabric": "metal",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "wedding"
+   ],
+   "style_tags": [
+    "old_money",
+    "classic",
+    "formal"
+   ],
+   "season": "all",
+   "price_inr": 3499,
+   "mrp_inr": 3499,
+   "image_url": "/media/products/ut-088.svg",
+   "added_at": "2026-07-26T22:00:00",
+   "description": "Gold-tone slim watch in metal. Made for work, wedding."
+  },
+  {
+   "id": "ut-089",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Black sports watch",
+   "category": "accessories",
+   "subcategory": "watch",
+   "gender_fit": "men",
+   "primary_color": "black",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "synthetic",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "gym",
+    "casual"
+   ],
+   "style_tags": [
+    "athleisure"
+   ],
+   "season": "all",
+   "price_inr": 2499,
+   "mrp_inr": 2499,
+   "image_url": "/media/products/ut-089.svg",
+   "added_at": "2026-07-30T04:00:00",
+   "description": "Black sports watch in synthetic. Made for gym, casual."
+  },
+  {
+   "id": "ut-090",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Gold-tone jhumkas",
+   "category": "accessories",
+   "subcategory": "jewellery",
+   "gender_fit": "women",
+   "primary_color": "gold",
+   "secondary_color": null,
+   "color_family": "metallic",
+   "pattern": "embroidered",
+   "fabric": "metal",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "festive",
+    "wedding"
+   ],
+   "style_tags": [
+    "ethnic"
+   ],
+   "season": "all",
+   "price_inr": 799,
+   "mrp_inr": 799,
+   "image_url": "/media/products/ut-090.svg",
+   "added_at": "2026-07-01T00:00:00",
+   "description": "Gold-tone jhumkas in metal. Made for festive, wedding."
+  },
+  {
+   "id": "ut-091",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Pearl drop earrings",
+   "category": "accessories",
+   "subcategory": "jewellery",
+   "gender_fit": "women",
+   "primary_color": "ivory",
+   "secondary_color": null,
+   "color_family": "neutral",
+   "pattern": "solid",
+   "fabric": "metal",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "wedding",
+    "work",
+    "brunch"
+   ],
+   "style_tags": [
+    "old_money",
+    "classic",
+    "romantic"
+   ],
+   "season": "all",
+   "price_inr": 999,
+   "mrp_inr": 1199,
+   "image_url": "/media/products/ut-091.svg",
+   "added_at": "2026-07-09T22:00:00",
+   "description": "Pearl drop earrings in metal. Made for wedding, work, brunch."
+  },
+  {
+   "id": "ut-092",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Silk-feel printed scarf",
+   "category": "accessories",
+   "subcategory": "scarf",
+   "gender_fit": "women",
+   "primary_color": "navy",
+   "secondary_color": "cream",
+   "color_family": "blue",
+   "pattern": "print",
+   "fabric": "polyester",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "brunch"
+   ],
+   "style_tags": [
+    "old_money",
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 899,
+   "mrp_inr": 1099,
+   "image_url": "/media/products/ut-092.svg",
+   "added_at": "2026-06-14T04:00:00",
+   "description": "Silk-feel printed scarf in polyester. Made for work, brunch."
+  },
+  {
+   "id": "ut-093",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Gold zari dupatta",
+   "category": "accessories",
+   "subcategory": "dupatta",
+   "gender_fit": "women",
+   "primary_color": "gold",
+   "secondary_color": "maroon",
+   "color_family": "metallic",
+   "pattern": "embroidered",
+   "fabric": "silk",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "festive",
+    "wedding"
+   ],
+   "style_tags": [
+    "ethnic"
+   ],
+   "season": "all",
+   "price_inr": 1299,
+   "mrp_inr": 1299,
+   "image_url": "/media/products/ut-093.svg",
+   "added_at": "2026-05-28T06:00:00",
+   "description": "Gold zari dupatta in silk. Made for festive, wedding."
+  },
+  {
+   "id": "ut-094",
+   "store_id": "urban-thread",
+   "brand": "Urban Thread",
+   "name": "Pink chiffon dupatta",
+   "category": "accessories",
+   "subcategory": "dupatta",
+   "gender_fit": "women",
+   "primary_color": "pink",
+   "secondary_color": null,
+   "color_family": "pink",
+   "pattern": "solid",
+   "fabric": "chiffon",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "festive"
+   ],
+   "style_tags": [
+    "ethnic",
+    "romantic"
+   ],
+   "season": "all",
+   "price_inr": 899,
+   "mrp_inr": 999,
+   "image_url": "/media/products/ut-094.svg",
+   "added_at": "2026-06-10T17:00:00",
+   "description": "Pink chiffon dupatta in chiffon. Made for festive."
+  }
+ ],
+ "product_sizes": [
+  {
+   "product_id": "ut-001",
+   "size": "XS",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-001",
+   "size": "S",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-001",
+   "size": "M",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-001",
+   "size": "L",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-001",
+   "size": "XL",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-002",
+   "size": "XS",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-002",
+   "size": "S",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-002",
+   "size": "M",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-002",
+   "size": "L",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-002",
+   "size": "XL",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-003",
+   "size": "XS",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-003",
+   "size": "S",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-003",
+   "size": "M",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-003",
+   "size": "L",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-003",
+   "size": "XL",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-004",
+   "size": "XS",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-004",
+   "size": "S",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-004",
+   "size": "M",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-004",
+   "size": "L",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-004",
+   "size": "XL",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-005",
+   "size": "S",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-005",
+   "size": "M",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-005",
+   "size": "L",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-005",
+   "size": "XL",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-005",
+   "size": "XXL",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-006",
+   "size": "S",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-006",
+   "size": "M",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-006",
+   "size": "L",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-006",
+   "size": "XL",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-006",
+   "size": "XXL",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-007",
+   "size": "XS",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-007",
+   "size": "S",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-007",
+   "size": "M",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-007",
+   "size": "L",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-007",
+   "size": "XL",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-007",
+   "size": "XXL",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-008",
+   "size": "XS",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-008",
+   "size": "S",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-008",
+   "size": "M",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-008",
+   "size": "L",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-008",
+   "size": "XL",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-009",
+   "size": "S",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-009",
+   "size": "M",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-009",
+   "size": "L",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-009",
+   "size": "XL",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-009",
+   "size": "XXL",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-010",
+   "size": "S",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-010",
+   "size": "M",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-010",
+   "size": "L",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-010",
+   "size": "XL",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-010",
+   "size": "XXL",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-011",
+   "size": "XS",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-011",
+   "size": "S",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-011",
+   "size": "M",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-011",
+   "size": "L",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-011",
+   "size": "XL",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-012",
+   "size": "S",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-012",
+   "size": "M",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-012",
+   "size": "L",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-012",
+   "size": "XL",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-012",
+   "size": "XXL",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-013",
+   "size": "XS",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-013",
+   "size": "S",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-013",
+   "size": "M",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-013",
+   "size": "L",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-013",
+   "size": "XL",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-013",
+   "size": "XXL",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-014",
+   "size": "XS",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-014",
+   "size": "S",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-014",
+   "size": "M",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-014",
+   "size": "L",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-014",
+   "size": "XL",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-014",
+   "size": "XXL",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-015",
+   "size": "S",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-015",
+   "size": "M",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-015",
+   "size": "L",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-015",
+   "size": "XL",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-015",
+   "size": "XXL",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-016",
+   "size": "XS",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-016",
+   "size": "S",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-016",
+   "size": "M",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-016",
+   "size": "L",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-016",
+   "size": "XL",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-017",
+   "size": "XS",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-017",
+   "size": "S",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-017",
+   "size": "M",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-017",
+   "size": "L",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-017",
+   "size": "XL",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-018",
+   "size": "XS",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-018",
+   "size": "S",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-018",
+   "size": "M",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-018",
+   "size": "L",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-018",
+   "size": "XL",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-019",
+   "size": "XS",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-019",
+   "size": "S",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-019",
+   "size": "M",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-019",
+   "size": "L",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-019",
+   "size": "XL",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-020",
+   "size": "XS",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-020",
+   "size": "S",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-020",
+   "size": "M",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-020",
+   "size": "L",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-020",
+   "size": "XL",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-021",
+   "size": "S",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-021",
+   "size": "M",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-021",
+   "size": "L",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-021",
+   "size": "XL",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-021",
+   "size": "XXL",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-022",
+   "size": "XS",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-022",
+   "size": "S",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-022",
+   "size": "M",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-022",
+   "size": "L",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-022",
+   "size": "XL",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-022",
+   "size": "XXL",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-023",
+   "size": "XS",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-023",
+   "size": "S",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-023",
+   "size": "M",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-023",
+   "size": "L",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-023",
+   "size": "XL",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-023",
+   "size": "XXL",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-024",
+   "size": "XS",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-024",
+   "size": "S",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-024",
+   "size": "M",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-024",
+   "size": "L",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-024",
+   "size": "XL",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-025",
+   "size": "S",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-025",
+   "size": "M",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-025",
+   "size": "L",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-025",
+   "size": "XL",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-025",
+   "size": "XXL",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-026",
+   "size": "26",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-026",
+   "size": "28",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-026",
+   "size": "30",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-026",
+   "size": "32",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-026",
+   "size": "34",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-027",
+   "size": "26",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-027",
+   "size": "28",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-027",
+   "size": "30",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-027",
+   "size": "32",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-027",
+   "size": "34",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-028",
+   "size": "28",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-028",
+   "size": "30",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-028",
+   "size": "32",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-028",
+   "size": "34",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-028",
+   "size": "36",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-029",
+   "size": "28",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-029",
+   "size": "30",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-029",
+   "size": "32",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-029",
+   "size": "34",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-029",
+   "size": "36",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-030",
+   "size": "26",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-030",
+   "size": "28",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-030",
+   "size": "30",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-030",
+   "size": "32",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-030",
+   "size": "34",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-031",
+   "size": "26",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-031",
+   "size": "28",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-031",
+   "size": "30",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-031",
+   "size": "32",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-031",
+   "size": "34",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-032",
+   "size": "28",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-032",
+   "size": "30",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-032",
+   "size": "32",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-032",
+   "size": "34",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-032",
+   "size": "36",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-033",
+   "size": "28",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-033",
+   "size": "30",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-033",
+   "size": "32",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-033",
+   "size": "34",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-033",
+   "size": "36",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-034",
+   "size": "28",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-034",
+   "size": "30",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-034",
+   "size": "32",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-034",
+   "size": "34",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-034",
+   "size": "36",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-035",
+   "size": "26",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-035",
+   "size": "28",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-035",
+   "size": "30",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-035",
+   "size": "32",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-035",
+   "size": "34",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-035",
+   "size": "36",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-036",
+   "size": "26",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-036",
+   "size": "28",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-036",
+   "size": "30",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-036",
+   "size": "32",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-036",
+   "size": "34",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-036",
+   "size": "36",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-037",
+   "size": "26",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-037",
+   "size": "28",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-037",
+   "size": "30",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-037",
+   "size": "32",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-037",
+   "size": "34",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-038",
+   "size": "26",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-038",
+   "size": "28",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-038",
+   "size": "30",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-038",
+   "size": "32",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-038",
+   "size": "34",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-039",
+   "size": "26",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-039",
+   "size": "28",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-039",
+   "size": "30",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-039",
+   "size": "32",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-039",
+   "size": "34",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-040",
+   "size": "26",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-040",
+   "size": "28",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-040",
+   "size": "30",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-040",
+   "size": "32",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-040",
+   "size": "34",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-041",
+   "size": "26",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-041",
+   "size": "28",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-041",
+   "size": "30",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-041",
+   "size": "32",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-041",
+   "size": "34",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-042",
+   "size": "28",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-042",
+   "size": "30",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-042",
+   "size": "32",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-042",
+   "size": "34",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-042",
+   "size": "36",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-043",
+   "size": "26",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-043",
+   "size": "28",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-043",
+   "size": "30",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-043",
+   "size": "32",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-043",
+   "size": "34",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-044",
+   "size": "XS",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-044",
+   "size": "S",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-044",
+   "size": "M",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-044",
+   "size": "L",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-044",
+   "size": "XL",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-045",
+   "size": "XS",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-045",
+   "size": "S",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-045",
+   "size": "M",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-045",
+   "size": "L",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-045",
+   "size": "XL",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-046",
+   "size": "XS",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-046",
+   "size": "S",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-046",
+   "size": "M",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-046",
+   "size": "L",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-046",
+   "size": "XL",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-047",
+   "size": "XS",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-047",
+   "size": "S",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-047",
+   "size": "M",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-047",
+   "size": "L",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-047",
+   "size": "XL",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-048",
+   "size": "XS",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-048",
+   "size": "S",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-048",
+   "size": "M",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-048",
+   "size": "L",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-048",
+   "size": "XL",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-049",
+   "size": "XS",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-049",
+   "size": "S",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-049",
+   "size": "M",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-049",
+   "size": "L",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-049",
+   "size": "XL",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-050",
+   "size": "XS",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-050",
+   "size": "S",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-050",
+   "size": "M",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-050",
+   "size": "L",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-050",
+   "size": "XL",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-051",
+   "size": "XS",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-051",
+   "size": "S",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-051",
+   "size": "M",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-051",
+   "size": "L",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-051",
+   "size": "XL",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-052",
+   "size": "XS",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-052",
+   "size": "S",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-052",
+   "size": "M",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-052",
+   "size": "L",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-052",
+   "size": "XL",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-053",
+   "size": "XS",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-053",
+   "size": "S",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-053",
+   "size": "M",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-053",
+   "size": "L",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-053",
+   "size": "XL",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-054",
+   "size": "S",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-054",
+   "size": "M",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-054",
+   "size": "L",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-054",
+   "size": "XL",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-054",
+   "size": "XXL",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-055",
+   "size": "XS",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-055",
+   "size": "S",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-055",
+   "size": "M",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-055",
+   "size": "L",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-055",
+   "size": "XL",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-056",
+   "size": "XS",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-056",
+   "size": "S",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-056",
+   "size": "M",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-056",
+   "size": "L",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-056",
+   "size": "XL",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-057",
+   "size": "S",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-057",
+   "size": "M",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-057",
+   "size": "L",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-057",
+   "size": "XL",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-057",
+   "size": "XXL",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-058",
+   "size": "XS",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-058",
+   "size": "S",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-058",
+   "size": "M",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-058",
+   "size": "L",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-058",
+   "size": "XL",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-059",
+   "size": "XS",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-059",
+   "size": "S",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-059",
+   "size": "M",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-059",
+   "size": "L",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-059",
+   "size": "XL",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-059",
+   "size": "XXL",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-060",
+   "size": "S",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-060",
+   "size": "M",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-060",
+   "size": "L",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-060",
+   "size": "XL",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-060",
+   "size": "XXL",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-061",
+   "size": "XS",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-061",
+   "size": "S",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-061",
+   "size": "M",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-061",
+   "size": "L",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-061",
+   "size": "XL",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-062",
+   "size": "S",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-062",
+   "size": "M",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-062",
+   "size": "L",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-062",
+   "size": "XL",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-062",
+   "size": "XXL",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-063",
+   "size": "XS",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-063",
+   "size": "S",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-063",
+   "size": "M",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-063",
+   "size": "L",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-063",
+   "size": "XL",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-064",
+   "size": "XS",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-064",
+   "size": "S",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-064",
+   "size": "M",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-064",
+   "size": "L",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-064",
+   "size": "XL",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-065",
+   "size": "4",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-065",
+   "size": "5",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-065",
+   "size": "6",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-065",
+   "size": "7",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-065",
+   "size": "8",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-065",
+   "size": "9",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-065",
+   "size": "10",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-066",
+   "size": "4",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-066",
+   "size": "5",
+   "stock": 6
+  },
+  {
+   "product_id": "ut-066",
+   "size": "6",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-066",
+   "size": "7",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-066",
+   "size": "8",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-066",
+   "size": "9",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-066",
+   "size": "10",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-067",
+   "size": "6",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-067",
+   "size": "7",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-067",
+   "size": "8",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-067",
+   "size": "9",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-067",
+   "size": "10",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-067",
+   "size": "11",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-068",
+   "size": "3",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-068",
+   "size": "4",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-068",
+   "size": "5",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-068",
+   "size": "6",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-068",
+   "size": "7",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-068",
+   "size": "8",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-069",
+   "size": "3",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-069",
+   "size": "4",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-069",
+   "size": "5",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-069",
+   "size": "6",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-069",
+   "size": "7",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-069",
+   "size": "8",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-070",
+   "size": "6",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-070",
+   "size": "7",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-070",
+   "size": "8",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-070",
+   "size": "9",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-070",
+   "size": "10",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-070",
+   "size": "11",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-071",
+   "size": "6",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-071",
+   "size": "7",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-071",
+   "size": "8",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-071",
+   "size": "9",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-071",
+   "size": "10",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-071",
+   "size": "11",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-072",
+   "size": "3",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-072",
+   "size": "4",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-072",
+   "size": "5",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-072",
+   "size": "6",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-072",
+   "size": "7",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-072",
+   "size": "8",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-073",
+   "size": "3",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-073",
+   "size": "4",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-073",
+   "size": "5",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-073",
+   "size": "6",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-073",
+   "size": "7",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-073",
+   "size": "8",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-074",
+   "size": "3",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-074",
+   "size": "4",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-074",
+   "size": "5",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-074",
+   "size": "6",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-074",
+   "size": "7",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-074",
+   "size": "8",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-075",
+   "size": "3",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-075",
+   "size": "4",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-075",
+   "size": "5",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-075",
+   "size": "6",
+   "stock": 2
+  },
+  {
+   "product_id": "ut-075",
+   "size": "7",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-075",
+   "size": "8",
+   "stock": 1
+  },
+  {
+   "product_id": "ut-076",
+   "size": "6",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-076",
+   "size": "7",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-076",
+   "size": "8",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-076",
+   "size": "9",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-076",
+   "size": "10",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-076",
+   "size": "11",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-077",
+   "size": "3",
+   "stock": 11
+  },
+  {
+   "product_id": "ut-077",
+   "size": "4",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-077",
+   "size": "5",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-077",
+   "size": "6",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-077",
+   "size": "7",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-077",
+   "size": "8",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-078",
+   "size": "3",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-078",
+   "size": "4",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-078",
+   "size": "5",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-078",
+   "size": "6",
+   "stock": 0
+  },
+  {
+   "product_id": "ut-078",
+   "size": "7",
+   "stock": 12
+  },
+  {
+   "product_id": "ut-078",
+   "size": "8",
+   "stock": 4
+  },
+  {
+   "product_id": "ut-079",
+   "size": "Free",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-080",
+   "size": "Free",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-081",
+   "size": "Free",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-082",
+   "size": "Free",
+   "stock": 8
+  },
+  {
+   "product_id": "ut-083",
+   "size": "Free",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-084",
+   "size": "Free",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-085",
+   "size": "Free",
+   "stock": 7
+  },
+  {
+   "product_id": "ut-086",
+   "size": "Free",
+   "stock": 10
+  },
+  {
+   "product_id": "ut-087",
+   "size": "Free",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-088",
+   "size": "Free",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-089",
+   "size": "Free",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-090",
+   "size": "Free",
+   "stock": 9
+  },
+  {
+   "product_id": "ut-091",
+   "size": "Free",
+   "stock": 3
+  },
+  {
+   "product_id": "ut-092",
+   "size": "Free",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-093",
+   "size": "Free",
+   "stock": 5
+  },
+  {
+   "product_id": "ut-094",
+   "size": "Free",
+   "stock": 11
+  }
+ ],
+ "price_history": [
+  {
+   "product_id": "ut-001",
+   "price_inr": 1799,
+   "mrp_inr": 1999,
+   "changed_at": "2026-05-14T11:00:00"
+  },
+  {
+   "product_id": "ut-002",
+   "price_inr": 3299,
+   "mrp_inr": 4099,
+   "changed_at": "2026-06-07T20:00:00"
+  },
+  {
+   "product_id": "ut-003",
+   "price_inr": 1199,
+   "mrp_inr": 1199,
+   "changed_at": "2026-07-05T19:00:00"
+  },
+  {
+   "product_id": "ut-004",
+   "price_inr": 1999,
+   "mrp_inr": 2199,
+   "changed_at": "2026-06-04T04:00:00"
+  },
+  {
+   "product_id": "ut-005",
+   "price_inr": 1999,
+   "mrp_inr": 2899,
+   "changed_at": "2026-05-21T12:00:00"
+  },
+  {
+   "product_id": "ut-006",
+   "price_inr": 2199,
+   "mrp_inr": 2199,
+   "changed_at": "2026-06-03T08:00:00"
+  },
+  {
+   "product_id": "ut-007",
+   "price_inr": 1699,
+   "mrp_inr": 2099,
+   "changed_at": "2026-05-11T01:00:00"
+  },
+  {
+   "product_id": "ut-008",
+   "price_inr": 1899,
+   "mrp_inr": 1899,
+   "changed_at": "2026-09-09T06:00:00"
+  },
+  {
+   "product_id": "ut-009",
+   "price_inr": 1999,
+   "mrp_inr": 1999,
+   "changed_at": "2026-07-03T06:00:00"
+  },
+  {
+   "product_id": "ut-010",
+   "price_inr": 2299,
+   "mrp_inr": 2599,
+   "changed_at": "2026-09-07T14:00:00"
+  },
+  {
+   "product_id": "ut-011",
+   "price_inr": 1599,
+   "mrp_inr": 1999,
+   "changed_at": "2026-09-20T10:00:00"
+  },
+  {
+   "product_id": "ut-012",
+   "price_inr": 1799,
+   "mrp_inr": 1799,
+   "changed_at": "2026-05-05T16:00:00"
+  },
+  {
+   "product_id": "ut-013",
+   "price_inr": 599,
+   "mrp_inr": 699,
+   "changed_at": "2026-09-06T06:00:00"
+  },
+  {
+   "product_id": "ut-014",
+   "price_inr": 899,
+   "mrp_inr": 899,
+   "changed_at": "2026-05-01T23:00:00"
+  },
+  {
+   "product_id": "ut-015",
+   "price_inr": 999,
+   "mrp_inr": 1399,
+   "changed_at": "2026-05-03T21:00:00"
+  },
+  {
+   "product_id": "ut-016",
+   "price_inr": 699,
+   "mrp_inr": 899,
+   "changed_at": "2026-05-29T03:00:00"
+  },
+  {
+   "product_id": "ut-017",
+   "price_inr": 799,
+   "mrp_inr": 799,
+   "changed_at": "2026-09-03T09:00:00"
+  },
+  {
+   "product_id": "ut-018",
+   "price_inr": 1499,
+   "mrp_inr": 1499,
+   "changed_at": "2026-06-06T10:00:00"
+  },
+  {
+   "product_id": "ut-019",
+   "price_inr": 1699,
+   "mrp_inr": 2399,
+   "changed_at": "2026-07-15T10:00:00"
+  },
+  {
+   "product_id": "ut-020",
+   "price_inr": 1499,
+   "mrp_inr": 1499,
+   "changed_at": "2026-07-11T20:00:00"
+  },
+  {
+   "product_id": "ut-021",
+   "price_inr": 2199,
+   "mrp_inr": 2399,
+   "changed_at": "2026-05-18T23:00:00"
+  },
+  {
+   "product_id": "ut-022",
+   "price_inr": 1999,
+   "mrp_inr": 2499,
+   "changed_at": "2026-06-18T23:00:00"
+  },
+  {
+   "product_id": "ut-023",
+   "price_inr": 1799,
+   "mrp_inr": 1799,
+   "changed_at": "2026-08-22T08:00:00"
+  },
+  {
+   "product_id": "ut-024",
+   "price_inr": 2799,
+   "mrp_inr": 2799,
+   "changed_at": "2026-09-11T14:00:00"
+  },
+  {
+   "product_id": "ut-025",
+   "price_inr": 2499,
+   "mrp_inr": 2499,
+   "changed_at": "2026-06-07T06:00:00"
+  },
+  {
+   "product_id": "ut-026",
+   "price_inr": 2299,
+   "mrp_inr": 2599,
+   "changed_at": "2026-09-20T12:00:00"
+  },
+  {
+   "product_id": "ut-027",
+   "price_inr": 1999,
+   "mrp_inr": 2899,
+   "changed_at": "2026-06-18T08:00:00"
+  },
+  {
+   "product_id": "ut-028",
+   "price_inr": 2499,
+   "mrp_inr": 2499,
+   "changed_at": "2026-05-16T16:00:00"
+  },
+  {
+   "product_id": "ut-029",
+   "price_inr": 2799,
+   "mrp_inr": 2799,
+   "changed_at": "2026-07-28T03:00:00"
+  },
+  {
+   "product_id": "ut-030",
+   "price_inr": 1999,
+   "mrp_inr": 1999,
+   "changed_at": "2026-06-19T19:00:00"
+  },
+  {
+   "product_id": "ut-031",
+   "price_inr": 1799,
+   "mrp_inr": 1999,
+   "changed_at": "2026-06-15T06:00:00"
+  },
+  {
+   "product_id": "ut-032",
+   "price_inr": 1799,
+   "mrp_inr": 1999,
+   "changed_at": "2026-06-25T18:00:00"
+  },
+  {
+   "product_id": "ut-033",
+   "price_inr": 1999,
+   "mrp_inr": 2899,
+   "changed_at": "2026-05-07T23:00:00"
+  },
+  {
+   "product_id": "ut-034",
+   "price_inr": 2499,
+   "mrp_inr": 2799,
+   "changed_at": "2026-07-30T13:00:00"
+  },
+  {
+   "product_id": "ut-035",
+   "price_inr": 2299,
+   "mrp_inr": 3299,
+   "changed_at": "2026-08-08T11:00:00"
+  },
+  {
+   "product_id": "ut-036",
+   "price_inr": 2499,
+   "mrp_inr": 3599,
+   "changed_at": "2026-07-28T13:00:00"
+  },
+  {
+   "product_id": "ut-037",
+   "price_inr": 1299,
+   "mrp_inr": 1399,
+   "changed_at": "2026-06-18T08:00:00"
+  },
+  {
+   "product_id": "ut-038",
+   "price_inr": 999,
+   "mrp_inr": 1099,
+   "changed_at": "2026-05-18T12:00:00"
+  },
+  {
+   "product_id": "ut-039",
+   "price_inr": 1799,
+   "mrp_inr": 1999,
+   "changed_at": "2026-08-17T14:00:00"
+  },
+  {
+   "product_id": "ut-040",
+   "price_inr": 1999,
+   "mrp_inr": 2899,
+   "changed_at": "2026-09-01T16:00:00"
+  },
+  {
+   "product_id": "ut-041",
+   "price_inr": 1499,
+   "mrp_inr": 1499,
+   "changed_at": "2026-07-29T08:00:00"
+  },
+  {
+   "product_id": "ut-042",
+   "price_inr": 1299,
+   "mrp_inr": 1899,
+   "changed_at": "2026-07-12T11:00:00"
+  },
+  {
+   "product_id": "ut-043",
+   "price_inr": 999,
+   "mrp_inr": 1099,
+   "changed_at": "2026-05-17T07:00:00"
+  },
+  {
+   "product_id": "ut-044",
+   "price_inr": 3499,
+   "mrp_inr": 3499,
+   "changed_at": "2026-06-22T03:00:00"
+  },
+  {
+   "product_id": "ut-045",
+   "price_inr": 2499,
+   "mrp_inr": 2499,
+   "changed_at": "2026-06-03T13:00:00"
+  },
+  {
+   "product_id": "ut-046",
+   "price_inr": 2799,
+   "mrp_inr": 3099,
+   "changed_at": "2026-09-13T10:00:00"
+  },
+  {
+   "product_id": "ut-047",
+   "price_inr": 2999,
+   "mrp_inr": 2999,
+   "changed_at": "2026-05-06T19:00:00"
+  },
+  {
+   "product_id": "ut-048",
+   "price_inr": 4499,
+   "mrp_inr": 4499,
+   "changed_at": "2026-05-29T20:00:00"
+  },
+  {
+   "product_id": "ut-049",
+   "price_inr": 2999,
+   "mrp_inr": 3699,
+   "changed_at": "2026-06-19T23:00:00"
+  },
+  {
+   "product_id": "ut-050",
+   "price_inr": 3999,
+   "mrp_inr": 3999,
+   "changed_at": "2026-08-19T08:00:00"
+  },
+  {
+   "product_id": "ut-051",
+   "price_inr": 3299,
+   "mrp_inr": 3299,
+   "changed_at": "2026-05-04T06:00:00"
+  },
+  {
+   "product_id": "ut-052",
+   "price_inr": 3999,
+   "mrp_inr": 4399,
+   "changed_at": "2026-06-19T02:00:00"
+  },
+  {
+   "product_id": "ut-053",
+   "price_inr": 4499,
+   "mrp_inr": 6399,
+   "changed_at": "2026-08-20T12:00:00"
+  },
+  {
+   "product_id": "ut-054",
+   "price_inr": 3299,
+   "mrp_inr": 4699,
+   "changed_at": "2026-05-30T17:00:00"
+  },
+  {
+   "product_id": "ut-055",
+   "price_inr": 5999,
+   "mrp_inr": 8599,
+   "changed_at": "2026-09-07T09:00:00"
+  },
+  {
+   "product_id": "ut-056",
+   "price_inr": 4999,
+   "mrp_inr": 4999,
+   "changed_at": "2026-07-24T02:00:00"
+  },
+  {
+   "product_id": "ut-057",
+   "price_inr": 5999,
+   "mrp_inr": 7499,
+   "changed_at": "2026-08-14T03:00:00"
+  },
+  {
+   "product_id": "ut-058",
+   "price_inr": 4299,
+   "mrp_inr": 4799,
+   "changed_at": "2026-05-08T18:00:00"
+  },
+  {
+   "product_id": "ut-059",
+   "price_inr": 2999,
+   "mrp_inr": 2999,
+   "changed_at": "2026-08-29T03:00:00"
+  },
+  {
+   "product_id": "ut-060",
+   "price_inr": 3499,
+   "mrp_inr": 4999,
+   "changed_at": "2026-08-21T20:00:00"
+  },
+  {
+   "product_id": "ut-061",
+   "price_inr": 3299,
+   "mrp_inr": 3299,
+   "changed_at": "2026-05-23T03:00:00"
+  },
+  {
+   "product_id": "ut-062",
+   "price_inr": 2999,
+   "mrp_inr": 3299,
+   "changed_at": "2026-08-20T23:00:00"
+  },
+  {
+   "product_id": "ut-063",
+   "price_inr": 2299,
+   "mrp_inr": 3299,
+   "changed_at": "2026-05-17T11:00:00"
+  },
+  {
+   "product_id": "ut-064",
+   "price_inr": 1999,
+   "mrp_inr": 2499,
+   "changed_at": "2026-07-30T16:00:00"
+  },
+  {
+   "product_id": "ut-065",
+   "price_inr": 3499,
+   "mrp_inr": 3899,
+   "changed_at": "2026-08-08T13:00:00"
+  },
+  {
+   "product_id": "ut-066",
+   "price_inr": 4499,
+   "mrp_inr": 5599,
+   "changed_at": "2026-06-21T00:00:00"
+  },
+  {
+   "product_id": "ut-067",
+   "price_inr": 2999,
+   "mrp_inr": 2999,
+   "changed_at": "2026-08-06T20:00:00"
+  },
+  {
+   "product_id": "ut-068",
+   "price_inr": 3999,
+   "mrp_inr": 3999,
+   "changed_at": "2026-05-10T02:00:00"
+  },
+  {
+   "product_id": "ut-069",
+   "price_inr": 4999,
+   "mrp_inr": 4999,
+   "changed_at": "2026-05-11T05:00:00"
+  },
+  {
+   "product_id": "ut-070",
+   "price_inr": 4499,
+   "mrp_inr": 4499,
+   "changed_at": "2026-08-14T04:00:00"
+  },
+  {
+   "product_id": "ut-071",
+   "price_inr": 3999,
+   "mrp_inr": 4399,
+   "changed_at": "2026-05-14T17:00:00"
+  },
+  {
+   "product_id": "ut-072",
+   "price_inr": 2799,
+   "mrp_inr": 2799,
+   "changed_at": "2026-09-06T04:00:00"
+  },
+  {
+   "product_id": "ut-073",
+   "price_inr": 2999,
+   "mrp_inr": 2999,
+   "changed_at": "2026-08-29T07:00:00"
+  },
+  {
+   "product_id": "ut-074",
+   "price_inr": 1799,
+   "mrp_inr": 1799,
+   "changed_at": "2026-09-07T02:00:00"
+  },
+  {
+   "product_id": "ut-075",
+   "price_inr": 1499,
+   "mrp_inr": 2099,
+   "changed_at": "2026-06-01T13:00:00"
+  },
+  {
+   "product_id": "ut-076",
+   "price_inr": 1799,
+   "mrp_inr": 1799,
+   "changed_at": "2026-05-18T10:00:00"
+  },
+  {
+   "product_id": "ut-077",
+   "price_inr": 4999,
+   "mrp_inr": 7099,
+   "changed_at": "2026-06-28T20:00:00"
+  },
+  {
+   "product_id": "ut-078",
+   "price_inr": 1899,
+   "mrp_inr": 1899,
+   "changed_at": "2026-05-03T00:00:00"
+  },
+  {
+   "product_id": "ut-079",
+   "price_inr": 1999,
+   "mrp_inr": 1999,
+   "changed_at": "2026-06-19T00:00:00"
+  },
+  {
+   "product_id": "ut-080",
+   "price_inr": 2499,
+   "mrp_inr": 2499,
+   "changed_at": "2026-08-01T00:00:00"
+  },
+  {
+   "product_id": "ut-081",
+   "price_inr": 1299,
+   "mrp_inr": 1599,
+   "changed_at": "2026-09-12T12:00:00"
+  },
+  {
+   "product_id": "ut-082",
+   "price_inr": 2299,
+   "mrp_inr": 2299,
+   "changed_at": "2026-06-30T20:00:00"
+  },
+  {
+   "product_id": "ut-083",
+   "price_inr": 1799,
+   "mrp_inr": 1799,
+   "changed_at": "2026-05-31T22:00:00"
+  },
+  {
+   "product_id": "ut-084",
+   "price_inr": 1499,
+   "mrp_inr": 1699,
+   "changed_at": "2026-06-02T10:00:00"
+  },
+  {
+   "product_id": "ut-085",
+   "price_inr": 999,
+   "mrp_inr": 999,
+   "changed_at": "2026-05-30T06:00:00"
+  },
+  {
+   "product_id": "ut-086",
+   "price_inr": 1499,
+   "mrp_inr": 1499,
+   "changed_at": "2026-08-11T13:00:00"
+  },
+  {
+   "product_id": "ut-087",
+   "price_inr": 1799,
+   "mrp_inr": 1799,
+   "changed_at": "2026-06-01T08:00:00"
+  },
+  {
+   "product_id": "ut-088",
+   "price_inr": 3499,
+   "mrp_inr": 3499,
+   "changed_at": "2026-07-26T22:00:00"
+  },
+  {
+   "product_id": "ut-089",
+   "price_inr": 2499,
+   "mrp_inr": 2499,
+   "changed_at": "2026-07-30T04:00:00"
+  },
+  {
+   "product_id": "ut-090",
+   "price_inr": 799,
+   "mrp_inr": 799,
+   "changed_at": "2026-07-01T00:00:00"
+  },
+  {
+   "product_id": "ut-091",
+   "price_inr": 999,
+   "mrp_inr": 1199,
+   "changed_at": "2026-07-09T22:00:00"
+  },
+  {
+   "product_id": "ut-092",
+   "price_inr": 899,
+   "mrp_inr": 1099,
+   "changed_at": "2026-06-14T04:00:00"
+  },
+  {
+   "product_id": "ut-093",
+   "price_inr": 1299,
+   "mrp_inr": 1299,
+   "changed_at": "2026-05-28T06:00:00"
+  },
+  {
+   "product_id": "ut-094",
+   "price_inr": 899,
+   "mrp_inr": 999,
+   "changed_at": "2026-06-10T17:00:00"
+  }
+ ],
+ "stock_events": [
+  {
+   "product_id": "ut-001",
+   "size": "XS",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-05-14T11:00:00"
+  },
+  {
+   "product_id": "ut-001",
+   "size": "S",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-05-14T11:00:00"
+  },
+  {
+   "product_id": "ut-001",
+   "size": "M",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-05-14T11:00:00"
+  },
+  {
+   "product_id": "ut-001",
+   "size": "L",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-05-14T11:00:00"
+  },
+  {
+   "product_id": "ut-001",
+   "size": "XL",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-05-14T11:00:00"
+  },
+  {
+   "product_id": "ut-002",
+   "size": "XS",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-06-07T20:00:00"
+  },
+  {
+   "product_id": "ut-002",
+   "size": "S",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-06-07T20:00:00"
+  },
+  {
+   "product_id": "ut-002",
+   "size": "M",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-06-07T20:00:00"
+  },
+  {
+   "product_id": "ut-002",
+   "size": "L",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-06-07T20:00:00"
+  },
+  {
+   "product_id": "ut-002",
+   "size": "XL",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-06-07T20:00:00"
+  },
+  {
+   "product_id": "ut-003",
+   "size": "XS",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-07-05T19:00:00"
+  },
+  {
+   "product_id": "ut-003",
+   "size": "S",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-07-05T19:00:00"
+  },
+  {
+   "product_id": "ut-003",
+   "size": "M",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-07-05T19:00:00"
+  },
+  {
+   "product_id": "ut-003",
+   "size": "L",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-07-05T19:00:00"
+  },
+  {
+   "product_id": "ut-003",
+   "size": "XL",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-07-05T19:00:00"
+  },
+  {
+   "product_id": "ut-004",
+   "size": "XS",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-06-04T04:00:00"
+  },
+  {
+   "product_id": "ut-004",
+   "size": "S",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-06-04T04:00:00"
+  },
+  {
+   "product_id": "ut-004",
+   "size": "M",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-06-04T04:00:00"
+  },
+  {
+   "product_id": "ut-004",
+   "size": "L",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-06-04T04:00:00"
+  },
+  {
+   "product_id": "ut-004",
+   "size": "XL",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-06-04T04:00:00"
+  },
+  {
+   "product_id": "ut-005",
+   "size": "S",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-05-21T12:00:00"
+  },
+  {
+   "product_id": "ut-005",
+   "size": "M",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-21T12:00:00"
+  },
+  {
+   "product_id": "ut-005",
+   "size": "L",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-05-21T12:00:00"
+  },
+  {
+   "product_id": "ut-005",
+   "size": "XL",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-05-21T12:00:00"
+  },
+  {
+   "product_id": "ut-005",
+   "size": "XXL",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-05-21T12:00:00"
+  },
+  {
+   "product_id": "ut-006",
+   "size": "S",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-06-03T08:00:00"
+  },
+  {
+   "product_id": "ut-006",
+   "size": "M",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-06-03T08:00:00"
+  },
+  {
+   "product_id": "ut-006",
+   "size": "L",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-06-03T08:00:00"
+  },
+  {
+   "product_id": "ut-006",
+   "size": "XL",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-06-03T08:00:00"
+  },
+  {
+   "product_id": "ut-006",
+   "size": "XXL",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-06-03T08:00:00"
+  },
+  {
+   "product_id": "ut-007",
+   "size": "XS",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-05-11T01:00:00"
+  },
+  {
+   "product_id": "ut-007",
+   "size": "S",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-05-11T01:00:00"
+  },
+  {
+   "product_id": "ut-007",
+   "size": "M",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-05-11T01:00:00"
+  },
+  {
+   "product_id": "ut-007",
+   "size": "L",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-05-11T01:00:00"
+  },
+  {
+   "product_id": "ut-007",
+   "size": "XL",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-05-11T01:00:00"
+  },
+  {
+   "product_id": "ut-007",
+   "size": "XXL",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-05-11T01:00:00"
+  },
+  {
+   "product_id": "ut-008",
+   "size": "XS",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-09-09T06:00:00"
+  },
+  {
+   "product_id": "ut-008",
+   "size": "S",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-09-09T06:00:00"
+  },
+  {
+   "product_id": "ut-008",
+   "size": "M",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-09-09T06:00:00"
+  },
+  {
+   "product_id": "ut-008",
+   "size": "L",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-09-09T06:00:00"
+  },
+  {
+   "product_id": "ut-008",
+   "size": "XL",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-09-09T06:00:00"
+  },
+  {
+   "product_id": "ut-009",
+   "size": "S",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-07-03T06:00:00"
+  },
+  {
+   "product_id": "ut-009",
+   "size": "M",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-07-03T06:00:00"
+  },
+  {
+   "product_id": "ut-009",
+   "size": "L",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-07-03T06:00:00"
+  },
+  {
+   "product_id": "ut-009",
+   "size": "XL",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-07-03T06:00:00"
+  },
+  {
+   "product_id": "ut-009",
+   "size": "XXL",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-07-03T06:00:00"
+  },
+  {
+   "product_id": "ut-010",
+   "size": "S",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-09-07T14:00:00"
+  },
+  {
+   "product_id": "ut-010",
+   "size": "M",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-09-07T14:00:00"
+  },
+  {
+   "product_id": "ut-010",
+   "size": "L",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-09-07T14:00:00"
+  },
+  {
+   "product_id": "ut-010",
+   "size": "XL",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-09-07T14:00:00"
+  },
+  {
+   "product_id": "ut-010",
+   "size": "XXL",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-09-07T14:00:00"
+  },
+  {
+   "product_id": "ut-011",
+   "size": "XS",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-09-20T10:00:00"
+  },
+  {
+   "product_id": "ut-011",
+   "size": "S",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-09-20T10:00:00"
+  },
+  {
+   "product_id": "ut-011",
+   "size": "M",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-09-20T10:00:00"
+  },
+  {
+   "product_id": "ut-011",
+   "size": "L",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-09-20T10:00:00"
+  },
+  {
+   "product_id": "ut-011",
+   "size": "XL",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-09-20T10:00:00"
+  },
+  {
+   "product_id": "ut-012",
+   "size": "S",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-05-05T16:00:00"
+  },
+  {
+   "product_id": "ut-012",
+   "size": "M",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-05-05T16:00:00"
+  },
+  {
+   "product_id": "ut-012",
+   "size": "L",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-05-05T16:00:00"
+  },
+  {
+   "product_id": "ut-012",
+   "size": "XL",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-05-05T16:00:00"
+  },
+  {
+   "product_id": "ut-012",
+   "size": "XXL",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-05T16:00:00"
+  },
+  {
+   "product_id": "ut-013",
+   "size": "XS",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-09-06T06:00:00"
+  },
+  {
+   "product_id": "ut-013",
+   "size": "S",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-09-06T06:00:00"
+  },
+  {
+   "product_id": "ut-013",
+   "size": "M",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-09-06T06:00:00"
+  },
+  {
+   "product_id": "ut-013",
+   "size": "L",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-09-06T06:00:00"
+  },
+  {
+   "product_id": "ut-013",
+   "size": "XL",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-09-06T06:00:00"
+  },
+  {
+   "product_id": "ut-013",
+   "size": "XXL",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-09-06T06:00:00"
+  },
+  {
+   "product_id": "ut-014",
+   "size": "XS",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-01T23:00:00"
+  },
+  {
+   "product_id": "ut-014",
+   "size": "S",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-05-01T23:00:00"
+  },
+  {
+   "product_id": "ut-014",
+   "size": "M",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-01T23:00:00"
+  },
+  {
+   "product_id": "ut-014",
+   "size": "L",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-05-01T23:00:00"
+  },
+  {
+   "product_id": "ut-014",
+   "size": "XL",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-05-01T23:00:00"
+  },
+  {
+   "product_id": "ut-014",
+   "size": "XXL",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-01T23:00:00"
+  },
+  {
+   "product_id": "ut-015",
+   "size": "S",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-05-03T21:00:00"
+  },
+  {
+   "product_id": "ut-015",
+   "size": "M",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-05-03T21:00:00"
+  },
+  {
+   "product_id": "ut-015",
+   "size": "L",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-05-03T21:00:00"
+  },
+  {
+   "product_id": "ut-015",
+   "size": "XL",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-05-03T21:00:00"
+  },
+  {
+   "product_id": "ut-015",
+   "size": "XXL",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-05-03T21:00:00"
+  },
+  {
+   "product_id": "ut-016",
+   "size": "XS",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-05-29T03:00:00"
+  },
+  {
+   "product_id": "ut-016",
+   "size": "S",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-05-29T03:00:00"
+  },
+  {
+   "product_id": "ut-016",
+   "size": "M",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-05-29T03:00:00"
+  },
+  {
+   "product_id": "ut-016",
+   "size": "L",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-05-29T03:00:00"
+  },
+  {
+   "product_id": "ut-016",
+   "size": "XL",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-05-29T03:00:00"
+  },
+  {
+   "product_id": "ut-017",
+   "size": "XS",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-09-03T09:00:00"
+  },
+  {
+   "product_id": "ut-017",
+   "size": "S",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-09-03T09:00:00"
+  },
+  {
+   "product_id": "ut-017",
+   "size": "M",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-09-03T09:00:00"
+  },
+  {
+   "product_id": "ut-017",
+   "size": "L",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-09-03T09:00:00"
+  },
+  {
+   "product_id": "ut-017",
+   "size": "XL",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-09-03T09:00:00"
+  },
+  {
+   "product_id": "ut-018",
+   "size": "XS",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-06-06T10:00:00"
+  },
+  {
+   "product_id": "ut-018",
+   "size": "S",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-06-06T10:00:00"
+  },
+  {
+   "product_id": "ut-018",
+   "size": "M",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-06-06T10:00:00"
+  },
+  {
+   "product_id": "ut-018",
+   "size": "L",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-06-06T10:00:00"
+  },
+  {
+   "product_id": "ut-018",
+   "size": "XL",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-06-06T10:00:00"
+  },
+  {
+   "product_id": "ut-019",
+   "size": "XS",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-07-15T10:00:00"
+  },
+  {
+   "product_id": "ut-019",
+   "size": "S",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-07-15T10:00:00"
+  },
+  {
+   "product_id": "ut-019",
+   "size": "M",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-07-15T10:00:00"
+  },
+  {
+   "product_id": "ut-019",
+   "size": "L",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-07-15T10:00:00"
+  },
+  {
+   "product_id": "ut-019",
+   "size": "XL",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-07-15T10:00:00"
+  },
+  {
+   "product_id": "ut-020",
+   "size": "XS",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-07-11T20:00:00"
+  },
+  {
+   "product_id": "ut-020",
+   "size": "S",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-07-11T20:00:00"
+  },
+  {
+   "product_id": "ut-020",
+   "size": "M",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-07-11T20:00:00"
+  },
+  {
+   "product_id": "ut-020",
+   "size": "L",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-07-11T20:00:00"
+  },
+  {
+   "product_id": "ut-020",
+   "size": "XL",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-07-11T20:00:00"
+  },
+  {
+   "product_id": "ut-021",
+   "size": "S",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-05-18T23:00:00"
+  },
+  {
+   "product_id": "ut-021",
+   "size": "M",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-05-18T23:00:00"
+  },
+  {
+   "product_id": "ut-021",
+   "size": "L",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-18T23:00:00"
+  },
+  {
+   "product_id": "ut-021",
+   "size": "XL",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-05-18T23:00:00"
+  },
+  {
+   "product_id": "ut-021",
+   "size": "XXL",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-05-18T23:00:00"
+  },
+  {
+   "product_id": "ut-022",
+   "size": "XS",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-06-18T23:00:00"
+  },
+  {
+   "product_id": "ut-022",
+   "size": "S",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-18T23:00:00"
+  },
+  {
+   "product_id": "ut-022",
+   "size": "M",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-06-18T23:00:00"
+  },
+  {
+   "product_id": "ut-022",
+   "size": "L",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-06-18T23:00:00"
+  },
+  {
+   "product_id": "ut-022",
+   "size": "XL",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-06-18T23:00:00"
+  },
+  {
+   "product_id": "ut-022",
+   "size": "XXL",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-06-18T23:00:00"
+  },
+  {
+   "product_id": "ut-023",
+   "size": "XS",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-08-22T08:00:00"
+  },
+  {
+   "product_id": "ut-023",
+   "size": "S",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-08-22T08:00:00"
+  },
+  {
+   "product_id": "ut-023",
+   "size": "M",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-08-22T08:00:00"
+  },
+  {
+   "product_id": "ut-023",
+   "size": "L",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-08-22T08:00:00"
+  },
+  {
+   "product_id": "ut-023",
+   "size": "XL",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-08-22T08:00:00"
+  },
+  {
+   "product_id": "ut-023",
+   "size": "XXL",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-08-22T08:00:00"
+  },
+  {
+   "product_id": "ut-024",
+   "size": "XS",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-09-11T14:00:00"
+  },
+  {
+   "product_id": "ut-024",
+   "size": "S",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-09-11T14:00:00"
+  },
+  {
+   "product_id": "ut-024",
+   "size": "M",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-09-11T14:00:00"
+  },
+  {
+   "product_id": "ut-024",
+   "size": "L",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-09-11T14:00:00"
+  },
+  {
+   "product_id": "ut-024",
+   "size": "XL",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-09-11T14:00:00"
+  },
+  {
+   "product_id": "ut-025",
+   "size": "S",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-07T06:00:00"
+  },
+  {
+   "product_id": "ut-025",
+   "size": "M",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-07T06:00:00"
+  },
+  {
+   "product_id": "ut-025",
+   "size": "L",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-06-07T06:00:00"
+  },
+  {
+   "product_id": "ut-025",
+   "size": "XL",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-06-07T06:00:00"
+  },
+  {
+   "product_id": "ut-025",
+   "size": "XXL",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-06-07T06:00:00"
+  },
+  {
+   "product_id": "ut-026",
+   "size": "26",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-09-20T12:00:00"
+  },
+  {
+   "product_id": "ut-026",
+   "size": "28",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-09-20T12:00:00"
+  },
+  {
+   "product_id": "ut-026",
+   "size": "30",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-09-20T12:00:00"
+  },
+  {
+   "product_id": "ut-026",
+   "size": "32",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-09-20T12:00:00"
+  },
+  {
+   "product_id": "ut-026",
+   "size": "34",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-09-20T12:00:00"
+  },
+  {
+   "product_id": "ut-027",
+   "size": "26",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-18T08:00:00"
+  },
+  {
+   "product_id": "ut-027",
+   "size": "28",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-06-18T08:00:00"
+  },
+  {
+   "product_id": "ut-027",
+   "size": "30",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-18T08:00:00"
+  },
+  {
+   "product_id": "ut-027",
+   "size": "32",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-06-18T08:00:00"
+  },
+  {
+   "product_id": "ut-027",
+   "size": "34",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-06-18T08:00:00"
+  },
+  {
+   "product_id": "ut-028",
+   "size": "28",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-05-16T16:00:00"
+  },
+  {
+   "product_id": "ut-028",
+   "size": "30",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-05-16T16:00:00"
+  },
+  {
+   "product_id": "ut-028",
+   "size": "32",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-05-16T16:00:00"
+  },
+  {
+   "product_id": "ut-028",
+   "size": "34",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-05-16T16:00:00"
+  },
+  {
+   "product_id": "ut-028",
+   "size": "36",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-05-16T16:00:00"
+  },
+  {
+   "product_id": "ut-029",
+   "size": "28",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-07-28T03:00:00"
+  },
+  {
+   "product_id": "ut-029",
+   "size": "30",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-07-28T03:00:00"
+  },
+  {
+   "product_id": "ut-029",
+   "size": "32",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-07-28T03:00:00"
+  },
+  {
+   "product_id": "ut-029",
+   "size": "34",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-07-28T03:00:00"
+  },
+  {
+   "product_id": "ut-029",
+   "size": "36",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-07-28T03:00:00"
+  },
+  {
+   "product_id": "ut-030",
+   "size": "26",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-06-19T19:00:00"
+  },
+  {
+   "product_id": "ut-030",
+   "size": "28",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-06-19T19:00:00"
+  },
+  {
+   "product_id": "ut-030",
+   "size": "30",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-19T19:00:00"
+  },
+  {
+   "product_id": "ut-030",
+   "size": "32",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-06-19T19:00:00"
+  },
+  {
+   "product_id": "ut-030",
+   "size": "34",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-06-19T19:00:00"
+  },
+  {
+   "product_id": "ut-031",
+   "size": "26",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-06-15T06:00:00"
+  },
+  {
+   "product_id": "ut-031",
+   "size": "28",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-06-15T06:00:00"
+  },
+  {
+   "product_id": "ut-031",
+   "size": "30",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-06-15T06:00:00"
+  },
+  {
+   "product_id": "ut-031",
+   "size": "32",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-06-15T06:00:00"
+  },
+  {
+   "product_id": "ut-031",
+   "size": "34",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-06-15T06:00:00"
+  },
+  {
+   "product_id": "ut-032",
+   "size": "28",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-06-25T18:00:00"
+  },
+  {
+   "product_id": "ut-032",
+   "size": "30",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-06-25T18:00:00"
+  },
+  {
+   "product_id": "ut-032",
+   "size": "32",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-06-25T18:00:00"
+  },
+  {
+   "product_id": "ut-032",
+   "size": "34",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-06-25T18:00:00"
+  },
+  {
+   "product_id": "ut-032",
+   "size": "36",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-06-25T18:00:00"
+  },
+  {
+   "product_id": "ut-033",
+   "size": "28",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-05-07T23:00:00"
+  },
+  {
+   "product_id": "ut-033",
+   "size": "30",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-05-07T23:00:00"
+  },
+  {
+   "product_id": "ut-033",
+   "size": "32",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-05-07T23:00:00"
+  },
+  {
+   "product_id": "ut-033",
+   "size": "34",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-05-07T23:00:00"
+  },
+  {
+   "product_id": "ut-033",
+   "size": "36",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-05-07T23:00:00"
+  },
+  {
+   "product_id": "ut-034",
+   "size": "28",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-07-30T13:00:00"
+  },
+  {
+   "product_id": "ut-034",
+   "size": "30",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-07-30T13:00:00"
+  },
+  {
+   "product_id": "ut-034",
+   "size": "32",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-07-30T13:00:00"
+  },
+  {
+   "product_id": "ut-034",
+   "size": "34",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-07-30T13:00:00"
+  },
+  {
+   "product_id": "ut-034",
+   "size": "36",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-07-30T13:00:00"
+  },
+  {
+   "product_id": "ut-035",
+   "size": "26",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-08-08T11:00:00"
+  },
+  {
+   "product_id": "ut-035",
+   "size": "28",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-08-08T11:00:00"
+  },
+  {
+   "product_id": "ut-035",
+   "size": "30",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-08-08T11:00:00"
+  },
+  {
+   "product_id": "ut-035",
+   "size": "32",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-08-08T11:00:00"
+  },
+  {
+   "product_id": "ut-035",
+   "size": "34",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-08-08T11:00:00"
+  },
+  {
+   "product_id": "ut-035",
+   "size": "36",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-08-08T11:00:00"
+  },
+  {
+   "product_id": "ut-036",
+   "size": "26",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-07-28T13:00:00"
+  },
+  {
+   "product_id": "ut-036",
+   "size": "28",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-07-28T13:00:00"
+  },
+  {
+   "product_id": "ut-036",
+   "size": "30",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-07-28T13:00:00"
+  },
+  {
+   "product_id": "ut-036",
+   "size": "32",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-07-28T13:00:00"
+  },
+  {
+   "product_id": "ut-036",
+   "size": "34",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-07-28T13:00:00"
+  },
+  {
+   "product_id": "ut-036",
+   "size": "36",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-07-28T13:00:00"
+  },
+  {
+   "product_id": "ut-037",
+   "size": "26",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-06-18T08:00:00"
+  },
+  {
+   "product_id": "ut-037",
+   "size": "28",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-06-18T08:00:00"
+  },
+  {
+   "product_id": "ut-037",
+   "size": "30",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-06-18T08:00:00"
+  },
+  {
+   "product_id": "ut-037",
+   "size": "32",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-06-18T08:00:00"
+  },
+  {
+   "product_id": "ut-037",
+   "size": "34",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-06-18T08:00:00"
+  },
+  {
+   "product_id": "ut-038",
+   "size": "26",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-05-18T12:00:00"
+  },
+  {
+   "product_id": "ut-038",
+   "size": "28",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-05-18T12:00:00"
+  },
+  {
+   "product_id": "ut-038",
+   "size": "30",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-18T12:00:00"
+  },
+  {
+   "product_id": "ut-038",
+   "size": "32",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-05-18T12:00:00"
+  },
+  {
+   "product_id": "ut-038",
+   "size": "34",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-05-18T12:00:00"
+  },
+  {
+   "product_id": "ut-039",
+   "size": "26",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-08-17T14:00:00"
+  },
+  {
+   "product_id": "ut-039",
+   "size": "28",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-08-17T14:00:00"
+  },
+  {
+   "product_id": "ut-039",
+   "size": "30",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-08-17T14:00:00"
+  },
+  {
+   "product_id": "ut-039",
+   "size": "32",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-17T14:00:00"
+  },
+  {
+   "product_id": "ut-039",
+   "size": "34",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-08-17T14:00:00"
+  },
+  {
+   "product_id": "ut-040",
+   "size": "26",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-09-01T16:00:00"
+  },
+  {
+   "product_id": "ut-040",
+   "size": "28",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-09-01T16:00:00"
+  },
+  {
+   "product_id": "ut-040",
+   "size": "30",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-09-01T16:00:00"
+  },
+  {
+   "product_id": "ut-040",
+   "size": "32",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-09-01T16:00:00"
+  },
+  {
+   "product_id": "ut-040",
+   "size": "34",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-09-01T16:00:00"
+  },
+  {
+   "product_id": "ut-041",
+   "size": "26",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-07-29T08:00:00"
+  },
+  {
+   "product_id": "ut-041",
+   "size": "28",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-07-29T08:00:00"
+  },
+  {
+   "product_id": "ut-041",
+   "size": "30",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-07-29T08:00:00"
+  },
+  {
+   "product_id": "ut-041",
+   "size": "32",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-07-29T08:00:00"
+  },
+  {
+   "product_id": "ut-041",
+   "size": "34",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-07-29T08:00:00"
+  },
+  {
+   "product_id": "ut-042",
+   "size": "28",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-07-12T11:00:00"
+  },
+  {
+   "product_id": "ut-042",
+   "size": "30",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-07-12T11:00:00"
+  },
+  {
+   "product_id": "ut-042",
+   "size": "32",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-07-12T11:00:00"
+  },
+  {
+   "product_id": "ut-042",
+   "size": "34",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-07-12T11:00:00"
+  },
+  {
+   "product_id": "ut-042",
+   "size": "36",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-07-12T11:00:00"
+  },
+  {
+   "product_id": "ut-043",
+   "size": "26",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-05-17T07:00:00"
+  },
+  {
+   "product_id": "ut-043",
+   "size": "28",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-05-17T07:00:00"
+  },
+  {
+   "product_id": "ut-043",
+   "size": "30",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-05-17T07:00:00"
+  },
+  {
+   "product_id": "ut-043",
+   "size": "32",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-05-17T07:00:00"
+  },
+  {
+   "product_id": "ut-043",
+   "size": "34",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-05-17T07:00:00"
+  },
+  {
+   "product_id": "ut-044",
+   "size": "XS",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-22T03:00:00"
+  },
+  {
+   "product_id": "ut-044",
+   "size": "S",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-06-22T03:00:00"
+  },
+  {
+   "product_id": "ut-044",
+   "size": "M",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-06-22T03:00:00"
+  },
+  {
+   "product_id": "ut-044",
+   "size": "L",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-06-22T03:00:00"
+  },
+  {
+   "product_id": "ut-044",
+   "size": "XL",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-06-22T03:00:00"
+  },
+  {
+   "product_id": "ut-045",
+   "size": "XS",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-06-03T13:00:00"
+  },
+  {
+   "product_id": "ut-045",
+   "size": "S",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-06-03T13:00:00"
+  },
+  {
+   "product_id": "ut-045",
+   "size": "M",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-03T13:00:00"
+  },
+  {
+   "product_id": "ut-045",
+   "size": "L",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-06-03T13:00:00"
+  },
+  {
+   "product_id": "ut-045",
+   "size": "XL",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-03T13:00:00"
+  },
+  {
+   "product_id": "ut-046",
+   "size": "XS",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-09-13T10:00:00"
+  },
+  {
+   "product_id": "ut-046",
+   "size": "S",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-09-13T10:00:00"
+  },
+  {
+   "product_id": "ut-046",
+   "size": "M",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-09-13T10:00:00"
+  },
+  {
+   "product_id": "ut-046",
+   "size": "L",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-09-13T10:00:00"
+  },
+  {
+   "product_id": "ut-046",
+   "size": "XL",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-09-13T10:00:00"
+  },
+  {
+   "product_id": "ut-047",
+   "size": "XS",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-05-06T19:00:00"
+  },
+  {
+   "product_id": "ut-047",
+   "size": "S",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-05-06T19:00:00"
+  },
+  {
+   "product_id": "ut-047",
+   "size": "M",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-05-06T19:00:00"
+  },
+  {
+   "product_id": "ut-047",
+   "size": "L",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-05-06T19:00:00"
+  },
+  {
+   "product_id": "ut-047",
+   "size": "XL",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-05-06T19:00:00"
+  },
+  {
+   "product_id": "ut-048",
+   "size": "XS",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-05-29T20:00:00"
+  },
+  {
+   "product_id": "ut-048",
+   "size": "S",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-05-29T20:00:00"
+  },
+  {
+   "product_id": "ut-048",
+   "size": "M",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-05-29T20:00:00"
+  },
+  {
+   "product_id": "ut-048",
+   "size": "L",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-05-29T20:00:00"
+  },
+  {
+   "product_id": "ut-048",
+   "size": "XL",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-05-29T20:00:00"
+  },
+  {
+   "product_id": "ut-049",
+   "size": "XS",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-06-19T23:00:00"
+  },
+  {
+   "product_id": "ut-049",
+   "size": "S",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-06-19T23:00:00"
+  },
+  {
+   "product_id": "ut-049",
+   "size": "M",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-06-19T23:00:00"
+  },
+  {
+   "product_id": "ut-049",
+   "size": "L",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-06-19T23:00:00"
+  },
+  {
+   "product_id": "ut-049",
+   "size": "XL",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-06-19T23:00:00"
+  },
+  {
+   "product_id": "ut-050",
+   "size": "XS",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-19T08:00:00"
+  },
+  {
+   "product_id": "ut-050",
+   "size": "S",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-08-19T08:00:00"
+  },
+  {
+   "product_id": "ut-050",
+   "size": "M",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-19T08:00:00"
+  },
+  {
+   "product_id": "ut-050",
+   "size": "L",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-08-19T08:00:00"
+  },
+  {
+   "product_id": "ut-050",
+   "size": "XL",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-08-19T08:00:00"
+  },
+  {
+   "product_id": "ut-051",
+   "size": "XS",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-05-04T06:00:00"
+  },
+  {
+   "product_id": "ut-051",
+   "size": "S",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-05-04T06:00:00"
+  },
+  {
+   "product_id": "ut-051",
+   "size": "M",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-05-04T06:00:00"
+  },
+  {
+   "product_id": "ut-051",
+   "size": "L",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-05-04T06:00:00"
+  },
+  {
+   "product_id": "ut-051",
+   "size": "XL",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-05-04T06:00:00"
+  },
+  {
+   "product_id": "ut-052",
+   "size": "XS",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-06-19T02:00:00"
+  },
+  {
+   "product_id": "ut-052",
+   "size": "S",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-06-19T02:00:00"
+  },
+  {
+   "product_id": "ut-052",
+   "size": "M",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-06-19T02:00:00"
+  },
+  {
+   "product_id": "ut-052",
+   "size": "L",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-06-19T02:00:00"
+  },
+  {
+   "product_id": "ut-052",
+   "size": "XL",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-06-19T02:00:00"
+  },
+  {
+   "product_id": "ut-053",
+   "size": "XS",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-20T12:00:00"
+  },
+  {
+   "product_id": "ut-053",
+   "size": "S",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-20T12:00:00"
+  },
+  {
+   "product_id": "ut-053",
+   "size": "M",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-20T12:00:00"
+  },
+  {
+   "product_id": "ut-053",
+   "size": "L",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-20T12:00:00"
+  },
+  {
+   "product_id": "ut-053",
+   "size": "XL",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-20T12:00:00"
+  },
+  {
+   "product_id": "ut-054",
+   "size": "S",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-05-30T17:00:00"
+  },
+  {
+   "product_id": "ut-054",
+   "size": "M",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-05-30T17:00:00"
+  },
+  {
+   "product_id": "ut-054",
+   "size": "L",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-05-30T17:00:00"
+  },
+  {
+   "product_id": "ut-054",
+   "size": "XL",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-05-30T17:00:00"
+  },
+  {
+   "product_id": "ut-054",
+   "size": "XXL",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-05-30T17:00:00"
+  },
+  {
+   "product_id": "ut-055",
+   "size": "XS",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-09-07T09:00:00"
+  },
+  {
+   "product_id": "ut-055",
+   "size": "S",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-09-07T09:00:00"
+  },
+  {
+   "product_id": "ut-055",
+   "size": "M",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-09-07T09:00:00"
+  },
+  {
+   "product_id": "ut-055",
+   "size": "L",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-09-07T09:00:00"
+  },
+  {
+   "product_id": "ut-055",
+   "size": "XL",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-09-07T09:00:00"
+  },
+  {
+   "product_id": "ut-056",
+   "size": "XS",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-07-24T02:00:00"
+  },
+  {
+   "product_id": "ut-056",
+   "size": "S",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-07-24T02:00:00"
+  },
+  {
+   "product_id": "ut-056",
+   "size": "M",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-07-24T02:00:00"
+  },
+  {
+   "product_id": "ut-056",
+   "size": "L",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-07-24T02:00:00"
+  },
+  {
+   "product_id": "ut-056",
+   "size": "XL",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-07-24T02:00:00"
+  },
+  {
+   "product_id": "ut-057",
+   "size": "S",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-08-14T03:00:00"
+  },
+  {
+   "product_id": "ut-057",
+   "size": "M",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-14T03:00:00"
+  },
+  {
+   "product_id": "ut-057",
+   "size": "L",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-08-14T03:00:00"
+  },
+  {
+   "product_id": "ut-057",
+   "size": "XL",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-08-14T03:00:00"
+  },
+  {
+   "product_id": "ut-057",
+   "size": "XXL",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-08-14T03:00:00"
+  },
+  {
+   "product_id": "ut-058",
+   "size": "XS",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-05-08T18:00:00"
+  },
+  {
+   "product_id": "ut-058",
+   "size": "S",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-05-08T18:00:00"
+  },
+  {
+   "product_id": "ut-058",
+   "size": "M",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-05-08T18:00:00"
+  },
+  {
+   "product_id": "ut-058",
+   "size": "L",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-05-08T18:00:00"
+  },
+  {
+   "product_id": "ut-058",
+   "size": "XL",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-05-08T18:00:00"
+  },
+  {
+   "product_id": "ut-059",
+   "size": "XS",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-08-29T03:00:00"
+  },
+  {
+   "product_id": "ut-059",
+   "size": "S",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-08-29T03:00:00"
+  },
+  {
+   "product_id": "ut-059",
+   "size": "M",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-08-29T03:00:00"
+  },
+  {
+   "product_id": "ut-059",
+   "size": "L",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-08-29T03:00:00"
+  },
+  {
+   "product_id": "ut-059",
+   "size": "XL",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-08-29T03:00:00"
+  },
+  {
+   "product_id": "ut-059",
+   "size": "XXL",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-08-29T03:00:00"
+  },
+  {
+   "product_id": "ut-060",
+   "size": "S",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-08-21T20:00:00"
+  },
+  {
+   "product_id": "ut-060",
+   "size": "M",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-08-21T20:00:00"
+  },
+  {
+   "product_id": "ut-060",
+   "size": "L",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-08-21T20:00:00"
+  },
+  {
+   "product_id": "ut-060",
+   "size": "XL",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-08-21T20:00:00"
+  },
+  {
+   "product_id": "ut-060",
+   "size": "XXL",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-08-21T20:00:00"
+  },
+  {
+   "product_id": "ut-061",
+   "size": "XS",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-05-23T03:00:00"
+  },
+  {
+   "product_id": "ut-061",
+   "size": "S",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-05-23T03:00:00"
+  },
+  {
+   "product_id": "ut-061",
+   "size": "M",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-23T03:00:00"
+  },
+  {
+   "product_id": "ut-061",
+   "size": "L",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-05-23T03:00:00"
+  },
+  {
+   "product_id": "ut-061",
+   "size": "XL",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-05-23T03:00:00"
+  },
+  {
+   "product_id": "ut-062",
+   "size": "S",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-08-20T23:00:00"
+  },
+  {
+   "product_id": "ut-062",
+   "size": "M",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-08-20T23:00:00"
+  },
+  {
+   "product_id": "ut-062",
+   "size": "L",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-08-20T23:00:00"
+  },
+  {
+   "product_id": "ut-062",
+   "size": "XL",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-08-20T23:00:00"
+  },
+  {
+   "product_id": "ut-062",
+   "size": "XXL",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-08-20T23:00:00"
+  },
+  {
+   "product_id": "ut-063",
+   "size": "XS",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-05-17T11:00:00"
+  },
+  {
+   "product_id": "ut-063",
+   "size": "S",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-05-17T11:00:00"
+  },
+  {
+   "product_id": "ut-063",
+   "size": "M",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-05-17T11:00:00"
+  },
+  {
+   "product_id": "ut-063",
+   "size": "L",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-17T11:00:00"
+  },
+  {
+   "product_id": "ut-063",
+   "size": "XL",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-05-17T11:00:00"
+  },
+  {
+   "product_id": "ut-064",
+   "size": "XS",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-07-30T16:00:00"
+  },
+  {
+   "product_id": "ut-064",
+   "size": "S",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-07-30T16:00:00"
+  },
+  {
+   "product_id": "ut-064",
+   "size": "M",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-07-30T16:00:00"
+  },
+  {
+   "product_id": "ut-064",
+   "size": "L",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-07-30T16:00:00"
+  },
+  {
+   "product_id": "ut-064",
+   "size": "XL",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-07-30T16:00:00"
+  },
+  {
+   "product_id": "ut-065",
+   "size": "4",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-08-08T13:00:00"
+  },
+  {
+   "product_id": "ut-065",
+   "size": "5",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-08-08T13:00:00"
+  },
+  {
+   "product_id": "ut-065",
+   "size": "6",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-08-08T13:00:00"
+  },
+  {
+   "product_id": "ut-065",
+   "size": "7",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-08-08T13:00:00"
+  },
+  {
+   "product_id": "ut-065",
+   "size": "8",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-08T13:00:00"
+  },
+  {
+   "product_id": "ut-065",
+   "size": "9",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-08T13:00:00"
+  },
+  {
+   "product_id": "ut-065",
+   "size": "10",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-08-08T13:00:00"
+  },
+  {
+   "product_id": "ut-066",
+   "size": "4",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-06-21T00:00:00"
+  },
+  {
+   "product_id": "ut-066",
+   "size": "5",
+   "delta": 6,
+   "new_stock": 6,
+   "kind": "initial",
+   "at": "2026-06-21T00:00:00"
+  },
+  {
+   "product_id": "ut-066",
+   "size": "6",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-06-21T00:00:00"
+  },
+  {
+   "product_id": "ut-066",
+   "size": "7",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-06-21T00:00:00"
+  },
+  {
+   "product_id": "ut-066",
+   "size": "8",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-06-21T00:00:00"
+  },
+  {
+   "product_id": "ut-066",
+   "size": "9",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-06-21T00:00:00"
+  },
+  {
+   "product_id": "ut-066",
+   "size": "10",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-06-21T00:00:00"
+  },
+  {
+   "product_id": "ut-067",
+   "size": "6",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-08-06T20:00:00"
+  },
+  {
+   "product_id": "ut-067",
+   "size": "7",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-08-06T20:00:00"
+  },
+  {
+   "product_id": "ut-067",
+   "size": "8",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-08-06T20:00:00"
+  },
+  {
+   "product_id": "ut-067",
+   "size": "9",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-08-06T20:00:00"
+  },
+  {
+   "product_id": "ut-067",
+   "size": "10",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-08-06T20:00:00"
+  },
+  {
+   "product_id": "ut-067",
+   "size": "11",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-08-06T20:00:00"
+  },
+  {
+   "product_id": "ut-068",
+   "size": "3",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-05-10T02:00:00"
+  },
+  {
+   "product_id": "ut-068",
+   "size": "4",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-05-10T02:00:00"
+  },
+  {
+   "product_id": "ut-068",
+   "size": "5",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-05-10T02:00:00"
+  },
+  {
+   "product_id": "ut-068",
+   "size": "6",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-10T02:00:00"
+  },
+  {
+   "product_id": "ut-068",
+   "size": "7",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-05-10T02:00:00"
+  },
+  {
+   "product_id": "ut-068",
+   "size": "8",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-05-10T02:00:00"
+  },
+  {
+   "product_id": "ut-069",
+   "size": "3",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-05-11T05:00:00"
+  },
+  {
+   "product_id": "ut-069",
+   "size": "4",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-05-11T05:00:00"
+  },
+  {
+   "product_id": "ut-069",
+   "size": "5",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-05-11T05:00:00"
+  },
+  {
+   "product_id": "ut-069",
+   "size": "6",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-05-11T05:00:00"
+  },
+  {
+   "product_id": "ut-069",
+   "size": "7",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-05-11T05:00:00"
+  },
+  {
+   "product_id": "ut-069",
+   "size": "8",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-11T05:00:00"
+  },
+  {
+   "product_id": "ut-070",
+   "size": "6",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-08-14T04:00:00"
+  },
+  {
+   "product_id": "ut-070",
+   "size": "7",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-08-14T04:00:00"
+  },
+  {
+   "product_id": "ut-070",
+   "size": "8",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-08-14T04:00:00"
+  },
+  {
+   "product_id": "ut-070",
+   "size": "9",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-08-14T04:00:00"
+  },
+  {
+   "product_id": "ut-070",
+   "size": "10",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-08-14T04:00:00"
+  },
+  {
+   "product_id": "ut-070",
+   "size": "11",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-08-14T04:00:00"
+  },
+  {
+   "product_id": "ut-071",
+   "size": "6",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-14T17:00:00"
+  },
+  {
+   "product_id": "ut-071",
+   "size": "7",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-05-14T17:00:00"
+  },
+  {
+   "product_id": "ut-071",
+   "size": "8",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-05-14T17:00:00"
+  },
+  {
+   "product_id": "ut-071",
+   "size": "9",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-05-14T17:00:00"
+  },
+  {
+   "product_id": "ut-071",
+   "size": "10",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-05-14T17:00:00"
+  },
+  {
+   "product_id": "ut-071",
+   "size": "11",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-05-14T17:00:00"
+  },
+  {
+   "product_id": "ut-072",
+   "size": "3",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-09-06T04:00:00"
+  },
+  {
+   "product_id": "ut-072",
+   "size": "4",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-09-06T04:00:00"
+  },
+  {
+   "product_id": "ut-072",
+   "size": "5",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-09-06T04:00:00"
+  },
+  {
+   "product_id": "ut-072",
+   "size": "6",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-09-06T04:00:00"
+  },
+  {
+   "product_id": "ut-072",
+   "size": "7",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-09-06T04:00:00"
+  },
+  {
+   "product_id": "ut-072",
+   "size": "8",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-09-06T04:00:00"
+  },
+  {
+   "product_id": "ut-073",
+   "size": "3",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-08-29T07:00:00"
+  },
+  {
+   "product_id": "ut-073",
+   "size": "4",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-08-29T07:00:00"
+  },
+  {
+   "product_id": "ut-073",
+   "size": "5",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-08-29T07:00:00"
+  },
+  {
+   "product_id": "ut-073",
+   "size": "6",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-29T07:00:00"
+  },
+  {
+   "product_id": "ut-073",
+   "size": "7",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-08-29T07:00:00"
+  },
+  {
+   "product_id": "ut-073",
+   "size": "8",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-08-29T07:00:00"
+  },
+  {
+   "product_id": "ut-074",
+   "size": "3",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-09-07T02:00:00"
+  },
+  {
+   "product_id": "ut-074",
+   "size": "4",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-09-07T02:00:00"
+  },
+  {
+   "product_id": "ut-074",
+   "size": "5",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-09-07T02:00:00"
+  },
+  {
+   "product_id": "ut-074",
+   "size": "6",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-09-07T02:00:00"
+  },
+  {
+   "product_id": "ut-074",
+   "size": "7",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-09-07T02:00:00"
+  },
+  {
+   "product_id": "ut-074",
+   "size": "8",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-09-07T02:00:00"
+  },
+  {
+   "product_id": "ut-075",
+   "size": "3",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-01T13:00:00"
+  },
+  {
+   "product_id": "ut-075",
+   "size": "4",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-06-01T13:00:00"
+  },
+  {
+   "product_id": "ut-075",
+   "size": "5",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-06-01T13:00:00"
+  },
+  {
+   "product_id": "ut-075",
+   "size": "6",
+   "delta": 2,
+   "new_stock": 2,
+   "kind": "initial",
+   "at": "2026-06-01T13:00:00"
+  },
+  {
+   "product_id": "ut-075",
+   "size": "7",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-06-01T13:00:00"
+  },
+  {
+   "product_id": "ut-075",
+   "size": "8",
+   "delta": 1,
+   "new_stock": 1,
+   "kind": "initial",
+   "at": "2026-06-01T13:00:00"
+  },
+  {
+   "product_id": "ut-076",
+   "size": "6",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-05-18T10:00:00"
+  },
+  {
+   "product_id": "ut-076",
+   "size": "7",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-05-18T10:00:00"
+  },
+  {
+   "product_id": "ut-076",
+   "size": "8",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-05-18T10:00:00"
+  },
+  {
+   "product_id": "ut-076",
+   "size": "9",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-05-18T10:00:00"
+  },
+  {
+   "product_id": "ut-076",
+   "size": "10",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-05-18T10:00:00"
+  },
+  {
+   "product_id": "ut-076",
+   "size": "11",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-05-18T10:00:00"
+  },
+  {
+   "product_id": "ut-077",
+   "size": "3",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-06-28T20:00:00"
+  },
+  {
+   "product_id": "ut-077",
+   "size": "4",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-06-28T20:00:00"
+  },
+  {
+   "product_id": "ut-077",
+   "size": "5",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-06-28T20:00:00"
+  },
+  {
+   "product_id": "ut-077",
+   "size": "6",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-28T20:00:00"
+  },
+  {
+   "product_id": "ut-077",
+   "size": "7",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-06-28T20:00:00"
+  },
+  {
+   "product_id": "ut-077",
+   "size": "8",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-28T20:00:00"
+  },
+  {
+   "product_id": "ut-078",
+   "size": "3",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-05-03T00:00:00"
+  },
+  {
+   "product_id": "ut-078",
+   "size": "4",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-05-03T00:00:00"
+  },
+  {
+   "product_id": "ut-078",
+   "size": "5",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-05-03T00:00:00"
+  },
+  {
+   "product_id": "ut-078",
+   "size": "6",
+   "delta": 0,
+   "new_stock": 0,
+   "kind": "initial",
+   "at": "2026-05-03T00:00:00"
+  },
+  {
+   "product_id": "ut-078",
+   "size": "7",
+   "delta": 12,
+   "new_stock": 12,
+   "kind": "initial",
+   "at": "2026-05-03T00:00:00"
+  },
+  {
+   "product_id": "ut-078",
+   "size": "8",
+   "delta": 4,
+   "new_stock": 4,
+   "kind": "initial",
+   "at": "2026-05-03T00:00:00"
+  },
+  {
+   "product_id": "ut-079",
+   "size": "Free",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-06-19T00:00:00"
+  },
+  {
+   "product_id": "ut-080",
+   "size": "Free",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-08-01T00:00:00"
+  },
+  {
+   "product_id": "ut-081",
+   "size": "Free",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-09-12T12:00:00"
+  },
+  {
+   "product_id": "ut-082",
+   "size": "Free",
+   "delta": 8,
+   "new_stock": 8,
+   "kind": "initial",
+   "at": "2026-06-30T20:00:00"
+  },
+  {
+   "product_id": "ut-083",
+   "size": "Free",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-05-31T22:00:00"
+  },
+  {
+   "product_id": "ut-084",
+   "size": "Free",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-06-02T10:00:00"
+  },
+  {
+   "product_id": "ut-085",
+   "size": "Free",
+   "delta": 7,
+   "new_stock": 7,
+   "kind": "initial",
+   "at": "2026-05-30T06:00:00"
+  },
+  {
+   "product_id": "ut-086",
+   "size": "Free",
+   "delta": 10,
+   "new_stock": 10,
+   "kind": "initial",
+   "at": "2026-08-11T13:00:00"
+  },
+  {
+   "product_id": "ut-087",
+   "size": "Free",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-06-01T08:00:00"
+  },
+  {
+   "product_id": "ut-088",
+   "size": "Free",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-07-26T22:00:00"
+  },
+  {
+   "product_id": "ut-089",
+   "size": "Free",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-07-30T04:00:00"
+  },
+  {
+   "product_id": "ut-090",
+   "size": "Free",
+   "delta": 9,
+   "new_stock": 9,
+   "kind": "initial",
+   "at": "2026-07-01T00:00:00"
+  },
+  {
+   "product_id": "ut-091",
+   "size": "Free",
+   "delta": 3,
+   "new_stock": 3,
+   "kind": "initial",
+   "at": "2026-07-09T22:00:00"
+  },
+  {
+   "product_id": "ut-092",
+   "size": "Free",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-06-14T04:00:00"
+  },
+  {
+   "product_id": "ut-093",
+   "size": "Free",
+   "delta": 5,
+   "new_stock": 5,
+   "kind": "initial",
+   "at": "2026-05-28T06:00:00"
+  },
+  {
+   "product_id": "ut-094",
+   "size": "Free",
+   "delta": 11,
+   "new_stock": 11,
+   "kind": "initial",
+   "at": "2026-06-10T17:00:00"
+  }
+ ],
+ "new_arrivals": [
+  {
+   "subcategory": "linen_shirt",
+   "gender_fit": "women",
+   "name": "Sky stripe linen shirt",
+   "primary_color": "sky_blue",
+   "secondary_color": "white",
+   "pattern": "stripes",
+   "fabric": "linen",
+   "silhouette": "relaxed",
+   "length": "regular",
+   "neckline": "collar",
+   "sleeve": "long",
+   "occasion_tags": [
+    "vacation",
+    "brunch",
+    "work"
+   ],
+   "style_tags": [
+    "old_money",
+    "resort",
+    "classic"
+   ],
+   "season": "summer",
+   "price_inr": 2299
+  },
+  {
+   "subcategory": "block_heels",
+   "gender_fit": "women",
+   "name": "Ivory kitten heels",
+   "primary_color": "ivory",
+   "secondary_color": null,
+   "pattern": "solid",
+   "fabric": "leather",
+   "silhouette": "none",
+   "length": "none",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "work",
+    "wedding",
+    "brunch"
+   ],
+   "style_tags": [
+    "old_money",
+    "classic"
+   ],
+   "season": "all",
+   "price_inr": 2599
+  },
+  {
+   "subcategory": "cargo_pants",
+   "gender_fit": "men",
+   "name": "Charcoal tech cargos",
+   "primary_color": "charcoal",
+   "secondary_color": null,
+   "pattern": "solid",
+   "fabric": "polyester",
+   "silhouette": "relaxed",
+   "length": "long",
+   "neckline": "none",
+   "sleeve": "none",
+   "occasion_tags": [
+    "casual",
+    "travel"
+   ],
+   "style_tags": [
+    "streetwear",
+    "athleisure"
+   ],
+   "season": "all",
+   "price_inr": 2699
+  }
+ ]
+}

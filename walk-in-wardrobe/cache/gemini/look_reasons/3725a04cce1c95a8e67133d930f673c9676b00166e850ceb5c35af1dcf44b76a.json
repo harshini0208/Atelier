@@ -1,0 +1,13 @@
+{
+ "task": "look_reasons",
+ "model": "gemini-3.8-flash",
+ "summary": "Write one short line (max 16 words) for each look explaining why it works with a more formal feel. Mention colour or fabric. Do not mention prices or invent items.\nLook 1: Ivory linen relaxed shirt (l",
+ "created": "2026-09-29T22:42:57",
+ "response": {
+  "lines": [
+   "Ivory linen with beige cotton chinos and tan leather loafers delivers a refined, tailored aesthetic.",
+   "Crisp sky blue cotton striping elevates beige chinos, while tan leather loafers ensure sophisticated formality.",
+   "Sophisticated ivory linen and beige cotton provide an elevated, upscale feel with sleek leather accents."
+  ]
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "task": "look_reasons",
+ "model": "gemini-3.8-flash",
+ "summary": "Write one short line (max 16 words) for each look explaining why it works with a more festive feel. Mention colour or fabric. Do not mention prices or invent items.\nLook 1: Ivory linen relaxed shirt (",
+ "created": "2026-09-29T22:43:03",
+ "response": {
+  "lines": [
+   "Airy ivory linen paired with rich tan leather delivers an effortlessly polished, celebratory summer style.",
+   "Playful sky-blue candy stripes bring vibrant, cheerful colour to classic beige cotton for festive parties.",
+   "Breezy ivory linen with tan leather sandals offers an easygoing, radiant feel for warm celebrations."
+  ]
+ }
+}

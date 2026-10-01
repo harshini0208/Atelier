@@ -1,0 +1,179 @@
+{
+ "task": "detect",
+ "model": "gemini-3.8-flash",
+ "summary": "List every apparel, footwear and accessory piece visibly worn in this outfit image.\n\nRules:\n- One entry per piece. A pair of shoes, earrings or similar counts as ONE piece.\n- If several people are in ",
+ "created": "2026-09-29T22:41:28",
+ "response": {
+  "image_quality": "ok",
+  "people_count": 1,
+  "pieces": [
+   {
+    "subcategory": "blouse",
+    "name": "Maroon and gold printed blouse",
+    "color": "maroon",
+    "box_2d": [
+     228,
+     356,
+     369,
+     642
+    ],
+    "confidence": 0.95,
+    "fabric": "silk",
+    "gender_fit": "women",
+    "length": "cropped",
+    "neckline": "square",
+    "occasion_tags": [
+     "wedding",
+     "festive",
+     "party"
+    ],
+    "pattern": "print",
+    "secondary_color": "gold",
+    "silhouette": "regular",
+    "sleeve": "short",
+    "style_tags": [
+     "ethnic"
+    ]
+   },
+   {
+    "subcategory": "lehenga",
+    "name": "Maroon and gold printed lehenga skirt",
+    "color": "maroon",
+    "box_2d": [
+     392,
+     313,
+     744,
+     690
+    ],
+    "confidence": 0.98,
+    "fabric": "silk",
+    "gender_fit": "women",
+    "length": "maxi",
+    "neckline": "none",
+    "occasion_tags": [
+     "wedding",
+     "festive",
+     "party"
+    ],
+    "pattern": "print",
+    "secondary_color": "gold",
+    "silhouette": "a_line",
+    "sleeve": "none",
+    "style_tags": [
+     "ethnic"
+    ]
+   },
+   {
+    "subcategory": "dupatta",
+    "name": "Gold woven dupatta",
+    "color": "gold",
+    "box_2d": [
+     233,
+     407,
+     535,
+     595
+    ],
+    "confidence": 0.96,
+    "fabric": "silk",
+    "gender_fit": "women",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "wedding",
+     "festive",
+     "party"
+    ],
+    "pattern": "print",
+    "secondary_color": "maroon",
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "ethnic"
+    ]
+   },
+   {
+    "subcategory": "clutch",
+    "name": "Gold textured clutch",
+    "color": "gold",
+    "box_2d": [
+     442,
+     626,
+     480,
+     737
+    ],
+    "confidence": 0.92,
+    "fabric": "synthetic",
+    "gender_fit": "women",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "wedding",
+     "festive",
+     "party"
+    ],
+    "pattern": "print",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "ethnic"
+    ]
+   },
+   {
+    "subcategory": "jewellery",
+    "name": "Gold statement jhumka earrings",
+    "color": "gold",
+    "box_2d": [
+     178,
+     442,
+     224,
+     558
+    ],
+    "confidence": 0.9,
+    "fabric": "metal",
+    "gender_fit": "women",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "wedding",
+     "festive",
+     "party"
+    ],
+    "pattern": "solid",
+    "secondary_color": null,
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "ethnic"
+    ]
+   },
+   {
+    "subcategory": "juttis",
+    "name": "Embellished gold juttis",
+    "color": "gold",
+    "box_2d": [
+     738,
+     402,
+     786,
+     599
+    ],
+    "confidence": 0.88,
+    "fabric": "synthetic",
+    "gender_fit": "women",
+    "length": "none",
+    "neckline": "none",
+    "occasion_tags": [
+     "wedding",
+     "festive"
+    ],
+    "pattern": "print",
+    "secondary_color": "maroon",
+    "silhouette": "none",
+    "sleeve": "none",
+    "style_tags": [
+     "ethnic"
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,32 @@
+{
+ "task": "catalog_tag",
+ "model": "gemini-3.8-flash",
+ "summary": "You are cataloguing product photos for a women's high-street fashion store.\nDescribe the single main product in this image using only the allowed values.\n- usable=false if it is a collage, a lifestyle",
+ "created": "2026-10-01T14:10:22",
+ "response": {
+  "usable": true,
+  "visible_logo_or_text": false,
+  "subcategory": "cardigan",
+  "name": "Beige ribbed knit cropped cardigan",
+  "primary_color": "beige",
+  "style_tags": [
+   "minimal",
+   "streetwear"
+  ],
+  "occasion_tags": [
+   "casual",
+   "brunch",
+   "date"
+  ],
+  "fabric": "knit",
+  "length": "cropped",
+  "neckline": "v_neck",
+  "pattern": "solid",
+  "season": "winter",
+  "secondary_color": null,
+  "shows_person_face": false,
+  "silhouette": "relaxed",
+  "sleeve": "long",
+  "womens_item": true
+ }
+}

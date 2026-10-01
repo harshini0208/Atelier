@@ -1,0 +1,215 @@
+"""Load the store catalog (and, for tests/demos only, synthetic personas + history) into the configured backends.
+
+The default is a clean start: the Urban Thread catalog and nothing else. Shoppers create their own profiles."""
+from __future__ import annotations
+
+import json
+from datetime import datetime, timedelta
+
+from sqlalchemy import select
+from sqlalchemy.orm import Session
+
+from . import models as m
+from .db import engine, session_scope
+from .settings import ROOT
+
+
+def load_json(name: str) -> dict:
+    return json.loads((ROOT / "data" / name).read_text())
+
+
+LEGACY_TABLES = ["avatars"]  # removed from the schema (the mannequin is gone); dropped on reset
+
+
+def reset_schema() -> None:
+    from sqlalchemy import text
+
+    with engine().begin() as conn:
+        for t in LEGACY_TABLES:
+            conn.execute(text(f"DROP TABLE IF EXISTS {t}" + (" CASCADE" if conn.dialect.name == "postgresql" else "")))
+    m.Base.metadata.drop_all(engine())
+    m.Base.metadata.create_all(engine())
+    wipe_uploads()
+
+
+def wipe_uploads() -> None:
+    """Delete shopper uploads (inspo screenshots and crops) from media storage."""
+    import shutil
+
+    from .settings import get_settings
+
+    s = get_settings()
+    if s.storage_backend == "gcs":
+        from .storage import storage
+
+        bucket = storage().bucket
+        for prefix in ("inspo/", "crops/"):
+            blobs = list(bucket.list_blobs(prefix=prefix))
+            for i in range(0, len(blobs), 100):
+                with bucket.client.batch():
+                    for b in blobs[i:i + 100]:
+                        b.delete()
+    else:
+        for d in ("inspo", "crops"):
+            shutil.rmtree(s.media_dir / d, ignore_errors=True)
+
+
+def ensure_schema() -> None:
+    m.Base.metadata.create_all(engine())
+
+
+def product_from_dict(p: dict) -> m.Product:
+    return m.Product(
+        id=p["id"], store_id=p["store_id"], brand=p["brand"], name=p["name"], description=p["description"],
+        category=p["category"], subcategory=p["subcategory"], gender_fit=p["gender_fit"],
+        primary_color=p["primary_color"], secondary_color=p.get("secondary_color"), color_family=p["color_family"],
+        pattern=p["pattern"], fabric=p["fabric"], silhouette=p["silhouette"], length=p["length"],
+        neckline=p["neckline"], sleeve=p["sleeve"], occasion_tags=p["occasion_tags"], style_tags=p["style_tags"],
+        season=p["season"], price_inr=p["price_inr"], mrp_inr=p["mrp_inr"], image_url=p["image_url"],
+        added_at=datetime.fromisoformat(p["added_at"]))
+
+
+def load_catalog(db: Session, catalog: dict) -> None:
+    st = catalog["store"]
+    db.add(m.Store(id=st["id"], name=st["name"], warehouse_city=st["warehouse_city"], description=st["description"]))
+    db.flush()
+    db.add(m.Brand(id=st["id"], store_id=st["id"], name=st["brand"]))
+    db.flush()
+    for p in catalog["products"]:
+        db.add(product_from_dict(p))
+    db.flush()
+    pos: dict[str, int] = {}
+    for s in catalog["product_sizes"]:
+        pos[s["product_id"]] = pos.get(s["product_id"], -1) + 1
+        db.add(m.ProductSize(product_id=s["product_id"], size=s["size"], stock=s["stock"], position=pos[s["product_id"]]))
+    for ph in catalog["price_history"]:
+        db.add(m.PriceHistory(product_id=ph["product_id"], price_inr=ph["price_inr"], mrp_inr=ph["mrp_inr"],
+                              changed_at=datetime.fromisoformat(ph["changed_at"])))
+    for se in catalog["stock_events"]:
+        db.add(m.StockEvent(product_id=se["product_id"], size=se["size"], delta=se["delta"], new_stock=se["new_stock"],
+                            kind=se["kind"], at=datetime.fromisoformat(se["at"])))
+
+
+def sync_catalog(db: Session, images: bool = True) -> int:
+    """Add catalog products that are not in the database yet (with sizes, price history and stock events).
+    Existing products only get their store-written name/description refreshed; nothing is deleted, and shoppers'
+    folders, carts and orders are untouched."""
+    catalog = full_catalog()
+    have = {p.id: p for p in db.scalars(select(m.Product))}
+    for p in catalog["products"]:
+        row = have.get(p["id"])
+        if row and (row.name, row.description) != (p["name"], p["description"]):
+            row.name, row.description = p["name"], p["description"]
+    new = [p for p in catalog["products"] if p["id"] not in have]
+    if not new:
+        return 0
+    ids = {p["id"] for p in new}
+    if images:
+        write_product_images({"products": new})
+    for p in new:
+        db.add(product_from_dict(p))
+    db.flush()
+    pos: dict[str, int] = {}
+    for s in catalog["product_sizes"]:
+        if s["product_id"] in ids:
+            pos[s["product_id"]] = pos.get(s["product_id"], -1) + 1
+            db.add(m.ProductSize(product_id=s["product_id"], size=s["size"], stock=s["stock"],
+                                 position=pos[s["product_id"]]))
+    for ph in catalog["price_history"]:
+        if ph["product_id"] in ids:
+            db.add(m.PriceHistory(product_id=ph["product_id"], price_inr=ph["price_inr"], mrp_inr=ph["mrp_inr"],
+                                  changed_at=datetime.fromisoformat(ph["changed_at"])))
+    for se in catalog["stock_events"]:
+        if se["product_id"] in ids:
+            db.add(m.StockEvent(product_id=se["product_id"], size=se["size"], delta=se["delta"],
+                                new_stock=se["new_stock"], kind=se["kind"], at=datetime.fromisoformat(se["at"])))
+    db.flush()
+    return len(new)
+
+
+def load_personas(db: Session, personas: dict, catalog: dict) -> dict[str, list[int]]:
+    """Create personas; returns {user_id: [folder ids]} so inspo can be attached afterwards."""
+    ids = {p["name"]: p["id"] for p in catalog["products"]}
+    price = {p["id"]: p["price_inr"] for p in catalog["products"]}
+    folders: dict[str, list[int]] = {}
+    base = datetime(2026, 9, 1, 12, 0)
+    for i, pr in enumerate(personas["personas"]):
+        db.add(m.User(id=pr["id"], name=pr["name"], city=pr["city"], tagline=pr["tagline"]))
+        db.flush()
+        prefs = pr["preferences"]
+        db.add(m.Preferences(user_id=pr["id"], budgets=prefs["budgets"], sizes=prefs["sizes"], fit=prefs["fit"],
+                             preferred_materials=prefs["preferred_materials"], avoid_materials=prefs["avoid_materials"],
+                             avoid_colors=prefs["avoid_colors"], occasions=prefs["occasions"], gender_fit=prefs["gender_fit"]))
+        folders[pr["id"]] = []
+        for f in pr["folders"]:
+            fo = m.Folder(user_id=pr["id"], name=f["name"], description=f["description"])
+            db.add(fo)
+            db.flush()
+            folders[pr["id"]].append(fo.id)
+        for j, (name, size) in enumerate(pr["orders"]):
+            pid = ids[name]
+            when = base - timedelta(days=20 + 9 * j + i)
+            order = m.Order(user_id=pr["id"], total_inr=price[pid], status="delivered", city=pr["city"],
+                            delivery_days=3, created_at=when)
+            order.items.append(m.OrderItem(product_id=pid, size=size, qty=1, price_inr=price[pid]))
+            db.add(order)
+    return folders
+
+
+def write_product_images(catalog: dict) -> None:
+    import sys
+
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from make_images import product_svg  # type: ignore
+
+    from .storage import storage
+
+    st = storage()
+    for p in catalog["products"]:
+        st.put(f"products/{p['id']}.svg", product_svg(p).encode(), "image/svg+xml")
+
+
+def full_catalog() -> dict:
+    """The generated base catalog plus any extra products (data/catalog_extra.json, built by scripts/expand_catalog.py).
+    CATALOG_EXTRA=0 keeps only the base catalog (the tests' fixed fixture)."""
+    import os
+
+    catalog = load_json("catalog.json")
+    extra_path = ROOT / "data" / "catalog_extra.json"
+    if extra_path.exists() and os.getenv("CATALOG_EXTRA", "1") != "0":
+        extra = json.loads(extra_path.read_text())
+        for k in ("products", "product_sizes", "price_history", "stock_events"):
+            catalog[k] = catalog[k] + extra.get(k, [])
+    return catalog
+
+
+def seed_all(images: bool = True, personas: bool = False, with_inspo: bool = True, with_history: bool = False) -> dict:
+    """Reset the schema and load the catalog. personas/with_history add synthetic shoppers (tests and rehearsals)."""
+    catalog = full_catalog()
+    reset_schema()
+    if images:
+        write_product_images(catalog)
+    with session_scope() as db:
+        load_catalog(db, catalog)
+    from .product_images import apply_photos
+
+    with session_scope() as db:
+        photos = apply_photos(db)
+    if not personas:
+        if with_history:
+            from .seed_history import seed_synthetic_history
+
+            seed_synthetic_history()
+        return {"products": len(catalog["products"]), "photos": photos, "personas": 0}
+    personas = load_json("personas.json")
+    with session_scope() as db:
+        folders = load_personas(db, personas, catalog)
+    if with_inspo:
+        from .seed_inspo import attach_persona_inspo
+
+        attach_persona_inspo(personas, folders)
+    if with_history:
+        from .seed_history import seed_synthetic_history
+
+        seed_synthetic_history()
+    return {"products": len(catalog["products"]), "personas": len(personas["personas"])}

@@ -1,0 +1,32 @@
+{
+ "task": "catalog_tag",
+ "model": "gemini-3.8-flash",
+ "summary": "You are cataloguing product photos for a women's high-street fashion store.\nDescribe the single main product in this image using only the allowed values.\n- usable=false if it is a collage, a lifestyle",
+ "created": "2026-10-01T14:16:07",
+ "response": {
+  "usable": true,
+  "visible_logo_or_text": false,
+  "subcategory": "crop_top",
+  "name": "Black v-neck camisole top",
+  "primary_color": "black",
+  "style_tags": [
+   "athleisure",
+   "minimal",
+   "streetwear"
+  ],
+  "occasion_tags": [
+   "casual",
+   "gym"
+  ],
+  "fabric": "synthetic",
+  "length": "regular",
+  "neckline": "v_neck",
+  "pattern": "solid",
+  "season": "summer",
+  "secondary_color": null,
+  "shows_person_face": false,
+  "silhouette": "bodycon",
+  "sleeve": "sleeveless",
+  "womens_item": true
+ }
+}

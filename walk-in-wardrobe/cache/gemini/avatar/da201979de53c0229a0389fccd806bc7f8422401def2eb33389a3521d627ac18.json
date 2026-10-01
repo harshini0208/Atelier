@@ -1,0 +1,14 @@
+{
+ "task": "avatar",
+ "model": "gemini-3.8-flash",
+ "summary": "Convert the shopper's own description of themselves into parameters for drawing a simple, faceless\n2D fashion mannequin. Use only what they say; keep defaults (average height, the first body type) whe",
+ "created": "2026-09-29T22:43:35",
+ "response": {
+  "body_type": "pear",
+  "hair_color": "black",
+  "hair_style": "long",
+  "height_band": "average",
+  "presentation": "women",
+  "skin_tone": 4
+ }
+}

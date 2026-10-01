@@ -1,0 +1,9 @@
+{
+ "task": "taste",
+ "model": "gemini-3.8-flash",
+ "summary": "Write ONE warm sentence (max 30 words) summarising a shopper's fashion taste for them, using only these facts. Core taste (saved repeatedly): ['resort', 'vacation', 'old money', 'beach']. Recently exp",
+ "created": "2026-09-29T22:43:31",
+ "response": {
+  "sentence": "Your style radiates a timeless old money elegance, effortlessly capturing the breezy spirit of sun-drenched beach days and relaxing resort vacations."
+ }
+}

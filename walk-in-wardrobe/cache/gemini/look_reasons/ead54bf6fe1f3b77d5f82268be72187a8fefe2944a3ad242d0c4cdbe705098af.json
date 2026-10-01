@@ -1,0 +1,13 @@
+{
+ "task": "look_reasons",
+ "model": "gemini-3.8-flash",
+ "summary": "Write one short line (max 16 words) for each look explaining why it works with a more casual feel. Mention colour or fabric. Do not mention prices or invent items.\nLook 1: Ivory linen relaxed shirt (l",
+ "created": "2026-09-29T22:42:51",
+ "response": {
+  "lines": [
+   "Breezy ivory linen and neutral cotton chinos give this classic loafer look an easygoing vibe.",
+   "Flat leather sandals paired with lightweight ivory linen create an effortlessly relaxed, warm-weather feel.",
+   "Sky-blue cotton stripes add a playful, relaxed touch to classic beige chinos."
+  ]
+ }
+}

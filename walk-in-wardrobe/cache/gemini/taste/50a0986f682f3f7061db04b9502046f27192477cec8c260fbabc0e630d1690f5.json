@@ -1,0 +1,9 @@
+{
+ "task": "taste",
+ "model": "gemini-3.8-flash",
+ "summary": "Write ONE warm sentence (max 30 words) summarising a shopper's fashion taste for them, using only these facts. Core taste (saved repeatedly): ['solid', 'streetwear', 'casual']. Recently exploring: [].",
+ "created": "2026-09-29T22:43:16",
+ "response": {
+  "sentence": "You bring an effortless charm to everyday dressing with your go-to love for casual, solid streetwear staples."
+ }
+}

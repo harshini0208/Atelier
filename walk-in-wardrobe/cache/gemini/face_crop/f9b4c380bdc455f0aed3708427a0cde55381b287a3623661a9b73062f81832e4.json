@@ -1,0 +1,10 @@
+{
+ "task": "face_crop",
+ "model": "gemini-3.8-flash",
+ "summary": "This is a fashion product photo. If a person's face is visible, give chin_y: the vertical position\nof the bottom of their chin as a fraction of the image height (0 = top, 1 = bottom). Otherwise has_fa",
+ "created": "2026-10-01T14:18:49",
+ "response": {
+  "has_face": true,
+  "chin_y": 0.177
+ }
+}

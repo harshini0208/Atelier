@@ -1,0 +1,34 @@
+{
+ "task": "catalog_tag",
+ "model": "gemini-3.8-flash",
+ "summary": "You are cataloguing product photos for a women's high-street fashion store.\nDescribe the single main product in this image using only the allowed values.\n- usable=false if it is a collage, a lifestyle",
+ "created": "2026-10-01T14:14:13",
+ "response": {
+  "usable": true,
+  "visible_logo_or_text": true,
+  "subcategory": "flats",
+  "name": "Dark green leather ballet flats",
+  "primary_color": "green",
+  "style_tags": [
+   "minimal",
+   "classic",
+   "old_money"
+  ],
+  "occasion_tags": [
+   "casual",
+   "work",
+   "travel"
+  ],
+  "fabric": "leather",
+  "length": "none",
+  "neckline": "none",
+  "pattern": "solid",
+  "reject_reason": "",
+  "season": "all",
+  "secondary_color": "tan",
+  "shows_person_face": false,
+  "silhouette": "none",
+  "sleeve": "none",
+  "womens_item": true
+ }
+}

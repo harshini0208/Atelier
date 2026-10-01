@@ -1,0 +1,33 @@
+{
+ "task": "catalog_tag",
+ "model": "gemini-3.8-flash",
+ "summary": "You are cataloguing product photos for a women's high-street fashion store.\nDescribe the single main product in this image using only the allowed values.\n- usable=false if it is a collage, a lifestyle",
+ "created": "2026-10-01T14:13:32",
+ "response": {
+  "usable": true,
+  "visible_logo_or_text": false,
+  "subcategory": "coat",
+  "name": "Beige lightweight long coat",
+  "primary_color": "beige",
+  "style_tags": [
+   "minimal",
+   "classic",
+   "streetwear"
+  ],
+  "occasion_tags": [
+   "casual",
+   "work",
+   "travel"
+  ],
+  "fabric": "polyester",
+  "length": "midi",
+  "neckline": "collar",
+  "pattern": "solid",
+  "season": "all",
+  "secondary_color": null,
+  "shows_person_face": true,
+  "silhouette": "relaxed",
+  "sleeve": "long",
+  "womens_item": true
+ }
+}

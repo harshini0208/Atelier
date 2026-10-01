@@ -1,0 +1,35 @@
+{
+ "task": "catalog_tag",
+ "model": "gemini-3.8-flash",
+ "summary": "You are cataloguing product photos for a women's high-street fashion store.\nDescribe the single main product in this image using only the allowed values.\n- usable=false if it is a collage, a lifestyle",
+ "created": "2026-10-01T14:15:04",
+ "response": {
+  "usable": true,
+  "visible_logo_or_text": true,
+  "subcategory": "sandals",
+  "name": "Brown leather crisscross slide sandals",
+  "primary_color": "brown",
+  "style_tags": [
+   "minimal",
+   "resort",
+   "classic",
+   "boho"
+  ],
+  "occasion_tags": [
+   "casual",
+   "vacation",
+   "brunch",
+   "beach"
+  ],
+  "fabric": "leather",
+  "length": "none",
+  "neckline": "none",
+  "pattern": "solid",
+  "season": "summer",
+  "secondary_color": "tan",
+  "shows_person_face": false,
+  "silhouette": "none",
+  "sleeve": "none",
+  "womens_item": true
+ }
+}
