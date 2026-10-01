@@ -117,3 +117,69 @@ def test_delete_me_removes_rail_data(ctx):
     with session_scope() as db:
         for model in (m.WishlistItem, m.StorePurchase, m.RailLook, m.Hanger):
             assert db.scalar(select(func.count()).select_from(model).where(model.user_id == h["X-User-Id"])) == 0
+
+
+@pytest.fixture(scope="module")
+def tops_only():
+    """Harshini's real case: a rail of tops only (a crop top wishlisted, a sweater in the bag)."""
+    from fastapi.testclient import TestClient
+    from sqlalchemy import select
+
+    from wiw import models as m
+    from wiw.db import session_scope
+    from wiw.seed import seed_all
+    seed_all(images=False)
+    from wiw.main import app
+    with session_scope() as db:
+        ids = {p.name: p.id for p in db.scalars(select(m.Product))}
+    with TestClient(app) as c:
+        h = {"X-User-Id": c.post("/api/profile", json=PROFILE).json()["id"]}
+        c.post("/api/wishlist", json={"product_id": ids["Black ribbed crop top"]}, headers=h)
+        c.post("/api/cart", json={"product_id": ids["Camel cable-knit sweater"], "size": "M"}, headers=h)
+        yield c, h
+
+
+def _outfit(c, h, msg):
+    r = c.post("/api/chat", json={"message": msg}, headers=h).json()
+    return r, r["payload"]["outfit"]
+
+
+def test_brief_parsing():
+    from wiw.styling import parse_brief
+    assert parse_brief("trip to nyc in december").season == "winter"
+    assert parse_brief("AR Rahman concert, something indo-western").styles == {"ethnic"}
+    assert parse_brief("brunch").season is None
+
+
+def test_a_tops_only_rail_still_gets_a_complete_look(tops_only):
+    c, h = tops_only
+    r, o = _outfit(c, h, "i am going to a concert idk what to wear, its an AR Rahman concert so i was thinking of something indowestern")
+    slots = {i["slot"] for i in o["items"]}
+    assert ("torso" in slots and "legs" in slots) or "full" in slots
+    assert "feet" in slots and len(o["items"]) >= 3                                   # not just one top any more
+    assert any("ethnic" in i["product"]["style_tags"] for i in o["items"])           # indo-western is honoured
+    assert o["occasion"] == "concert"
+
+
+def test_winter_trip_gets_warm_layers_not_a_crop_top(tops_only):
+    c, h = tops_only
+    r, o = _outfit(c, h, "i am planning a trip to nyc in december can you help me style it")
+    subs = [i["product"]["subcategory"] for i in o["items"]]
+    names = [i["product"]["name"] for i in o["items"]]
+    assert "crop_top" not in subs and "sandals" not in subs
+    assert "Camel cable-knit sweater" in names                                       # uses what's on the rail
+    assert any(i["slot"] == "outer" for i in o["items"])                              # a coat or jacket for the cold
+    assert o["total_inr"] == sum(i["product"]["price_inr"] for i in o["items"] if not i["owned"])
+
+
+def test_build_outfit_makes_the_card_match_the_reply(tops_only):
+    from wiw import models as m
+    from wiw.db import session_scope
+    from wiw.stylist import Ctx, execute
+    c, h = tops_only
+    with session_scope() as db:
+        ctx = Ctx(db=db, user=db.get(m.User, h["X-User-Id"]), folder=None, hangers=[])
+        out = execute(ctx, "build_outfit", {"product_ids": ["ut-001", "ut-030", "nope"], "occasion": "work"})
+        assert len(out["items"]) == 2 and ctx.outfit["total_inr"] == out["total_inr_to_buy"]
+        assert [i["product"]["id"] for i in ctx.outfit["items"]] == ["ut-001", "ut-030"]
+        db.rollback()

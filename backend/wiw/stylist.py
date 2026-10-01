@@ -20,9 +20,9 @@ from .commerce import CartError, add_item
 from .services import matches_for_piece, pick_size, prefs_dict, product_dict
 from .settings import get_settings
 from .styling import folder_hangers, suggest_outfit
-from .vocab import CATEGORIES, COLORS, FABRICS, OCCASIONS, SUB_TO_CAT, label
+from .vocab import CATEGORIES, COLORS, FABRICS, OCCASIONS, STYLE_TAGS, SUB_TO_CAT, label
 
-VERSION = "stylist-v4"
+VERSION = "stylist-v5"
 FORMALITY = ["more_casual", "more_formal", "more_festive"]
 
 TOOLS = [
@@ -47,11 +47,17 @@ TOOLS = [
          "add_avoid_colors": {"type": "array", "items": {"type": "string", "enum": COLORS}},
          "add_occasions": {"type": "array", "items": {"type": "string", "enum": OCCASIONS}},
          "fit": {"type": "string", "enum": ["slim", "regular", "relaxed", "oversized"]}}}},
-    {"name": "suggest_outfit", "description": "Build a full outfit from the current folder's hangers using real catalog items, optionally for an occasion, a total budget, or a formality nudge.",
+    {"name": "suggest_outfit", "description": "Build a full outfit (top + bottom or a one-piece, shoes, a coat when it's cold, optional accessories) around the open folder's hangers, or the shopper's rail when no folder is open. Missing pieces are completed from the catalog in their size. Pass the weather and style so it suits the request.",
      "parameters": {"type": "object", "properties": {
-         "occasion": {"type": "string", "description": "e.g. 'beach wedding', 'work', 'sangeet'"},
+         "occasion": {"type": "string", "description": "e.g. 'concert', 'beach wedding', 'work', 'sangeet', 'trip'"},
+         "season": {"type": "string", "enum": ["winter", "summer"], "description": "winter for cold places or months (e.g. New York in December), summer for heat"},
+         "style": {"type": "string", "enum": STYLE_TAGS, "description": "Style direction, e.g. 'ethnic' for indo-western or fusion"},
          "max_total_inr": {"type": "integer", "description": "Budget for the whole outfit"},
          "formality": {"type": "string", "enum": FORMALITY}}}},
+    {"name": "build_outfit", "description": "Make the outfit card from exact products you picked (from search results, the rail or hangers). Use this when suggest_outfit's pick isn't right, so the card shows exactly what you recommend. Returns totals (pieces the shopper owns are free).",
+     "parameters": {"type": "object", "properties": {
+         "product_ids": {"type": "array", "items": {"type": "string"}},
+         "occasion": {"type": "string"}}, "required": ["product_ids"]}},
     {"name": "place_on_board", "description": "Lay the outfit out on the folder's style board. Omit product_ids to use the most recently suggested outfit.",
      "parameters": {"type": "object", "properties": {"product_ids": {"type": "array", "items": {"type": "string"}}}}},
     {"name": "add_to_cart", "description": "Add products to the cart in the shopper's size when it is in stock. Omit product_ids to add the most recently suggested outfit.",
@@ -72,6 +78,10 @@ How you work:
   Then say you've proposed the change and they can confirm it. Never claim it is saved.
 - If the store can't cover a piece, say so honestly and offer the closest option.
 - Describe clothing only. Never comment on the shopper's body, face or appearance.
+- Every outfit you recommend must be on the outfit card: finish with suggest_outfit, or build_outfit with the exact
+  product IDs you chose. Never recommend products in your text that are not on the card, and keep the text short
+  because the card shows the pieces. Read the request for weather (cold place or month -> season winter) and style
+  (indo-western -> style ethnic) and pass them on.
 - Prices are in Indian rupees, written like ₹1,999. Never add up prices yourself: outfit totals come from
   suggest_outfit (total_inr_to_buy leaves out pieces the shopper already owns; say which pieces are already theirs). If the shopper wants a swap, call suggest_outfit again (or search) instead of doing arithmetic.
 """
@@ -218,13 +228,15 @@ def t_update_preferences(ctx: Ctx, **changes) -> dict:  # noqa: ANN003
 
 
 def t_suggest_outfit(ctx: Ctx, occasion: str | None = None, max_total_inr: int | None = None,
-                     formality: str | None = None) -> dict:
+                     formality: str | None = None, season: str | None = None, style: str | None = None,
+                     brief: str | None = None) -> dict:
     if not ctx.hangers:
         return {"error": "This folder has no hangers yet. Upload an inspo and pick some pieces first." if ctx.folder else
                 "The rail is empty. Wishlist a few pieces in the Shop or open a folder first."}
     o = suggest_outfit(ctx.db, ctx.user.id, ctx.folder.id if ctx.folder else None, occasion, max_total_inr,
                        formality if formality in FORMALITY else None,
-                       hangers=None if ctx.folder else ctx.hangers, owned=ctx.owned).as_dict()
+                       hangers=None if ctx.folder else ctx.hangers, owned=ctx.owned,
+                       brief=" ".join(x for x in (season, style, brief) if x)).as_dict()
     for it in o["items"]:
         _remember(ctx, it["product"], show=False)
     ctx.outfit = o
@@ -232,6 +244,30 @@ def t_suggest_outfit(ctx: Ctx, occasion: str | None = None, max_total_inr: int |
                        "outside_preferences": [r["label"] for r in it["reasons"]]} for it in o["items"]],
             "total_inr_to_buy": o["total_inr"], "pieces_already_owned": o["owned_count"], "within_budget": o["within_budget"], "over_by_inr": o["over_by_inr"],
             "left_out_for_budget": o.get("dropped", []), "not_in_store": o["gaps"]}
+
+
+def t_build_outfit(ctx: Ctx, product_ids: list[str] | None = None, occasion: str | None = None) -> dict:
+    from .services import slot_for
+    from .styling import Outfit
+
+    items, seen_slots = [], set()
+    for pid in dict.fromkeys(product_ids or []):
+        p = ctx.db.get(m.Product, pid)
+        if not p:
+            continue
+        d = product_dict(p)
+        owned = p.id in ctx.owned
+        items.append({"hanger_index": 0, "hanger_id": None, "piece_name": "", "slot": slot_for(p.subcategory), "product": d,
+                      "score": 0, "tier": "picked", "reasons": [], "why": "", "owned": owned})
+        seen_slots.add(slot_for(p.subcategory))
+        _remember(ctx, d, show=False)
+    if not items:
+        return {"error": "None of those products exist in the catalog."}
+    o = Outfit(items=items, total_inr=sum(i["product"]["price_inr"] for i in items if not i["owned"]), occasion=occasion,
+               owned_count=sum(i["owned"] for i in items)).as_dict()
+    ctx.outfit = o
+    return {"items": [{**compact(i["product"], ctx.prefs), "already_owned": i["owned"]} for i in items],
+            "total_inr_to_buy": o["total_inr"], "pieces_already_owned": o["owned_count"]}
 
 
 def _default_ids(ctx: Ctx, product_ids: list[str] | None) -> list[str]:
@@ -284,7 +320,7 @@ def t_add_to_cart(ctx: Ctx, product_ids: list[str] | None = None) -> dict:
 
 IMPL = {"search_catalog": t_search_catalog, "get_hanger_matches": t_get_hanger_matches,
         "get_preferences": t_get_preferences, "update_preferences": t_update_preferences,
-        "suggest_outfit": t_suggest_outfit, "place_on_board": t_place_on_board, "add_to_cart": t_add_to_cart}
+        "suggest_outfit": t_suggest_outfit, "build_outfit": t_build_outfit, "place_on_board": t_place_on_board, "add_to_cart": t_add_to_cart}
 
 
 def execute(ctx: Ctx, name: str, args: dict) -> dict:
@@ -316,6 +352,7 @@ OCCASION_WORDS = [
     (r"beach wedding", "beach wedding"), (r"sangeet|mehendi|mehndi|haldi|diwali|puja|festive|festival", "festive"),
     (r"wedding|reception|shaadi", "wedding"), (r"beach|pool", "beach"), (r"office|work|meeting|interview", "work"),
     (r"party|club|night out|cocktail", "party"), (r"date", "date"), (r"brunch|lunch|cafe", "brunch"),
+    (r"concert|gig|music show", "concert"), (r"dinner", "dinner"),
     (r"goa|vacation|holiday|trip|travel", "vacation"), (r"formal|black tie", "formal"), (r"casual|everyday|weekend", "casual"),
 ]
 
@@ -410,7 +447,7 @@ def plan(ctx: Ctx, message: str, trace: list[dict]) -> gemini.AgentResult:
                                       + (", plus a few that are worth a look." if out.get("also_view") else "."), trace, "fallback")
     if re.search(r"board|canvas|mannequin|try (it|this|them) on|put (it|them|this) on|lay (it|them) out", t):
         if not (ctx.outfit or {}).get("items") and "suggest_outfit" not in ran:
-            call("suggest_outfit", occasion=occasion, max_total_inr=budget, formality=formality)
+            call("suggest_outfit", occasion=occasion, max_total_inr=budget, formality=formality, brief=message)
         items = (ctx.outfit or {}).get("items", [])
         if not items:
             return gemini.AgentResult("Add a few pieces first (hang some in this folder, or wishlist a few in the Shop), "
@@ -435,7 +472,7 @@ def plan(ctx: Ctx, message: str, trace: list[dict]) -> gemini.AgentResult:
         return gemini.AgentResult("Happy to help! What's the occasion, and do you want it dressed up or easy? "
                                   "You can also give me a budget, like “under ₹5,000”.", trace, "fallback")
     if "suggest_outfit" not in ran:
-        call("suggest_outfit", occasion=occasion, max_total_inr=budget, formality=formality)
+        call("suggest_outfit", occasion=occasion, max_total_inr=budget, formality=formality, brief=message)
     o = ctx.outfit or {}
     if not o.get("items"):
         return gemini.AgentResult("I couldn't build a look from these pieces yet.", trace, "fallback")
@@ -492,8 +529,12 @@ def chat(db: Session, user: m.User, folder: m.Folder | None, message: str) -> di
     text = res.text.strip() or "Here's what I found."
     # never surface IDs or products the tools didn't return
     text = re.sub(r"\s*\(?\b(?:ID:?\s*)?ut-\d{3}\b\)?", "", text).strip()
-    outfit = ctx.outfit if any(t["name"] == "suggest_outfit" for t in res.trace if t["role"] == "tool") else None
-    shown = [] if outfit else [ctx.products[i] for i in ctx.shown if i in ctx.products][:6]
+    outfit = ctx.outfit if any(t["name"] in ("suggest_outfit", "build_outfit") for t in res.trace if t["role"] == "tool") else None
+    on_card = {i["product"]["id"] for i in (outfit or {}).get("items", [])}
+    shown = [ctx.products[i] for i in ctx.shown if i in ctx.products and i not in on_card]
+    if outfit:   # only products the reply names that aren't already on the card
+        shown = [p for p in shown if p["name"].lower() in text.lower()]
+    shown = shown[:6]
     payload = {"source": res.source, "products": shown,
                "outfit": outfit, "pending_preferences": ctx.pending, "actions": ctx.actions}
     db.add(m.ChatMessage(user_id=user.id, folder_id=folder.id if folder else None, role="user", content=message, payload={}))

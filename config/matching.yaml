@@ -127,6 +127,17 @@ stylist:
     casual: [casual, brunch, travel]
     travel: [travel, casual, vacation]
     gym: [gym, casual]
+    concert: [party, casual, date]
+    dinner: [date, party, formal]
+    trip: [travel, vacation, casual]
+    sightseeing: [travel, casual]
+  # Words in a request that change what suits it (deterministic). "winter" pushes warm layers and drops crop tops,
+  # "summer" the opposite; "ethnic" prefers ethnic/fusion pieces (indo-western).
+  brief:
+    winter: [december, january, february, winter, snow, snowy, cold, chilly, freezing, christmas]
+    summer: [summer, hot, humid, heatwave, april, may, june]
+    ethnic: [indo-western, indowestern, indo western, ethnic, fusion, desi, traditional]
+  complete_slots: true         # fill a missing top/bottom, shoes (and a coat in winter) from the catalog
   formality_shift:             # "make it more ..." nudges which style tags are preferred
     more_casual: [minimal, streetwear, athleisure, boho, resort]
     more_formal: [formal, classic, old_money]

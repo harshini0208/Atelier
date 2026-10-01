@@ -225,7 +225,19 @@ def _run_live(task, version, system, history, tools, execute, max_steps, tool_na
             trace.append({"role": "tool", "name": c["name"], "response": out})
             parts.append(types.Part(function_response=types.FunctionResponse(name=c["name"], response=out)))
         contents.append(types.Content(role="user", parts=parts))
-    raise RuntimeError("agent exceeded max steps")
+    # Out of tool steps: one last turn with tools switched off, so the model answers from what the tools returned
+    # (instead of the whole turn falling back to the rule-based planner).
+    final = types.GenerateContentConfig(
+        system_instruction=system, temperature=0.3, tools=[types.Tool(function_declarations=decls)],
+        tool_config=types.ToolConfig(function_calling_config=types.FunctionCallingConfig(mode="NONE")),
+        automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True))
+    resp = client().models.generate_content(model=s.gemini_model, contents=contents, config=final)
+    text = resp.text or ""
+    if not text.strip():
+        raise RuntimeError("agent exceeded max steps")
+    key = cache_key(task, version, system, [json.dumps(history + trace, sort_keys=True, default=str)], tool_names)
+    cache_put(task, key, {"text": text, "calls": []}, summary=history[-1]["text"])
+    return AgentResult(text, trace, "live")
 
 
 def _plain(v: Any) -> Any:

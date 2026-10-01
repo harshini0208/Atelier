@@ -12,7 +12,7 @@ from sqlalchemy.orm import Session
 from . import models as m
 from .services import matcher, matches_for_piece, user_prefs
 from .settings import get_settings
-from .vocab import label, slot_for
+from .vocab import SUB_TO_CAT, label, slot_for
 
 SLOT_ORDER = ["full", "torso", "legs", "outer", "feet", "hand", "neck", "head", "waist", "wrist"]
 
@@ -20,7 +20,7 @@ SLOT_ORDER = ["full", "torso", "legs", "outer", "feet", "hand", "neck", "head", 
 @dataclass
 class Choice:
     hanger_index: int
-    hanger_id: int
+    hanger_id: int | None
     piece_name: str
     slot: str
     options: list[dict]            # [{product, score, reasons, tier}] best first
@@ -78,6 +78,43 @@ def _why(product: dict, occasion: str | None, reasons: list[dict]) -> str:
     return s
 
 
+@dataclass
+class Brief:
+    """What a request implies beyond the occasion: the weather and a style direction."""
+    season: str | None = None          # winter | summer
+    styles: set[str] = field(default_factory=set)
+
+    def bonus(self, p: dict) -> float:
+        sc = 0.0
+        if self.season == "winter":
+            if p["season"] == "summer" or p.get("sleeve") == "sleeveless" or p["subcategory"] in COLD_WRONG:
+                sc -= 25
+            if p["season"] == "winter" or p["fabric"] == "wool" or p["category"] == "outerwear":
+                sc += 10
+        elif self.season == "summer":
+            if p["season"] == "winter" or p["fabric"] == "wool" or p["subcategory"] in ("coat", "boots"):
+                sc -= 20
+            if p["fabric"] in ("linen", "cotton"):
+                sc += 5
+        if self.styles & set(p["style_tags"]):
+            sc += 14
+        return sc
+
+
+COLD_WRONG = {"crop_top", "shorts", "sandals", "kolhapuris", "flats"}
+
+
+def parse_brief(*texts: str | None) -> Brief:
+    words = " ".join(t for t in texts if t).lower().replace("_", " ")
+    cfg = get_settings().matching["stylist"].get("brief", {})
+    hit = lambda key: any(w in words for w in cfg.get(key, []))  # noqa: E731
+    season = "winter" if hit("winter") or "winter" in words.split() else "summer" if hit("summer") else None
+    styles = {"ethnic"} if hit("ethnic") else set()
+    styles |= {w for w in ("formal", "streetwear", "minimal", "boho", "old_money", "classic", "edgy", "romantic", "resort")
+               if w.replace("_", " ") in words}
+    return Brief(season, styles)
+
+
 OPTIONAL_SLOTS = {"hand", "head", "neck", "waist", "wrist", "outer"}
 UNBUYABLE = {"size", "stock"}  # an outfit never includes something the shopper can't buy in their size
 
@@ -85,13 +122,15 @@ UNBUYABLE = {"size", "stock"}  # an outfit never includes something the shopper 
 def build_choices(db: Session, user_id: str, folder_id: int | None, occasion: str | None = None,
                   formality: str | None = None, prefs_override: dict | None = None,
                   hangers: list[m.Hanger] | None = None,
-                  owned: frozenset[str] = frozenset()) -> tuple[list[Choice], list[str]]:
+                  owned: frozenset[str] = frozenset(), brief: str | None = None,
+                  complete: bool = False) -> tuple[list[Choice], list[str]]:
     """One Choice per body slot. Candidates for a slot are pooled from every hanger in that slot, so a folder with
     loafers AND sandals lets the occasion and budget decide between them."""
     prefs = user_prefs(db, user_id)
     if prefs_override:
         prefs = {**(prefs or {}), **prefs_override}
     occ = _occasion_set(occasion)
+    br = parse_brief(occasion, brief, formality and formality.replace("more_", ""))
     shift = set(get_settings().matching["stylist"]["formality_shift"].get(formality or "", []))
     if hangers is None:   # a folder's hangers; the rail passes its own in-memory hangers
         hangers = folder_hangers(db, user_id, folder_id)
@@ -124,6 +163,7 @@ def build_choices(db: Session, user_id: str, folder_id: int | None, occasion: st
                         sc += 5
                     if p["id"] in owned:      # styling the rail: lean on what they already own
                         sc += 15
+                    sc += br.bonus(p)
                     opt = {"product": p, "score": round(sc, 1), "style_score": round(it.score, 1), "hanger_index": idx,
                            "hanger_id": h.id, "piece_name": h.piece.name, "reasons": [r.as_dict() for r in it.reasons],
                            "tier": tier}
@@ -137,8 +177,55 @@ def build_choices(db: Session, user_id: str, folder_id: int | None, occasion: st
                            "hanger_id": members[0][1].id, "piece_name": members[0][1].piece.name, "reasons": [], "tier": "skip"})
         first = ranked[0]
         choices.append(Choice(first["hanger_index"], first["hanger_id"], first["piece_name"], slot, ranked))
+    if complete and choices and get_settings().matching["stylist"].get("complete_slots", True):
+        choices += _complete(db, prefs, {c.slot for c in choices}, occ, br, shift,
+                             [c.current["product"] for c in choices if c.current["product"]])
     choices.sort(key=lambda c: SLOT_ORDER.index(c.slot) if c.slot in SLOT_ORDER else 99)
     return choices, gaps
+
+
+def _complete(db: Session, prefs: dict | None, have: set[str], occ: set[str], br: Brief, shift: set[str],
+              anchors: list[dict]) -> list[Choice]:
+    """Fill the slots a look can't do without (top + bottom or a one-piece, shoes, and a coat in winter) from the
+    catalog: in the shopper's size, section and materials, suited to the occasion and the brief."""
+    from sqlalchemy.orm import selectinload
+
+    from .catalog_search import allowed_genders
+    from .services import pick_size, product_dict
+
+    need = [] if "full" in have else [s for s in ("torso", "legs") if s not in have]
+    need += [s for s in ("feet",) if s not in have]
+    if br.season == "winter" and "outer" not in have:
+        need.append("outer")
+    if not need:
+        return []
+    prefs = prefs or {}
+    avoid_f, avoid_c = set(prefs.get("avoid_materials") or []), set(prefs.get("avoid_colors") or [])
+    budgets = prefs.get("budgets") or {}
+    anchor_styles = {t for a in anchors for t in a["style_tags"]}
+    rows = db.scalars(select(m.Product).options(selectinload(m.Product.sizes))
+                      .where(m.Product.active.is_(True), m.Product.gender_fit.in_(allowed_genders(prefs.get("gender_fit", "any")))))
+    pools: dict[str, list[dict]] = {s: [] for s in need}
+    for p in rows:
+        slot = slot_for(p.subcategory)
+        if slot not in pools or p.fabric in avoid_f or p.primary_color in avoid_c or not pick_size(prefs, p):
+            continue
+        d = product_dict(p)
+        sc = 50 + br.bonus(d) + 3 * len(anchor_styles & set(d["style_tags"]))
+        if occ:
+            sc += 12 if occ & set(d["occasion_tags"]) else -8
+        if shift:
+            sc += 8 if shift & set(d["style_tags"]) else 0
+        lo, hi = (budgets.get(SUB_TO_CAT[p.subcategory]) or [0, 10**6])[:2]
+        sc -= 0 if lo <= d["price_inr"] <= hi else 10
+        pools[slot].append({"product": d, "score": round(sc, 1), "style_score": round(sc, 1), "hanger_index": 0,
+                            "hanger_id": None, "piece_name": "To complete the look", "reasons": [], "tier": "suggested"})
+    out = []
+    for slot, opts in pools.items():
+        ranked = sorted(opts, key=lambda o: (-o["score"], o["product"]["price_inr"]))[:6]
+        if ranked:
+            out.append(Choice(0, None, "To complete the look", slot, ranked))
+    return out
 
 
 def _fit_budget(choices: list[Choice], max_total: int | None, owned: frozenset[str] = frozenset()) -> None:
@@ -183,17 +270,21 @@ def outfit_from(choices: list[Choice], gaps: list[str], occasion: str | None, ma
 
 def suggest_outfit(db: Session, user_id: str, folder_id: int | None, occasion: str | None = None,
                    max_total_inr: int | None = None, formality: str | None = None,
-                   hangers: list[m.Hanger] | None = None, owned: frozenset[str] = frozenset()) -> Outfit:
-    choices, gaps = build_choices(db, user_id, folder_id, occasion, formality, hangers=hangers, owned=owned)
+                   hangers: list[m.Hanger] | None = None, owned: frozenset[str] = frozenset(),
+                   brief: str | None = None, complete: bool = True) -> Outfit:
+    choices, gaps = build_choices(db, user_id, folder_id, occasion, formality, hangers=hangers, owned=owned,
+                                  brief=brief, complete=complete)
     _fit_budget(choices, max_total_inr, owned)
     return outfit_from(choices, gaps, occasion, max_total_inr, owned)
 
 
 def style_options(db: Session, user_id: str, folder_id: int | None, n: int = 3, occasion: str | None = None,
                   formality: str | None = None, hangers: list[m.Hanger] | None = None,
-                  owned: frozenset[str] = frozenset()) -> list[Outfit]:
+                  owned: frozenset[str] = frozenset(), brief: str | None = None,
+                  complete: bool = True) -> list[Outfit]:
     """Up to n distinct combinations: the best look, then variants that swap the closest runner-up."""
-    choices, gaps = build_choices(db, user_id, folder_id, occasion, formality, hangers=hangers, owned=owned)
+    choices, gaps = build_choices(db, user_id, folder_id, occasion, formality, hangers=hangers, owned=owned,
+                                  brief=brief, complete=complete)
     if not choices:
         return []
     outfits = [outfit_from(choices, gaps, occasion, None, owned)]
