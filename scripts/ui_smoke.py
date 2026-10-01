@@ -57,6 +57,10 @@ def main() -> None:
         for grp, size in (("tops size", "M"), ("bottoms size", "28"), ("footwear size", "5")):
             page.get_by_role("group", name=grp).get_by_role("button", name=size, exact=True).click()
         page.get_by_role("button", name="Next").click()
+        expect(page.get_by_role("heading", name="Your mannequin")).to_be_visible()
+        page.get_by_role("radio", name="Curvy").click()
+        page.get_by_role("radio", name="Brown").click()
+        page.get_by_role("button", name="Next").click()
         page.get_by_role("button", name="Next").click()   # budgets: keep defaults
         page.locator(".field", has_text="Materials I avoid").get_by_role("button", name="Polyester").click()
         page.get_by_role("button", name="Next").click()
@@ -101,6 +105,8 @@ def main() -> None:
         # 4. style board: drag two pieces so they overlap -> inside/outside question
         page.get_by_role("button", name="Style board").click()
         expect(page.get_by_text("Your hangers")).to_be_visible(timeout=30_000)
+        expect(page.get_by_role("tab", name="Mannequin")).to_have_attribute("aria-selected", "true")
+        page.get_by_role("tab", name="Flat lay").click()
         page.get_by_role("heading", name="Your hangers").scroll_into_view_if_needed()
         page.evaluate("window.scrollBy(0, -80)")
         board = page.get_by_role("region", name="Empty style board")

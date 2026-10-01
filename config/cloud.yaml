@@ -9,6 +9,8 @@ gemini:
   # gemini-3.8-flash is served only from the `global` location.
   model: gemini-3.8-flash
   location: global
+  # Dressing the shopper's mannequin (style board). gemini-3-pro-image is a little better but ~3x slower (~27s vs ~10s).
+  image_model: gemini-3.1-flash-image
 
 bucket: wiw-atelieros-cup26-media   # product images, inspo uploads, crops
 bq_dataset: wiw                     # behaviour events + retailer views

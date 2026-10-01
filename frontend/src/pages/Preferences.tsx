@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { api } from "../api";
 import { useMe, useVocab } from "../components/Layout";
+import { MannequinSection } from "../components/Mannequin";
 import { AboutYou, Budgets, ColoursAndOccasions, Draft, Materials, prefsPayload, SizeAndFit } from "../components/PrefsForm";
 import { ErrorBox, Icon, Loading, useToast } from "../components/ui";
 import type { Preferences as Prefs } from "../types";
@@ -43,6 +44,7 @@ export default function Preferences() {
       <div className="prefs-grid section">
         <Section title="About you"><AboutYou d={d} set={setD} vocab={v} /></Section>
         <Section title="Size and fit"><SizeAndFit d={d} set={setD} vocab={v} /></Section>
+        <Section title="Your mannequin"><MannequinSection /></Section>
         <Section title="Budget per piece"><Budgets d={d} set={setD} /></Section>
         <Section title="Fabrics"><Materials d={d} set={setD} vocab={v} /></Section>
         <Section title="Colours and occasions"><ColoursAndOccasions d={d} set={setD} vocab={v} /></Section>

@@ -165,7 +165,7 @@ def delete_me(db: Db, user: User) -> dict:
     """Delete this shopper's profile and everything they created (folders, uploads' records, cart, orders, events)."""
     uid = user.id
     for model in (m.ChatMessage, m.Notification, m.CartItem, m.TasteSignal, m.Look, m.Hanger, m.WishlistItem,
-                  m.StorePurchase, m.RailLook):
+                  m.StorePurchase, m.RailLook, m.Mannequin):
         db.query(model).filter(model.user_id == uid).delete(synchronize_session=False)
     for o in db.scalars(select(m.Order).where(m.Order.user_id == uid)):
         db.delete(o)
@@ -178,7 +178,7 @@ def delete_me(db: Db, user: User) -> dict:
     db.commit()
     from .storage import storage
 
-    for prefix in (f"inspo/{uid}/", f"crops/{uid}/"):  # their uploaded screenshots and crops
+    for prefix in (f"inspo/{uid}/", f"crops/{uid}/", f"tryon/{uid}/"):  # their uploaded screenshots and crops
         storage().delete_prefix(prefix)
     return {"ok": True}
 

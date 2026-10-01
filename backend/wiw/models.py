@@ -280,6 +280,15 @@ class Event(Base):
     synthetic: Mapped[bool] = mapped_column(Boolean, default=False)
 
 
+class Mannequin(Base):
+    """The display mannequin a shopper's looks are dressed on: body type and finish (skin tone)."""
+    __tablename__ = "mannequins"
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    body_type: Mapped[str] = mapped_column(String(20), default="slim")
+    skin_tone: Mapped[str] = mapped_column(String(20), default="tan")
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=now, onupdate=now)
+
+
 class WishlistItem(Base):
     """A product the shopper hearted in the Shop. Shows on their rail."""
     __tablename__ = "wishlist_items"

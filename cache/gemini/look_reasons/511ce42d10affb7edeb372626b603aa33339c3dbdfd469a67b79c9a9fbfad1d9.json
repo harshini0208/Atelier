@@ -1,0 +1,13 @@
+{
+ "task": "look_reasons",
+ "model": "gemini-3.8-flash",
+ "summary": "Write one short line (max 16 words) for each look explaining why it works. Mention colour or fabric. Do not mention prices or invent items.\nLook 1: Beige satin tie neck blouse (polyester, beige), Blus",
+ "created": "2026-10-02T02:54:11",
+ "response": {
+  "lines": [
+   "Soft beige satin and blush tones harmonize smoothly against bold black leather accents.",
+   "Crisp white linen contrasts effortlessly with soft blush tones and sleek black leather details.",
+   "Lustrous beige satin complements the delicate blush skirt, grounded by black leather elements."
+  ]
+ }
+}

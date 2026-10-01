@@ -68,6 +68,9 @@ OCCASIONS = ["casual", "work", "formal", "party", "wedding", "festive", "vacatio
 STYLE_TAGS = ["formal", "ethnic", "streetwear", "minimal", "boho", "old_money", "athleisure", "classic", "preppy",
               "edgy", "romantic", "resort", "y2k"]
 SEASONS = ["summer", "winter", "monsoon", "all"]
+# The mannequin a shopper's looks are dressed on (images in data/mannequins/<body>-<tone>.png).
+BODY_TYPES = ["slim", "curvy", "plus", "athletic"]
+SKIN_TONES = ["light", "tan", "brown", "deep"]
 
 # Sizes per category and gender fit.
 SIZE_SYSTEMS = {

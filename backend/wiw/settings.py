@@ -32,6 +32,7 @@ class Settings:
         self.gemini_mode = os.getenv("GEMINI_MODE", "replay").lower()
         self.gemini_model = os.getenv("GEMINI_MODEL", cloud["gemini"]["model"])
         self.gemini_location = os.getenv("GEMINI_LOCATION", cloud["gemini"]["location"])
+        self.gemini_image_model = os.getenv("GEMINI_IMAGE_MODEL", cloud["gemini"].get("image_model", "gemini-3.1-flash-image"))
         self.db_backend = os.getenv("DB_BACKEND", "sqlite")
         self.sqlite_path = Path(os.getenv("SQLITE_PATH", str(ROOT / "local/wiw.db")))
         self.storage_backend = os.getenv("STORAGE_BACKEND", "local")

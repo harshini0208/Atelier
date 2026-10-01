@@ -183,3 +183,29 @@ def test_build_outfit_makes_the_card_match_the_reply(tops_only):
         assert len(out["items"]) == 2 and ctx.outfit["total_inr"] == out["total_inr_to_buy"]
         assert [i["product"]["id"] for i in ctx.outfit["items"]] == ["ut-001", "ut-030"]
         db.rollback()
+
+
+def test_mannequin_choice_and_tryon_prompt(ctx):
+    from wiw import models as m
+    from wiw.db import session_scope
+    from wiw.tryon import MANNEQUIN, build_prompt, cache_path
+    c, h = ctx
+    h = {"X-User-Id": c.post("/api/profile", json=PROFILE).json()["id"]}
+    assert c.get("/api/mannequin", headers=h).json()["chosen"] is False
+    assert c.put("/api/mannequin", json={"body_type": "huge", "skin_tone": "tan"}, headers=h).status_code == 422
+    r = c.put("/api/mannequin", json={"body_type": "curvy", "skin_tone": "deep"}, headers=h).json()
+    assert (r["body_type"], r["skin_tone"], r["chosen"]) == ("curvy", "deep", True)
+    assert c.get("/api/mannequins/curvy-deep.png").headers["content-type"] == "image/png"
+    assert c.get("/api/mannequins/curvy-green.png").status_code == 404
+    # layer order and wording: the jacket is the outer layer, the top goes under it
+    with session_scope() as db:
+        top, jacket = db.get(m.Product, "ut-001"), db.get(m.Product, "ut-059")
+        parts = build_prompt("curvy", "deep", [top, jacket])
+        assert parts[1] is MANNEQUIN and parts[3] is top and parts[5] is jacket
+        assert "under the outer layer" in parts[2] and "outermost layer" in parts[4] and "curvy body" in parts[-1]
+    assert cache_path("u", "slim", "tan", ["a", "b"]) != cache_path("u", "slim", "tan", ["b", "a"])  # order matters
+    # tests run with Gemini off: a clear message, never a crash
+    out = c.post("/api/tryon", json={"product_ids": ["ut-001", "ut-059"]}, headers=h)
+    assert out.status_code == 422 and "live Gemini" in out.json()["detail"]
+    assert c.post("/api/tryon", json={"product_ids": ["ut-001"], "cached_only": True}, headers=h).json()["image_url"] is None
+    c.delete("/api/me", headers=h)

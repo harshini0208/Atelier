@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { api, setCurrentUserId } from "../api";
 import { useVocab } from "../components/Layout";
 import { AboutYou, Budgets, ColoursAndOccasions, DEFAULT_DRAFT, Draft, Materials, prefsPayload, SizeAndFit } from "../components/PrefsForm";
+import { MannequinChoice, MannequinPicker } from "../components/Mannequin";
 import { ErrorBox, Icon, Loading } from "../components/ui";
 
 const STEPS = [
   { title: "Welcome to your walk-in wardrobe", hint: "Everything you buy, bag and love at Urban Thread on one rail, ready to hang in folders and style." },
   { title: "Your sizes and fit", hint: "We'll pre-select your size and tell you when it's sold out." },
+  { title: "Your mannequin", hint: "Pick the body type and finish closest to yours. We dress your looks on it so you can see how they fit." },
   { title: "What you like to spend", hint: "Per piece. It's a guide, not a filter." },
   { title: "Fabrics", hint: "We'll put what you love first and flag what you avoid." },
   { title: "Colours and occasions", hint: "Almost done." },
@@ -21,10 +23,12 @@ export default function Onboarding() {
   const [step, setStep] = useState(0);
   const [d, setD] = useState<Draft>(DEFAULT_DRAFT);
   const [member, setMember] = useState(true);
+  const [mq, setMq] = useState<MannequinChoice>({ body_type: "slim", skin_tone: "tan" });
   const create = useMutation({
     mutationFn: async () => {
       const r = await api.post<{ id: string }>("/profile", { ...prefsPayload(d), name: d.name.trim() });
       setCurrentUserId(r.id);
+      await api.put("/mannequin", mq).catch(() => undefined);
       if (member) await api.post("/membership/link", {}).catch(() => undefined);   // optional; never blocks sign-up
       return r;
     },
@@ -36,6 +40,7 @@ export default function Onboarding() {
   const last = step === STEPS.length - 1;
   const body = [
     <AboutYou key="a" d={d} set={setD} vocab={v} />, <SizeAndFit key="s" d={d} set={setD} vocab={v} />,
+    <MannequinPicker key="q" value={mq} onChange={setMq} />,
     <Budgets key="b" d={d} set={setD} />, <Materials key="m" d={d} set={setD} vocab={v} />,
     <ColoursAndOccasions key="c" d={d} set={setD} vocab={v} />,
   ][step];

@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { KeyboardEvent, PointerEvent as RPointerEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api, inr } from "../api";
+import { mannequinUrl, useMannequin } from "../components/Mannequin";
 import ProductModal from "../components/ProductModal";
 import { ErrorBox, Icon, Loading, Modal, Price, useToast } from "../components/ui";
 import type { FolderDetail, Product } from "../types";
@@ -105,6 +106,13 @@ function Board({ items, selected, setSelected, onStart, onMove, onMoveEnd, onRes
   );
 }
 
+type TryOn = { image_url: string | null; cached: boolean };
+
+function MannequinDrop({ children }: { children: React.ReactNode }) {
+  const { setNodeRef, isOver } = useDroppable({ id: "mannequin" });
+  return <div ref={setNodeRef} className="mq-stage" style={{ outline: isOver ? "2px dashed var(--sage)" : undefined }}>{children}</div>;
+}
+
 function SizePrompt({ items, onDone, onClose }: { items: { product: Product; reason: string }[]; onDone: (s: Record<string, string>) => void; onClose: () => void }) {
   const [sizes, setSizes] = useState<Record<string, string>>({});
   return (
@@ -153,6 +161,10 @@ export default function StyleBoard() {
   const [product, setProduct] = useState<string | null>(null);
   const [needSizes, setNeedSizes] = useState<{ product: Product; reason: string }[] | null>(null);
   const [loadedLook, setLoadedLook] = useState<number | null>(null);
+  const [view, setView] = useState<"mannequin" | "canvas">("mannequin");
+  const [autoDress, setAutoDress] = useState(false);
+  const [lastImg, setLastImg] = useState<string | null>(null);
+  const mq = useMannequin();
   const boardRef = useRef<HTMLDivElement | null>(null);
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
     useSensor(TouchSensor, { activationConstraint: { delay: 120, tolerance: 8 } }), useSensor(KeyboardSensor));
@@ -162,6 +174,7 @@ export default function StyleBoard() {
     if (latest && latest.id !== loadedLook) {
       setItems(latest.items.map((i) => ({ product: i.product, x: i.x, y: i.y, w: i.w, z: i.z })));
       setLoadedLook(latest.id);
+      setAutoDress(true);
     }
   }, [looks.data, loadedLook]);
 
@@ -210,7 +223,10 @@ export default function StyleBoard() {
     if (items.some((i) => i.product.id === p.id)) { toast(`${p.name} is already on the board`); return; }
     const w = defaultWidth(p);
     const n = items.length;
-    const it: Item = { product: p, w, x: x ?? clamp(8 + (n % 3) * 30, 0, 100 - w), y: y ?? clamp(6 + Math.floor(n / 3) * 30, 0, 80), z: topZ() + 10 };
+    // a new piece goes on top, except that a coat or jacket already on the board stays the outer layer
+    const outer = items.filter((i) => i.product.category === "outerwear").map((i) => i.z);
+    const z = p.category !== "outerwear" && outer.length ? Math.min(...outer) - 1 : topZ() + 10;
+    const it: Item = { product: p, w, x: x ?? clamp(8 + (n % 3) * 30, 0, 100 - w), y: y ?? clamp(6 + Math.floor(n / 3) * 30, 0, 80), z };
     commit([...items, it]);
     setSelected(p.id);
     maybeAskLayer(p.id);
@@ -221,6 +237,7 @@ export default function StyleBoard() {
     const p = e.active.data.current?.product as Product | undefined;
     const r = boardRef.current?.getBoundingClientRect();
     const t = e.active.rect.current.translated;
+    if (p && e.over?.id === "mannequin") { addAt(p); return; }
     if (!p || !r || !t || e.over?.id !== "board") return;
     const w = defaultWidth(p);
     addAt(p, clamp(((t.left - r.left) / r.width) * 100, -5, 100 - w / 2), clamp(((t.top - r.top) / r.height) * 100, -5, 92));
@@ -272,7 +289,28 @@ export default function StyleBoard() {
   const applyOption = (o: StyleOption) => {
     const byId = Object.fromEntries(o.items.map((i) => [i.product.id, i.product]));
     commit(o.layout.map((l) => ({ product: byId[l.product_id], x: l.x, y: l.y, w: l.w, z: l.z })));
+    setAutoDress(true);
   };
+
+  // ---- the mannequin: dressed in the board's pieces, inside -> outside (the board's layer order)
+  const layered = [...items].sort((a, b) => a.z - b.z);
+  const order = layered.map((i) => i.product.id);
+  const lookKey = order.join(",");
+  const mqKey = mq.data ? `${mq.data.body_type}-${mq.data.skin_tone}` : "";
+  const cachedTry = useQuery({ queryKey: ["tryon", mqKey, lookKey], enabled: !!order.length && !!mq.data, staleTime: Infinity,
+    queryFn: () => api.post<TryOn>("/tryon", { product_ids: order, cached_only: true }) });
+  const dress = useMutation({
+    mutationFn: (ids: string[]) => api.post<TryOn>("/tryon", { product_ids: ids }),
+    onSuccess: (r, ids) => { qc.setQueryData(["tryon", mqKey, ids.join(",")], r); setLastImg(r.image_url); },
+  });
+  const dressed = order.length ? cachedTry.data?.image_url ?? null : null;
+  useEffect(() => { if (dressed) setLastImg(dressed); else if (!order.length) setLastImg(null); }, [dressed, order.length]);
+  useEffect(() => {
+    if (!autoDress || !order.length || !cachedTry.isFetched) return;
+    setAutoDress(false);
+    if (!dressed && !dress.isPending && view === "mannequin") dress.mutate(order);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoDress, cachedTry.isFetched, dressed, lookKey]);
 
   if (folder.error) return <ErrorBox error={folder.error} onRetry={() => folder.refetch()} />;
   if (folderId && !folder.data) return <Loading label="Opening your style board" />;
@@ -296,9 +334,45 @@ export default function StyleBoard() {
           </section>
 
           <div className="stack wardrobe-stage">
-            <Board items={items} selected={selected} setSelected={setSelected} onStart={onStart} onMove={onMove} onMoveEnd={onMoveEnd}
-              onResize={onResize} boardRef={boardRef} onKey={onKey} />
-            {sel && (
+            <div className="seg" role="tablist" aria-label="Board view">
+              <button role="tab" aria-selected={view === "mannequin"} onClick={() => setView("mannequin")}>Mannequin</button>
+              <button role="tab" aria-selected={view === "canvas"} onClick={() => setView("canvas")}>Flat lay</button>
+            </div>
+            {view === "mannequin" && mq.data && (
+              <>
+                <MannequinDrop>
+                  <img src={dressed ?? lastImg ?? mannequinUrl(mq.data)} alt={items.length ? `Your mannequin wearing ${layered.map((i) => i.product.name).join(", ")}` : "Your mannequin"}
+                    className={`mq-render ${!dressed && lastImg && items.length ? "stale" : ""} ${dressed || lastImg ? "" : "bare"}`} />
+                  {dress.isPending && (
+                    <div className="mq-overlay" role="status"><span className="spinner" /> Dressing your mannequin… about 10 seconds</div>
+                  )}
+                  {!items.length && <div className="mq-hint small">Add pieces from {folderId ? "your hangers" : "your rail"} and we'll dress your mannequin in them.</div>}
+                  {!!items.length && !dressed && !dress.isPending && (
+                    <button className="btn btn-primary mq-dress" onClick={() => dress.mutate(order)}>
+                      <Icon name="sparkle" size={16} /> {lastImg ? "Update the mannequin" : "Dress the mannequin"}</button>
+                  )}
+                </MannequinDrop>
+                {dress.error && <ErrorBox error={dress.error} />}
+                {!!items.length && (
+                  <div className="card pad stack" style={{ gap: 6 }}>
+                    <div className="row-between"><b className="small">Layers</b><span className="small muted">inside first, outside last</span></div>
+                    {layered.map((i, k) => (
+                      <div key={i.product.id} className="mq-layer">
+                        <span className="small muted" style={{ width: 16 }}>{k + 1}</span>
+                        <img src={i.product.image_url} alt="" />
+                        <button className="mq-layer-name small" onClick={() => setProduct(i.product.id)}>{i.product.name}</button>
+                        <button className="icon-btn" disabled={k === 0} aria-label={`Wear ${i.product.name} further inside`} title="Further inside" onClick={() => restack(i.product.id, -1)}>↑</button>
+                        <button className="icon-btn" disabled={k === layered.length - 1} aria-label={`Wear ${i.product.name} further outside`} title="Further outside" onClick={() => restack(i.product.id, 1)}>↓</button>
+                        <button className="icon-btn" aria-label={`Remove ${i.product.name}`} onClick={() => remove(i.product.id)}><Icon name="trash" size={16} /></button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
+            {view === "canvas" && <Board items={items} selected={selected} setSelected={setSelected} onStart={onStart} onMove={onMove} onMoveEnd={onMoveEnd}
+              onResize={onResize} boardRef={boardRef} onKey={onKey} />}
+            {view === "canvas" && sel && (
               <div className="row board-toolbar" role="toolbar" aria-label={`${sel.product.name} controls`}>
                 <b className="small" style={{ flex: 1, minWidth: 120 }}>{sel.product.name}</b>
                 <button className="btn btn-sm" onClick={() => restack(sel.product.id, 1)} title="Bring forward (wear outside)">Outside ↑</button>
@@ -378,7 +452,7 @@ export default function StyleBoard() {
                 <h3>Saved looks</h3>
                 {looks.data.map((l) => (
                   <button key={l.id} className="card" style={{ padding: 10, textAlign: "left", cursor: "pointer" }}
-                    onClick={() => commit(l.items.map((i) => ({ ...i })))}>
+                    onClick={() => { commit(l.items.map((i) => ({ ...i }))); setAutoDress(true); }}>
                     <div className="row-between"><b className="small">{l.name}</b><span className="small">{inr(l.total_inr)}</span></div>
                     <div className="row" style={{ gap: 4, marginTop: 6 }}>
                       {l.items.map((i) => <img key={i.product.id} src={i.product.image_url} alt={i.product.name}

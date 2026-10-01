@@ -201,6 +201,16 @@ The home page starts from what a shopper already has with the store, not from an
   budgets, and is labelled as a demo in the UI. It never changes stock.
 - Uploading an inspo screenshot is still there, lower on the page, as an optional way to find new pieces.
 
+## Your mannequin (style board)
+
+New shoppers pick a mannequin in onboarding (body type: slim, curvy, plus size, athletic x finish: light, tan,
+brown, deep; changeable in Preferences). The style board's **Mannequin** view dresses it in the board's pieces with
+Gemini image generation (`gemini-3.1-flash-image` on Vertex AI, about 10 s; `config/cloud.yaml` `image_model` can switch
+to `gemini-3-pro-image`, slower and slightly better). Pieces are layered inside to outside in the board's layer order
+("Layers" list), fitted to the chosen body type, and reproduced from their product photos. Every render is cached in
+media storage by mannequin + pieces + order, so a look is only generated once. The mannequins are faceless; no photo
+of the shopper is ever used. The **Flat lay** view is the original free canvas.
+
 ## Mock marketplace
 
 `data/generate.py` builds one storefront deterministically:
