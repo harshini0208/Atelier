@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { api, inr, pretty } from "../api";
 import type { Hanger, ProductDetail } from "../types";
+import { FolderPicker, WishButton } from "./Rail";
 import { ErrorBox, Icon, Loading, Modal, Price, useToast } from "./ui";
 
 export default function ProductModal({ productId, hangerId, onClose, onAddedToLook }: {
@@ -11,6 +12,7 @@ export default function ProductModal({ productId, hangerId, onClose, onAddedToLo
   const toast = useToast();
   const q = useQuery({ queryKey: ["product", productId], queryFn: () => api.get<ProductDetail>(`/products/${productId}`) });
   const [size, setSize] = useState<string | null>(null);
+  const [folders, setFolders] = useState(false);
   useEffect(() => { if (q.data) setSize(q.data.suggested_size); }, [q.data]);
   const p = q.data;
 
@@ -46,7 +48,10 @@ export default function ProductModal({ productId, hangerId, onClose, onAddedToLo
                 <span className="chip chip-sage" style={{ marginLeft: 8 }}>Price dropped from {inr(p.price_history[0].price_inr)}</span>
               )}
             </div>
-            {!p.in_stock && <span className="chip chip-rose">Sold out</span>}
+            <div className="row" style={{ gap: 6 }}>
+              {!p.in_stock && <span className="chip chip-rose">Sold out</span>}
+              <WishButton product={p} className="wish-inline" />
+            </div>
           </div>
           <p className="muted" style={{ margin: 0 }}>{p.description}</p>
           <div className="chips">
@@ -80,8 +85,12 @@ export default function ProductModal({ productId, hangerId, onClose, onAddedToLo
               <Icon name="bag" /> {size ? "Add to cart" : "Pick a size"}
             </button>
           </div>
+          <button className="btn btn-ghost btn-sm" style={{ alignSelf: "flex-start" }} onClick={() => setFolders(true)}>
+            <Icon name="folder" size={16} /> Hang it in folders
+          </button>
         </div>
       )}
+      {folders && p && <FolderPicker product={p} size={size} onClose={() => setFolders(false)} />}
     </Modal>
   );
 }

@@ -18,7 +18,12 @@ def history(db: Db, user: User, folder_id: int | None = None) -> list[dict]:
     folder = own_folder(db, user, folder_id) if folder_id else None
     rows = list(db.scalars(select(m.ChatMessage).where(m.ChatMessage.user_id == user.id, m.ChatMessage.folder_id == folder_id)
                            .order_by(m.ChatMessage.id)))
-    n = len(folder_hangers(db, user.id, folder.id)) if folder else 0
+    if folder:
+        n = len(folder_hangers(db, user.id, folder.id))
+    else:
+        from .rail import rail
+
+        n = len(rail(db, user)["items"])
     return [greeting(user, folder, n)] + [message_dict(c) for c in rows]
 
 

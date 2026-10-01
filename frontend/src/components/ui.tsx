@@ -23,6 +23,9 @@ const paths: Record<string, string> = {
   tag: "M3 12V4h8l10 10-8 8zM7.5 7.5h0",
   trash: "M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13",
   undo: "M9 14 4 9l5-5M4 9h11a5 5 0 0 1 0 10h-3",
+  heart: "M12 20C12 20 3 14.5 3 9c0-3 2.2-5 4.6-5 2 0 3.6 1.2 4.4 3 .8-1.8 2.4-3 4.4-3C18.8 4 21 6 21 9c0 5.5-9 11-9 11z",
+  store: "M4 9l1.5-5h13L20 9M4 9h16v11H4zM4 9c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 2 3s2-1.3 2-3c0 1.7 1.3 3 3 3s3-1.3 3-3M10 20v-5h4v5",
+  folder: "M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z",
 };
 
 export function Icon({ name, size = 20, title }: { name: keyof typeof paths | string; size?: number; title?: string }) {

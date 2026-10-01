@@ -73,7 +73,8 @@ def inspo_dict(i: m.InspoImage) -> dict:
 
 def hanger_dict(db: Session, h: m.Hanger, *, with_top: bool = True) -> dict:
     d = {"id": h.id, "folder_id": h.folder_id, "piece": piece_dict(h.piece), "chosen_product_id": h.chosen_product_id,
-         "chosen_size": h.chosen_size, "created_at": h.created_at.isoformat()}
+         "chosen_size": h.chosen_size, "created_at": h.created_at.isoformat(),
+         "from_rail": bool(h.piece.manual and h.piece.inspo and h.piece.inspo.status == "wardrobe")}
     if h.chosen_product_id:
         d["chosen_product"] = product_dict(db.get(m.Product, h.chosen_product_id))
     if with_top:

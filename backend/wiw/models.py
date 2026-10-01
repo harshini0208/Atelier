@@ -278,3 +278,35 @@ class Event(Base):
     total: Mapped[int | None] = mapped_column(Integer, nullable=True)
     value_inr: Mapped[int | None] = mapped_column(Integer, nullable=True)
     synthetic: Mapped[bool] = mapped_column(Boolean, default=False)
+
+
+class WishlistItem(Base):
+    """A product the shopper hearted in the Shop. Shows on their rail."""
+    __tablename__ = "wishlist_items"
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    product_id: Mapped[str] = mapped_column(ForeignKey("products.id"), primary_key=True)
+    added_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+
+
+class StorePurchase(Base):
+    """An in-store (offline) purchase linked through the shopper's membership. Online purchases are Orders."""
+    __tablename__ = "store_purchases"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    product_id: Mapped[str] = mapped_column(ForeignKey("products.id"))
+    size: Mapped[str] = mapped_column(String(10))
+    price_inr: Mapped[int] = mapped_column(Integer)
+    store_label: Mapped[str] = mapped_column(String(80))
+    receipt: Mapped[str] = mapped_column(String(20))
+    purchased_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+
+
+class RailLook(Base):
+    """A look saved on the rail's style board (pieces from everything the shopper owns, carted or saved)."""
+    __tablename__ = "rail_looks"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    name: Mapped[str] = mapped_column(String(80), default="My look")
+    placements: Mapped[list] = mapped_column(JSON, default=list)
+    reason: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=now)

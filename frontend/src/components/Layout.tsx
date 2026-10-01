@@ -16,7 +16,7 @@ export function useVocab() {
 export type NavItem = { to: string; label: string; icon: string };
 
 export const NAV: NavItem[] = [
-  { to: "/", label: "Wardrobes", icon: "hanger" },
+  { to: "/", label: "Wardrobe", icon: "hanger" },
   { to: "/shop", label: "Shop", icon: "tag" },
   { to: "/taste", label: "My taste", icon: "sparkle" },
   { to: "/preferences", label: "Preferences", icon: "sliders" },

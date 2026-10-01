@@ -360,3 +360,55 @@ button.chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-c
 .shop-meta { display: flex; flex-direction: column; gap: 2px; }
 .shop-meta .name { font-size: 13px; }
 .shop-img img.photo { object-fit: cover; padding: 0; }
+
+/* ------------------------------------------------------------------ home: the rail */
+.home-head { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: flex-end; justify-content: space-between; margin-bottom: 4px; }
+.home-head > div:first-child { flex: 1 1 420px; min-width: 0; }
+.home-head h1 { margin: 4px 0 6px; }
+.rail-section .chips { margin-bottom: 10px; }
+.rail-scroller { position: relative; display: flex; gap: 14px; overflow-x: auto; padding: 18px 2px 10px; scroll-snap-type: x proximity;
+  min-width: 0; }
+.rail-bar { position: absolute; left: 0; right: 0; top: 8px; height: 4px; border-radius: 4px; background: linear-gradient(#cdbfae, #b9a995);
+  min-width: 100%; }
+.rail-card { position: relative; flex: 0 0 168px; scroll-snap-align: start; display: flex; flex-direction: column; gap: 8px; }
+.rail-hook { position: absolute; top: -12px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border: 2px solid #9c8b77;
+  border-bottom: 0; border-radius: 10px 10px 0 0; }
+.rail-img { position: relative; aspect-ratio: 3 / 4; background: #f1ece5; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+.rail-open { all: unset; display: block; width: 100%; height: 100%; cursor: pointer; }
+.rail-open:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.rail-img img { width: 100%; height: 100%; object-fit: contain; padding: 12%; }
+.rail-img img.photo { object-fit: cover; padding: 0; }
+.rail-src { position: absolute; left: 6px; bottom: 6px; display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600;
+  padding: 3px 7px; border-radius: 99px; background: rgba(255,255,255,.92); color: var(--ink); }
+.rail-src.in_store, .rail-src.online { background: var(--ink); color: #fff; }
+.rail-src.wishlist { color: var(--rose); }
+.rail-meta { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.rail-meta b { line-height: 1.25; }
+.rail-folders { align-self: flex-start; margin-top: 4px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rail-empty { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.member-banner { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 12px 14px; border: 1px dashed var(--line-2);
+  border-radius: 12px; margin-top: 6px; background: var(--surface-2); }
+.demo-note { color: var(--muted); font-style: italic; }
+.inspo-row { display: grid; gap: 16px; }
+@media (min-width: 900px) { .inspo-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
+
+/* wishlist heart (on rail, shop cards and the product sheet) */
+.wish-btn { position: absolute; right: 6px; top: 6px; width: 34px; height: 34px; border-radius: 99px; border: 0; display: grid;
+  place-items: center; background: rgba(255,255,255,.92); color: var(--ink); cursor: pointer; z-index: 2; }
+.wish-btn.on { color: var(--rose); }
+.wish-btn.on svg { fill: currentColor; }
+.wish-btn:focus-visible { outline: 2px solid var(--focus); }
+.wish-inline { position: static; border: 1px solid var(--line); }
+.shop-card-wrap { position: relative; }
+.folder-check { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+  cursor: pointer; background: var(--surface); }
+.folder-check:has(input:checked) { border-color: var(--ink); background: var(--surface-2); }
+.folder-check input { width: 18px; height: 18px; accent-color: var(--ink); }
+.hanger-origin { font-size: 11px; color: var(--sage); font-weight: 600; }
+.rail-pick-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 10px; max-height: 56vh; overflow-y: auto; }
+.rail-pick { position: relative; display: flex; flex-direction: column; gap: 4px; text-align: left; padding: 6px; border-radius: 12px;
+  border: 1.5px solid var(--line); background: var(--surface); cursor: pointer; }
+.rail-pick img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 8px; background: #f1ece5; }
+.rail-pick.on { border-color: var(--ink); }
+.rail-pick-check { position: absolute; right: 10px; top: 10px; width: 24px; height: 24px; border-radius: 99px; background: var(--ink); color: #fff;
+  display: grid; place-items: center; }

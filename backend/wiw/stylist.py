@@ -22,7 +22,7 @@ from .settings import get_settings
 from .styling import folder_hangers, suggest_outfit
 from .vocab import CATEGORIES, COLORS, FABRICS, OCCASIONS, SUB_TO_CAT, label
 
-VERSION = "stylist-v3"
+VERSION = "stylist-v4"
 FORMALITY = ["more_casual", "more_formal", "more_festive"]
 
 TOOLS = [
@@ -73,7 +73,7 @@ How you work:
 - If the store can't cover a piece, say so honestly and offer the closest option.
 - Describe clothing only. Never comment on the shopper's body, face or appearance.
 - Prices are in Indian rupees, written like ₹1,999. Never add up prices yourself: outfit totals come from
-  suggest_outfit. If the shopper wants a swap, call suggest_outfit again (or search) instead of doing arithmetic.
+  suggest_outfit (total_inr_to_buy leaves out pieces the shopper already owns; say which pieces are already theirs). If the shopper wants a swap, call suggest_outfit again (or search) instead of doing arithmetic.
 """
 
 
@@ -88,6 +88,7 @@ class Ctx:
     shown: list[str] = field(default_factory=list)            # product ids to show as cards
     pending: dict | None = None
     actions: list[str] = field(default_factory=list)
+    owned: frozenset = frozenset()                            # bought online or in store (rail styling)
 
     @property
     def prefs(self) -> dict | None:
@@ -115,8 +116,13 @@ def context_text(ctx: Ctx) -> str:
                 lines.append(f"  {i}. {h.piece.name} ({label(h.piece.subcategory)}, {h.piece.color} {h.piece.fabric})")
         else:
             lines.append("The folder has no hangers yet.")
+    elif ctx.hangers:
+        lines.append("No folder is open. The shopper's rail (pieces they bought online or in store, have in their bag, "
+                     "or wishlisted); style from these:")
+        for i, h in enumerate(ctx.hangers, 1):
+            lines.append(f"  {i}. {h.piece.name} ({label(h.piece.subcategory)}, {h.piece.color} {h.piece.fabric})")
     else:
-        lines.append("No folder is open.")
+        lines.append("No folder is open and the shopper's rail is empty.")
     if ctx.outfit and ctx.outfit.get("items"):
         lines.append("Most recent outfit you suggested (total ₹{:,}): ".format(ctx.outfit["total_inr"])
                      + "; ".join(f"{i['product']['name']} [{i['product']['id']}]" for i in ctx.outfit["items"]))
@@ -213,18 +219,18 @@ def t_update_preferences(ctx: Ctx, **changes) -> dict:  # noqa: ANN003
 
 def t_suggest_outfit(ctx: Ctx, occasion: str | None = None, max_total_inr: int | None = None,
                      formality: str | None = None) -> dict:
-    if not ctx.folder:
-        return {"error": "Open a folder first so I know which look to style."}
     if not ctx.hangers:
-        return {"error": "This folder has no hangers yet. Upload an inspo and pick some pieces first."}
-    o = suggest_outfit(ctx.db, ctx.user.id, ctx.folder.id, occasion, max_total_inr,
-                       formality if formality in FORMALITY else None).as_dict()
+        return {"error": "This folder has no hangers yet. Upload an inspo and pick some pieces first." if ctx.folder else
+                "The rail is empty. Wishlist a few pieces in the Shop or open a folder first."}
+    o = suggest_outfit(ctx.db, ctx.user.id, ctx.folder.id if ctx.folder else None, occasion, max_total_inr,
+                       formality if formality in FORMALITY else None,
+                       hangers=None if ctx.folder else ctx.hangers, owned=ctx.owned).as_dict()
     for it in o["items"]:
         _remember(ctx, it["product"], show=False)
     ctx.outfit = o
-    return {"items": [{"for": it["piece_name"], **compact(it["product"], ctx.prefs),
+    return {"items": [{"for": it["piece_name"], **compact(it["product"], ctx.prefs), "already_owned": it["owned"],
                        "outside_preferences": [r["label"] for r in it["reasons"]]} for it in o["items"]],
-            "total_inr": o["total_inr"], "within_budget": o["within_budget"], "over_by_inr": o["over_by_inr"],
+            "total_inr_to_buy": o["total_inr"], "pieces_already_owned": o["owned_count"], "within_budget": o["within_budget"], "over_by_inr": o["over_by_inr"],
             "left_out_for_budget": o.get("dropped", []), "not_in_store": o["gaps"]}
 
 
@@ -235,8 +241,6 @@ def _default_ids(ctx: Ctx, product_ids: list[str] | None) -> list[str]:
 def t_place_on_board(ctx: Ctx, product_ids: list[str] | None = None) -> dict:
     from .styling import auto_layout
 
-    if not ctx.folder:
-        return {"error": "Open a folder first."}
     products = []
     for pid in dict.fromkeys(_default_ids(ctx, product_ids)):
         p = ctx.db.get(m.Product, pid)
@@ -245,8 +249,12 @@ def t_place_on_board(ctx: Ctx, product_ids: list[str] | None = None) -> dict:
     if not products:
         return {"error": "None of those products exist in the catalog."}
     occasion = (ctx.outfit or {}).get("occasion")
-    look = m.Look(user_id=ctx.user.id, folder_id=ctx.folder.id, name=f"Stylist pick for {occasion}" if occasion else "Stylist pick",
-                  placements=auto_layout(products), reason=occasion or "")
+    name = f"Stylist pick for {occasion}" if occasion else "Stylist pick"
+    if ctx.folder:
+        look = m.Look(user_id=ctx.user.id, folder_id=ctx.folder.id, name=name, placements=auto_layout(products),
+                      reason=occasion or "")
+    else:   # no folder open: the rail's style board
+        look = m.RailLook(user_id=ctx.user.id, name=name, placements=auto_layout(products), reason=occasion or "")
     ctx.db.add(look)
     ctx.db.flush()
     ctx.actions.append(f"Laid out {len(products)} piece{'s' if len(products) != 1 else ''} on your style board")
@@ -254,7 +262,7 @@ def t_place_on_board(ctx: Ctx, product_ids: list[str] | None = None) -> dict:
 
 
 def t_add_to_cart(ctx: Ctx, product_ids: list[str] | None = None) -> dict:
-    product_ids = _default_ids(ctx, product_ids)
+    product_ids = [i for i in _default_ids(ctx, product_ids) if i not in ctx.owned]   # never re-buy what they own
     added, needs = [], []
     for pid in product_ids:
         p = ctx.db.get(m.Product, pid)
@@ -405,7 +413,8 @@ def plan(ctx: Ctx, message: str, trace: list[dict]) -> gemini.AgentResult:
             call("suggest_outfit", occasion=occasion, max_total_inr=budget, formality=formality)
         items = (ctx.outfit or {}).get("items", [])
         if not items:
-            return gemini.AgentResult("Add a few hangers to this folder first, then I can lay out a look.", trace, "fallback")
+            return gemini.AgentResult("Add a few pieces first (hang some in this folder, or wishlist a few in the Shop), "
+                                      "then I can lay out a look.", trace, "fallback")
         call("place_on_board", product_ids=[i["product"]["id"] for i in items])
         return gemini.AgentResult(f"Done. I've laid out the {', '.join(i['product']['name'] for i in items)} on your style "
                                   "board. Open it to move pieces around or layer them.", trace, "fallback")
@@ -419,9 +428,9 @@ def plan(ctx: Ctx, message: str, trace: list[dict]) -> gemini.AgentResult:
         n = len(out["results"])
         return gemini.AgentResult(f"Here {'is' if n == 1 else 'are'} {n} option{'s' if n != 1 else ''} from Urban Thread"
                                   + (f" under ₹{budget:,}" if budget else "") + ".", trace, "fallback")
-    if not ctx.folder or not ctx.hangers:
-        return gemini.AgentResult("Open a folder with a few hangers and I'll style them into a look. What's the occasion "
-                                  "you're shopping for?", trace, "fallback")
+    if not ctx.hangers:
+        return gemini.AgentResult("Wishlist a few pieces in the Shop, or open a folder with some hangers, and I'll style "
+                                  "them into a look. What's the occasion you're shopping for?", trace, "fallback")
     if not (budget or occasion or formality) and not re.search(r"\b(style|outfit|look|wear|suggest|pick)\b", t):
         return gemini.AgentResult("Happy to help! What's the occasion, and do you want it dressed up or easy? "
                                   "You can also give me a budget, like “under ₹5,000”.", trace, "fallback")
@@ -429,9 +438,15 @@ def plan(ctx: Ctx, message: str, trace: list[dict]) -> gemini.AgentResult:
         call("suggest_outfit", occasion=occasion, max_total_inr=budget, formality=formality)
     o = ctx.outfit or {}
     if not o.get("items"):
-        return gemini.AgentResult("I couldn't build a look from this folder's hangers yet.", trace, "fallback")
+        return gemini.AgentResult("I couldn't build a look from these pieces yet.", trace, "fallback")
     names = ", ".join(i["product"]["name"] for i in o["items"])
-    msg = (f"For {occasion}" if occasion else "Here's a look") + f": {names}. Total ₹{o['total_inr']:,}"
+    msg = (f"For {occasion}" if occasion else "Here's a look") + f": {names}."
+    if o.get("owned_count") and o["owned_count"] == len(o["items"]):
+        msg += " All of it is already in your wardrobe, so there's nothing to buy"
+    elif o.get("owned_count"):
+        msg += f" {o['owned_count']} of these are already yours; the rest come to ₹{o['total_inr']:,}"
+    else:
+        msg += f" Total ₹{o['total_inr']:,}"
     if budget:
         msg += " (within your budget)." if o["within_budget"] else f", ₹{o['over_by_inr']:,} over your budget; that's the closest I can get."
     else:
@@ -453,8 +468,15 @@ def plan(ctx: Ctx, message: str, trace: list[dict]) -> gemini.AgentResult:
 
 def chat(db: Session, user: m.User, folder: m.Folder | None, message: str) -> dict:
     cfg = get_settings().matching["stylist"]
-    hangers = folder_hangers(db, user.id, folder.id) if folder else []
+    if folder:
+        hangers = folder_hangers(db, user.id, folder.id)
+    else:
+        from .rail import owned_ids, rail_hangers
+
+        hangers = rail_hangers(db, user)
     ctx = Ctx(db=db, user=user, folder=folder, hangers=hangers)
+    if not folder:
+        ctx.owned = owned_ids(db, user)
     prev = list(db.scalars(select(m.ChatMessage).where(m.ChatMessage.user_id == user.id,
                                                         m.ChatMessage.folder_id == (folder.id if folder else None))
                            .order_by(m.ChatMessage.id.desc()).limit(cfg["history_messages"])))[::-1]
@@ -492,6 +514,9 @@ def greeting(user: m.User, folder: m.Folder | None, n_hangers: int) -> dict:
                 f"hanging in “{folder.name}”. What's the occasion, and how do you want to wear it?")
     elif folder:
         text = f"Hi {user.name}! Upload an inspo to “{folder.name}” and I'll help you shop the look."
+    elif n_hangers:
+        text = (f"Hi {user.name}! I can style the {n_hangers} piece{'s' if n_hangers != 1 else ''} on your rail, "
+                "the things you've bought, bagged or wishlisted. What's the occasion?")
     else:
-        text = f"Hi {user.name}! Open a wardrobe folder and I'll help you style it, or ask me to find something."
+        text = f"Hi {user.name}! Tell me what you're dressing for, or ask me to find something in Urban Thread."
     return {"id": 0, "role": "assistant", "content": text, "payload": {}, "created_at": ""}

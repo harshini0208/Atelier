@@ -98,6 +98,7 @@ export type Hanger = {
   covered?: boolean;
   covered_in_prefs?: boolean;
   created_at: string;
+  from_rail?: boolean;
 };
 
 export type FolderSummary = {

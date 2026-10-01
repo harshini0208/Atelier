@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { api, inr } from "../api";
 import HangerDrawer from "../components/HangerDrawer";
+import { AddFromRail } from "../components/Rail";
 import UploadZone from "../components/UploadZone";
 import { CoverageLine, ErrorBox, Icon, Loading, useToast } from "../components/ui";
 import type { FolderDetail, FolderSummary, Hanger } from "../types";
@@ -26,9 +27,10 @@ function HangerCard({ h, onOpen }: { h: Hanger; onOpen: () => void }) {
         <div className="hanger-img">
           {product ? <img src={product.image_url} alt={product.name} style={{ padding: 8 }} />
             : h.piece.crop_url ? <img src={h.piece.crop_url} alt="" style={{ opacity: .55 }} /> : null}
-          {product && h.piece.crop_url && <img className="pick" src={h.piece.crop_url} alt="" title={`From your inspo: ${h.piece.name}`} />}
+          {product && h.piece.crop_url && !h.from_rail && <img className="pick" src={h.piece.crop_url} alt="" title={`From your inspo: ${h.piece.name}`} />}
         </div>
         <div className="hanger-body">
+          {h.from_rail && <span className="hanger-origin">From your rail</span>}
           <div className="name">{product?.name ?? h.piece.name}</div>
           <div className="row" style={{ marginTop: 6, gap: 4 }}>
             {product ? <span className="price" style={{ fontSize: 13 }}>{inr(product.price_inr)}</span>
@@ -72,6 +74,7 @@ export default function FolderPage() {
   const [params, setParams] = useSearchParams();
   const hangerParam = params.get("hanger");
   const [tab, setTab] = useState<"looks" | "inspo">("looks");
+  const [fromRail, setFromRail] = useState(false);
   const q = useQuery({ queryKey: ["folder", folderId], queryFn: () => api.get<FolderDetail>(`/folders/${folderId}`) });
   const folders = useQuery({ queryKey: ["folders"], queryFn: () => api.get<FolderSummary[]>("/folders") });
 
@@ -84,20 +87,23 @@ export default function FolderPage() {
 
   return (
     <>
-      <Link to="/" className="btn btn-ghost btn-sm" style={{ marginLeft: -8 }}><Icon name="back" size={16} /> Wardrobes</Link>
+      <Link to="/" className="btn btn-ghost btn-sm" style={{ marginLeft: -8 }}><Icon name="back" size={16} /> Wardrobe</Link>
       <div className="row-between" style={{ marginTop: 4 }}>
         <div style={{ minWidth: 0 }}>
           <span className="eyebrow">Folder</span>
           <h1>{f.name}</h1>
           {f.description && <p className="muted" style={{ margin: "4px 0 0" }}>{f.description}</p>}
         </div>
-        {f.hangers.length > 0 && (
-          <button className="btn btn-primary" onClick={() => nav(`/folders/${folderId}/board`)}><Icon name="sparkle" /> Style board</button>
-        )}
+        <div className="row" style={{ gap: 8 }}>
+          <button className="btn" onClick={() => setFromRail(true)}><Icon name="hanger" size={16} /> Add from your rail</button>
+          {f.hangers.length > 0 && (
+            <button className="btn btn-primary" onClick={() => nav(`/folders/${folderId}/board`)}><Icon name="sparkle" /> Style board</button>
+          )}
+        </div>
       </div>
 
       <div className="section" style={{ marginTop: 18 }}>
-        <UploadZone folderId={folderId} compact={f.inspo.length > 0} />
+        <UploadZone folderId={folderId} compact={f.inspo.length > 0 || f.hangers.length > 0} />
       </div>
 
       <div className="tabs" role="tablist">
@@ -110,7 +116,9 @@ export default function FolderPage() {
           {f.hangers.length === 0 && (
             <div className="empty">
               <h3>No hangers yet</h3>
-              <p className="muted" style={{ margin: 0 }}>Upload an inspo screenshot, pick the pieces you love, and they'll hang here.</p>
+              <p className="muted" style={{ margin: 0 }}>Add pieces from your rail (things you've bought, bagged or wishlisted),
+                or upload an inspo screenshot and pick the pieces you love.</p>
+              <button className="btn btn-primary" style={{ marginTop: 10 }} onClick={() => setFromRail(true)}><Icon name="hanger" size={16} /> Add from your rail</button>
             </div>
           )}
           {f.looks.map((look) => {
@@ -141,6 +149,20 @@ export default function FolderPage() {
         </>
       )}
 
+      {tab === "looks" && f.hangers.some((h) => h.from_rail) && (
+        <section className="card pad" style={{ marginBottom: 16 }}>
+          <div className="row-between"><b>From your rail</b><span className="small muted">Pieces you own, bagged or wishlisted</span></div>
+          <div className="rail">
+            {f.hangers.filter((h) => h.from_rail).map((h) => (
+              <div key={h.id} style={{ flex: "0 0 150px" }}>
+                <HangerCard h={h} onOpen={() => openHanger(h.id)} />
+                <MoveMenu h={h} folders={folders.data ?? []} current={folderId} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {tab === "inspo" && (
         <div className="folder-grid">
           {f.inspo.length === 0 && <div className="muted">No inspo yet.</div>}
@@ -153,6 +175,7 @@ export default function FolderPage() {
         </div>
       )}
 
+      {fromRail && <AddFromRail folderId={folderId} onClose={() => setFromRail(false)} />}
       {hangerParam && <HangerDrawer hangerId={Number(hangerParam)} onClose={() => setParams({})} />}
     </>
   );

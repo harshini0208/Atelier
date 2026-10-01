@@ -8,10 +8,13 @@ import { ErrorBox, Icon, Loading, Modal, Price, useToast } from "../components/u
 import type { FolderDetail, Product } from "../types";
 
 type Item = { product: Product; x: number; y: number; w: number; z: number };   // x, y, w in % of the board
-type TrayItem = { hanger_id: number; piece: { name: string; crop_url: string | null }; product: Product | null; source: string };
+type FolderTrayItem = { hanger_id: number; piece: { name: string; crop_url: string | null }; product: Product | null; source: string };
+type RailTrayItem = { key: string; product: Product; owned: boolean; sources: string[] };
+/** One draggable piece: from a folder hanger (may be "not in store") or from the rail. */
+type TrayItem = { key: string; name: string; crop_url: string | null; product: Product | null; note: string; owned: boolean };
 type Look = { id: number; name: string; items: { product: Product; x: number; y: number; w: number; z: number }[]; total_inr: number };
 type Layout = { product_id: string; x: number; y: number; w: number; z: number };
-type StyleOption = { items: { product: Product; why: string }[]; total_inr: number; reason: string; layout: Layout[] };
+type StyleOption = { items: { product: Product; why: string; owned?: boolean }[]; total_inr: number; reason: string; layout: Layout[]; owned_count?: number };
 type StyleResp = { options: StyleOption[]; message?: string;
   complete_the_look: { product: Product; pairs_with_past: string | null }[] };
 type LayerAsk = { moved: string; other: string };
@@ -22,18 +25,18 @@ const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v
 
 function TrayCard({ item, onAdd }: { item: TrayItem; onAdd: (p: Product) => void }) {
   const p = item.product;
-  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({ id: `tray-${item.hanger_id}`, disabled: !p, data: { product: p } });
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({ id: `tray-${item.key}`, disabled: !p, data: { product: p } });
   return (
     <div ref={setNodeRef} className="card tray-card" style={{ padding: 8, display: "flex", gap: 8, alignItems: "center", opacity: isDragging ? 0.4 : 1, touchAction: "none" }}>
-      <div {...listeners} {...attributes} aria-label={p ? `Drag ${p.name} onto the board` : `${item.piece.name}: not in store`}
+      <div {...listeners} {...attributes} aria-label={p ? `Drag ${p.name} onto the board` : `${item.name}: not in store`}
         style={{ cursor: p ? "grab" : "not-allowed", display: "flex", gap: 8, alignItems: "center", flex: 1, minWidth: 0 }}>
         <div style={{ width: 56, height: 56, borderRadius: 10, background: "#f4efe8", flex: "none", display: "grid", placeItems: "center" }}>
           {p ? <img src={p.image_url} alt="" style={{ width: 50, height: 50, objectFit: "contain" }} />
-            : item.piece.crop_url && <img src={item.piece.crop_url} alt="" style={{ width: 50, height: 50, objectFit: "contain", opacity: .5 }} />}
+            : item.crop_url && <img src={item.crop_url} alt="" style={{ width: 50, height: 50, objectFit: "contain", opacity: .5 }} />}
         </div>
         <div style={{ minWidth: 0 }}>
-          <div className="small" style={{ fontWeight: 600, lineHeight: 1.25 }}>{p?.name ?? item.piece.name}</div>
-          <div className="small muted">{p ? inr(p.price_inr) : "Wish · not in store"}</div>
+          <div className="small" style={{ fontWeight: 600, lineHeight: 1.25 }}>{p?.name ?? item.name}</div>
+          <div className="small muted">{item.note}</div>
         </div>
       </div>
       {p && <button className="btn btn-sm" onClick={() => onAdd(p)} aria-label={`Add ${p.name} to the board`}>Add</button>}
@@ -122,12 +125,26 @@ function SizePrompt({ items, onDone, onClose }: { items: { product: Product; rea
 
 export default function StyleBoard() {
   const { id } = useParams();
-  const folderId = Number(id);
+  const folderId = id ? Number(id) : null;          // no folder: the rail's board (/board)
+  const base = folderId ? `/folders/${folderId}` : "/rail";
   const qc = useQueryClient();
   const toast = useToast();
-  const folder = useQuery({ queryKey: ["folder", folderId], queryFn: () => api.get<FolderDetail>(`/folders/${folderId}`) });
-  const tray = useQuery({ queryKey: ["tray", folderId], queryFn: () => api.get<{ items: TrayItem[] }>(`/folders/${folderId}/tray`) });
-  const looks = useQuery({ queryKey: ["looks", folderId], queryFn: () => api.get<Look[]>(`/folders/${folderId}/looks`) });
+  const folder = useQuery({ queryKey: ["folder", folderId], queryFn: () => api.get<FolderDetail>(`/folders/${folderId}`), enabled: !!folderId });
+  const tray = useQuery({
+    queryKey: ["tray", folderId ?? "rail"],
+    queryFn: async (): Promise<{ items: TrayItem[] }> => {
+      if (folderId) {
+        const r = await api.get<{ items: FolderTrayItem[] }>(`/folders/${folderId}/tray`);
+        return { items: r.items.map((t) => ({ key: `h${t.hanger_id}`, name: t.piece.name, crop_url: t.piece.crop_url, product: t.product,
+          owned: false, note: t.product ? inr(t.product.price_inr) : "Wish · not in store" })) };
+      }
+      const r = await api.get<{ items: RailTrayItem[] }>("/rail/tray");
+      return { items: r.items.map((t) => ({ key: t.key, name: t.product.name, crop_url: null, product: t.product, owned: t.owned,
+        note: t.owned ? "Yours" : `${inr(t.product.price_inr)} · ${t.sources[0]}` })) };
+    },
+  });
+  const looks = useQuery({ queryKey: ["looks", folderId ?? "rail"], queryFn: () => api.get<Look[]>(`${base}/looks`) });
+  const owned = useMemo(() => new Set((tray.data?.items ?? []).filter((t) => t.owned && t.product).map((t) => t.product!.id)), [tray.data]);
   const [items, setItems] = useState<Item[]>([]);
   const [history, setHistory] = useState<Item[][]>([]);
   const [selected, setSelected] = useState<string | null>(null);
@@ -233,18 +250,19 @@ export default function StyleBoard() {
     if (e.key === "Delete" || e.key === "Backspace") { e.preventDefault(); remove(pid); }
   };
 
-  const total = useMemo(() => items.reduce((s, i) => s + i.product.price_inr, 0), [items]);
+  const toBuy = items.filter((i) => !owned.has(i.product.id));
+  const total = toBuy.reduce((s, i) => s + i.product.price_inr, 0);
   const sel = items.find((i) => i.product.id === selected);
 
-  const style = useMutation({ mutationFn: (body: { formality?: string }) => api.post<StyleResp>(`/folders/${folderId}/style`, body) });
+  const style = useMutation({ mutationFn: (body: { formality?: string }) => api.post<StyleResp>(`${base}/style`, body) });
   const save = useMutation({
-    mutationFn: () => api.post<Look>(`/folders/${folderId}/looks`, { name: `Look ${(looks.data?.length ?? 0) + 1}`,
+    mutationFn: () => api.post<Look>(`${base}/looks`, { name: `Look ${(looks.data?.length ?? 0) + 1}`,
       placements: items.map((i) => ({ product_id: i.product.id, x: i.x, y: i.y, w: i.w, z: i.z })) }),
-    onSuccess: (l) => { setLoadedLook(l.id); qc.invalidateQueries({ queryKey: ["looks", folderId] }); toast("Look saved"); },
+    onSuccess: (l) => { setLoadedLook(l.id); qc.invalidateQueries({ queryKey: ["looks", folderId ?? "rail"] }); toast("Look saved"); },
   });
   const addToCart = useMutation({
     mutationFn: (list: { product_id: string; size?: string }[]) => api.post<{ added: unknown[]; needs_size: { product: Product; reason: string }[]; failed: unknown[] }>(
-      `/cart/look/${folderId}`, { items: list }),
+      folderId ? `/cart/look/${folderId}` : "/rail/cart", { items: list }),
     onSuccess: (r) => {
       qc.invalidateQueries({ queryKey: ["me"] }); qc.invalidateQueries({ queryKey: ["cart"] });
       setNeedSizes(r.needs_size.length ? r.needs_size : null);
@@ -257,22 +275,24 @@ export default function StyleBoard() {
   };
 
   if (folder.error) return <ErrorBox error={folder.error} onRetry={() => folder.refetch()} />;
-  if (!folder.data) return <Loading label="Opening your style board" />;
+  if (folderId && !folder.data) return <Loading label="Opening your style board" />;
+  const title = folder.data?.name ?? "Your rail";
   const askMoved = ask && items.find((i) => i.product.id === ask.moved);
   const askOther = ask && items.find((i) => i.product.id === ask.other);
 
   return (
     <>
-      <Link to={`/folders/${folderId}`} className="btn btn-ghost btn-sm" style={{ marginLeft: -8 }}><Icon name="back" size={16} /> {folder.data.name}</Link>
+      <Link to={folderId ? `/folders/${folderId}` : "/"} className="btn btn-ghost btn-sm" style={{ marginLeft: -8 }}><Icon name="back" size={16} /> {folderId ? title : "Wardrobe"}</Link>
       <span className="eyebrow" style={{ display: "block", marginTop: 4 }}>Style board</span>
-      <h1>{folder.data.name}</h1>
+      <h1>{title}</h1>
+      {!folderId && <p className="muted" style={{ margin: "4px 0 0" }}>Everything you've bought, bagged or wishlisted. Mix what you own with what you're eyeing.</p>}
       <DndContext sensors={sensors} onDragStart={onDragStart} onDragCancel={() => setActive(null)} onDragEnd={onDragEnd}>
         <div className="wardrobe-layout section" style={{ marginTop: 16 }}>
           <section className="stack wardrobe-tray" style={{ gap: 8 }}>
-            <div className="row-between"><h3>Your hangers</h3><span className="small muted">Drag onto the board, or tap “Add”</span></div>
+            <div className="row-between"><h3>{folderId ? "Your hangers" : "Your rail"}</h3><span className="small muted">Drag onto the board, or tap “Add”</span></div>
             {tray.isLoading && <Loading />}
-            {tray.data?.items.length === 0 && <div className="empty"><p className="muted" style={{ margin: 0 }}>No hangers yet. Hang pieces from an inspo first.</p></div>}
-            <div className="tray-grid">{tray.data?.items.map((it) => <TrayCard key={it.hanger_id} item={it} onAdd={(p) => addAt(p)} />)}</div>
+            {tray.data?.items.length === 0 && <div className="empty"><p className="muted" style={{ margin: 0 }}>{folderId ? "No hangers yet. Hang pieces from your rail or an inspo first." : "Your rail is empty. Heart pieces in the Shop or link your membership."}</p></div>}
+            <div className="tray-grid">{tray.data?.items.map((it) => <TrayCard key={it.key} item={it} onAdd={(p) => addAt(p)} />)}</div>
           </section>
 
           <div className="stack wardrobe-stage">
@@ -299,10 +319,12 @@ export default function StyleBoard() {
             )}
             {items.length > 0 && (
               <div className="card pad stack" style={{ gap: 8 }}>
-                <div className="row-between"><b>On the board</b><span className="price">{inr(total)}</span></div>
-                <button className="btn btn-primary" onClick={() => addToCart.mutate(items.map((i) => ({ product_id: i.product.id })))} disabled={addToCart.isPending}>
-                  {addToCart.isPending ? <span className="spinner" /> : <Icon name="bag" />} Add full look to cart
-                </button>
+                <div className="row-between"><b>{toBuy.length === 0 ? "All from your wardrobe. Nothing to buy." : toBuy.length < items.length ? `To complete the look (${items.length - toBuy.length} already yours)` : "On the board"}</b>
+                  {toBuy.length > 0 && <span className="price">{inr(total)}</span>}</div>
+                {toBuy.length > 0 && (
+                <button className="btn btn-primary" onClick={() => addToCart.mutate(toBuy.map((i) => ({ product_id: i.product.id })))} disabled={addToCart.isPending}>
+                  {addToCart.isPending ? <span className="spinner" /> : <Icon name="bag" />} {toBuy.length < items.length ? `Add ${toBuy.length} piece${toBuy.length === 1 ? "" : "s"} to cart` : "Add full look to cart"}
+                </button>)}
                 {addToCart.error && <ErrorBox error={addToCart.error} />}
               </div>
             )}
@@ -324,7 +346,9 @@ export default function StyleBoard() {
               {style.data?.message && <div className="alert">{style.data.message}</div>}
               {style.data?.options.map((o, k) => (
                 <button key={k} className="card" style={{ padding: 10, textAlign: "left", cursor: "pointer" }} onClick={() => applyOption(o)}>
-                  <div className="row-between"><b>Look {k + 1}</b><Price price={o.total_inr} /></div>
+                  <div className="row-between"><b>Look {k + 1}</b>
+                    {o.owned_count === o.items.length ? <span className="chip chip-sage">All yours</span>
+                      : <span className="small"><Price price={o.total_inr} />{o.owned_count ? " to buy" : ""}</span>}</div>
                   <div className="row" style={{ gap: 4, margin: "6px 0" }}>
                     {o.items.map((i) => <img key={i.product.id} src={i.product.image_url} alt={i.product.name} title={i.why}
                       style={{ width: 44, height: 44, objectFit: "contain", background: "#f4efe8", borderRadius: 8 }} />)}

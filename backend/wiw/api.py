@@ -64,7 +64,7 @@ def own_hanger(db: Session, user: m.User, hanger_id: int) -> m.Hanger:
 
 def own_inspo(db: Session, user: m.User, inspo_id: int) -> m.InspoImage:
     i = db.get(m.InspoImage, inspo_id)
-    if not i or i.user_id != user.id:
+    if not i or i.user_id != user.id or i.status == "wardrobe":   # the rail's hidden source is not an upload
         raise HTTPException(404, "Inspo not found")
     return i
 
@@ -164,7 +164,8 @@ def update_me(body: MeIn, db: Db, user: User) -> dict:
 def delete_me(db: Db, user: User) -> dict:
     """Delete this shopper's profile and everything they created (folders, uploads' records, cart, orders, events)."""
     uid = user.id
-    for model in (m.ChatMessage, m.Notification, m.CartItem, m.TasteSignal, m.Look, m.Hanger):
+    for model in (m.ChatMessage, m.Notification, m.CartItem, m.TasteSignal, m.Look, m.Hanger, m.WishlistItem,
+                  m.StorePurchase, m.RailLook):
         db.query(model).filter(model.user_id == uid).delete(synchronize_session=False)
     for o in db.scalars(select(m.Order).where(m.Order.user_id == uid)):
         db.delete(o)
@@ -259,6 +260,8 @@ def get_folder(folder_id: int, db: Db, user: User) -> dict:
         by_inspo.setdefault(h.piece.inspo_id, []).append(h)
     for inspo_id, hs in by_inspo.items():
         inspo = db.get(m.InspoImage, inspo_id)
+        if inspo and inspo.status == "wardrobe":   # pieces hung from the rail aren't an inspo look
+            continue
         looks.append({"inspo_id": inspo_id, "image_url": inspo.image_url if inspo else None,
                       "coverage": look_coverage(db, user.id, hs)})
     return {**folder_summary(db, f), "inspo": [inspo_dict(i) for i in inspos],
@@ -276,7 +279,8 @@ async def upload_unfiled_inspo(db: Db, user: User, file: UploadFile = File(...))
 @router.get("/inspo")
 def list_unfiled_inspo(db: Db, user: User) -> list[dict]:
     """Uploads not filed into any folder yet (nothing hung from them)."""
-    rows = db.scalars(select(m.InspoImage).where(m.InspoImage.user_id == user.id, m.InspoImage.folder_id.is_(None))
+    rows = db.scalars(select(m.InspoImage).where(m.InspoImage.user_id == user.id, m.InspoImage.folder_id.is_(None),
+                                                 m.InspoImage.status != "wardrobe")
                       .order_by(m.InspoImage.id.desc()))
     return [inspo_dict(i) for i in rows]
 

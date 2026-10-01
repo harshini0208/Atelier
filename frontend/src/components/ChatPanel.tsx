@@ -6,9 +6,9 @@ import type { Product } from "../types";
 import ProductModal from "./ProductModal";
 import { ErrorBox, Icon, useToast } from "./ui";
 
-type OutfitItem = { product: Product; piece_name: string; why: string; reasons: { label: string }[]; hanger_id: number };
+type OutfitItem = { product: Product; piece_name: string; why: string; reasons: { label: string }[]; hanger_id: number | null; owned?: boolean };
 type Outfit = { items: OutfitItem[]; total_inr: number; max_total_inr: number | null; within_budget: boolean; over_by_inr: number;
-  occasion: string | null; gaps: string[]; dropped?: string[] };
+  occasion: string | null; gaps: string[]; dropped?: string[]; owned_count?: number };
 type Msg = {
   id: number; role: "user" | "assistant"; content: string; created_at: string;
   payload: { source?: string; products?: Product[]; outfit?: Outfit | null; actions?: string[];
@@ -17,6 +17,13 @@ type Msg = {
 
 const SUGGESTIONS = ["Make it work for a beach wedding under ₹5,000", "Make it more casual", "Put it on my board",
   "Add the look to my cart"];
+const RAIL_SUGGESTIONS = ["Style my rail for a weekend brunch", "What can I wear to work this week?", "Put it on my board",
+  "Find me a blazer under ₹4,000"];
+
+/** Open the stylist from anywhere (e.g. the home page), optionally sending a message straight away. */
+export function openStylist(message?: string) {
+  window.dispatchEvent(new CustomEvent("wiw:stylist", { detail: { message } }));
+}
 
 function useFolderId(): number | null {
   const { pathname } = useLocation();
@@ -28,15 +35,16 @@ function OutfitCard({ o, folderId, onOpen }: { o: Outfit; folderId: number | nul
   const qc = useQueryClient();
   const nav = useNavigate();
   const toast = useToast();
+  const toBuy = o.items.filter((i) => !i.owned);
   const place = useMutation({
-    mutationFn: () => api.post(`/folders/${folderId}/looks`, {
+    mutationFn: () => api.post(folderId ? `/folders/${folderId}/looks` : "/rail/looks", {
       name: o.occasion ? `For ${o.occasion}` : "Stylist pick",
       placements: o.items.map((i) => ({ product_id: i.product.id })), reason: o.occasion ?? "" }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["looks", folderId] }); nav(`/folders/${folderId}/board`); },
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["looks"] }); nav(folderId ? `/folders/${folderId}/board` : "/board"); },
   });
   const cart = useMutation({
-    mutationFn: () => api.post<{ added: unknown[]; needs_size: unknown[] }>(`/cart/look/${folderId}`, {
-      items: o.items.map((i) => ({ product_id: i.product.id })) }),
+    mutationFn: () => api.post<{ added: unknown[]; needs_size: unknown[] }>(folderId ? `/cart/look/${folderId}` : "/rail/cart", {
+      items: toBuy.map((i) => ({ product_id: i.product.id })) }),
     onSuccess: (r) => {
       qc.invalidateQueries({ queryKey: ["me"] }); qc.invalidateQueries({ queryKey: ["cart"] });
       toast(`Added ${r.added.length} to cart${r.needs_size.length ? `, ${r.needs_size.length} need a size` : ""}`);
@@ -47,7 +55,7 @@ function OutfitCard({ o, folderId, onOpen }: { o: Outfit; folderId: number | nul
       <div className="row-between small" style={{ marginBottom: 6 }}>
         <b>{o.occasion ? `Look for ${o.occasion}` : "Your look"}</b>
         <span className={`chip ${o.within_budget ? "chip-sage" : "chip-amber"}`}>
-          {inr(o.total_inr)}{o.max_total_inr ? (o.within_budget ? " · in budget" : ` · ${inr(o.over_by_inr)} over`) : ""}
+          {toBuy.length === 0 ? "All yours" : `${inr(o.total_inr)}${o.owned_count ? " to buy" : ""}`}{o.max_total_inr ? (o.within_budget ? " · in budget" : ` · ${inr(o.over_by_inr)} over`) : ""}
         </span>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(76px, 1fr))", gap: 6 }}>
@@ -56,7 +64,7 @@ function OutfitCard({ o, folderId, onOpen }: { o: Outfit; folderId: number | nul
             <div className="product-img" style={{ padding: 4 }}><img src={i.product.image_url} alt={i.product.name} /></div>
             <div style={{ padding: "4px 6px 6px", fontSize: 11, lineHeight: 1.25 }}>
               <div style={{ fontWeight: 600 }}>{i.product.name}</div>
-              <div>{inr(i.product.price_inr)}</div>
+              <div>{i.owned ? <b style={{ color: "var(--sage)" }}>Yours</b> : inr(i.product.price_inr)}</div>
               {i.reasons[0] && <div style={{ color: "var(--amber)" }}>{i.reasons[0].label}</div>}
             </div>
           </button>
@@ -68,10 +76,12 @@ function OutfitCard({ o, folderId, onOpen }: { o: Outfit; folderId: number | nul
           {o.gaps.length ? `Not in store: ${o.gaps.join(", ")}.` : ""}
         </div>
       )}
-      {folderId && (
+      {(
         <div className="row" style={{ marginTop: 8, gap: 6 }}>
           <button className="btn btn-sm" onClick={() => place.mutate()} disabled={place.isPending}><Icon name="sparkle" size={16} /> Open on board</button>
-          <button className="btn btn-sm btn-primary" onClick={() => cart.mutate()} disabled={cart.isPending}><Icon name="bag" size={16} /> Add look to cart</button>
+          {toBuy.length > 0 && (
+            <button className="btn btn-sm btn-primary" onClick={() => cart.mutate()} disabled={cart.isPending}>
+              <Icon name="bag" size={16} /> {toBuy.length < o.items.length ? `Add ${toBuy.length} to cart` : "Add look to cart"}</button>)}
         </div>
       )}
     </div>
@@ -144,6 +154,16 @@ export default function ChatPanel() {
   // on phones the chat is a full-screen sheet: close it when an action navigates (e.g. "Try on")
   const { pathname } = useLocation();
   useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => {
+    const h = (e: Event) => {
+      setOpen(true);
+      const msg = (e as CustomEvent<{ message?: string }>).detail?.message;
+      if (msg) submit(undefined, msg);
+      else window.setTimeout(() => document.getElementById("chat-input")?.focus(), 50);
+    };
+    window.addEventListener("wiw:stylist", h);
+    return () => window.removeEventListener("wiw:stylist", h);
+  });
 
   const submit = (e?: FormEvent, value?: string) => {
     e?.preventDefault();
@@ -170,15 +190,15 @@ export default function ChatPanel() {
         <div ref={endRef} />
       </div>
       <div style={{ padding: "8px 12px 12px", borderTop: "1px solid var(--line)" }}>
-        {folderId && (
+        {(
           <div style={{ display: "flex", gap: 6, overflowX: "auto", paddingBottom: 8 }}>
-            {SUGGESTIONS.map((s) => <button key={s} className="chip" onClick={() => submit(undefined, s)} disabled={send.isPending}>{s}</button>)}
+            {(folderId ? SUGGESTIONS : RAIL_SUGGESTIONS).map((s) => <button key={s} className="chip" onClick={() => submit(undefined, s)} disabled={send.isPending}>{s}</button>)}
           </div>
         )}
         <form onSubmit={submit} className="row" style={{ flexWrap: "nowrap", gap: 6 }}>
           <label htmlFor="chat-input" className="sr-only">Message the stylist</label>
           <input id="chat-input" className="input" value={text} onChange={(e) => setText(e.target.value)} maxLength={800}
-            placeholder={folderId ? "Occasion, budget, how you'll wear it…" : "Ask me to find something…"} />
+            placeholder={folderId ? "Occasion, budget, how you'll wear it…" : "Style my rail, or find something…"} />
           <button className="btn btn-primary" disabled={!text.trim() || send.isPending} aria-label="Send">
             <Icon name="arrow" />
           </button>

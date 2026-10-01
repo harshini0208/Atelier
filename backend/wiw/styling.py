@@ -39,6 +39,7 @@ class Outfit:
     occasion: str | None = None
     gaps: list[str] = field(default_factory=list)
     dropped: list[str] = field(default_factory=list)  # optional accessories left out to meet the budget
+    owned_count: int = 0                               # pieces the shopper already owns (not in total_inr)
 
     @property
     def within_budget(self) -> bool:
@@ -48,7 +49,7 @@ class Outfit:
         return {"items": self.items, "total_inr": self.total_inr, "max_total_inr": self.max_total_inr,
                 "within_budget": self.within_budget,
                 "over_by_inr": 0 if self.within_budget else self.total_inr - (self.max_total_inr or 0),
-                "occasion": self.occasion, "gaps": self.gaps, "dropped": self.dropped}
+                "occasion": self.occasion, "gaps": self.gaps, "dropped": self.dropped, "owned_count": self.owned_count}
 
 
 def folder_hangers(db: Session, user_id: str, folder_id: int) -> list[m.Hanger]:
@@ -81,8 +82,10 @@ OPTIONAL_SLOTS = {"hand", "head", "neck", "waist", "wrist", "outer"}
 UNBUYABLE = {"size", "stock"}  # an outfit never includes something the shopper can't buy in their size
 
 
-def build_choices(db: Session, user_id: str, folder_id: int, occasion: str | None = None,
-                  formality: str | None = None, prefs_override: dict | None = None) -> tuple[list[Choice], list[str]]:
+def build_choices(db: Session, user_id: str, folder_id: int | None, occasion: str | None = None,
+                  formality: str | None = None, prefs_override: dict | None = None,
+                  hangers: list[m.Hanger] | None = None,
+                  owned: frozenset[str] = frozenset()) -> tuple[list[Choice], list[str]]:
     """One Choice per body slot. Candidates for a slot are pooled from every hanger in that slot, so a folder with
     loafers AND sandals lets the occasion and budget decide between them."""
     prefs = user_prefs(db, user_id)
@@ -90,7 +93,8 @@ def build_choices(db: Session, user_id: str, folder_id: int, occasion: str | Non
         prefs = {**(prefs or {}), **prefs_override}
     occ = _occasion_set(occasion)
     shift = set(get_settings().matching["stylist"]["formality_shift"].get(formality or "", []))
-    hangers = folder_hangers(db, user_id, folder_id)
+    if hangers is None:   # a folder's hangers; the rail passes its own in-memory hangers
+        hangers = folder_hangers(db, user_id, folder_id)
     has_top_bottom = any(slot_for(h.piece.subcategory) in ("torso", "legs") for h in hangers)
     by_slot: dict[str, list[tuple[int, m.Hanger]]] = {}
     for idx, h in enumerate(hangers, start=1):
@@ -118,6 +122,8 @@ def build_choices(db: Session, user_id: str, folder_id: int, occasion: str | Non
                         sc += 8 if shift & set(p["style_tags"]) else 0
                     if h.chosen_product_id == p["id"]:
                         sc += 5
+                    if p["id"] in owned:      # styling the rail: lean on what they already own
+                        sc += 15
                     opt = {"product": p, "score": round(sc, 1), "style_score": round(it.score, 1), "hanger_index": idx,
                            "hanger_id": h.id, "piece_name": h.piece.name, "reasons": [r.as_dict() for r in it.reasons],
                            "tier": tier}
@@ -135,11 +141,11 @@ def build_choices(db: Session, user_id: str, folder_id: int, occasion: str | Non
     return choices, gaps
 
 
-def _fit_budget(choices: list[Choice], max_total: int | None) -> None:
-    """Swap to cheaper options with the smallest score loss per rupee saved until within budget."""
+def _fit_budget(choices: list[Choice], max_total: int | None, owned: frozenset[str] = frozenset()) -> None:
+    """Swap to cheaper options with the smallest score loss per rupee saved until within budget (owned pieces are free)."""
     if max_total is None:
         return
-    price = lambda o: o["product"]["price_inr"] if o["product"] else 0  # noqa: E731
+    price = lambda o: o["product"]["price_inr"] if o["product"] and o["product"]["id"] not in owned else 0  # noqa: E731
     total = lambda: sum(price(c.current) for c in choices)  # noqa: E731
     while total() > max_total:
         best = None
@@ -157,7 +163,8 @@ def _fit_budget(choices: list[Choice], max_total: int | None) -> None:
         best[1].pick = best[2]
 
 
-def outfit_from(choices: list[Choice], gaps: list[str], occasion: str | None, max_total: int | None) -> Outfit:
+def outfit_from(choices: list[Choice], gaps: list[str], occasion: str | None, max_total: int | None,
+                owned: frozenset[str] = frozenset()) -> Outfit:
     items, dropped = [], []
     for c in choices:
         cur = c.current
@@ -166,27 +173,30 @@ def outfit_from(choices: list[Choice], gaps: list[str], occasion: str | None, ma
             continue
         items.append({"hanger_index": cur["hanger_index"], "hanger_id": cur["hanger_id"], "piece_name": cur["piece_name"],
                       "slot": c.slot, "product": cur["product"], "score": cur["style_score"], "tier": cur["tier"],
-                      "reasons": cur["reasons"], "why": _why(cur["product"], occasion, cur["reasons"])})
-    o = Outfit(items=items, total_inr=sum(i["product"]["price_inr"] for i in items), max_total_inr=max_total,
-               occasion=occasion, gaps=gaps)
+                      "reasons": cur["reasons"], "why": _why(cur["product"], occasion, cur["reasons"]),
+                      "owned": cur["product"]["id"] in owned})
+    o = Outfit(items=items, total_inr=sum(i["product"]["price_inr"] for i in items if not i["owned"]), max_total_inr=max_total,
+               occasion=occasion, gaps=gaps, owned_count=sum(i["owned"] for i in items))
     o.dropped = dropped
     return o
 
 
-def suggest_outfit(db: Session, user_id: str, folder_id: int, occasion: str | None = None,
-                   max_total_inr: int | None = None, formality: str | None = None) -> Outfit:
-    choices, gaps = build_choices(db, user_id, folder_id, occasion, formality)
-    _fit_budget(choices, max_total_inr)
-    return outfit_from(choices, gaps, occasion, max_total_inr)
+def suggest_outfit(db: Session, user_id: str, folder_id: int | None, occasion: str | None = None,
+                   max_total_inr: int | None = None, formality: str | None = None,
+                   hangers: list[m.Hanger] | None = None, owned: frozenset[str] = frozenset()) -> Outfit:
+    choices, gaps = build_choices(db, user_id, folder_id, occasion, formality, hangers=hangers, owned=owned)
+    _fit_budget(choices, max_total_inr, owned)
+    return outfit_from(choices, gaps, occasion, max_total_inr, owned)
 
 
-def style_options(db: Session, user_id: str, folder_id: int, n: int = 3, occasion: str | None = None,
-                  formality: str | None = None) -> list[Outfit]:
+def style_options(db: Session, user_id: str, folder_id: int | None, n: int = 3, occasion: str | None = None,
+                  formality: str | None = None, hangers: list[m.Hanger] | None = None,
+                  owned: frozenset[str] = frozenset()) -> list[Outfit]:
     """Up to n distinct combinations: the best look, then variants that swap the closest runner-up."""
-    choices, gaps = build_choices(db, user_id, folder_id, occasion, formality)
+    choices, gaps = build_choices(db, user_id, folder_id, occasion, formality, hangers=hangers, owned=owned)
     if not choices:
         return []
-    outfits = [outfit_from(choices, gaps, occasion, None)]
+    outfits = [outfit_from(choices, gaps, occasion, None, owned)]
     seen = {tuple(i["product"]["id"] for i in outfits[0].items)}
     swaps = sorted(((c.options[0]["score"] - c.options[1]["score"], k) for k, c in enumerate(choices)
                     if len(c.options) > 1 and c.options[1]["product"] is not None))
@@ -194,7 +204,7 @@ def style_options(db: Session, user_id: str, folder_id: int, n: int = 3, occasio
         if len(outfits) >= n:
             break
         choices[k].pick = 1
-        o = outfit_from(choices, gaps, occasion, None)
+        o = outfit_from(choices, gaps, occasion, None, owned)
         key = tuple(i["product"]["id"] for i in o.items)
         if key not in seen:
             seen.add(key)
@@ -213,6 +223,9 @@ def complete_the_look(db: Session, user_id: str, look_products: list[dict], limi
     past = [product_dict(p) for p in db.scalars(
         select(m.Product).join(m.OrderItem, m.OrderItem.product_id == m.Product.id)
         .join(m.Order, m.Order.id == m.OrderItem.order_id).where(m.Order.user_id == user_id))]
+    past += [product_dict(p) for p in db.scalars(       # in-store purchases count too
+        select(m.Product).join(m.StorePurchase, m.StorePurchase.product_id == m.Product.id)
+        .where(m.StorePurchase.user_id == user_id))]
     genders = {"women": {"women", "unisex"}, "men": {"men", "unisex"}}.get((prefs or {}).get("gender_fit", "any"),
                                                                           {"women", "men", "unisex"})
     owned = {p["id"] for p in past} | {p["id"] for p in look_products}

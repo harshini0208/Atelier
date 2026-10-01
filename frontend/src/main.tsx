@@ -51,6 +51,7 @@ function App() {
           <Route path="/preferences" element={<Preferences />} />
           <Route path="/folders/:id" element={<FolderPage />} />
           <Route path="/folders/:id/board" element={<StyleBoard />} />
+          <Route path="/board" element={<StyleBoard />} />
           <Route path="/inspo/:id" element={<InspoReview />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/taste" element={<Taste />} />

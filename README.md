@@ -185,6 +185,22 @@ against the event with the matcher and writes notifications and `alert_sent` eve
 whose taste score clears the configured threshold. **Complete the look** appears under "Style it for me". **My taste**
 shows deterministic core and exploring counts, with a one-sentence summary from Gemini.
 
+## The rail (home page)
+
+The home page starts from what a shopper already has with the store, not from an upload:
+- **Your rail**: one generic hanger with everything bought online (orders) or in store (receipts linked through the
+  Urban Thread membership), in the bag, or wishlisted (heart in the Shop or on any product). Filter by source.
+- **Hang a piece in many folders**: "Add to folders" ticks any number of folders at once (or creates one). In a folder,
+  "Add from your rail" does the same from the other side. Rail pieces behave like any hanger (matches, board, stylist).
+- **Style on canvas** (`/board`): the white style board over the whole rail. Pieces you own are free, so the look's
+  price is only what you'd still buy, and "Add to cart" skips what you own.
+- **Ask the stylist**: with no folder open, the stylist styles the rail, says which pieces are already yours, and never
+  re-adds owned pieces to the cart.
+- **Membership is a demo**: real stores look purchases up by member number. Here "Link membership" (also offered at
+  the end of onboarding) adds a small, plausible history picked from the catalog in the shopper's section, sizes and
+  budgets, and is labelled as a demo in the UI. It never changes stock.
+- Uploading an inspo screenshot is still there, lower on the page, as an optional way to find new pieces.
+
 ## Mock marketplace
 
 `data/generate.py` builds one storefront deterministically:

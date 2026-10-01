@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { api } from "../api";
 import { useMe } from "../components/Layout";
 import ProductModal from "../components/ProductModal";
+import { WishButton } from "../components/Rail";
 import { ErrorBox, Price, SkeletonGrid } from "../components/ui";
 import type { Product } from "../types";
 
@@ -94,7 +95,8 @@ export default function Shop() {
           {shop.data?.count === 0 && <div className="empty"><h3>Nothing here yet</h3><p className="muted" style={{ margin: 0 }}>Try another category or search.</p></div>}
           <div className="shop-grid" style={{ opacity: shop.isFetching ? 0.6 : 1 }}>
             {shop.data?.products.map((p) => (
-              <button key={p.id} className="shop-card" onClick={() => setOpen(p.id)} aria-label={`${p.name}`}>
+              <div key={p.id} className="shop-card-wrap">
+              <button className="shop-card" onClick={() => setOpen(p.id)} aria-label={`${p.name}`}>
                 <div className="shop-img">
                   <img src={p.image_url} alt={p.name} loading="lazy" className={p.image_url.includes("/photos/") ? "photo" : ""} />
                   <Badge p={p} />
@@ -105,6 +107,8 @@ export default function Shop() {
                   <span className="small muted">{p.sizes.filter((s) => s.stock > 0).map((s) => s.size).join(" · ") || "Out of stock"}</span>
                 </div>
               </button>
+              <WishButton product={p} />
+              </div>
             ))}
           </div>
         </section>

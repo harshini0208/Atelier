@@ -131,9 +131,15 @@ def _fallback_line(o: dict, occasion: str | None, formality: str | None) -> str:
 @router.post("/folders/{folder_id}/style")
 def style_it(folder_id: int, body: StyleIn, db: Db, user: User) -> dict:
     own_folder(db, user, folder_id)
-    options = [o.as_dict() for o in style_options(db, user.id, folder_id, 3, body.occasion, body.formality)]
+    return _style(db, user, folder_id, None, body, "Hang a few pieces in this folder first and I'll style them for you.")
+
+
+def _style(db, user: m.User, folder_id: int | None, hangers: list | None, body: StyleIn, empty: str,  # noqa: ANN001
+           owned: frozenset[str] = frozenset()) -> dict:
+    options = [o.as_dict() for o in style_options(db, user.id, folder_id, 3, body.occasion, body.formality,
+                                                  hangers=hangers, owned=owned)]
     if not options:
-        return {"options": [], "message": "Hang a few pieces in this folder first and I'll style them for you."}
+        return {"options": [], "message": empty}
     summary = "\n".join(f"Look {k + 1}: " + ", ".join(f"{i['product']['name']} ({i['product']['fabric']}, "
                                                         f"{i['product']['primary_color']})" for i in o["items"])
                         for k, o in enumerate(options))
@@ -157,3 +163,49 @@ def style_it(folder_id: int, body: StyleIn, db: Db, user: User) -> dict:
     extras = complete_the_look(db, user.id, [i["product"] for i in options[0]["items"]], limit=3)
     return {"options": options, "source": res.source, "complete_the_look": extras}
 
+
+
+# ------------------------------------------------------------------ the rail's style board (no folder)
+
+@router.get("/rail/tray")
+def rail_tray(db: Db, user: User) -> dict:
+    from .rail import rail
+
+    return {"items": [{"key": e["product"]["id"], "product": e["product"], "owned": e["owned"],
+                       "sources": [s["label"] for s in e["sources"]]} for e in rail(db, user)["items"]]}
+
+
+@router.get("/rail/looks")
+def rail_looks(db: Db, user: User) -> list[dict]:
+    rows = db.scalars(select(m.RailLook).where(m.RailLook.user_id == user.id)
+                      .order_by(m.RailLook.created_at.desc(), m.RailLook.id.desc()))
+    return [look_dict(db, lk) for lk in rows]
+
+
+@router.post("/rail/looks")
+def save_rail_look(body: LookIn, db: Db, user: User) -> dict:
+    if not body.placements:
+        raise HTTPException(422, "Put at least one piece on the board first")
+    look = m.RailLook(user_id=user.id, name=body.name.strip() or "My look",
+                      placements=normalise_placements(db, body.placements), reason=body.reason)
+    db.add(look)
+    db.commit()
+    return look_dict(db, look)
+
+
+@router.delete("/rail/looks/{look_id}")
+def delete_rail_look(look_id: int, db: Db, user: User) -> dict:
+    lk = db.get(m.RailLook, look_id)
+    if not lk or lk.user_id != user.id:
+        raise HTTPException(404, "Look not found")
+    db.delete(lk)
+    db.commit()
+    return {"ok": True}
+
+
+@router.post("/rail/style")
+def style_rail(body: StyleIn, db: Db, user: User) -> dict:
+    from .rail import owned_ids, rail_hangers
+
+    return _style(db, user, None, rail_hangers(db, user), body,
+                  "Your rail is empty. Wishlist a few pieces in the Shop and I'll style them for you.", owned_ids(db, user))

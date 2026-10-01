@@ -63,7 +63,7 @@ def main() -> None:
         shot(page, "02-onboarding-last")
         page.get_by_role("button", name="Start my wardrobe").click()
         expect(page.get_by_role("heading", name=re.compile("Hi Smoke"))).to_be_visible()
-        expect(page.get_by_text("Your wardrobes")).to_be_visible()
+        expect(page.get_by_role("heading", name="Your rail")).to_be_visible()
         shot(page, "03-home-fresh")
 
         # 2. upload straight from the landing page (no folder yet), tap pieces BEFORE choosing a folder

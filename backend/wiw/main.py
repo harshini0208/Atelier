@@ -18,7 +18,7 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(messag
 app = FastAPI(title="Walk-In Wardrobe", version="0.1.0")
 app.include_router(router)
 
-for extra in ("api_stylist", "api_wardrobe", "api_commerce", "api_insights"):
+for extra in ("api_stylist", "api_wardrobe", "api_commerce", "api_insights", "api_rail"):
     try:
         mod = __import__(f"wiw.{extra}", fromlist=["router"])
         app.include_router(mod.router)
