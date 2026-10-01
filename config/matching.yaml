@@ -112,7 +112,7 @@ taste:
 stylist:
   max_steps: 5                 # model <-> tool round trips per message
   history_messages: 8          # previous chat messages sent as context
-  reasons_timeout_s: 8         # "Style it" waits this long for Gemini's one-line reasons, then uses rule-based ones
+  reasons_timeout_s: 4         # "Style it" waits this long for Gemini's one-line reasons, then uses rule-based ones
   # Occasions the stylist treats as related when refining picks (deterministic, used by suggest_outfit).
   related_occasions:
     beach: [beach, vacation, brunch]
