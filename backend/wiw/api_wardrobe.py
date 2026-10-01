@@ -1,6 +1,8 @@
 """Style board: a plain canvas per folder where shoppers arrange real store pieces, saved looks, "Style it for me"."""
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import TimeoutError as FutureTimeout
 from typing import Literal
 
 from fastapi import APIRouter, HTTPException
@@ -11,10 +13,12 @@ from . import gemini
 from . import models as m
 from .api import Db, User, own_folder
 from .services import matches_for_piece, product_dict
+from .settings import get_settings
 from .styling import auto_layout, complete_the_look, folder_hangers, style_options
 from .vocab import label
 
 router = APIRouter(prefix="/api")
+_REASONS = ThreadPoolExecutor(max_workers=2, thread_name_prefix="look-reasons")
 
 
 @router.get("/folders/{folder_id}/tray")
@@ -154,9 +158,17 @@ def _style(db, user: m.User, folder_id: int | None, hangers: list | None, body: 
         r.lines = [ln.strip()[:140] for ln in r.lines]
         return r
 
-    res = gemini.generate_json("look_reasons", version="reasons-v1", parts=[prompt], schema=ReasonLines,
-                               validate=validate, fallback=lambda: ReasonLines(lines=[
-                                   _fallback_line(o, body.occasion, body.formality) for o in options]))
+    def fallback() -> ReasonLines:
+        return ReasonLines(lines=[_fallback_line(o, body.occasion, body.formality) for o in options])
+
+    # The one-line "why" is nice to have, never worth a long wait: past the timeout the rule-based lines are used and
+    # the Gemini answer still lands in the cache for next time.
+    fut = _REASONS.submit(gemini.generate_json, "look_reasons", version="reasons-v1", parts=[prompt], schema=ReasonLines,
+                          validate=validate, fallback=fallback)
+    try:
+        res = fut.result(timeout=get_settings().matching["stylist"].get("reasons_timeout_s", 8))
+    except FutureTimeout:
+        res = gemini.Result(fallback(), "fallback")
     for o, line in zip(options, res.value.lines):
         o["reason"] = line
         o["layout"] = auto_layout([i["product"] for i in o["items"]])
