@@ -1,7 +1,8 @@
 """Product photos for the store catalog (backend only).
 
     make product-manifest   # data/product_images/manifest.csv: which file name belongs to which product
-    make product-images     # publish data/product_images/<product_id>.jpg|png|webp and use them in the app
+    make product-images     # add new catalog products (data/catalog_extra.json), then publish
+                            # data/product_images/<product_id>.jpg|png|webp and use them in the app
 
 Runs against whichever backend the environment selects (local by default; `make product-images-cloud` for Cloud).
 """
@@ -17,7 +18,7 @@ sys.path.insert(0, str(ROOT / "backend"))
 def main() -> None:
     from wiw.db import session_scope
     from wiw.product_images import PHOTO_DIR, apply_photos, write_manifest
-    from wiw.seed import ensure_schema
+    from wiw.seed import ensure_schema, sync_catalog
 
     ensure_schema()
     cmd = sys.argv[1] if len(sys.argv) > 1 else "apply"
@@ -25,6 +26,9 @@ def main() -> None:
         if cmd == "manifest":
             print(f"wrote {write_manifest(db)}")
         else:
+            added = sync_catalog(db)
+            if added:
+                print(f"{added} new product(s) added to the catalog")
             n = apply_photos(db)
             print(f"{n} product photo(s) published from {PHOTO_DIR}")
             if cmd == "apply" and n:

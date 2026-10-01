@@ -1,0 +1,33 @@
+{
+ "task": "catalog_tag",
+ "model": "gemini-3.8-flash",
+ "summary": "You are cataloguing product photos for a women's high-street fashion store.\nDescribe the single main product in this image using only the allowed values.\n- usable=false if it is a collage, a lifestyle",
+ "created": "2026-10-01T14:08:50",
+ "response": {
+  "usable": true,
+  "visible_logo_or_text": false,
+  "subcategory": "crop_top",
+  "name": "Beige ribbed knit halter crop top",
+  "primary_color": "beige",
+  "style_tags": [
+   "minimal",
+   "y2k",
+   "resort"
+  ],
+  "occasion_tags": [
+   "casual",
+   "brunch",
+   "vacation"
+  ],
+  "fabric": "knit",
+  "length": "cropped",
+  "neckline": "halter",
+  "pattern": "solid",
+  "season": "summer",
+  "secondary_color": null,
+  "shows_person_face": false,
+  "silhouette": "slim",
+  "sleeve": "sleeveless",
+  "womens_item": true
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "task": "catalog_tag",
+ "model": "gemini-3.8-flash",
+ "summary": "You are cataloguing product photos for a women's high-street fashion store.\nDescribe the single main product in this image using only the allowed values.\n- usable=false if it is a collage, a lifestyle",
+ "created": "2026-10-01T14:15:33",
+ "response": {
+  "usable": false,
+  "visible_logo_or_text": true,
+  "subcategory": "scarf",
+  "name": "Cream printed silk scarf",
+  "primary_color": "cream",
+  "style_tags": [
+   "classic",
+   "romantic",
+   "old_money"
+  ],
+  "occasion_tags": [
+   "casual",
+   "work",
+   "brunch"
+  ],
+  "fabric": "silk",
+  "length": "none",
+  "neckline": "none",
+  "pattern": "print",
+  "reject_reason": "Close-up detail shot where the full product is cut off and obscured",
+  "season": "all",
+  "secondary_color": "rust",
+  "shows_person_face": false,
+  "silhouette": "none",
+  "sleeve": "none",
+  "womens_item": true
+ }
+}

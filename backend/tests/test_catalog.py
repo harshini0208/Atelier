@@ -115,4 +115,33 @@ def test_clean_start_has_no_shoppers():
     with session_scope() as db:
         assert db.scalar(select(func.count()).select_from(m.User)) == 0
         assert db.scalar(select(func.count()).select_from(m.Event)) == 0
-        assert db.scalar(select(func.count()).select_from(m.Product)) == 94
+        from wiw.seed import full_catalog
+        assert db.scalar(select(func.count()).select_from(m.Product)) == len(full_catalog()["products"])
+
+
+def test_catalog_extra_is_consistent():
+    """Expansion products (scripts/expand_catalog.py): unique ids/names, vocabulary values, stock per size, a photo."""
+    import json
+
+    from wiw.seed import ROOT, load_json
+    from wiw.vocab import COLORS, SUB_TO_CAT, size_system
+
+    path = ROOT / "data/catalog_extra.json"
+    if not path.exists():
+        return
+    extra = json.loads(path.read_text())
+    ids = [p["id"] for p in load_json("catalog.json")["products"] + extra["products"]]
+    assert len(ids) == len(set(ids))
+    names = [p["name"].lower() for p in extra["products"]]
+    assert len(names) == len(set(names))
+    sizes = {}
+    for s in extra["product_sizes"]:
+        sizes.setdefault(s["product_id"], []).append(s["size"])
+    for p in extra["products"]:
+        assert int(p["id"][3:]) >= 201 and p["gender_fit"] == "women"
+        assert SUB_TO_CAT[p["subcategory"]] == p["category"] and p["primary_color"] in COLORS
+        assert 0 < p["price_inr"] <= p["mrp_inr"]
+        assert sizes[p["id"]] == size_system(p["category"], "women")
+        photos = ROOT / "data/product_images"
+        if any(photos.glob("ut-2*")):          # photo files are gitignored; check them when present
+            assert any(photos.glob(f"{p['id']}.*")), p["id"]

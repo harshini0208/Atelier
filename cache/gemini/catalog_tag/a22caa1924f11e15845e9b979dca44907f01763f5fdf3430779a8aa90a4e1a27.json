@@ -1,0 +1,34 @@
+{
+ "task": "catalog_tag",
+ "model": "gemini-3.8-flash",
+ "summary": "You are cataloguing product photos for a women's high-street fashion store.\nDescribe the single main product in this image using only the allowed values.\n- usable=false if it is a collage, a lifestyle",
+ "created": "2026-10-01T14:15:13",
+ "response": {
+  "usable": true,
+  "visible_logo_or_text": false,
+  "subcategory": "tote",
+  "name": "Jute tote bag with clear panel",
+  "primary_color": "tan",
+  "style_tags": [
+   "boho",
+   "resort",
+   "minimal"
+  ],
+  "occasion_tags": [
+   "casual",
+   "beach",
+   "vacation",
+   "travel"
+  ],
+  "fabric": "canvas",
+  "length": "none",
+  "neckline": "none",
+  "pattern": "solid",
+  "season": "summer",
+  "secondary_color": null,
+  "shows_person_face": false,
+  "silhouette": "none",
+  "sleeve": "none",
+  "womens_item": true
+ }
+}

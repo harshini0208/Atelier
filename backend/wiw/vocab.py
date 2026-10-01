@@ -5,7 +5,7 @@ SUBCATEGORIES: dict[str, list[str]] = {
     "tops": ["tshirt", "shirt", "linen_shirt", "crop_top", "blouse", "kurta", "hoodie", "sweater"],
     "bottoms": ["jeans", "wide_leg_trousers", "chinos", "cargo_pants", "palazzo", "skirt", "shorts", "leggings"],
     "one_piece": ["dress", "jumpsuit", "coord_set", "kurta_set", "saree", "lehenga"],
-    "outerwear": ["blazer", "denim_jacket", "bomber", "shrug", "nehru_jacket", "cardigan"],
+    "outerwear": ["blazer", "denim_jacket", "bomber", "shrug", "nehru_jacket", "cardigan", "coat"],
     "footwear": ["sneakers", "loafers", "block_heels", "stilettos", "flats", "sandals", "boots", "juttis", "kolhapuris"],
     "accessories": ["tote", "sling_bag", "clutch", "belt", "sunglasses", "watch", "jewellery", "scarf", "dupatta"],
 }

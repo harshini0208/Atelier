@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 from datetime import datetime, timedelta
 
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from . import models as m
@@ -89,6 +90,43 @@ def load_catalog(db: Session, catalog: dict) -> None:
                             kind=se["kind"], at=datetime.fromisoformat(se["at"])))
 
 
+def sync_catalog(db: Session, images: bool = True) -> int:
+    """Add catalog products that are not in the database yet (with sizes, price history and stock events).
+    Existing products only get their store-written name/description refreshed; nothing is deleted, and shoppers'
+    folders, carts and orders are untouched."""
+    catalog = full_catalog()
+    have = {p.id: p for p in db.scalars(select(m.Product))}
+    for p in catalog["products"]:
+        row = have.get(p["id"])
+        if row and (row.name, row.description) != (p["name"], p["description"]):
+            row.name, row.description = p["name"], p["description"]
+    new = [p for p in catalog["products"] if p["id"] not in have]
+    if not new:
+        return 0
+    ids = {p["id"] for p in new}
+    if images:
+        write_product_images({"products": new})
+    for p in new:
+        db.add(product_from_dict(p))
+    db.flush()
+    pos: dict[str, int] = {}
+    for s in catalog["product_sizes"]:
+        if s["product_id"] in ids:
+            pos[s["product_id"]] = pos.get(s["product_id"], -1) + 1
+            db.add(m.ProductSize(product_id=s["product_id"], size=s["size"], stock=s["stock"],
+                                 position=pos[s["product_id"]]))
+    for ph in catalog["price_history"]:
+        if ph["product_id"] in ids:
+            db.add(m.PriceHistory(product_id=ph["product_id"], price_inr=ph["price_inr"], mrp_inr=ph["mrp_inr"],
+                                  changed_at=datetime.fromisoformat(ph["changed_at"])))
+    for se in catalog["stock_events"]:
+        if se["product_id"] in ids:
+            db.add(m.StockEvent(product_id=se["product_id"], size=se["size"], delta=se["delta"],
+                                new_stock=se["new_stock"], kind=se["kind"], at=datetime.fromisoformat(se["at"])))
+    db.flush()
+    return len(new)
+
+
 def load_personas(db: Session, personas: dict, catalog: dict) -> dict[str, list[int]]:
     """Create personas; returns {user_id: [folder ids]} so inspo can be attached afterwards."""
     ids = {p["name"]: p["id"] for p in catalog["products"]}
@@ -131,9 +169,23 @@ def write_product_images(catalog: dict) -> None:
         st.put(f"products/{p['id']}.svg", product_svg(p).encode(), "image/svg+xml")
 
 
+def full_catalog() -> dict:
+    """The generated base catalog plus any extra products (data/catalog_extra.json, built by scripts/expand_catalog.py).
+    CATALOG_EXTRA=0 keeps only the base catalog (the tests' fixed fixture)."""
+    import os
+
+    catalog = load_json("catalog.json")
+    extra_path = ROOT / "data" / "catalog_extra.json"
+    if extra_path.exists() and os.getenv("CATALOG_EXTRA", "1") != "0":
+        extra = json.loads(extra_path.read_text())
+        for k in ("products", "product_sizes", "price_history", "stock_events"):
+            catalog[k] = catalog[k] + extra.get(k, [])
+    return catalog
+
+
 def seed_all(images: bool = True, personas: bool = False, with_inspo: bool = True, with_history: bool = False) -> dict:
     """Reset the schema and load the catalog. personas/with_history add synthetic shoppers (tests and rehearsals)."""
-    catalog = load_json("catalog.json")
+    catalog = full_catalog()
     reset_schema()
     if images:
         write_product_images(catalog)

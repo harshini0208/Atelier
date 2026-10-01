@@ -14,3 +14,4 @@ data/product_images/*.jpg
 data/product_images/*.jpeg
 data/product_images/*.png
 data/product_images/*.webp
+data/expand/

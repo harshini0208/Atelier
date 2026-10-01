@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import csv
 import io
+import os
 from pathlib import Path
 
 from PIL import Image, ImageOps
@@ -21,7 +22,7 @@ from . import models as m
 from .settings import ROOT
 from .storage import storage
 
-PHOTO_DIR = ROOT / "data/product_images"
+PHOTO_DIR = Path(os.getenv("PRODUCT_PHOTO_DIR", str(ROOT / "data/product_images")))
 EXTS = (".jpg", ".jpeg", ".png", ".webp")
 MAX_SIDE = 1400
 

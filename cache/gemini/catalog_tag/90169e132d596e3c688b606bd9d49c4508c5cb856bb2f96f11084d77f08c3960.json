@@ -1,0 +1,33 @@
+{
+ "task": "catalog_tag",
+ "model": "gemini-3.8-flash",
+ "summary": "You are cataloguing product photos for a women's high-street fashion store.\nDescribe the single main product in this image using only the allowed values.\n- usable=false if it is a collage, a lifestyle",
+ "created": "2026-10-01T14:09:08",
+ "response": {
+  "usable": true,
+  "visible_logo_or_text": false,
+  "subcategory": "shirt",
+  "name": "Pink striped cotton shirt",
+  "primary_color": "pink",
+  "style_tags": [
+   "classic",
+   "preppy"
+  ],
+  "occasion_tags": [
+   "casual",
+   "work",
+   "brunch"
+  ],
+  "fabric": "cotton",
+  "length": "regular",
+  "neckline": "collar",
+  "pattern": "stripes",
+  "reject_reason": "",
+  "season": "all",
+  "secondary_color": "black",
+  "shows_person_face": true,
+  "silhouette": "relaxed",
+  "sleeve": "long",
+  "womens_item": true
+ }
+}
