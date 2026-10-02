@@ -143,7 +143,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[minmax(0,1fr)_360px]">
       <div className="min-w-0 pb-28 lg:pb-0">
-        <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur">
+        <header data-theme="sky-studio" className="app-header sticky top-0 z-30 border-b border-border">
           <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-5 sm:px-8">
             <Link to="/" className="flex min-w-0 items-center gap-2" aria-label="Atelier home">
               <span className="brand-script block whitespace-nowrap text-[38px] text-foreground sm:text-[42px]">Atelier</span>

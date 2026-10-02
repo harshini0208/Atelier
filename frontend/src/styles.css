@@ -147,3 +147,11 @@
     url("/onboarding-gradient.jpg") center / cover no-repeat;
   color: #1e293b;
 }
+
+/* App header: a pale steel-blue grain strip, lightly veiled so the navigation text stays crisp at the darker ends. */
+@utility app-header {
+  background:
+    linear-gradient(rgb(255 255 255 / 0.35), rgb(255 255 255 / 0.35)),
+    url("/header-gradient.jpg") center / 100% 100% no-repeat;
+  color: var(--text);
+}
