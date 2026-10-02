@@ -34,6 +34,21 @@ def main() -> None:
 
     with sync_playwright() as p:
         browser = p.chromium.launch()
+        try:
+            run(p, browser, base, out, desktop, gemini, viewport, errors, shot)
+        except Exception:
+            for pg in browser.contexts[0].pages if browser.contexts else []:
+                pg.screenshot(path=str(out / f"{'d' if desktop else 'm'}-FAILED.png"))
+            raise
+        browser.close()
+    if errors:
+        print("browser errors:\n  " + "\n  ".join(errors))
+        sys.exit(1)
+    print(f"UI smoke OK ({'desktop' if desktop else 'mobile'}), screenshots in {out}")
+
+
+def run(p, browser, base, out, desktop, gemini, viewport, errors, shot) -> None:  # noqa: ANN001, PLR0913
+    if True:
         page = browser.new_page(viewport=viewport, device_scale_factor=1)
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.on("console", lambda m: m.type == "error" and "401" not in m.text and errors.append(m.text))
@@ -92,11 +107,11 @@ def main() -> None:
         # 5. style board: put two pieces on and dress the mannequin
         page.get_by_role("link", name="Style board").click()
         expect(page.get_by_role("heading", name="Layers")).to_be_visible(timeout=15_000)
-        adds = page.get_by_role("button", name=re.compile(r"^Add "))
+        adds = page.locator("li button", has_text=re.compile(r"^Add$"))   # tray "Add" buttons
         expect(adds.first).to_be_visible(timeout=15_000)
-        adds.first.click()
-        if adds.count():
+        for _ in range(min(2, adds.count())):
             adds.first.click()
+            page.wait_for_timeout(300)
         if gemini:
             page.get_by_role("button", name=re.compile("Dress mannequin|Update the mannequin")).click()
             expect(page.locator("img[alt^='Your mannequin wearing']")).to_have_attribute("src", re.compile("/media/tryon/"), timeout=90_000)
@@ -145,14 +160,11 @@ def main() -> None:
         shot(page, "12-rose-gold-noir")
 
         # leave no trace: the smoke shopper deletes their own profile and data
-        status = page.evaluate("""async () => (await fetch('/api/me', {method: 'DELETE',
-            headers: {'X-User-Id': localStorage.getItem('wiw.user')}})).status""")
+        # (a separate request, after leaving the app: once the profile is gone the app redirects to onboarding)
+        uid = page.evaluate("localStorage.getItem('wiw.user')")
+        page.goto("about:blank")
+        status = page.request.delete(base + "/api/me", headers={"X-User-Id": uid}).status
         assert status == 200, f"cleanup failed: {status}"
-        browser.close()
-    if errors:
-        print("browser errors:\n  " + "\n  ".join(errors))
-        sys.exit(1)
-    print(f"UI smoke OK ({'desktop' if desktop else 'mobile'}), screenshots in {out}")
 
 
 if __name__ == "__main__":
