@@ -176,7 +176,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </div>
 
       {desktop && (
-        <aside className="sticky top-0 h-screen border-l border-border bg-muted/40" aria-label="Stylist">
+        <aside className="sticky top-0 h-screen border-l border-border" aria-label="Stylist">
           <StylistPanel />
         </aside>
       )}
@@ -190,7 +190,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <Sparkles /> Stylist
       </Button>
       <Sheet open={stylistOpen && !desktop} onOpenChange={openStylist}>
-        <SheetContent side="bottom" className="h-[85vh] rounded-t-[24px] border-border bg-background p-0">
+        <SheetContent side="bottom" className="h-[85vh] overflow-hidden rounded-t-[24px] border-border bg-background p-0">
           <SheetTitle className="sr-only">Stylist chat</SheetTitle>
           <StylistPanel />
         </SheetContent>

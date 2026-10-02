@@ -149,7 +149,7 @@ export function StylistPanel() {
   const suggestions = folderId ? FOLDER_SUGGESTIONS : RAIL_SUGGESTIONS;
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
+    <div data-theme="sky-studio" className="chat-bg flex h-full min-h-0 flex-col">
       <div className="border-b border-border px-5 py-4">
         <p className="eyebrow">Urban Thread{folderName ? ` · ${folderName}` : ""}</p>
         <p className="display text-xl">Your stylist</p>
