@@ -122,3 +122,12 @@
   background-size: 200% 100%;
   animation: shimmer 1.6s linear infinite;
 }
+
+/* The membership card on home: a grainy navy-to-sky gradient photo, with a navy veil on the text side so the
+   light copy stays readable over the pale corner. Same in every theme (it's an image, like product photos). */
+@utility membership-card {
+  background:
+    linear-gradient(90deg, rgb(8 20 60 / 0.55), rgb(8 20 60 / 0.25) 55%, rgb(8 20 60 / 0) 85%),
+    url("/membership-gradient.jpg") center / cover no-repeat;
+  color: #f5f8ff;
+}

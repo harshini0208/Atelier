@@ -192,7 +192,7 @@ function Home() {
         {rail && (
           <section className="mb-12">
             {rail.member_linked ? (
-              <div className="flex flex-col gap-4 rounded-[24px] bg-hero p-8 sm:flex-row sm:items-center">
+              <div className="flex flex-col gap-4 rounded-[24px] membership-card p-8 sm:flex-row sm:items-center">
                 <BadgeCheck className="size-8 shrink-0" aria-hidden />
                 <div className="flex-1">
                   <p className="font-serif text-2xl">Membership linked</p>
@@ -200,7 +200,7 @@ function Home() {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col gap-4 rounded-[24px] bg-hero p-8 sm:flex-row sm:items-center">
+              <div className="flex flex-col gap-4 rounded-[24px] membership-card p-8 sm:flex-row sm:items-center">
                 <CreditCard className="size-8 shrink-0" aria-hidden />
                 <div className="flex-1">
                   <p className="font-serif text-2xl">Link your membership</p>
