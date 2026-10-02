@@ -139,3 +139,11 @@
     url("/upload-gradient.jpg") center / cover no-repeat;
   color: #f5f8ff;
 }
+
+/* Onboarding form card: a pale silver-blue grain photo under a soft white veil, so the dark labels stay crisp. */
+@utility onboarding-card {
+  background:
+    linear-gradient(rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.55)),
+    url("/onboarding-gradient.jpg") center / cover no-repeat;
+  color: #1e293b;
+}

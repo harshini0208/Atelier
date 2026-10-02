@@ -83,7 +83,7 @@ function Welcome() {
         </h1>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground sm:text-base">{cur.intro}</p>
 
-        <section className="mt-10 rounded-[20px] border border-border bg-card p-5 sm:p-8">
+        <section data-theme="sky-studio" className="mt-10 onboarding-card rounded-[20px] border border-border p-5 sm:p-8">
           {!vocab ? (
             <div className="shimmer h-48 rounded-[14px]" />
           ) : (
