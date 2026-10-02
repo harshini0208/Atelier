@@ -141,10 +141,10 @@ export function AppShell({ children }: { children: ReactNode }) {
   const stylistOpen = useUI((u) => u.stylistOpen);
 
   return (
-    <div className="min-h-screen lg:grid lg:grid-cols-[minmax(0,1fr)_360px]">
-      <div className="min-w-0 pb-28 lg:pb-0">
-        <header data-theme="sky-studio" className="app-header sticky top-0 z-30 border-b border-border">
-          <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-5 sm:px-8">
+    <div className="min-h-screen">
+      {/* the header runs the full width, over both the page and the stylist column */}
+      <header data-theme="sky-studio" className="app-header sticky top-0 z-30 border-b border-border">
+        <div className="flex h-16 items-center gap-6 px-5 sm:px-8">
             <Link to="/" className="flex min-w-0 items-center gap-2" aria-label="Atelier home">
               <span className="brand-script block whitespace-nowrap text-[38px] text-foreground sm:text-[42px]">Atelier</span>
             </Link>
@@ -170,16 +170,19 @@ export function AppShell({ children }: { children: ReactNode }) {
               </IconLink>
               <ProfileMenu />
             </div>
-          </div>
-        </header>
-        <main className="mx-auto max-w-6xl px-5 py-8 sm:px-8 sm:py-12">{children}</main>
-      </div>
+        </div>
+      </header>
 
-      {desktop && (
-        <aside className="sticky top-0 h-screen border-l border-border" aria-label="Stylist">
-          <StylistPanel />
-        </aside>
-      )}
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_360px]">
+        <div className="min-w-0 pb-28 lg:pb-0">
+          <main className="mx-auto max-w-6xl px-5 py-8 sm:px-8 sm:py-12">{children}</main>
+        </div>
+        {desktop && (
+          <aside className="sticky top-16 h-[calc(100vh-4rem)] border-l border-border" aria-label="Stylist">
+            <StylistPanel />
+          </aside>
+        )}
+      </div>
 
       {/* mobile */}
       <Button
