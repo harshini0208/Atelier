@@ -131,3 +131,11 @@
     url("/membership-gradient.jpg") center / cover no-repeat;
   color: #f5f8ff;
 }
+
+/* "Shop a look you saw" strip on home: a soft steel-blue grain photo with a navy veil behind the copy. */
+@utility upload-card {
+  background:
+    linear-gradient(90deg, rgb(10 24 52 / 0.5), rgb(10 24 52 / 0.2) 60%, rgb(10 24 52 / 0.05)),
+    url("/upload-gradient.jpg") center / cover no-repeat;
+  color: #f5f8ff;
+}

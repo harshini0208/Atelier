@@ -126,6 +126,40 @@ function Home() {
         </Link>
       </section>
 
+      {/* Shop a look you saw: a compact upload strip right under the rail */}
+      <section className="mb-14" aria-label="Shop a look you saw">
+        <div
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => { e.preventDefault(); upload(e.dataTransfer.files[0]); }}
+          className="upload-card flex flex-col gap-4 rounded-[20px] px-5 py-5 sm:flex-row sm:items-center sm:px-6"
+        >
+          <span className="grid size-11 shrink-0 place-items-center rounded-full border border-white/40 bg-white/15">
+            <ImagePlus className="size-5" aria-hidden />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="font-serif text-lg leading-tight">Shop a look you saw</p>
+            <p className="mt-1 text-xs opacity-85 sm:text-sm">
+              Upload a screenshot from Instagram or Pinterest. We find each piece in store, in your size and budget.
+            </p>
+          </div>
+          <input ref={file} type="file" accept="image/*" className="sr-only" aria-label="Choose an inspo screenshot" onChange={(e) => upload(e.target.files?.[0])} />
+          <Button variant="outline" className="shrink-0" onClick={() => file.current?.click()}><Upload /> Upload inspo</Button>
+        </div>
+        {unfiled.length > 0 && (
+          <div className="mt-4">
+            <p className="eyebrow mb-2">Not in a folder yet</p>
+            <div className="no-scrollbar flex gap-3 overflow-x-auto">
+              {unfiled.map((i) => (
+                <Link key={i.id} to="/inspo" search={{ id: i.id }} className="w-20 shrink-0 overflow-hidden rounded-[12px] border border-line bg-card">
+                  <img src={i.image_url} alt="Unsorted inspo" className="aspect-[9/16] w-full object-cover" />
+                  <span className="block px-2 py-1 text-[10px] text-muted-foreground">{i.pieces.length} pieces</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </section>
+
       {/* The studio */}
       <div className="min-w-0">
         <section className="mb-12">
@@ -227,37 +261,6 @@ function Home() {
           </section>
         )}
 
-        <section className="mb-12">
-          <SectionTitle title="Shop a look you saw" meta="Optional" />
-          <div
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={(e) => { e.preventDefault(); upload(e.dataTransfer.files[0]); }}
-            className="flex flex-col items-center gap-4 rounded-[24px] border-2 border-dashed border-line bg-surface-2/60 px-6 py-12 text-center"
-          >
-            <span className="grid size-14 place-items-center rounded-full border border-line bg-card text-primary">
-              <ImagePlus className="size-6" aria-hidden />
-            </span>
-            <p className="max-w-md text-sm text-muted-foreground">
-              Saw an outfit on Instagram or Pinterest? Upload a screenshot. We find each piece in Urban Thread, in your size and budget, and you hang the ones you like.
-            </p>
-            <input ref={file} type="file" accept="image/*" className="sr-only" aria-label="Choose an inspo screenshot" onChange={(e) => upload(e.target.files?.[0])} />
-            <Button variant="hero" onClick={() => file.current?.click()}><Upload /> Upload inspo</Button>
-            <p className="text-xs text-muted-foreground">Drop a screenshot here or pick a file.</p>
-          </div>
-          {unfiled.length > 0 && (
-            <div className="mt-5">
-              <p className="eyebrow mb-3">Not in a folder yet</p>
-              <div className="no-scrollbar flex gap-3 overflow-x-auto">
-                {unfiled.map((i) => (
-                  <Link key={i.id} to="/inspo" search={{ id: i.id }} className="w-24 shrink-0 overflow-hidden rounded-[14px] border border-line bg-card">
-                    <img src={i.image_url} alt="Unsorted inspo" className="aspect-[9/16] w-full object-cover" />
-                    <span className="block px-2 py-1 text-[10px] text-muted-foreground">{i.pieces.length} pieces</span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-        </section>
 
         {picks.length > 0 && (
           <section className="mb-4">
