@@ -126,7 +126,7 @@ The demo personas and synthetic shopper history still exist, but only as test fi
 ## Architecture
 
 ```
- Browser (React + Vite, mobile-first)
+ Browser (React + Vite + TanStack Router + Tailwind/shadcn, mobile-first; design from Lovable)
    │  /api/*  /media/*                      one Cloud Run service (FastAPI serves API + built app)
    ▼
  FastAPI ── wiw/gemini.py ── Gemini on Vertex AI    vision (outfit split, box_2d), structured JSON,
@@ -305,7 +305,7 @@ idle cost is about ₹150–900 a month, with a budget alert at ₹2,000.
 backend/wiw/      FastAPI app: api*.py routes, gemini.py, detection.py, matching.py, styling.py, stylist.py,
                   agents.py, taste.py, commerce.py, events.py, catalog_search.py, garments.py, product_images.py, seed*.py
 backend/tests/    pytest suite (matching, tiers, coverage, cart/stock, alerts, schema validation, catalog integrity…)
-frontend/src/     React app (pages/, components/)
+frontend/src/     React app: routes/ (one file per screen), components/wiw/ (app pieces), components/ui/ (shadcn), lib/ (API client, store, themes in styles/themes.css)
 config/           matching.yaml (thresholds), cloud.yaml (resource names, model)
 data/generate.py  deterministic catalog (+ test personas); data/product_images/ your photos;  scripts/  images, inspo, seed, loaders, smoke tests
 infra/            gcp.py (status/setup), deploy.sh, created_resources.md

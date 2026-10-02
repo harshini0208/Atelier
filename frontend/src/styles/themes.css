@@ -1,0 +1,86 @@
+/* Walk-In Wardrobe: five themes from the moodboard palettes. Switch with <html data-theme="...">.
+   Every pair used for text was checked for WCAG AA contrast (4.5:1 or better). */
+
+:root,
+[data-theme="sky-studio"] {            /* Sky Studio: Cloud White #FFFFFF · Baby Blue #DBEAFE · Navy #152A6E · Ink #1E293B */
+  --bg: #ffffff;            /* page — pure white */
+  --surface: #ffffff;       /* cards, sheets — defined by their baby-blue edges */
+  --surface-2: #F2F8FF;     /* subtle fills, hover — the faintest baby-blue wash */
+  --text: #1E293B;          /* 14.9:1 on bg */
+  --muted: #5C6B87;         /* 5.4:1 on surface */
+  --line: #DBEAFE;          /* baby blue: every hairline, chip edge, dashed drop zone */
+  --primary: #152A6E;       /* buttons, active nav — deep navy */
+  --on-primary: #ffffff;    /* 12.5:1 */
+  --accent: #DBEAFE;        /* baby blue: chips, selected states, badges */
+  --on-accent: #1E3A8A;     /* 9.9:1 */
+  --hero: #1E3A8A;          /* big feature blocks */
+  --on-hero: #EFF6FF;
+  --glass-sheen: rgba(255, 255, 255, 0.75);  /* light glint along the top of a glass surface */
+}
+
+[data-theme="blush-noir"] {           /* Grey Brown #442f2a · Cream #fff7ec · Blush #f5cbd7 · Noir #070d0d */
+  --bg: #fff7ec;            /* page */
+  --surface: #ffffff;       /* cards, sheets */
+  --surface-2: #fdeff0;     /* subtle fills, hover */
+  --text: #070d0d;          /* 18.4:1 on bg */
+  --muted: #5c4740;         /* 8.6:1 on surface */
+  --line: #ecd9d3;
+  --primary: #442f2a;       /* buttons, active nav */
+  --on-primary: #fff7ec;    /* 11.7:1 */
+  --accent: #f5cbd7;        /* chips, selected states, badges */
+  --on-accent: #442f2a;     /* 8.5:1 */
+  --hero: #442f2a;          /* big feature blocks */
+  --on-hero: #fff7ec;
+  --glass-sheen: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="espresso-peony"] {       /* Espresso #3E2723 · Peony #F4C9D6 */
+  --bg: #F4C9D6;
+  --surface: #fbe7ed;
+  --surface-2: #f8d9e2;
+  --text: #3E2723;          /* 9.3:1 */
+  --muted: #6d4a44;         /* 6.5:1 */
+  --line: #e9b7c6;
+  --primary: #3E2723;
+  --on-primary: #F4C9D6;    /* 9.3:1 */
+  --accent: #3E2723;
+  --on-accent: #F4C9D6;
+  --hero: #3E2723;
+  --on-hero: #F4C9D6;
+  --glass-sheen: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="oat-wine"] {             /* oat milk #e8dbcc · favorite mug #5f0c2f · dark chocolate #3c0e18 */
+  --bg: #e8dbcc;
+  --surface: #f6efe6;
+  --surface-2: #efe4d7;
+  --text: #3c0e18;          /* 12.2:1 */
+  --muted: #6b3a45;         /* 7.9:1 */
+  --line: #d9c7b4;
+  --primary: #5f0c2f;
+  --on-primary: #f6efe6;    /* 11.6:1 */
+  --accent: #3c0e18;
+  --on-accent: #e8dbcc;
+  --hero: #5f0c2f;
+  --on-hero: #f6efe6;
+  --glass-sheen: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="rose-gold-noir"] {       /* dark: Onyx #000 · Noir Velvet #1A1515 · Rose Gold #B07878 · Rose Glimmer #E6C2BF · Pearl Dust #F9EBE5 */
+  --bg: #000000;
+  --surface: #1A1515;
+  --surface-2: #231c1c;
+  --text: #F9EBE5;          /* 18:1 */
+  --muted: #E6C2BF;         /* 11:1 on surface */
+  --line: #3a2e2e;
+  --primary: #B07878;       /* use a soft metallic gradient #B07878 -> #E6C2BF for hero buttons */
+  --on-primary: #000000;    /* 5.8:1 */
+  --accent: #E6C2BF;
+  --on-accent: #1A1515;
+  --hero: linear-gradient(135deg, #B07878, #E6C2BF);
+  --on-hero: #1A1515;
+  --glass-sheen: rgba(249, 235, 229, 0.35);
+}
+
+/* status colours stay the same in every theme (always with an icon + label, never colour alone) */
+:root { --ok: #2f6b3a; --warn: #8a5a14; --danger: #a23434; }

@@ -1,9 +1,10 @@
 """Headless browser smoke test of the shopper journey (Playwright).
 
-    python scripts/ui_smoke.py [base_url] [out_dir] [--desktop]
+    python scripts/ui_smoke.py [base_url] [out_dir] [--desktop] [--no-gemini]
 
-A brand-new visitor: onboarding -> folder -> upload inspo -> tap pieces and hang real store products -> style
-board (drag, overlap, answer the inside/outside question) -> shop -> add to cart. Screenshots at each step.
+A brand-new visitor: onboarding (mannequin + membership) -> rail -> hang a piece in a new folder -> upload an inspo and
+hang store matches -> style board (dress the mannequin) -> stylist -> shop -> cart and checkout -> preferences -> theme.
+Screenshots at each step. --no-gemini skips the steps that need live Gemini (mannequin render, stylist reply).
 """
 from __future__ import annotations
 
@@ -23,21 +24,13 @@ def main() -> None:
     out = Path(args[1] if len(args) > 1 else ROOT / "local/smoke")
     out.mkdir(parents=True, exist_ok=True)
     desktop = "--desktop" in sys.argv
-    viewport = {"width": 1360, "height": 860} if desktop else {"width": 390, "height": 844}
+    gemini = "--no-gemini" not in sys.argv
+    viewport = {"width": 1440, "height": 900} if desktop else {"width": 390, "height": 844}
     errors: list[str] = []
 
     def shot(page, name: str) -> None:
-        page.wait_for_timeout(450)
+        page.wait_for_timeout(500)
         page.screenshot(path=str(out / f"{'d' if desktop else 'm'}-{name}.png"))
-
-    def drag(page, source, target_box, fx=0.5, fy=0.35) -> None:
-        box = source.bounding_box()
-        page.mouse.move(box["x"] + 20, box["y"] + 20)
-        page.mouse.down()
-        page.mouse.move(box["x"] + 40, box["y"] + 40, steps=5)
-        page.mouse.move(target_box["x"] + target_box["width"] * fx, target_box["y"] + target_box["height"] * fy, steps=12)
-        page.wait_for_timeout(150)
-        page.mouse.up()
 
     with sync_playwright() as p:
         browser = p.chromium.launch()
@@ -46,96 +39,111 @@ def main() -> None:
         page.on("console", lambda m: m.type == "error" and "401" not in m.text and errors.append(m.text))
         page.goto(base)
 
-        # 1. a fresh visitor lands on onboarding (no default shopper)
+        # 1. a fresh visitor lands on onboarding
         expect(page).to_have_url(re.compile(r"/welcome$"))
-        expect(page.get_by_role("heading", name="Welcome to your walk-in wardrobe")).to_be_visible()
+        expect(page.get_by_role("heading", name=re.compile("Welcome to"))).to_be_visible()
         page.get_by_label("Your name").fill("Smoke Tester")
-        page.get_by_label("City").select_option("Bengaluru")
+        page.get_by_label("City (for delivery times)").select_option("Bengaluru")
         shot(page, "01-welcome")
         page.get_by_role("button", name="Next").click()
-        expect(page.get_by_role("heading", name="Nice to meet you, Smoke.")).to_be_visible()
         for grp, size in (("tops size", "M"), ("bottoms size", "28"), ("footwear size", "5")):
             page.get_by_role("group", name=grp).get_by_role("button", name=size, exact=True).click()
         page.get_by_role("button", name="Next").click()
         expect(page.get_by_role("heading", name="Your mannequin")).to_be_visible()
-        page.get_by_role("radio", name="Curvy").click()
-        page.get_by_role("radio", name="Brown").click()
-        page.get_by_role("button", name="Next").click()
-        page.get_by_role("button", name="Next").click()   # budgets: keep defaults
-        page.locator(".field", has_text="Materials I avoid").get_by_role("button", name="Polyester").click()
-        page.get_by_role("button", name="Next").click()
-        shot(page, "02-onboarding-last")
-        page.get_by_role("button", name="Start my wardrobe").click()
-        expect(page.get_by_role("heading", name=re.compile("Hi Smoke"))).to_be_visible()
-        expect(page.get_by_role("heading", name="Your rail")).to_be_visible()
-        shot(page, "03-home-fresh")
+        page.get_by_role("button", name="Curvy").click()
+        page.get_by_role("button", name="brown finish").click()
+        shot(page, "02-mannequin")
+        page.get_by_role("button", name="Next").click()   # -> budgets
+        page.get_by_role("button", name="Next").click()   # -> fabrics
+        page.get_by_role("button", name="Next").click()   # -> colours and occasions
+        expect(page.get_by_text("Bring in my Urban Thread purchases")).to_be_visible()
+        page.get_by_role("button", name="Open my wardrobe").click()
 
-        # 2. upload straight from the landing page (no folder yet), tap pieces BEFORE choosing a folder
+        # 2. home: the rail, filled from the (demo) membership
+        expect(page.get_by_role("heading", name="Hi Smoke.")).to_be_visible(timeout=30_000)
+        expect(page.get_by_text("Membership linked")).to_be_visible()
+        expect(page.get_by_role("button", name="Add to folders").first).to_be_visible()
+        shot(page, "03-home")
+
+        # 3. hang the first rail piece in a brand-new folder
+        page.get_by_role("button", name="Add to folders").first.click()
+        name = f"Office edit {int(time.time()) % 1000}"
+        page.get_by_label("New folder name").fill(name)
+        page.get_by_role("button", name="Add", exact=True).click()
+        expect(page.get_by_role("checkbox").first).to_be_checked()
+        shot(page, "04-hang-sheet")
+        page.get_by_role("button", name="Save").click()
+        expect(page.get_by_role("button", name="In 1 folder").first).to_be_visible(timeout=15_000)
+
+        # 4. upload an inspo from home, hang store matches into that folder
         page.set_input_files("input[type=file]", str(ROOT / "demo/inspo/generated/old_money_summer.png"))
-        expect(page.get_by_text("Tap a piece you love")).to_be_visible(timeout=60_000)
-        shot(page, "04-inspo")
-        page.get_by_role("button", name="Done").click()
-        expect(page.get_by_text("Tap the pieces you like first")).to_be_visible()   # never leaves empty-handed
-        page.locator(".box").filter(has_text="Linen shirt").first.click()
-        expect(page.get_by_text("You liked this piece. Choose a folder")).to_be_visible(timeout=30_000)
-        page.locator(".box").filter(has_text="Chinos").first.click()
-        expect(page.get_by_role("button", name="Save 2 liked pieces")).to_be_visible()
-        # 3. create a folder from the picker -> both liked pieces are hung with their best store match
-        name = f"Old-money summer {int(time.time()) % 1000}"
-        page.get_by_label("Hang pieces in").select_option("new")
-        page.get_by_label("Name").fill(name)
-        page.get_by_role("button", name="Create folder").click()
-        expect(page.get_by_role("button", name=re.compile(r"Done: 2 pieces on hangers"))).to_be_visible(timeout=30_000)
-        # a third piece, tapped after the folder exists, is hung immediately; then swap its product
-        page.locator(".box").filter(has_text="Loafers").first.click()
-        expect(page.get_by_role("button", name=re.compile(r"Done: 3 pieces on hangers"))).to_be_visible(timeout=30_000)
-        expect(page.get_by_role("button", name="On your hanger")).to_be_visible(timeout=30_000)
-        shot(page, "05-piece-matches")
-        swap = page.get_by_role("button", name="Swap to this")
-        if swap.count():
-            swap.first.click()
-            expect(page.get_by_text("is on your hanger").last).to_be_visible()
-        shot(page, "06-hung")
-        page.get_by_role("button", name=re.compile(r"Done: 3 pieces")).click()
+        expect(page.get_by_text("Tap a piece you love")).to_be_visible(timeout=90_000)
+        page.get_by_label("Hang pieces in").select_option(label=name)
+        chips = page.locator("button[aria-pressed]").filter(has=page.locator("img"))
+        chips.first.click()
+        expect(page.get_by_role("button", name="On your hanger").first).to_be_visible(timeout=30_000)
+        shot(page, "05-inspo-matches")
+        page.get_by_role("button", name=re.compile(r"^Done")).click()
         expect(page.get_by_role("heading", name=name)).to_be_visible(timeout=30_000)
-        expect(page.get_by_role("tab", name="Hangers (3)")).to_be_visible()
-        expect(page.locator(".hanger-card img").first).to_have_attribute("src", re.compile(r"/media/products/"))
-        shot(page, "07-folder-hangers")
+        expect(page.get_by_text("From inspo").first).to_be_visible()
+        expect(page.get_by_text("From your rail").first).to_be_visible()
+        shot(page, "06-folder")
 
-        # 4. style board: drag two pieces so they overlap -> inside/outside question
-        page.get_by_role("button", name="Style board").click()
-        expect(page.get_by_text("Your hangers")).to_be_visible(timeout=30_000)
-        expect(page.get_by_role("tab", name="Mannequin")).to_have_attribute("aria-selected", "true")
-        page.get_by_role("tab", name="Flat lay").click()
-        page.get_by_role("heading", name="Your hangers").scroll_into_view_if_needed()
-        page.evaluate("window.scrollBy(0, -80)")
-        board = page.get_by_role("region", name="Empty style board")
-        bb = board.bounding_box()
-        cards = page.locator("[aria-label^='Drag ']")
-        drag(page, cards.nth(0), bb, 0.35, 0.12)
-        expect(page.get_by_role("region", name=re.compile("Style board with"))).to_be_visible()
-        drag(page, cards.nth(1), page.get_by_role("region", name=re.compile("Style board with")).bounding_box(), 0.37, 0.14)
-        expect(page.get_by_role("dialog", name="How should these layer?")).to_be_visible()
-        shot(page, "08-layer-question")
-        page.get_by_role("dialog").get_by_role("button", name=re.compile(r"^Outside")).click()
-        expect(page.get_by_text(re.compile("is outside, over"))).to_be_visible()
-        shot(page, "09-board")
+        # 5. style board: put two pieces on and dress the mannequin
+        page.get_by_role("link", name="Style board").click()
+        expect(page.get_by_role("heading", name="Layers")).to_be_visible(timeout=15_000)
+        adds = page.get_by_role("button", name=re.compile(r"^Add "))
+        expect(adds.first).to_be_visible(timeout=15_000)
+        adds.first.click()
+        if adds.count():
+            adds.first.click()
+        if gemini:
+            page.get_by_role("button", name=re.compile("Dress mannequin|Update the mannequin")).click()
+            expect(page.locator("img[alt^='Your mannequin wearing']")).to_have_attribute("src", re.compile("/media/tryon/"), timeout=90_000)
+            expect(page.get_by_text("Dressing your mannequin")).to_have_count(0, timeout=90_000)
+        shot(page, "07-board")
         page.get_by_role("button", name="Save look").click()
-        expect(page.get_by_text("Look saved")).to_be_visible()
+        expect(page.get_by_role("heading", name="Saved looks")).to_be_visible()
 
-        # 5. shop like a store website, add to cart
-        if desktop:
-            page.get_by_role("navigation", name="Main").first.get_by_role("link", name="Shop").click()
-        else:
-            page.locator(".bottom-nav").get_by_role("link", name="Shop").click()
-        expect(page.get_by_role("tab", name="Women")).to_be_visible()
-        page.locator(".shop-cats").get_by_role("button", name=re.compile("^Tops")).click()
-        expect(page.get_by_role("heading", name=re.compile("^Tops"))).to_be_visible()
-        shot(page, "10-shop")
-        page.locator(".shop-card").first.click()
+        # 6. stylist (desktop column, or the mobile sheet)
+        if gemini:
+            if not desktop:
+                page.get_by_role("button", name="Stylist").click()
+            page.get_by_label("Message your stylist").fill("Style an outfit for a weekend brunch")
+            page.get_by_role("button", name="Send").click()
+            expect(page.get_by_text("Styling…")).to_have_count(0, timeout=120_000)
+            expect(page.get_by_role("button", name="Open on board").last).to_be_visible(timeout=30_000)
+            shot(page, "08-stylist")
+            if not desktop:
+                page.keyboard.press("Escape")
+
+        # 7. shop: heart a piece, open one, add to cart; checkout
+        page.goto(base + "/shop")
+        expect(page.get_by_role("heading", name="Shop")).to_be_visible(timeout=30_000)
+        page.get_by_role("button", name=re.compile("^Add .* to wishlist")).first.click()
+        shot(page, "09-shop")
+        page.locator(".shop-card img").first.click()
+        page.locator("button[aria-label]").filter(has_text=re.compile(r"^(S|M|L|26|28|30)$")).first.click()
         page.get_by_role("button", name="Add to cart").click()
-        expect(page.get_by_text("Added to cart")).to_be_visible()
-        shot(page, "11-added-to-cart")
+        expect(page.get_by_text("Added to your bag")).to_be_visible(timeout=15_000)
+        shot(page, "10-product")
+        page.keyboard.press("Escape")
+        page.goto(base + "/cart")
+        page.get_by_role("button", name="Place order").click()
+        expect(page.get_by_text(re.compile(r"Order #\d+ placed"))).to_be_visible(timeout=15_000)
+        shot(page, "11-cart")
+
+        # 8. preferences save, then try a theme
+        page.goto(base + "/preferences")
+        page.get_by_role("button", name="Save changes").first.click()
+        expect(page.get_by_text("Saved. Your matches are updated.")).to_be_visible(timeout=15_000)
+        page.get_by_role("button", name="Profile menu").click()
+        page.get_by_role("radio", name="Rose Gold Noir").click()
+        page.keyboard.press("Escape")
+        page.goto(base + "/")
+        expect(page.locator("html")).to_have_attribute("data-theme", "rose-gold-noir")
+        shot(page, "12-rose-gold-noir")
+
         # leave no trace: the smoke shopper deletes their own profile and data
         status = page.evaluate("""async () => (await fetch('/api/me', {method: 'DELETE',
             headers: {'X-User-Id': localStorage.getItem('wiw.user')}})).status""")
