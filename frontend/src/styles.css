@@ -156,8 +156,8 @@
   color: var(--text);
 }
 
-/* Stylist chat: a soft sky-blue wash (desktop column and the mobile sheet). The input row stays opaque. */
+/* Stylist chat: a pale blue-white textured paper (desktop column and the mobile sheet). */
 @utility chat-bg {
-  background: url("/chat-gradient.jpg") center / cover no-repeat;
+  background: url("/chat-paper.jpg") center / cover no-repeat;
   color: var(--text);
 }
